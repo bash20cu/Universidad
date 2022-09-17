@@ -1,0 +1,2 @@
+Generate new changelog
+git log  --pretty=format:'<li> <a href="http://github.com/miguelfernandez2022/connectivitytool/commit/%H">view commit &bull;</a> %s</li> ' --reverse > changelog.md
