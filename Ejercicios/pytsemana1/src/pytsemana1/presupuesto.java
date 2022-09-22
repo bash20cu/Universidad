@@ -20,7 +20,6 @@ import java.util.Scanner;
     d. Traumatología 21%
     e. Diseñe un algoritmo que calcule y muestre la cantidad de dinero que
         recibirá cada área a partir del presupuesto del hospital
-
 */
 
 public class presupuesto {
@@ -28,6 +27,7 @@ public class presupuesto {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         
@@ -46,9 +46,9 @@ public class presupuesto {
         pediatria = presupuesto*PPEDIATRIA;
         traumatologia = presupuesto*PTRAUMATOLOGIA;
         
-        System.out.println("Presupuesto para Emergencias: $ " +emergencias);
-        System.out.println("Presupuesto para Pediatria: $ " +pediatria);
-        System.out.println("Presupuesto para Traumatologia: $ " +traumatologia);      
+        System.out.println("Presupuesto para Emergencias: $" +emergencias);
+        System.out.println("Presupuesto para Pediatria: $" +pediatria);
+        System.out.println("Presupuesto para Traumatologia:$" +traumatologia);      
         
     }
     
