@@ -31,6 +31,6 @@
 
 - [x] Ejercicio 8:
 
-        Una tablilla PVC de cielo raso tienen un costo de ¢3000, y cubre 1m2, realice
-        un algoritmo que calcule la cantidad de piezas y el costo a invertir para
-        colocar este tipo de cielorraso en una casa de X m2.
+        Una tablilla PVC de cielo raso tienen un costo de ¢3000, y cubre 1 metro cuadrado, 
+        realice un algoritmo que calcule la cantidad de piezas y el costo a invertir para
+        colocar este tipo de cielorraso en una casa de X metros cuadrados.
