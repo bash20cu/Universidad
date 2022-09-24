@@ -33,6 +33,19 @@ public class ServicioTaxi {
         int TotalKm,TotalEspera,TotalDemora,importeRecorrido,importeEspera,importeDemora;
         int MontoTotal = 0;
         
+        //Constantes 
+         //i. Primer kilómetro tiene un valor de ¢660  
+        final int VALORPRIMERKM = 660;
+        
+        //ii. Cada kilómetro adicional tiene un costo de ¢615
+        final int VALORKM = 615;
+        
+        //iii. Tarifa espera tiene un costo de ¢3750 por hora
+        final int VALORESPERA = 3750;
+        //iv. Tarifa tiempo de demora tiene un costo de ¢6140 
+        final int VALORDEMORA = 6140;
+        
+                
         //Entradas 
         System.out.print("Ingrese el total de kilometros recorridos: ");
         TotalKm = in.nextInt();
@@ -45,16 +58,18 @@ public class ServicioTaxi {
         System.out.print("Si tuvo demora, ingrese el total (Solo se contabilizan horas): ");
         TotalDemora = in.nextInt();
         
+        in.close();
+        
         //Procesos
         //i. Primer kilómetro tiene un valor de ¢660        
         //ii. Cada kilómetro adicional tiene un costo de ¢615
-        importeRecorrido = ((TotalKm - 1) * 615) + 660;
+        importeRecorrido = ((TotalKm - 1) * VALORKM) + VALORPRIMERKM;
         
         //iii. Tarifa espera tiene un costo de ¢3750 por hora
-        importeEspera = TotalEspera * 3750;
+        importeEspera = TotalEspera * VALORESPERA;
         
         //iv. Tarifa tiempo de demora tiene un costo de ¢6140       
-        importeDemora = TotalDemora * 6140;
+        importeDemora = TotalDemora * VALORDEMORA;
         
         //importe total
         MontoTotal = importeRecorrido + importeEspera + importeDemora;
@@ -70,8 +85,7 @@ public class ServicioTaxi {
         
         
         //v. Muestre los datos desglosados y el total a pagar en pantalla
-        System.out.println("Importe Total a pagar : $" + MontoTotal );
-        
+        System.out.println("Importe Total a pagar : $" + MontoTotal );        
         
     }
     
