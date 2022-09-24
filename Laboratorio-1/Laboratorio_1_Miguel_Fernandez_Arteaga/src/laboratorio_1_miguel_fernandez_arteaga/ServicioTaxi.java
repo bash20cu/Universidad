@@ -78,7 +78,7 @@ public class ServicioTaxi {
         System.out.println("Total de Kilometros recorridos: " + TotalKm);
         System.out.println("Total de horas en espera: " + TotalEspera);
         System.out.println("Total de horas en demora: " + TotalDemora);
-        System.out.println("Importe del primer Kilometro: $660 ");
+        System.out.println("- Importe del primer Kilometro: $660 -");
         System.out.println("Total de importe del recorrido : " + importeRecorrido);
         System.out.println("Importe adicional de horas en espera: $" + importeEspera);
         System.out.println("Importe adicional de horas en demora: $" + importeDemora);
