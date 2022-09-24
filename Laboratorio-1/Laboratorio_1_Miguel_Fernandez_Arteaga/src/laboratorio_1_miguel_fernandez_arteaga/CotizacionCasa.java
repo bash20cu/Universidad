@@ -83,22 +83,22 @@ public class CotizacionCasa {
         financiacionLargoPlazoTotal = cuotaMensualLargo * 84;
         //Salidas
         //vi. Mostrar en pantalla los datos anteriores    
-        System.out.println("Informacion del propietario: ");
+        System.out.println("- Informacion del propietario - ");
         System.out.println("Nombre: : " + nombre + "\n" 
                 + "Cedula: "+ cedula + "\n" 
                 + "Numero de telefono: " + telefono);
         // Uso de un metodo dentro del Objeto String, el cual formatea el valor y evita la notacion cientifica.
         System.out.println("La propiedad tiene un valor inicial de: " + String.format("%.2f",valorPropiedad));
         
-        System.out.println("Pago de contado, con un descuento del 10%, Total a pagar: " + String.format("%.2f",pagoDeContado));
+        System.out.println("- Pago de contado - ");
+        System.out.println("Con un descuento del 10%, Total a pagar: " + String.format("%.2f",pagoDeContado));
         
-        System.out.println("Financiacion a Corto Plazo (24 meses): ");
+        System.out.println("- Financiacion a Corto Plazo (24 meses) -");
         System.out.println("Valor de l cuota mensual: " + String.format("%.2f",financiacionCortoPlazo));
         System.out.println("Valor de la cuota mensual con recargo: "+ String.format("%.2f",cuotaMensual));
         System.out.println("Valor total del pago con financiamiento: " + String.format("%.2f", financiacionCortoPlazoTotal));
-        
-        
-        System.out.println("Financiacion a Largo Plazo (84 meses): ");
+                
+        System.out.println("- Financiacion a Largo Plazo (84 meses) -");
         System.out.println("Valor de l cuota mensual: "+String.format("%.2f",financiacionLargoPlazo));
         System.out.println("Valor de la cuota mensual con recargo: " + String.format("%.2f",cuotaMensualLargo));
         System.out.println("Valor total del pago con financiamiento: " + String.format("%.2f",financiacionLargoPlazoTotal));        
