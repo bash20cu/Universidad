@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author migue
+ * @author miguel
  */
 public class VentasPanaderia {
 
@@ -16,7 +16,7 @@ public class VentasPanaderia {
      * @param args the command line arguments
      */
     /*
-    Ejercicio #: Una panadería desea llevar un control sobre sus ventas, los
+      Ejercicio #: Una panadería desea llevar un control sobre sus ventas, los
     productos con su precio se muestran a continuación:
     i. Baguette ¢600
     ii. Manita ¢500
@@ -25,8 +25,8 @@ public class VentasPanaderia {
     v. Bollo relleno ¢1500
     vi. Se desea conocer el total recaudado por la venta de cada producto.
     vii. Se desea conocer el total recaudado de ventas.
-    
     */
+    
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         
@@ -78,7 +78,6 @@ public class VentasPanaderia {
         System.out.println("El importe del total de Pan Salado vendido es: " + Totalpansalado);
         System.out.println("El importe del total de Pan Relleno vendido es: " + Totalpanrelleno);
         System.out.println("El importe del total vendido es: " + TotalVentas);
-        
     }
     
 }

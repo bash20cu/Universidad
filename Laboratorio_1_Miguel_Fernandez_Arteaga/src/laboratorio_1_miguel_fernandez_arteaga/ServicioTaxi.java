@@ -8,14 +8,13 @@ import java.util.Scanner;
 
 /**
  *
- * @author migue
+ * @author miguel
  */
 public class ServicioTaxi {
 
     /**
      * @param args the command line arguments
      */
-    
     /* Ejercicio #1:
         Desarrolle un algoritmo que calcule el costo total de un servicio
         de taxi según los siguientes datos:
@@ -25,8 +24,8 @@ public class ServicioTaxi {
         iv. Tarifa tiempo de demora tiene un costo de ¢6140
         v. Muestre los datos desglosados y el total a pagar en pantalla
     */
+    
     public static void main(String[] args) {
-        
         Scanner in = new Scanner(System.in);
         
         //Variables
@@ -85,8 +84,7 @@ public class ServicioTaxi {
         
         
         //v. Muestre los datos desglosados y el total a pagar en pantalla
-        System.out.println("Importe Total a pagar : $" + MontoTotal );        
-        
+        System.out.println("Importe Total a pagar : $" + MontoTotal );  
     }
     
 }

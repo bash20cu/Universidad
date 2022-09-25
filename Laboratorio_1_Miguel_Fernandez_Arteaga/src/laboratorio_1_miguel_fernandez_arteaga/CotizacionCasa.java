@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author migue
+ * @author miguel
  */
 public class CotizacionCasa {
 
@@ -27,8 +27,8 @@ public class CotizacionCasa {
         de esta.
         vi. Mostrar en pantalla los datos anteriores
     */
+    
     public static void main(String[] args) {
-        
         //Variables
         long cedula,telefono;
         double valorPropiedad,pagoDeContado,financiacionCortoPlazo,cuotaMensual,
@@ -101,7 +101,7 @@ public class CotizacionCasa {
         System.out.println("- Financiacion a Largo Plazo (84 meses) -");
         System.out.println("Valor de l cuota mensual: "+String.format("%.2f",financiacionLargoPlazo));
         System.out.println("Valor de la cuota mensual con recargo: " + String.format("%.2f",cuotaMensualLargo));
-        System.out.println("Valor total del pago con financiamiento: " + String.format("%.2f",financiacionLargoPlazoTotal));        
+        System.out.println("Valor total del pago con financiamiento: " + String.format("%.2f",financiacionLargoPlazoTotal));
     }
     
 }
