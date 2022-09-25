@@ -102,6 +102,9 @@ public class CotizacionCasa {
         System.out.println("Valor de l cuota mensual: "+String.format("%.2f",financiacionLargoPlazo));
         System.out.println("Valor de la cuota mensual con recargo: " + String.format("%.2f",cuotaMensualLargo));
         System.out.println("Valor total del pago con financiamiento: " + String.format("%.2f",financiacionLargoPlazoTotal));
+        
+        
+        
     }
     
 }
