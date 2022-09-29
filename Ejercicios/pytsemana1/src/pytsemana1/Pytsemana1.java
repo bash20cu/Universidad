@@ -34,14 +34,6 @@ public class Pytsemana1 {
        
         System.out.println("");
        
-       
-        
-       
-       
-               
-               
-               
-       
     }
     
 }
