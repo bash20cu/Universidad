@@ -74,12 +74,12 @@ public class Ejercicio2 {
                         }
                         if(partido == 3){
                             pad++;
-                        }
-                                 
+                        }                                 
                     }
                     if(voto == 2){
                         votoNo++;
                     }
+                    in.close();
                    break;
                 case 2:
                     System.out.println("El partido que está liderando la encuesta es : ");
