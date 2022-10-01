@@ -6,9 +6,9 @@ package laboratorio_1_miguel_fernandez_arteaga;
 
 /**
  *
- * @author migue
+ * @author miguel
  */
-public class Laboratorio_1 {
+public class Laboratorio_1_Miguel_Fernandez_Arteaga {
 
     /**
      * @param args the command line arguments
