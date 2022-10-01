@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author migue
  */
-public class Laboratorio_2_Miguel_Fernandez_Arteaga {
+public class Ejercicio1 {
 
     /**
      * @param args the command line arguments
@@ -109,6 +109,7 @@ public class Laboratorio_2_Miguel_Fernandez_Arteaga {
                     System.out.println("Opción Invalida");
             }                        
         }
+        in.close();
                
     }
     
