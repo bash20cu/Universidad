@@ -34,3 +34,93 @@
         Una tablilla PVC de cielo raso tienen un costo de ¢3000, y cubre 1 metro cuadrado, 
         realice un algoritmo que calcule la cantidad de piezas y el costo a invertir para
         colocar este tipo de cielorraso en una casa de X metros cuadrados.
+
+- [x] laboratorio 1
+      
+      Ejercicio #1:
+
+        Desarrolle un algoritmo que calcule el costo total de un servicio de taxi según los siguientes datos:
+        i. Primer kilómetro tiene un valor de ¢660
+        ii. Cada kilómetro adicional tiene un costo de ¢615
+        iii. Tarifa espera tiene un costo de ¢3750 por hora
+        iv. Tarifa tiempo de demora tiene un costo de ¢6140
+        v. Muestre los datos desglosados y el total a pagar en pantalla
+
+      Ejercicio #2: 
+
+        Defina un algoritmo que calcule la cotización de una compra de casa según los siguientes datos:
+        i. Información personal de la persona interesada (cedula, nombre, teléfono)
+        ii. El valor de venta de la propiedad
+        iii. Descuento por pago de contado: un 10% de rebajo del valor de la propiedad
+        iv. Financiación a corto plazo: valor de la propiedad entre 24 meses para calcular la cuota mensual,
+         cada cuota mensual tiene un recargo de 4% del valor de esta
+        v. Financiación a largo plazo: valor de la propiedad entre 84 meses para 
+        calcular la cuota mensual, cada cuota tiene un recargo de 2% del valor de esta.
+        vi. Mostrar en pantalla los datos anteriores
+      
+      Ejercicio #:3
+
+        Una panadería desea llevar un control sobre sus ventas, los productos con su precio se muestran a continuación:
+        i. Baguette ¢600
+        ii. Manita ¢500
+        iii. Bollo pan dulce ¢900
+        iv. Bollo pan salado ¢800
+        v. Bollo relleno ¢1500
+        vi. Se desea conocer el total recaudado por la venta de cada producto.
+        vii. Se desea conocer el total recaudado de ventas.
+- [x] laboratorio 2
+
+      Ejercicio #1
+
+      Se requiere una aplicación que reciba el resultado de una prueba de 
+      una lista desconocida de estudiantes, en esta lista junto a cada nombre hay un A
+      escrito, si el estudiante aprobó el examen, o un B si lo reprobó. El programa debe 
+      analizar los resultados del examen de la siguiente manera:
+      a. Introducir cada resultado de la prueba (es decir, un A o un B). Mostrar el mensaje “Ingrese el resultado del estudiante #” en la pantalla, cada vez que el programa solicite otro resultado de la prueba.
+      b. Si se ingresa un valor que no sea A o B, se debe mostrar el mensaje “Dato Invalido” y volver a pedir la nota de ese estudiante, no puede avanzar si no se ingresa una nota válida.
+      c. Después de ingresar una nota valida, debe preguntar si desea agregar una nueva o no.
+      d. Llevar el número de resultados de la prueba, de cada tipo.
+      e. Al finalizar el ingreso de notas, debe mostrar un resumen de los resultados de la prueba, indicando el número de estudiantes, el número que aprobaron y el número de estudiantes que reprobaron, así como el porcentaje de 
+      estudiantes aprobados y reprobados.
+      f. Al final debe preguntar si se desea ingresar otra lista de estudiantes, de ser 
+      así se debe repetir todo el proceso anterior, de lo contrario se finaliza la aplicación.
+
+      Ejercicio #2:
+      Realizar un programa que permita realizar una encuesta para las 
+      siguientes elecciones presidenciales en Costa Rica con los candidatos de los 
+      partidos tradicionales (PTN. PUNS, PAD). A cada persona se le pregunta: El 
+      programa debe tener un menú con las siguientes opciones:
+      a. Aplicar encuesta: esta opción permite encuestar a una persona y se deben registrar las respuestas a las siguientes preguntas:
+            i. Si va a votar, En caso de que la respuesta sea afirmativa, se le preguntará por qué partido Votará.
+            ii. Debe llevar un control de la información recolectada en el punto anterior.
+      b. Consultar datos: en esta opción consultara los resultados de la encuesta:
+            i. ¿Cuál es el partido que está liderando la encuesta?
+            ii. ¿Cuál es % a favor de cada partido, teniendo en cuenta, las personas que si votaran?
+            iii. ¿Cuál es % de personas que no votarán?
+            iv. ¿Cuál es el % de personas que SI votaran?
+      c. Salir: finaliza aplicación
+
+      Ejercicio #3: 
+      Realice una aplicación donde que calcule el total a pagar por el envío de un paquete según la siguiente tabla
+      Por cada paquete calculado, se debe preguntar a usuario si sea agregar otro, de ser 
+      afirmativo, se repite el proceso, de lo contrario se finaliza la aplicación.
+
+  ![Tabla Ejericio](./img/TablaEjercicio3Lab2.jpg)
+
+- [x] laboratorio 3
+      
+      Ejercicio #1:
+      
+      Defina una función que reciba un nombre completo y lo retorne en 
+      formato capital, por ejemplo, recibe el nombre MarIA mendez SOSA y debe 
+      retornar Maria Mendez Sosa.
+
+      Ejercicio #2: 
+      
+      Realice una función que permita calcular cualquier IVA de costa rica, 
+      tome en cuenta que los porcentajes vigentes para costa rica son exonerados, 1%, 
+      2%, 4% y 13% del subtotal.
+
+      Ejercicio #3: 
+      
+      Realice una función que genere un numero aleatorio entre x y y.
