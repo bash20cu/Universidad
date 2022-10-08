@@ -4,6 +4,8 @@
 ## Development tools used
 
 ![JAVA](https://img.shields.io/badge/JAVA-239120?style=plastic&logo=html5&logoColor=white)
+![NetBeans IDE](https://img.shields.io/badge/NetBeansIDE-1B6AC6.svg?style=plastic&logo=apache-netbeans-ide&logoColor=white)
+![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=plastic&logo=visual-studio-code&logoColor=white)
 
 ![GitHub language count](https://img.shields.io/github/languages/count/bash20cu/Universidad?style=plastic)
 ![GitHub top language](https://img.shields.io/github/languages/top/bash20cu/Universidad?style=plastic)
