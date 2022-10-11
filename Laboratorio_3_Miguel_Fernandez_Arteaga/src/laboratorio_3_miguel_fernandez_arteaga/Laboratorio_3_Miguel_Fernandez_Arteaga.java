@@ -43,8 +43,7 @@ public class Laboratorio_3_Miguel_Fernandez_Arteaga {
                     System.out.println("Opción Invalida");
                     break;
             }
-        }      
-        
+        }  
     }
     
     /*Ejercicio #1:
@@ -139,7 +138,5 @@ public class Laboratorio_3_Miguel_Fernandez_Arteaga {
         System.out.print("Hasta Y igual a: ");
         rangoB = in.nextInt();
         System.out.println("Numero aleatorio: " + ((int)(Math.random()*(rangoA-rangoB+1)+rangoB)));
-    }
-    
-    
+    }        
 }
