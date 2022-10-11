@@ -76,7 +76,7 @@ public class Laboratorio_3_Miguel_Fernandez_Arteaga {
     */
     
     static void CalcularIva(){
-        System.out.println("--- Metodo para Calcular el IVA de un Subtotal --- ");
+        System.out.println("--- Metodo para Calcular el IVA de un Subtotal ---");
         Scanner in = new Scanner(System.in);
         short opcMetodo;
         double montoTotal;
