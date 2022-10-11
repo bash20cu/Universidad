@@ -6,7 +6,7 @@ package ejericiosclase;
 import java.util.Scanner;
 /**
  *
- * @author migue
+ * @author migue daniel
  */
 public class AreaTriangulo {  
     
