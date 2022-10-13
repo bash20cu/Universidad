@@ -21,14 +21,10 @@ public class listaArreglos {
         ArrayList<String> nombres = new ArrayList<String>();
         String txtBuscar;
         int opc;
-
-
-
-       do {
+        
+        do {
             menu();
             opc = in.nextInt();
-
-
 
            switch (opc) {
                 case 1:
@@ -47,12 +43,7 @@ public class listaArreglos {
                 case 4:
                     imprimirNombres(nombres);
                     break;
-
-
-
            }
-
-
 
        } while (opc != 5);
     }
@@ -65,10 +56,7 @@ public class listaArreglos {
         System.out.println("3-Eliminar Nombres");
         System.out.println("4-Imprimir Nombres");
         System.out.println("5-Salir");
-
-
-
-   }
+    }
 
 
 
@@ -76,8 +64,6 @@ public class listaArreglos {
         System.out.println("Digite el nombre a guardar:");
         nombres.add(in.next());
     }
-
-
 
    static void imprimirNombres(ArrayList<String> nombres) {
         int i=1;
@@ -89,11 +75,8 @@ public class listaArreglos {
             }
         }else{
              System.out.println("No hay nombres registrados");
-        }
-        
+        }        
     }
-
-
 
    static void modificarNombres(ArrayList<String> nombres, String nombre, Scanner in) {
         int i =  nombres.indexOf(nombre);
@@ -107,8 +90,6 @@ public class listaArreglos {
         }
     }
 
-
-
    static void eliminarNombres(ArrayList<String> nombres, String nombre, Scanner in) {
        int i =  nombres.indexOf(nombre);
         if (i!=-1) {
@@ -117,6 +98,5 @@ public class listaArreglos {
         } else {
             System.out.println("Nombre: " + nombre + " no registrado");
         }
-    }
-    
+    }    
 }
