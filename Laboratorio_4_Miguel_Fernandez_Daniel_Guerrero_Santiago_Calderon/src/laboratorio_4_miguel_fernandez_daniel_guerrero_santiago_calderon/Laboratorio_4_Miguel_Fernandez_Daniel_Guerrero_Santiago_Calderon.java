@@ -113,7 +113,7 @@ public class Laboratorio_4_Miguel_Fernandez_Daniel_Guerrero_Santiago_Calderon {
         String nombreProducto = in.next();
         System.out.print("Precio del Producto: ");
         float precioProducto = in.nextFloat();        
-        productos.put(nombreProducto, precioProducto);
+        productos.put(nombreProducto.toUpperCase(), precioProducto);
         
         System.out.println("--- Producto insertado correctamente ---");
         System.out.println("Que desea hacer? ");        
@@ -121,7 +121,35 @@ public class Laboratorio_4_Miguel_Fernandez_Daniel_Guerrero_Santiago_Calderon {
     
     //Metodo para modificar el Producto del inventario
     static void modificarProducto(Map<String,Float> productos,Scanner in){
-        System.out.println("Modificando productos");
+        // System.out.println("Modificando productos");     
+        
+        //Validar que la lista no este vacia
+        if(productos.isEmpty()){
+            System.out.println("---- ----- -----");
+            System.out.println("|No hay productos que mostrar |");
+            System.out.println("---- ----- -----");
+        }else {
+            //Lectura de los nuevos valores del producto
+            System.out.println("Ingrese el nombre del producto que desea modificar");
+            String productoModificado = in.next();
+            productoModificado = productoModificado.toUpperCase();
+            //Verificar si el producto existe dentro de la lista 
+            for (String m : productos.keySet()) { 
+                if(productoModificado.compareToIgnoreCase(m)==0){
+                    System.out.println("Ingrese el nuevo precio: ");
+                    float precioModificado = in.nextFloat();
+                    productos.put(productoModificado, precioModificado);
+                    System.out.println("---- ---------- ---------");
+                    System.out.println("Producto " + productoModificado + " Modificado Correctamente");
+                    System.out.println("--- ---- ---- ----");
+                    consultarProductos(productos);
+                }else{
+                    System.out.println("Producto no encontrado");
+                    System.out.println("Consulte la lista nuevamente");
+                    consultarProductos(productos);
+                }
+            }
+        }                      
     }
     
     //Metodo para Eliminar el producto del inventario
@@ -131,8 +159,11 @@ public class Laboratorio_4_Miguel_Fernandez_Daniel_Guerrero_Santiago_Calderon {
     
     //Metodo para Consultar total de inventario
     static void consultarProductos(Map<String,Float> productos){
+        System.out.println("Producto  ----  : ----  Precio ");
+        int i = 1;
         for (Object m : productos.keySet()) {
-            System.out.println(m);
+            System.out.println("("+ i + ")"+ "Producto: "+ m + " Precio: " + productos.get(m));
+            i++;
         }
     }
     
