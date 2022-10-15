@@ -31,6 +31,9 @@ public class Laboratorio_4_Miguel_Fernandez_Daniel_Guerrero_Santiago_Calderon {
         Scanner in = new Scanner(System.in);
         int opc;
         Map<String,Float> productos = new HashMap<String,Float>();
+        Map<String,Float> carrito = new HashMap<String,Float>();
+        
+        
         
         do {            
            menuPrincipal();          
@@ -40,7 +43,7 @@ public class Laboratorio_4_Miguel_Fernandez_Daniel_Guerrero_Santiago_Calderon {
                     AdministrarSupermercado(productos,in);
                     break;
                 case 2:
-                    
+                    compras(productos,carrito, in);
                     break;    
                 case 3:
                     in.close();
@@ -69,7 +72,11 @@ public class Laboratorio_4_Miguel_Fernandez_Daniel_Guerrero_Santiago_Calderon {
         System.out.println("4 - Consultar Productos ");
         System.out.println("5 - Salir ");
     }
-    
+    static void menuCompras(){
+        System.out.println("Opciones Validas");
+        System.out.println("1 - Agregar Producto a la lista ");
+        System.out.println("2 - Pagar ");
+    }
     
     /*
     Metodo para arministrar el supermercado
@@ -174,7 +181,7 @@ public class Laboratorio_4_Miguel_Fernandez_Daniel_Guerrero_Santiago_Calderon {
             System.out.println("#"+" => Producto  "+"=> Precio");
             int i = 1;
             for (Object m : productos.keySet()) {
-                System.out.println(" ("+ i + ") "+  m + productos.get(m));
+                System.out.println(" ("+ i + ") "+ m + " " + productos.get(m));
                 i++;
             }
         }        
@@ -183,6 +190,70 @@ public class Laboratorio_4_Miguel_Fernandez_Daniel_Guerrero_Santiago_Calderon {
     /*
     Metodo para Simular la compra del supermercado
     */
+   static void compras(Map<String,Float> productos,Map<String,Float> carrito, Scanner in){
+        System.out.println("Bienvenido al carrito de compras");
+        System.out.println("Que desea hacer? ");  
+        int opcCompras;
+        do {            
+           menuCompras();   
+           opcCompras = in.nextInt();
+            switch (opcCompras) {
+                case 1:
+                    agregarProducto(productos,carrito, in);
+                    break;
+                case 2:
+                    pagar(carrito);
+                    break;
+                case 3:
+                    System.out.println("--- Saliendo del carrito --- ");
+                    break;
+                default:
+                    System.out.println("Opción Invalida");
+            }
+        } while (opcCompras != 2);
+   }
    
+   //Metodo para agregar productos a la lista de compras
+   static void agregarProducto(Map<String,Float> productos,Map<String,Float> carrito, Scanner in){
+       System.out.println("Estas agregando productos");
+       if(productos.isEmpty()){
+           System.out.println("No hay productos para comprar");
+       }else{
+           consultarProductos(productos);
+           
+           System.out.println("Digite el producto a comprar:");
+           String producto = in.next();           
+           
+           producto = producto.toUpperCase();
+           
+           //Validamos que el producto este en el inventario
+           for (String m : productos.keySet()) {
+               if(producto.compareToIgnoreCase(m)==0){
+                   System.out.println("Digite cantidad a agregar: ");
+                   int cantidad = in.nextInt();
+                   carrito.put(m, (productos.get(m)*cantidad));
+               }else{
+                   System.out.println("Producto no encontrado");
+               }
+           }
+           
+       }
+   }
+   
+   //Metodo para pagar 
+   static void pagar(Map<String,Float> carrito){        
+        float importe = 0;
+        final double IMPUESTO = 0.13;
+        System.out.println("#"+" => Producto  "+"=> Precio");
+            int i = 1;
+            for (Object m : carrito.keySet()) {               
+                System.out.println(" ("+ i + ") "+ m + " " + carrito.get(m));
+                importe = importe + carrito.get(m);
+                i++;
+            }
+            System.out.println("Subtotal: " + importe);
+            System.out.println("Impuesto total: " + (importe*IMPUESTO));
+            System.out.println("Total a pagar: " + (importe+(importe*IMPUESTO)));       
+   }
     
 }
