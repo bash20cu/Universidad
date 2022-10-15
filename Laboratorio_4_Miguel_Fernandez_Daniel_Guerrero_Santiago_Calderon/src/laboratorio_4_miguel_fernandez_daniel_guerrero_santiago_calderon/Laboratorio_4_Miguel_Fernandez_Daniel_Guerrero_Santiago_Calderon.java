@@ -56,10 +56,18 @@ public class Laboratorio_4_Miguel_Fernandez_Daniel_Guerrero_Santiago_Calderon {
     Diferentes menues 
     */
     static void menuPrincipal() {
-       System.out.println("Digite: 1 - Administrar, 2 - Comprar, 3 - Salir :  ");
+        System.out.println("Opciones Validas");
+        System.out.println("1 - Administrar ");
+        System.out.println("2 - Comprar ");
+        System.out.println("3 - Salir ");
     }
     static void menuAdministrar(){
-       System.out.println("Digite: 1 - Inserter, 2 - Modificar, 3 - Eliminar, 4 - Consultar, 5 - Salir :");
+        System.out.println("Opciones Validas");
+        System.out.println("1 - Insertar Nuevo producto ");
+        System.out.println("2 - Modificar Productos ");
+        System.out.println("3 - Eliminar Productos ");
+        System.out.println("4 - Consultar Productos ");
+        System.out.println("5 - Salir ");
     }
     
     
@@ -76,11 +84,17 @@ public class Laboratorio_4_Miguel_Fernandez_Daniel_Guerrero_Santiago_Calderon {
            opcAdmin = in.nextInt();
             switch (opcAdmin) {
                 case 1:
-                    
+                    insertarProducto(productos, in);
                     break;
                 case 2:
-                    
-                    break;    
+                    modificarProducto(productos, in);
+                    break;
+                case 3:
+                    eliminarProducto(productos, in);
+                    break;
+                case 4:
+                    consultarProductos(productos);
+                    break;                    
                 case 5:
                     System.out.println("----- Saliendo del Administrador -----"); 
                     break;
@@ -89,17 +103,39 @@ public class Laboratorio_4_Miguel_Fernandez_Daniel_Guerrero_Santiago_Calderon {
             }
         } while (opcAdmin != 5);
     }
+    /*
+     Metodos para el CRUD del inventario
+    */
     
+    //Metodo para Insertar el producto al inventario
     static void insertarProducto(Map<String,Float> productos,Scanner in){
         System.out.print("Nombre del producto: ");
         String nombreProducto = in.next();
-        System.out.println("Precio del Producto: ");
+        System.out.print("Precio del Producto: ");
         float precioProducto = in.nextFloat();        
         productos.put(nombreProducto, precioProducto);
         
-        System.out.println("Producto insertado correctamente");
-        
+        System.out.println("--- Producto insertado correctamente ---");
+        System.out.println("Que desea hacer? ");        
     }
+    
+    //Metodo para modificar el Producto del inventario
+    static void modificarProducto(Map<String,Float> productos,Scanner in){
+        System.out.println("Modificando productos");
+    }
+    
+    //Metodo para Eliminar el producto del inventario
+    static void eliminarProducto(Map<String,Float> productos,Scanner in){
+        System.out.println("eliminando productos");
+    }
+    
+    //Metodo para Consultar total de inventario
+    static void consultarProductos(Map<String,Float> productos){
+        for (Object m : productos.keySet()) {
+            System.out.println(m);
+        }
+    }
+    
     /*
     Metodo para Simular la compra del supermercado
     */
