@@ -18,7 +18,7 @@ public class listaedades {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-Scanner in = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
         Map<String,Integer> mascotas=new HashMap<String,Integer>();
         String nombre;
         int edad;
