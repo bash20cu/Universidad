@@ -210,7 +210,7 @@ public class Laboratorio_4_Miguel_Fernandez_Daniel_Guerrero_Santiago_Calderon {
                 default:
                     System.out.println("Opción Invalida");
             }
-        } while (opcCompras != 2);
+        } while (opcCompras != 3);
    }
    
    //Metodo para agregar productos a la lista de compras
@@ -254,6 +254,5 @@ public class Laboratorio_4_Miguel_Fernandez_Daniel_Guerrero_Santiago_Calderon {
             System.out.println("Subtotal: " + importe);
             System.out.println("Impuesto total: " + (importe*IMPUESTO));
             System.out.println("Total a pagar: " + (importe+(importe*IMPUESTO)));       
-   }
-    
+   }    
 }
