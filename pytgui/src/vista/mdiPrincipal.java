@@ -34,10 +34,11 @@ public class mdiPrincipal extends javax.swing.JFrame {
         mntEmpleados = new javax.swing.JMenuItem();
         mntSalir = new javax.swing.JMenuItem();
         flmReportes = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
+        mntCalculadora = new javax.swing.JMenuItem();
+        mntCut = new javax.swing.JMenuItem();
+        mntCopy = new javax.swing.JMenuItem();
+        mntPaste = new javax.swing.JMenuItem();
+        mntDelete = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,7 +60,6 @@ public class mdiPrincipal extends javax.swing.JFrame {
 
         mntEmpleados.setMnemonic('a');
         mntEmpleados.setText("Empleados");
-        mntEmpleados.setDisplayedMnemonicIndex(5);
         flmCatalogo.add(mntEmpleados);
 
         mntSalir.setMnemonic('x');
@@ -76,26 +76,35 @@ public class mdiPrincipal extends javax.swing.JFrame {
         flmReportes.setMnemonic('e');
         flmReportes.setText("Reportes");
 
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Cut");
-        cutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        mntCalculadora.setMnemonic('t');
+        mntCalculadora.setText("Calculadora");
+        mntCalculadora.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cutMenuItemActionPerformed(evt);
+                mntCalculadoraActionPerformed(evt);
             }
         });
-        flmReportes.add(cutMenuItem);
+        flmReportes.add(mntCalculadora);
 
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
-        flmReportes.add(copyMenuItem);
+        mntCut.setMnemonic('t');
+        mntCut.setText("Cut");
+        mntCut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntCutActionPerformed(evt);
+            }
+        });
+        flmReportes.add(mntCut);
 
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Paste");
-        flmReportes.add(pasteMenuItem);
+        mntCopy.setMnemonic('y');
+        mntCopy.setText("Copy");
+        flmReportes.add(mntCopy);
 
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Delete");
-        flmReportes.add(deleteMenuItem);
+        mntPaste.setMnemonic('p');
+        mntPaste.setText("Paste");
+        flmReportes.add(mntPaste);
+
+        mntDelete.setMnemonic('d');
+        mntDelete.setText("Delete");
+        flmReportes.add(mntDelete);
 
         mnbMenu.add(flmReportes);
 
@@ -137,9 +146,21 @@ public class mdiPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_mntUsuariosActionPerformed
 
-    private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItemActionPerformed
+    private void mntCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntCutActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cutMenuItemActionPerformed
+    }//GEN-LAST:event_mntCutActionPerformed
+
+    private void mntCalculadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntCalculadoraActionPerformed
+        // TODO add your handling code here:
+         //Instanciar JinternalFrame
+        jtfCalculadora vCalculadora = new jtfCalculadora();
+        
+        //agregar el jinternal al desktop panel
+        dskPanel.add(vCalculadora);
+        
+        //mostrar el desktop panel
+        vCalculadora.setVisible(true);
+    }//GEN-LAST:event_mntCalculadoraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,18 +198,19 @@ public class mdiPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JDesktopPane dskPanel;
     private javax.swing.JMenu flmCatalogo;
     private javax.swing.JMenu flmReportes;
     private javax.swing.JMenuBar mnbMenu;
+    private javax.swing.JMenuItem mntCalculadora;
+    private javax.swing.JMenuItem mntCopy;
+    private javax.swing.JMenuItem mntCut;
+    private javax.swing.JMenuItem mntDelete;
     private javax.swing.JMenuItem mntEmpleados;
+    private javax.swing.JMenuItem mntPaste;
     private javax.swing.JMenuItem mntProductos;
     private javax.swing.JMenuItem mntSalir;
     private javax.swing.JMenuItem mntUsuarios;
-    private javax.swing.JMenuItem pasteMenuItem;
     // End of variables declaration//GEN-END:variables
 
 }
