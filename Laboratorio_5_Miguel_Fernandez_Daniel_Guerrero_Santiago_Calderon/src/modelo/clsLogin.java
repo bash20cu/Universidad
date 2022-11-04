@@ -4,10 +4,34 @@
  */
 package modelo;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author migue
  */
 public class clsLogin {
+    private Map<String,Integer> Tarjeta=new HashMap<String,Integer>();
     
+
+    public clsLogin() {
+       Tarjeta.put("12", 12);
+       Tarjeta.put("34", 34);
+       Tarjeta.put("56", 56);
+    }
+
+    public Map<String, Integer> getTarjeta() {
+        return Tarjeta;
+    }
+
+    public void setTarjeta(Map<String, Integer> Tarjeta) {
+        this.Tarjeta = Tarjeta;
+    }   
+    
+    //metodos personaliados
+    
+
+   
+     
 }
