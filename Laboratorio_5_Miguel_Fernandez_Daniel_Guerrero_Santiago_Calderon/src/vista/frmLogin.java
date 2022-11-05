@@ -5,14 +5,14 @@
 package vista;
 
 import javax.swing.JOptionPane;
-import modelo.clsLogin;
+import modelo.clsCuenta;
 
 /**
  *
  * @author migue
  */
 public class frmLogin extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form frmLogin2
      */
@@ -147,25 +147,25 @@ public class frmLogin extends javax.swing.JFrame {
         boolean validacion = false;
         
         //Creacion del objeto que controla la cantidad de tarjetas.
-        clsLogin Tarjeta = new clsLogin();
-        
+        clsCuenta cuenta = new clsCuenta();
+        cuenta.cuentaPin();
          
         //Comparacion de tarjetas, para validar
-        for (String m:Tarjeta.getTarjeta().keySet()) {            
-                        
+        for (String m:cuenta.getCuenta().keySet()) {            
+                       
             if (txtTarjeta.getText().equalsIgnoreCase(m) && 
-                    String.valueOf( pswPin.getPassword()).equals(Tarjeta.getTarjeta().get(m).toString())){
-                //JOptionPane.showMessageDialog(null, "Tarjeta Valida", "Mensaje", JOptionPane.ERROR_MESSAGE);                
-                //System.out.println("Son iguales " + txtTarjeta.getText() + " " + Tarjeta.getTarjeta().keySet());
+                    String.valueOf( pswPin.getPassword()).equals(cuenta.getCuenta().get(m))){
+                
                 validacion = true;
                 
                 //abrir mdi
-                mdiPrincipal mdi = new mdiPrincipal();
-                mdi.setVisible(true);
-
+                frmCuenta frmcuenta = new frmCuenta();
+                frmcuenta.setVisible(true);
+                
                 //Cerrar Login
                 this.dispose(); 
-            }            
+            }
+            System.out.println(cuenta.getCuenta());
         }
         // Mensaje en caso que no encuentre una validacion satisfactoria.
         if(!validacion){
