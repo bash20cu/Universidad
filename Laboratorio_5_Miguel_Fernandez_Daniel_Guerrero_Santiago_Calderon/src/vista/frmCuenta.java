@@ -222,32 +222,11 @@ public class frmCuenta extends javax.swing.JFrame {
         try {
             //tomamos el saldo, almacenado en el Label, y lo formateamos para un double.
             double saldo = Double.parseDouble(lblSaldo.getText().replace(",", "."));
-            double retiro = Double.parseDouble(txtRetiro.getText().replace(",", "."));
-            
-            //Validacion en caso que el monto a retirar que no sea menor o igual que 0.
-            if (retiro <= 0) {
-            txtRetiro.requestFocus();
-            JOptionPane.showMessageDialog(null, "El retiro no puede ser numero negativo o igual a 0", "Mensaje", JOptionPane.ERROR_MESSAGE);
-            //Validacion en caso que SALDO sea menor que 0.
-            } else if(saldo <= 0 ) {
-                txtRetiro.requestFocus();
-                JOptionPane.showMessageDialog(null, "Saldo insuficiente para realizar la operación", "Mensaje", JOptionPane.ERROR_MESSAGE);
-            }else{
-               Double saldoNuevo;
-               saldoNuevo = saldo - retiro;
-               //Validamos en caso que el saldo quede negativo, advirtiendo al cliente.
-               if(saldoNuevo <= 0){
-                    btnRetiro.requestFocus();
-                    txtRetiro.setText("0.0");
-                    JOptionPane.showMessageDialog(null, "Saldo insuficiente para realizar la operación", "Mensaje", JOptionPane.ERROR_MESSAGE);
-               }else{
-                    String format = String.format("%.2f", saldoNuevo);
-                    lblSaldo.setText(format);
-                    btnRetiro.requestFocus();
-                    txtRetiro.setText("0.0");
-                    JOptionPane.showMessageDialog(null, "Se a retirado el monto exitosamente", "Retiro Exitoso", JOptionPane.INFORMATION_MESSAGE);
-               }           
-            }
+            double retiro = Double.parseDouble(txtRetiro.getText().replace(",", "."));                       
+            txtRetiro.setText("0.0");
+            btnRetiro.requestFocus();
+            lblSaldo.setText(cuenta.retiro(saldo, retiro));
+           
             //En caso que no sea un numero, advertimos al cliente que solo numeros estan permitidos
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Solo numeros estan permitidos", "Mensaje", JOptionPane.ERROR_MESSAGE);
@@ -262,30 +241,18 @@ public class frmCuenta extends javax.swing.JFrame {
 
     private void btnDepositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositoActionPerformed
         // TODO add your handling code here:
-        //Validacion que sea siempre un Numero. Capturamos el error
         try {
-            //tomamos el saldo, almacenado en el Label, y lo formateamos para un double.
             double saldo = Double.parseDouble(lblSaldo.getText().replace(",", "."));       
             double deposito = Double.parseDouble(txtDeposito.getText().replace(",", "."));
-            
-             //Validacion en caso que el monto a depositar que sea no menor o igual que 0.
-            if (deposito <= 0) {
-                JOptionPane.showMessageDialog(null, "El deposito no puede ser numero negativo o igual a 0", "Mensaje", JOptionPane.ERROR_MESSAGE);
-            }else{                
-                Double saldoNuevo;
-                saldoNuevo = saldo + deposito;
-                String format = String.format("%.2f", saldoNuevo);
-                lblSaldo.setText(format);
-                btnDeposito.requestFocus();
-                txtDeposito.setText("0.0");
-                JOptionPane.showMessageDialog(null, "Se a depositado el monto exitosamente", "Deposito Exitoso", JOptionPane.INFORMATION_MESSAGE);
-            }  
-        //En caso que no sea un numero, advertimos al cliente que solo numeros estan permitidos
+            lblSaldo.setText(cuenta.deposito(saldo, deposito));
+            btnDeposito.requestFocus();
+            txtDeposito.setText("0.0");
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Solo numeros estan permitidos", "Mensaje", JOptionPane.ERROR_MESSAGE);
             btnDeposito.requestFocus();
             txtDeposito.setText("0.0");
-        }       
+        }     
+        
     }//GEN-LAST:event_btnDepositoActionPerformed
 
     /**

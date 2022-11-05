@@ -6,6 +6,7 @@ package modelo;
 
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,6 +39,43 @@ public class clsCuenta {
         saldoAleatorio = Math.random() * (1-100+1) + 100;  
         String format = String.format("%.2f", saldoAleatorio);
         cuenta.put("12", format);  
-    } 
+    }
+    public String deposito(Double saldo, Double deposito){        
+            
+             //Validacion en caso que el monto a depositar que sea no menor o igual que 0.
+            if (deposito <= 0) {
+                JOptionPane.showMessageDialog(null, "El deposito no puede ser numero negativo o igual a 0", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            }else{                
+                Double saldoNuevo;
+                saldoNuevo = saldo + deposito;
+                String format = String.format("%.2f", saldoNuevo);                
+                JOptionPane.showMessageDialog(null, "Se a depositado el monto exitosamente", "Deposito Exitoso", JOptionPane.INFORMATION_MESSAGE);
+                return format;
+            }          
+         return saldo.toString();
+    }
     
+    public String retiro (Double saldo, Double retiro){
+        //Validacion en caso que el monto a retirar que no sea menor o igual que 0.
+        if (retiro <= 0) { 
+            JOptionPane.showMessageDialog(null, "El retiro no puede ser numero negativo o igual a 0", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            return saldo.toString();
+            //Validacion en caso que SALDO sea menor que 0.
+        } else if(saldo <= 0 ) {               
+            JOptionPane.showMessageDialog(null, "Saldo insuficiente para realizar la operación", "Mensaje", JOptionPane.ERROR_MESSAGE);
+                return saldo.toString();
+        }else{
+            Double saldoNuevo;
+            saldoNuevo = saldo - retiro;
+           //Validamos en caso que el saldo quede negativo, advirtiendo al cliente.
+            if(saldoNuevo <= 0){
+                JOptionPane.showMessageDialog(null, "Saldo insuficiente para realizar la operación", "Mensaje", JOptionPane.ERROR_MESSAGE);
+                    return saldo.toString();
+            }else{
+                String format = String.format("%.2f", saldoNuevo);
+                JOptionPane.showMessageDialog(null, "Se a retirado el monto exitosamente", "Retiro Exitoso", JOptionPane.INFORMATION_MESSAGE);
+                return format;
+            }           
+        }
+    }
 }
