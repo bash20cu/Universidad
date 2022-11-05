@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="modelo">
+  <ClassDiagramComponents>
+    <Class name="clsCuenta" package="modelo" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="cuenta" type="Map&lt;String, String&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getCuenta" returnType="Map&lt;String, String&gt;" visibility="public"/>
+        <Method name="setCuenta" returnType="void" visibility="public">
+          <Argument type="Map&lt;String, String&gt;" name="cuenta"/>
+        </Method>
+        <Method name="cuentaPin" returnType="void" visibility="public"/>
+        <Method name="saldoAleatorio" returnType="void" visibility="public"/>
+        <Method name="depositoCuenta" returnType="String" visibility="public">
+          <Argument type="Double" name="saldo"/>
+          <Argument type="Double" name="deposito"/>
+        </Method>
+        <Method name="retiroCuenta" returnType="String" visibility="public">
+          <Argument type="Double" name="saldo"/>
+          <Argument type="Double" name="retiro"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations/>
+</ClassDiagram>

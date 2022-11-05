@@ -225,18 +225,14 @@ public class frmCuenta extends javax.swing.JFrame {
             double retiro = Double.parseDouble(txtRetiro.getText().replace(",", "."));                       
             txtRetiro.setText("0.0");
             btnRetiro.requestFocus();
-            lblSaldo.setText(cuenta.retiro(saldo, retiro));
+            lblSaldo.setText(cuenta.retiroCuenta(saldo, retiro));
            
             //En caso que no sea un numero, advertimos al cliente que solo numeros estan permitidos
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Solo numeros estan permitidos", "Mensaje", JOptionPane.ERROR_MESSAGE);
             btnRetiro.requestFocus();
             txtRetiro.setText("0.0");
-        }
-        
-        
-              
-
+        }  
     }//GEN-LAST:event_btnRetiroActionPerformed
 
     private void btnDepositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositoActionPerformed
@@ -244,7 +240,7 @@ public class frmCuenta extends javax.swing.JFrame {
         try {
             double saldo = Double.parseDouble(lblSaldo.getText().replace(",", "."));       
             double deposito = Double.parseDouble(txtDeposito.getText().replace(",", "."));
-            lblSaldo.setText(cuenta.deposito(saldo, deposito));
+            lblSaldo.setText(cuenta.depositoCuenta(saldo, deposito));
             btnDeposito.requestFocus();
             txtDeposito.setText("0.0");
         } catch (NumberFormatException e) {
