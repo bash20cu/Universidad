@@ -144,12 +144,12 @@ public class frmLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         //Validacion de tarjeta
-        boolean validacion = false;
+        boolean validacion = false; 
         
         //Creacion del objeto que controla la cantidad de tarjetas.
         clsCuenta cuenta = new clsCuenta();
-        cuenta.cuentaPin();
-         
+        cuenta.cuentaPin();    
+        
         //Comparacion de tarjetas, para validar
         for (String m:cuenta.getCuenta().keySet()) {            
                        
@@ -164,17 +164,15 @@ public class frmLogin extends javax.swing.JFrame {
                 
                 //Cerrar Login
                 this.dispose(); 
-            }
-            System.out.println(cuenta.getCuenta());
+            }            
         }
         // Mensaje en caso que no encuentre una validacion satisfactoria.
         if(!validacion){
             txtTarjeta.setText("");
             pswPin.setText("");
             txtTarjeta.requestFocus();
-            JOptionPane.showMessageDialog(null, "Tarjeta Erronea", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Numero de tarjeta o PIN incorrectos", "Informacion no valida", JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void pswPinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswPinActionPerformed

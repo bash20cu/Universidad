@@ -162,7 +162,7 @@ public class frmCuenta extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnSalir.setText("Salir");
+        btnSalir.setText("Salir de la aplicacion");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -174,19 +174,18 @@ public class frmCuenta extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(144, 144, 144)
-                        .addComponent(btnSalir))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(panRetiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(panDeposito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(panRetiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panDeposito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(33, 33, 33))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnSalir)
+                .addGap(121, 121, 121))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,9 +196,9 @@ public class frmCuenta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panRetiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panDeposito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(btnSalir)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -208,59 +207,85 @@ public class frmCuenta extends javax.swing.JFrame {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         // TODO add your handling code here:
-        cuenta.saldoAleatorio();
-        //System.out.println(cuenta.getCuenta().get("12"));
-        //saldo = cuenta.getCuenta().values().toString();
-        lblSaldo.setText(cuenta.getCuenta().get("12"));        
+        cuenta.saldoAleatorio();        
+        lblSaldo.setText(cuenta.getCuenta().get("12"));       
     }//GEN-LAST:event_formComponentShown
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
-
+    
     private void btnRetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetiroActionPerformed
-        // TODO add your handling code here:         
-        double saldo = Double.parseDouble(lblSaldo.getText().replace(",", "."));       
-        double retiro = Double.parseDouble(txtRetiro.getText().replace(",", "."));        
-        if (retiro <= 0) {
+        // TODO add your handling code here:
+        //Validacion que sea siempre un Numero. Capturamos el error
+        try {
+            //tomamos el saldo, almacenado en el Label, y lo formateamos para un double.
+            double saldo = Double.parseDouble(lblSaldo.getText().replace(",", "."));
+            double retiro = Double.parseDouble(txtRetiro.getText().replace(",", "."));
+            
+            //Validacion en caso que el monto a retirar que no sea menor o igual que 0.
+            if (retiro <= 0) {
             txtRetiro.requestFocus();
             JOptionPane.showMessageDialog(null, "El retiro no puede ser numero negativo o igual a 0", "Mensaje", JOptionPane.ERROR_MESSAGE);
-        } else if(saldo <= 0 ) {
-            txtRetiro.requestFocus();
-            JOptionPane.showMessageDialog(null, "Saldo insuficiente para realizar la operación", "Mensaje", JOptionPane.ERROR_MESSAGE);
-        }else{
-           Double saldoNuevo;
-           saldoNuevo = saldo - retiro;
-           if(saldoNuevo <= 0){
-                btnRetiro.requestFocus();
-                txtRetiro.setText("0.0");
+            //Validacion en caso que SALDO sea menor que 0.
+            } else if(saldo <= 0 ) {
+                txtRetiro.requestFocus();
                 JOptionPane.showMessageDialog(null, "Saldo insuficiente para realizar la operación", "Mensaje", JOptionPane.ERROR_MESSAGE);
-           }else{
-                String format = String.format("%.2f", saldoNuevo);
-                lblSaldo.setText(format);
-                btnRetiro.requestFocus();
-                txtRetiro.setText("0.0");
-                JOptionPane.showMessageDialog(null, "Se a retirado el monto exitosamente", "Retiro Exitoso", JOptionPane.INFORMATION_MESSAGE);
-           }           
+            }else{
+               Double saldoNuevo;
+               saldoNuevo = saldo - retiro;
+               //Validamos en caso que el saldo quede negativo, advirtiendo al cliente.
+               if(saldoNuevo <= 0){
+                    btnRetiro.requestFocus();
+                    txtRetiro.setText("0.0");
+                    JOptionPane.showMessageDialog(null, "Saldo insuficiente para realizar la operación", "Mensaje", JOptionPane.ERROR_MESSAGE);
+               }else{
+                    String format = String.format("%.2f", saldoNuevo);
+                    lblSaldo.setText(format);
+                    btnRetiro.requestFocus();
+                    txtRetiro.setText("0.0");
+                    JOptionPane.showMessageDialog(null, "Se a retirado el monto exitosamente", "Retiro Exitoso", JOptionPane.INFORMATION_MESSAGE);
+               }           
+            }
+            //En caso que no sea un numero, advertimos al cliente que solo numeros estan permitidos
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Solo numeros estan permitidos", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            btnRetiro.requestFocus();
+            txtRetiro.setText("0.0");
         }
+        
+        
+              
+
     }//GEN-LAST:event_btnRetiroActionPerformed
 
     private void btnDepositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositoActionPerformed
-        // TODO add your handling code here:        
-        double saldo = Double.parseDouble(lblSaldo.getText().replace(",", "."));       
-        double deposito = Double.parseDouble(txtDeposito.getText().replace(",", "."));        
-        if (deposito <= 0) {
-            JOptionPane.showMessageDialog(null, "El deposito no puede ser numero negativo o igual a 0", "Mensaje", JOptionPane.ERROR_MESSAGE);
-        }else{
-           Double saldoNuevo;
-           saldoNuevo = saldo + deposito;
-           String format = String.format("%.2f", saldoNuevo);
-           lblSaldo.setText(format);
-           btnDeposito.requestFocus();
-           txtDeposito.setText("0.0");
-           JOptionPane.showMessageDialog(null, "Se a depositado el monto exitosamente", "Deposito Exitoso", JOptionPane.INFORMATION_MESSAGE);
-        }
+        // TODO add your handling code here:
+        //Validacion que sea siempre un Numero. Capturamos el error
+        try {
+            //tomamos el saldo, almacenado en el Label, y lo formateamos para un double.
+            double saldo = Double.parseDouble(lblSaldo.getText().replace(",", "."));       
+            double deposito = Double.parseDouble(txtDeposito.getText().replace(",", "."));
+            
+             //Validacion en caso que el monto a depositar que sea no menor o igual que 0.
+            if (deposito <= 0) {
+                JOptionPane.showMessageDialog(null, "El deposito no puede ser numero negativo o igual a 0", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            }else{                
+                Double saldoNuevo;
+                saldoNuevo = saldo + deposito;
+                String format = String.format("%.2f", saldoNuevo);
+                lblSaldo.setText(format);
+                btnDeposito.requestFocus();
+                txtDeposito.setText("0.0");
+                JOptionPane.showMessageDialog(null, "Se a depositado el monto exitosamente", "Deposito Exitoso", JOptionPane.INFORMATION_MESSAGE);
+            }  
+        //En caso que no sea un numero, advertimos al cliente que solo numeros estan permitidos
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Solo numeros estan permitidos", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            btnDeposito.requestFocus();
+            txtDeposito.setText("0.0");
+        }       
     }//GEN-LAST:event_btnDepositoActionPerformed
 
     /**
