@@ -37,7 +37,7 @@ public class frmCuenta extends javax.swing.JFrame {
         panRetiro = new javax.swing.JPanel();
         lblRetiro = new javax.swing.JLabel();
         txtRetiro = new javax.swing.JTextField();
-        btnRetiro = new javax.swing.JToggleButton();
+        btnRetiro = new javax.swing.JButton();
         panDeposito = new javax.swing.JPanel();
         lblDeposito = new javax.swing.JLabel();
         txtDeposito = new javax.swing.JTextField();
@@ -108,9 +108,8 @@ public class frmCuenta extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblRetiro)
-                    .addGroup(panRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtRetiro, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnRetiro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)))
+                    .addComponent(txtRetiro, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRetiro))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
         panRetiroLayout.setVerticalGroup(
@@ -216,6 +215,22 @@ public class frmCuenta extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
     
+    private void btnDepositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositoActionPerformed
+        // TODO add your handling code here:
+        try {
+            double saldo = Double.parseDouble(lblSaldo.getText().replace(",", "."));       
+            double deposito = Double.parseDouble(txtDeposito.getText().replace(",", "."));
+            lblSaldo.setText(cuenta.depositoCuenta(saldo, deposito));
+            btnDeposito.requestFocus();
+            txtDeposito.setText("0.0");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Solo numeros estan permitidos", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            btnDeposito.requestFocus();
+            txtDeposito.setText("0.0");
+        }     
+        
+    }//GEN-LAST:event_btnDepositoActionPerformed
+
     private void btnRetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetiroActionPerformed
         // TODO add your handling code here:
         //Validacion que sea siempre un Numero. Capturamos el error
@@ -232,24 +247,8 @@ public class frmCuenta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Solo numeros estan permitidos", "Mensaje", JOptionPane.ERROR_MESSAGE);
             btnRetiro.requestFocus();
             txtRetiro.setText("0.0");
-        }  
+        } 
     }//GEN-LAST:event_btnRetiroActionPerformed
-
-    private void btnDepositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositoActionPerformed
-        // TODO add your handling code here:
-        try {
-            double saldo = Double.parseDouble(lblSaldo.getText().replace(",", "."));       
-            double deposito = Double.parseDouble(txtDeposito.getText().replace(",", "."));
-            lblSaldo.setText(cuenta.depositoCuenta(saldo, deposito));
-            btnDeposito.requestFocus();
-            txtDeposito.setText("0.0");
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Solo numeros estan permitidos", "Mensaje", JOptionPane.ERROR_MESSAGE);
-            btnDeposito.requestFocus();
-            txtDeposito.setText("0.0");
-        }     
-        
-    }//GEN-LAST:event_btnDepositoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,7 +288,7 @@ public class frmCuenta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeposito;
-    private javax.swing.JToggleButton btnRetiro;
+    private javax.swing.JButton btnRetiro;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel lblDeposito;
     private javax.swing.JLabel lblNumeroCuenta;

@@ -144,10 +144,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lblRetiro" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="txtRetiro" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnRetiro" alignment="0" pref="125" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="txtRetiro" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                      <Component id="btnRetiro" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="10" max="32767" attributes="0"/>
               </Group>
@@ -178,7 +176,7 @@
             <Property name="text" type="java.lang.String" value="0.0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="btnRetiro">
+        <Component class="javax.swing.JButton" name="btnRetiro">
           <Properties>
             <Property name="text" type="java.lang.String" value="Realizar Retiro"/>
           </Properties>
