@@ -143,19 +143,20 @@ public class frmLogin extends javax.swing.JFrame {
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         // TODO add your handling code here:
         
-        clsLogin Tarjeta = new clsLogin();
+        //Validacion de tarjeta
         boolean validacion = false;
-         
         
+        //Creacion del objeto que controla la cantidad de tarjetas.
+        clsLogin Tarjeta = new clsLogin();
+        
+         
+        //Comparacion de tarjetas, para validar
         for (String m:Tarjeta.getTarjeta().keySet()) {            
-            //System.out.println(m);
-            //System.out.println(Tarjeta.getTarjeta().get(m));
-            
+                        
             if (txtTarjeta.getText().equalsIgnoreCase(m) && 
                     String.valueOf( pswPin.getPassword()).equals(Tarjeta.getTarjeta().get(m).toString())){
-                JOptionPane.showMessageDialog(null, "Tarjeta Valida", "Mensaje", JOptionPane.ERROR_MESSAGE);
-                
-                System.out.println("Son iguales " + txtTarjeta.getText() + " " + Tarjeta.getTarjeta().keySet());
+                //JOptionPane.showMessageDialog(null, "Tarjeta Valida", "Mensaje", JOptionPane.ERROR_MESSAGE);                
+                //System.out.println("Son iguales " + txtTarjeta.getText() + " " + Tarjeta.getTarjeta().keySet());
                 validacion = true;
                 
                 //abrir mdi
@@ -166,34 +167,13 @@ public class frmLogin extends javax.swing.JFrame {
                 this.dispose(); 
             }            
         }
-        
+        // Mensaje en caso que no encuentre una validacion satisfactoria.
         if(!validacion){
             txtTarjeta.setText("");
             pswPin.setText("");
             txtTarjeta.requestFocus();
             JOptionPane.showMessageDialog(null, "Tarjeta Erronea", "Mensaje", JOptionPane.ERROR_MESSAGE);
         }
-        
-        //TO-DO Validar en caso que sea erronea la tarjeta
-        
-           
-       
-        /*
-                if (txtTarjeta.getText().equalsIgnoreCase(Tarjeta.getTarjeta()) && 
-               String.valueOf( pswPin.getPassword()).equals(password)) {
-            
-            //abrir mdi
-            mdiPrincipal mdi = new mdiPrincipal();
-            mdi.setVisible(true);
-            
-            //Cerrar Login
-            this.dispose();
-            
-        }else{
-            // Cuadro de dialogo
-            JOptionPane.showMessageDialog(null, "Usuario o Contraseña equivocada", "Mensaje", JOptionPane.ERROR_MESSAGE);
-        }
-        */
 
     }//GEN-LAST:event_btnIniciarActionPerformed
 
