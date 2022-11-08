@@ -39,6 +39,7 @@ public class frmLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Iniciar Sesion");
+        setResizable(false);
 
         lblTarjeta.setText("Numero de Tarjeta");
 
