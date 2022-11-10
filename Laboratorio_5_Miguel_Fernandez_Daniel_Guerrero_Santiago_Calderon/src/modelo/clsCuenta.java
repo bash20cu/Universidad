@@ -27,6 +27,7 @@ public class clsCuenta {
     public void setCuenta(Map<String, String> cuenta) {
         this.cuenta = cuenta;
     }
+    
     //metodo para crear tarjetas y los pines,
     //Solo caracteres numericos String, estan permitidos.
     public void cuentaPin(){
