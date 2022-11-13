@@ -19,20 +19,19 @@ public class clsEmpleadoPorHoras extends clsEmpleado implements iSueldoPorHoras,
     }
     
     //Empleado X Horas
-    public clsEmpleadoPorHoras(int horasTrabajadas, double sueldoxhoras, 
+    public clsEmpleadoPorHoras(int horasTrabajadas, double tasaxhoras, 
             String empleadoID, String nombre, String apellido1, String apellido2, 
-            String telefono, String direccion) {
-        super(empleadoID, nombre, apellido1, apellido2, telefono, direccion);
+            String telefono) {
+        super(empleadoID, nombre, apellido1, apellido2, telefono);
         this.horasTrabajadas = horasTrabajadas;
-        this.tasaxhoras = sueldoxhoras;
+        this.tasaxhoras = tasaxhoras;
     }
     
     //Empleado X Horas sin tiempo extra que recibe comision
     public clsEmpleadoPorHoras(int horasTrabajadas, int totalVentas, 
             double tasaxhoras, double comision, String empleadoID, 
-            String nombre, String apellido1, String apellido2, String telefono, 
-            String direccion) {
-        super(empleadoID, nombre, apellido1, apellido2, telefono, direccion);
+            String nombre, String apellido1, String apellido2, String telefono) {
+        super(empleadoID, nombre, apellido1, apellido2, telefono);
         this.horasTrabajadas = horasTrabajadas;
         this.totalVentas = totalVentas;
         this.tasaxhoras = tasaxhoras;
@@ -99,11 +98,9 @@ public class clsEmpleadoPorHoras extends clsEmpleado implements iSueldoPorHoras,
         }
         
         //Si tiene ventas, o derechos a comision se pagan.
-        if(getTotalVentas() >= 0){
+        if(getTotalVentas() > 0){
             setSalarioSemanal(getSalarioSemanal() + porcentajeComision());
             System.out.println("---|Salario semanal + comision : " + getSalarioSemanal());
-        }else{
-            System.out.println("Error el total de ventas no puede ser menor que 0 o negativo");
         }
         
         System.out.print("-> Salario semanal total: ");

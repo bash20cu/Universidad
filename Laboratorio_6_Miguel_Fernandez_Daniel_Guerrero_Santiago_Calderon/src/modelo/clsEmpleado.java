@@ -15,8 +15,8 @@ public abstract class clsEmpleado extends clsPersona{
         empleadoID = "Vacio";
     }
 
-    public clsEmpleado(String empleadoID, String nombre, String apellido1, String apellido2, String telefono, String direccion) {
-        super(nombre, apellido1, apellido2, telefono, direccion);
+    public clsEmpleado(String empleadoID, String nombre, String apellido1, String apellido2, String telefono) {
+        super(nombre, apellido1, apellido2, telefono);
         this.empleadoID = empleadoID;
     }
 
@@ -28,6 +28,5 @@ public abstract class clsEmpleado extends clsPersona{
         this.empleadoID = empleadoID;
     }
     
-    abstract public double importeNomina ();   
-    
+    abstract public double importeNomina (); 
 }

@@ -11,7 +11,6 @@ package modelo;
 public class clsEmpleadoSemanal extends clsEmpleado implements iPorcentajeVentas{
     //Atributos
     private double salarioSemanal = 250; // salario semanal fijo 250
-    private boolean salarioxcomision = false;
     private double comision;
     private int totalVentas;
     
@@ -23,16 +22,15 @@ public class clsEmpleadoSemanal extends clsEmpleado implements iPorcentajeVentas
         //sin importar el número de horas trabajadas;
     public clsEmpleadoSemanal(String empleadoID, String nombre, String apellido1, 
             String apellido2, String telefono, String direccion) {
-        super(empleadoID, nombre, apellido1, apellido2, telefono, direccion);
+        super(empleadoID, nombre, apellido1, apellido2, telefono);
     }
     
     //Empleados asalariados por comision que reciben un salario base
         //más un porcentaje de sus ventas.
-    public clsEmpleadoSemanal(boolean salarioxcomision , double comision, int totalVentas, 
+    public clsEmpleadoSemanal(double comision, int totalVentas, 
             String empleadoID, String nombre, String apellido1, String apellido2, 
             String telefono, String direccion) {
-        super(empleadoID, nombre, apellido1, apellido2, telefono, direccion);
-        this.salarioxcomision = salarioxcomision;
+        super(empleadoID, nombre, apellido1, apellido2, telefono);
         this.salarioSemanal = 250;
         this.comision = comision;
         this.totalVentas = totalVentas;
@@ -46,14 +44,6 @@ public class clsEmpleadoSemanal extends clsEmpleado implements iPorcentajeVentas
         return salarioSemanal;
     }
     
-    public boolean isSalarioxcomision() {
-        return salarioxcomision;
-    }
-
-    public void setSalarioxcomision(boolean salarioxcomision) {
-        this.salarioxcomision = salarioxcomision;
-    }
-
     public double getComision() {
         return comision;
     }
@@ -73,19 +63,18 @@ public class clsEmpleadoSemanal extends clsEmpleado implements iPorcentajeVentas
     //Metodo para determinar el importe en la nomina
     @Override
     public double importeNomina() {
-        if (isSalarioxcomision()) {
-            setSalarioSemanal(getSalarioSemanal() + porcentajeComision());
-            System.out.println("Importe en nomina : "+ salarioSemanal);            
+        if (getComision() > 0) {
+            setSalarioSemanal(getSalarioSemanal() + porcentajeComision());                    
+            System.out.println("Salario semanal + Comision : "+ salarioSemanal);            
         }else{
             System.out.println("Importe en nomina : "+ salarioSemanal);            
         }
-        System.out.print("Salario semanal: ");
-        return (getSalarioSemanal() * 5); //Salario Semanal
+        System.out.println("Total a pagar: " + getSalarioSemanal());
+        return (getSalarioSemanal()); //Salario Semanal
     }            
     //Metodo para determinar la comision a pagar
     @Override
-    public double porcentajeComision() {
-        System.out.println("Comision: " + getComision() + " Total de ventas: " + getTotalVentas());
+    public double porcentajeComision() {        
         System.out.println("Total de comision: " + (getComision() * getTotalVentas()));
         return (getComision() * getTotalVentas());
     }

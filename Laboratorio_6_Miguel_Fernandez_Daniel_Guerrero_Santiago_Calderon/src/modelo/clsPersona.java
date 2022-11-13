@@ -14,18 +14,16 @@ public class clsPersona {
     private String nombre;
     private String apellido1;
     private String apellido2;
-    private String telefono;
-    private String direccion;    
+    private String telefono;    
 
     public clsPersona() {
     }
 
-    public clsPersona(String nombre, String apellido1, String apellido2, String telefono, String direccion) {
+    public clsPersona(String nombre, String apellido1, String apellido2, String telefono) {
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
-        this.telefono = telefono;
-        this.direccion = direccion;
+        this.telefono = telefono;        
     }
 
     public String getNombre() {
@@ -33,7 +31,7 @@ public class clsPersona {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombre = nombre.toUpperCase();
     }
 
     public String getApellido1() {
@@ -41,7 +39,7 @@ public class clsPersona {
     }
 
     public void setApellido1(String apellido1) {
-        this.apellido1 = apellido1;
+        this.apellido1 = apellido1.toUpperCase();
     }
 
     public String getApellido2() {
@@ -49,7 +47,7 @@ public class clsPersona {
     }
 
     public void setApellido2(String apellido2) {
-        this.apellido2 = apellido2;
+        this.apellido2 = apellido2.toUpperCase();
     }
 
     public String getTelefono() {
@@ -59,17 +57,8 @@ public class clsPersona {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
     
-    //Metodos personalizados
-    
+    //Metodos personalizados   
     
 
     //Metodo para devolver el nombre completo
@@ -124,6 +113,5 @@ public class clsPersona {
                 throw new AssertionError();
         }              
     }
-    
     
 }
