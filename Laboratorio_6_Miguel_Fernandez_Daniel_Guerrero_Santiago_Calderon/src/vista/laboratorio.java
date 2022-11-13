@@ -4,6 +4,8 @@
  */
 package vista;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import modelo.clsEmpleadoSemanal;
 import modelo.clsEmpleadoPorHoras;
@@ -26,11 +28,11 @@ public class laboratorio {
                 
         //empleados asalariados que reciben un salario semanal fijo, 
             //sin importar el número de horas trabajadas;
-        //clsEmpleadoSemanal juan = new clsEmpleadoSemanal("001A20", "Juan", "Gonzalez", "Perez", "64524289", "Barrio Jardin");
+        clsEmpleadoSemanal juan = new clsEmpleadoSemanal("001A20", "Juan", "Gonzalez", "Perez", "64524289", "Barrio Jardin");
         
         //Empleados asalariados por comision que reciben un salario base
             //más un porcentaje de sus ventas.
-        //clsEmpleadoSemanal juan = new clsEmpleadoSemanal(true, 0.2, 10, "001A20", "Juan", "Gonzalez", "Perez", "64524289", "Barrio Jardin");
+        clsEmpleadoSemanal pedro = new clsEmpleadoSemanal(true, 0.2, 10, "001A21", "Pedro", "Gonzalez", "Perez", "64524289", "Barrio Jardin");
         
         //Empleado X Horas        
         //clsEmpleadoPorHoras juan = new clsEmpleadoPorHoras(8, 10, "001A20", "Juan", "Gonzalez", "Perez", "64524289", "Barrio Jardin");
@@ -39,7 +41,7 @@ public class laboratorio {
         //clsEmpleadoPorHoras juan = new clsEmpleadoPorHoras(true, 10, 5, 10, 0.2, "001A20", "Juan", "Gonzalez", "Perez", "64524289", "Barrio Jardin");
         
          //Empleados x hora con horas extras y que reciben un porcentaje de sus ventas
-         clsEmpleadoPorHoras juan = new clsEmpleadoPorHoras(9, 2, 10, 2, "001A20", "Juan", "Gonzalez", "Perez", "64524289", "Barrio Jardin");
+         clsEmpleadoPorHoras juan2 = new clsEmpleadoPorHoras(41, 2, 10, 2, "001A20", "Juan", "Gonzalez", "Perez", "64524289", "Barrio Jardin");
 
         //visualizacion de datos:
         //System.out.println("Nomina de empleados");
@@ -50,8 +52,33 @@ public class laboratorio {
         //System.out.println("Salario mensual " + miguel.getSalarioMensual());
         //System.out.println(juan.nombreCompleto());
         //System.out.println(juan.importeNomina()); 
-        System.out.println(juan.nombreCompleto());
-        System.out.println( juan.importeNomina()); 
+        //System.out.println(juan.nombreCompleto());
+        //System.out.println( juan.importeNomina());
+        
+        List<clsEmpleadoSemanal> nominaSemanal = new ArrayList<>();
+        
+
+        nominaSemanal.add(juan);
+        nominaSemanal.add(juan);
+        
+        nominaSemanal.forEach(empleado -> {
+            System.out.println(empleado.nombreCompleto());
+            System.out.println(empleado.importeNomina());
+        });
+        
+        List<clsEmpleadoPorHoras> nominaPorHoras = new ArrayList<>();
+        nominaPorHoras.add(juan2);
+        nominaPorHoras.add(juan2);
+        nominaPorHoras.add(juan2);
+        nominaPorHoras.forEach(empleado -> {
+            System.out.println(empleado.nombreCompleto());
+            System.out.println(empleado.importeNomina());
+        });  
+        
+        
+        
+        
+       
 
     }
     
