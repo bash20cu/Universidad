@@ -5,6 +5,11 @@
  */
 package vista;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.clsClientes;
+
 /**
  *
  * @author Est_Nautico
@@ -12,12 +17,31 @@ package vista;
 public class frmClientes extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form frmClientes
+     * Creates new form frmTarjetas
      */
     public frmClientes() {
         initComponents();
+        this.cargarTabla();
     }
 
+     public void cargarTabla(){
+        clsClientes c=new clsClientes();
+        ArrayList<Object> clientes = c.getRegistros();
+        DefaultTableModel model= (DefaultTableModel) tblClientes.getModel();
+        //borrar filas
+        model.setRowCount(0);
+        
+        for (Object cliente : clientes) {
+            clsClientes cl= (clsClientes) cliente;
+            //generar la fila
+            model.addRow(new Object[]{ cl.getCedula(),
+                                      cl.getNombre(),
+                                      cl.getApellidos(),
+                                      cl.getTelefono()});
+        }
+        
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,39 +69,37 @@ public class frmClientes extends javax.swing.JInternalFrame {
         tblClientes = new javax.swing.JTable();
 
         setClosable(true);
-        setTitle("Catalogo de Clientes");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/logo.png"))); // NOI18N
 
-        panDatosCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Formulario Clientes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
+        panDatosCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Formulario Tarjetas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
         panDatosCliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblCedula.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblCedula.setText("Cedula Cliente");
+        lblCedula.setText("Cedula");
         panDatosCliente.add(lblCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 30, -1, -1));
 
         txtCedula.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         panDatosCliente.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 51, 114, -1));
 
         lblNombre.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblNombre.setText("Número de Cuenta");
+        lblNombre.setText("Nombre");
         panDatosCliente.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         txtNombre.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         panDatosCliente.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 114, -1));
 
         txtApellidos.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        panDatosCliente.add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 110, -1));
+        panDatosCliente.add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 220, -1));
 
         lblApellidos.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblApellidos.setText("Monto Limite");
+        lblApellidos.setText("Apellidos");
         panDatosCliente.add(lblApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
         lblTelefono.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblTelefono.setText("Saldo");
+        lblTelefono.setText("Telefono");
         panDatosCliente.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
 
         txtTelefono.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        txtTelefono.setText("0");
         panDatosCliente.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 114, -1));
 
         panOperaciones.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Operaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -109,7 +131,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
         panOperacionesLayout.setHorizontalGroup(
             panOperacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panOperacionesLayout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -124,18 +146,18 @@ public class frmClientes extends javax.swing.JInternalFrame {
             .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        panOperaciones1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tarjetas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        panOperaciones1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Clientes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Cedula", "Numero", "Limite", "Saldo"
+                "Cedula", "Nombre", "Apellidos", "Telefono"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -162,7 +184,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
             panOperaciones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panOperaciones1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrScrollPlato1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                .addComponent(scrScrollPlato1, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panOperaciones1Layout.setVerticalGroup(
@@ -180,7 +202,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panDatosCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panDatosCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                     .addComponent(panOperaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(27, 27, 27)
                 .addComponent(panOperaciones1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -196,27 +218,35 @@ public class frmClientes extends javax.swing.JInternalFrame {
                         .addComponent(panDatosCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(panOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        
+        clsClientes c=new clsClientes(txtCedula.getText(), 
+                                        txtNombre.getText(), 
+                                        txtApellidos.getText(), 
+                                        txtTelefono.getText());
+        if(c.guardar()==1){
+            JOptionPane.showMessageDialog(null, "Cliente Guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            this.cargarTabla();
+        }else{
+            JOptionPane.showMessageDialog(null, "No se ha podido guardar la información", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-       
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnElminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElminarActionPerformed
-       
+
     }//GEN-LAST:event_btnElminarActionPerformed
 
     private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
 
-        
     }//GEN-LAST:event_tblClientesMouseClicked
 
 

@@ -61,7 +61,7 @@ public class clsTarjetas extends clsMetodos{
     }
 
     @Override
-    public int guardar(Object dato) {
+    public int guardar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

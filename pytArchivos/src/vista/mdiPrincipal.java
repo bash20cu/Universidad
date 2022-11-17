@@ -31,8 +31,8 @@ public class mdiPrincipal extends javax.swing.JFrame {
         dskPanel = new javax.swing.JDesktopPane();
         mnbMenu = new javax.swing.JMenuBar();
         fmuCatalogos = new javax.swing.JMenu();
-        mniClientes = new javax.swing.JMenuItem();
         mniTarjetas = new javax.swing.JMenuItem();
+        mniClientes = new javax.swing.JMenuItem();
         mniSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -41,23 +41,23 @@ public class mdiPrincipal extends javax.swing.JFrame {
         fmuCatalogos.setMnemonic('f');
         fmuCatalogos.setText("Catalogos");
 
-        mniClientes.setMnemonic('o');
-        mniClientes.setText("Clientes");
-        mniClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniClientesActionPerformed(evt);
-            }
-        });
-        fmuCatalogos.add(mniClientes);
-
         mniTarjetas.setMnemonic('s');
-        mniTarjetas.setText("Tarjetas");
+        mniTarjetas.setText("Clientes");
         mniTarjetas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniTarjetasActionPerformed(evt);
             }
         });
         fmuCatalogos.add(mniTarjetas);
+
+        mniClientes.setMnemonic('o');
+        mniClientes.setText("Tarjetas");
+        mniClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniClientesActionPerformed(evt);
+            }
+        });
+        fmuCatalogos.add(mniClientes);
 
         mniSalir.setMnemonic('x');
         mniSalir.setText("Salir");
@@ -91,13 +91,13 @@ public class mdiPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mniSalirActionPerformed
 
     private void mniClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniClientesActionPerformed
-        frmClientes v = new frmClientes();
+        frmTarjetas v = new frmTarjetas();
         dskPanel.add(v);
         v.setVisible(true);
     }//GEN-LAST:event_mniClientesActionPerformed
 
     private void mniTarjetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniTarjetasActionPerformed
-        frmTarjetas v = new frmTarjetas();
+        frmClientes v = new frmClientes();
         dskPanel.add(v);
         v.setVisible(true);
     }//GEN-LAST:event_mniTarjetasActionPerformed
