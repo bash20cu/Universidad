@@ -54,7 +54,7 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
         setTitle("Catalogo de Clientes");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/logo.png"))); // NOI18N
 
-        panDatosCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Formulario Clientes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
+        panDatosCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Formulario Tarjetas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
         panDatosCliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblCedula.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N

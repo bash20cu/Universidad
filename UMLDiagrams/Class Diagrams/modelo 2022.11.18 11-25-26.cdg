@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="modelo">
+  <ClassDiagramComponents>
+    <Class name="clsEmpleado" package="modelo" visibility="public" isAbstract="true" xPosition="529.0" yPosition="488.0">
+      <Fields>
+        <Field name="empleadoID" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="empleadoID"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido1"/>
+          <Argument type="String" name="apellido2"/>
+          <Argument type="String" name="telefono"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getEmpleadoID" returnType="String" visibility="public"/>
+        <Method name="setEmpleadoID" returnType="void" visibility="public">
+          <Argument type="String" name="empleadoID"/>
+        </Method>
+        <Method name="importeNomina" returnType="double" visibility="public" isAbstract="true"/>
+      </Methods>
+    </Class>
+    <Class name="clsEmpleadoComision" package="modelo" visibility="public" xPosition="43.0" yPosition="903.0">
+      <Fields>
+        <Field name="comision" type="double" visibility="private"/>
+        <Field name="totalVentas" type="int" visibility="private"/>
+        <Field name="salarioSemanal" type="double" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="double" name="comision"/>
+          <Argument type="int" name="totalVentas"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="double" name="comision"/>
+          <Argument type="int" name="totalVentas"/>
+          <Argument type="String" name="empleadoID"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido1"/>
+          <Argument type="String" name="apellido2"/>
+          <Argument type="String" name="telefono"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getComision" returnType="double" visibility="public"/>
+        <Method name="setComision" returnType="void" visibility="public">
+          <Argument type="double" name="comision"/>
+        </Method>
+        <Method name="getTotalVentas" returnType="int" visibility="public"/>
+        <Method name="setTotalVentas" returnType="void" visibility="public">
+          <Argument type="int" name="totalVentas"/>
+        </Method>
+        <Method name="getSalarioSemanal" returnType="double" visibility="public"/>
+        <Method name="setSalarioSemanal" returnType="void" visibility="public">
+          <Argument type="double" name="salarioSemanal"/>
+        </Method>
+        <Method name="importeNomina" returnType="double" visibility="public"/>
+        <Method name="porcentajeComision" returnType="double" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="clsEmpleadoPorHoras" package="modelo" visibility="public" xPosition="390.0" yPosition="63.0">
+      <Fields>
+        <Field name="horasTrabajadas" type="int" visibility="private"/>
+        <Field name="tasaxhoras" type="double" visibility="private"/>
+        <Field name="salarioSemanal" type="double" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="int" name="horasTrabajadas"/>
+          <Argument type="double" name="tasaxhoras"/>
+          <Argument type="String" name="empleadoID"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido1"/>
+          <Argument type="String" name="apellido2"/>
+          <Argument type="String" name="telefono"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getHorasTrabajadas" returnType="int" visibility="public"/>
+        <Method name="setHorasTrabajadas" returnType="void" visibility="public">
+          <Argument type="int" name="horasTrabajadas"/>
+        </Method>
+        <Method name="getTasaxhoras" returnType="double" visibility="public"/>
+        <Method name="setTasaxhoras" returnType="void" visibility="public">
+          <Argument type="double" name="tasaxhoras"/>
+        </Method>
+        <Method name="getSalarioSemanal" returnType="double" visibility="public"/>
+        <Method name="setSalarioSemanal" returnType="void" visibility="public">
+          <Argument type="double" name="salarioSemanal"/>
+        </Method>
+        <Method name="importeNomina" returnType="double" visibility="public"/>
+        <Method name="sueldoxhoras" returnType="double" visibility="public"/>
+        <Method name="tiempoExtra" returnType="double" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="clsEmpleadoSemanal" package="modelo" visibility="public" xPosition="898.0" yPosition="903.0">
+      <Fields>
+        <Field name="salarioSemanal" type="double" visibility="private"/>
+        <Field name="comision" type="double" visibility="private"/>
+        <Field name="totalVentas" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="empleadoID"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido1"/>
+          <Argument type="String" name="apellido2"/>
+          <Argument type="String" name="telefono"/>
+          <Argument type="String" name="direccion"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="double" name="comision"/>
+          <Argument type="int" name="totalVentas"/>
+          <Argument type="String" name="empleadoID"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido1"/>
+          <Argument type="String" name="apellido2"/>
+          <Argument type="String" name="telefono"/>
+          <Argument type="String" name="direccion"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="setSalarioSemanal" returnType="void" visibility="public">
+          <Argument type="double" name="salarioSemanal"/>
+        </Method>
+        <Method name="getSalarioSemanal" returnType="double" visibility="public"/>
+        <Method name="getComision" returnType="double" visibility="public"/>
+        <Method name="setComision" returnType="void" visibility="public">
+          <Argument type="double" name="comision"/>
+        </Method>
+        <Method name="getTotalVentas" returnType="int" visibility="public"/>
+        <Method name="setTotalVentas" returnType="void" visibility="public">
+          <Argument type="int" name="totalVentas"/>
+        </Method>
+        <Method name="importeNomina" returnType="double" visibility="public"/>
+        <Method name="porcentajeComision" returnType="double" visibility="public"/>
+      </Methods>
+    </Class>
+    <Interface name="iPorcentajeVentas" package="modelo" visibility="public" xPosition="731.0" yPosition="734.0">
+      <Methods>
+        <Method name="porcentajeComision" returnType="double" visibility="public" isAbstract="true"/>
+      </Methods>
+    </Interface>
+    <Interface name="iSueldoPorHoras" package="modelo" visibility="public" xPosition="326.0" yPosition="488.0">
+      <Methods>
+        <Method name="sueldoxhoras" returnType="double" visibility="public" isAbstract="true"/>
+      </Methods>
+    </Interface>
+    <Interface name="iTiempoExtra" package="modelo" visibility="public" xPosition="1170.0" yPosition="464.0">
+      <Methods>
+        <Method name="tiempoExtra" returnType="double" visibility="public" isAbstract="true"/>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="modelo.clsEmpleadoSemanal" target="modelo.iPorcentajeVentas"/>
+    <IsRelation name="is" source="modelo.clsEmpleadoSemanal" target="modelo.clsEmpleado"/>
+    <IsRelation name="is" source="modelo.clsEmpleadoPorHoras" target="modelo.clsEmpleado"/>
+    <IsRelation name="is" source="modelo.clsEmpleadoComision" target="modelo.clsEmpleado"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="modelo.clsEmpleadoComision" target="modelo.iPorcentajeVentas"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="modelo.clsEmpleadoPorHoras" target="modelo.iTiempoExtra"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="modelo.clsEmpleadoPorHoras" target="modelo.iSueldoPorHoras"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
