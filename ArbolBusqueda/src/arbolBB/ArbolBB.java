@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Toloza XD
+ * @author migue
  */
 
 public class ArbolBB {

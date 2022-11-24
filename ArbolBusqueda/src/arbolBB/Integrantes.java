@@ -11,7 +11,8 @@ package arbolBB;
  */
 public class Integrantes {
     
-    /* Reyna Marinely Cerritos Cornejo CC16124
+    /* 
+    Reyna Marinely Cerritos Cornejo CC16124
     Enrique Josué Cortez Hernández     CH14008
     Reynaldo Eliseo Diaz Molina        DM16015
     Roberto Alexander Toloza Mendoza   TM16010

@@ -4,7 +4,6 @@
  */
 package arbolBB;
 
-
 import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -15,7 +14,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Toloza XD
+ * @author @author migue
  */
 public class Vistaa extends javax.swing.JFrame {
 
@@ -27,7 +26,6 @@ public class Vistaa extends javax.swing.JFrame {
     public Vistaa() {
         initComponents();
         this.inicializar(false);
-
 
     }
 
@@ -237,9 +235,10 @@ public class Vistaa extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonInsertarActionPerformed
 
-    public void complementos(){
+    public void complementos() {
         this.repintarArbol();
     }
+
     private void repintarArbol() {
         this.jDesktopPane1.removeAll();
         Rectangle tamaño = this.jInternalFrame2.getBounds();

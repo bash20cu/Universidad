@@ -10,8 +10,9 @@ package arbolBB;
  * @author Toloza XD
  */
 public class Nodo {
+
     private int dato;
-    private Nodo izq,der;
+    private Nodo izq, der;
 
     public Nodo(int dato, Nodo izq, Nodo der) {
         this.dato = dato;
@@ -42,5 +43,5 @@ public class Nodo {
     public void setDer(Nodo der) {
         this.der = der;
     }
- 
+
 }

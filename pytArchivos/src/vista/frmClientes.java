@@ -24,24 +24,24 @@ public class frmClientes extends javax.swing.JInternalFrame {
         this.cargarTabla();
     }
 
-     public void cargarTabla(){
-        clsClientes c=new clsClientes();
+    public void cargarTabla() {
+        clsClientes c = new clsClientes();
         ArrayList<Object> clientes = c.getRegistros();
-        DefaultTableModel model= (DefaultTableModel) tblClientes.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblClientes.getModel();
         //borrar filas
         model.setRowCount(0);
-        
+
         for (Object cliente : clientes) {
-            clsClientes cl= (clsClientes) cliente;
+            clsClientes cl = (clsClientes) cliente;
             //generar la fila
-            model.addRow(new Object[]{ cl.getCedula(),
-                                      cl.getNombre(),
-                                      cl.getApellidos(),
-                                      cl.getTelefono()});
+            model.addRow(new Object[]{cl.getCedula(),
+                cl.getNombre(),
+                cl.getApellidos(),
+                cl.getTelefono()});
         }
-        
-        
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -225,14 +225,14 @@ public class frmClientes extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        clsClientes c=new clsClientes(txtCedula.getText(), 
-                                        txtNombre.getText(), 
-                                        txtApellidos.getText(), 
-                                        txtTelefono.getText());
-        if(c.guardar()==1){
+        clsClientes c = new clsClientes(txtCedula.getText(),
+                txtNombre.getText(),
+                txtApellidos.getText(),
+                txtTelefono.getText());
+        if (c.guardar() == 1) {
             JOptionPane.showMessageDialog(null, "Cliente Guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             this.cargarTabla();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "No se ha podido guardar la información", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed

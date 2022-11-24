@@ -3,7 +3,7 @@ package arbolBB;
 
   /**
  *
- * @author Toloza XD
+ * @author migue
  */
 
 import java.awt.*;

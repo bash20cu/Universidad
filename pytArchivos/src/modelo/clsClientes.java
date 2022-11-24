@@ -72,14 +72,17 @@ public class clsClientes extends clsMetodos implements Serializable{
 
     @Override
     public int guardar() {
-        FileOutputStream ficheroSalida= null;
+        FileOutputStream ficheroSalida = null;
         try {
             File bd= this.validarArchivo("clientes");
+            
             //abrir el flujo de escritura
             ficheroSalida = new FileOutputStream(bd,true);
             ObjectOutputStream objetoSalida=new ObjectOutputStream(ficheroSalida);
+            
             //escribimos en el archivo
             objetoSalida.writeObject(this);
+            
         } catch (FileNotFoundException ex) {
             return 0;
         } catch (IOException ex) {
@@ -138,8 +141,15 @@ public class clsClientes extends clsMetodos implements Serializable{
     }
 
     @Override
-    public Object getRegistro(int cedula) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object getRegistro(String cedula) {
+        clsClientes c = null;
+        ArrayList<Object> filas = this.getRegistros();
+        for (Object fila : filas) {
+            c = (clsClientes) fila;
+            if(c.cedula.compareToIgnoreCase(cedula) == 0){
+                return c;
+            }
+        }
     }
     
     

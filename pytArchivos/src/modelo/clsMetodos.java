@@ -21,7 +21,7 @@ public abstract class clsMetodos {
    public File  validarArchivo(String archivo){
        //archivo a utilizar 
        //src\\archivos\\bdplatos.dat
-       File bd=new File("src\\archivos\\"+ archivo +".dat");       
+       File bd = new File("src\\archivos\\"+ archivo +".dat");       
        //verificar si existe el archivo
        if (!bd.exists()) {
            try {
@@ -40,7 +40,7 @@ public abstract class clsMetodos {
     public abstract int modificar(Object dato);
     public abstract int eliminar(int cedula);
     public abstract ArrayList<Object> getRegistros();
-    public abstract Object getRegistro(int cedula);
+    public abstract Object getRegistro(String cedula);
     
     
 }

@@ -1,7 +1,6 @@
 
 package arbolBB;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import javax.swing.JPanel;
 
@@ -19,6 +18,7 @@ public class SimuladorArbolBinario {
     public boolean insertar(Integer dato) {
         return (this.miArbol.agregar(dato));
     }
+
     //metodo para mostrar los recorridos del arbol
     public String preOrden() {
         LinkedList it = this.miArbol.preOrden();
@@ -34,7 +34,7 @@ public class SimuladorArbolBinario {
         LinkedList it = this.miArbol.postOrden();
         return (recorrido(it, "Recorrido PosOrden"));
     }
-    
+
     //metodo para poder mostrar los tipos d recorrido
     private String recorrido(LinkedList it, String msg) {
         int i = 0;
@@ -45,8 +45,7 @@ public class SimuladorArbolBinario {
         }
         return (r);
     }
-    
-    
+
     //Metodo para buscar dato en el nodo
     public String buscar(Integer dato) {
         boolean siEsta = this.miArbol.existe(dato);
