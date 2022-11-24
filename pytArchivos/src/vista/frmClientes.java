@@ -232,23 +232,45 @@ public class frmClientes extends javax.swing.JInternalFrame {
         if (c.guardar() == 1) {
             JOptionPane.showMessageDialog(null, "Cliente Guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             this.cargarTabla();
+            CancelarBtn();
         } else {
             JOptionPane.showMessageDialog(null, "No se ha podido guardar la información", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-
+        CancelarBtn();
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnElminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElminarActionPerformed
-
+        CancelarBtn();
     }//GEN-LAST:event_btnElminarActionPerformed
 
     private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
-
+        btnGuardar.setEnabled(false);
+        btnModificar.setEnabled(true);
+        btnElminar.setEnabled(true);
+        clsClientes c = new clsClientes();
+        c = (clsClientes) c.getRegistro(tblClientes.getSelectedRow());
+        txtCedula.setText(c.getCedula());
+        txtNombre.setText(c.getNombre());
+        txtApellidos.setText(c.getApellidos());
+        txtTelefono.setText(c.getTelefono());
     }//GEN-LAST:event_tblClientesMouseClicked
 
+    private void limpiarCampos() {
+        txtCedula.setText("");
+        txtNombre.setText("");
+        txtApellidos.setText("");
+        txtTelefono.setText("");
+    }
+
+    private void CancelarBtn() {
+        limpiarCampos();
+        btnGuardar.setEnabled(true);
+        btnModificar.setEnabled(false);
+        btnElminar.setEnabled(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnElminar;

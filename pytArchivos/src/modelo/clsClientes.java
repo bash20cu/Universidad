@@ -141,16 +141,11 @@ public class clsClientes extends clsMetodos implements Serializable{
     }
 
     @Override
-    public Object getRegistro(String cedula) {
-        clsClientes c = null;
+    public Object getRegistro(int cedula) {
         ArrayList<Object> filas = this.getRegistros();
-        for (Object fila : filas) {
-            c = (clsClientes) fila;
-            if(c.cedula.compareToIgnoreCase(cedula) == 0){
-                return c;
-            }
-        }
+        return filas.get(id);
     }
+
     
     
 }
