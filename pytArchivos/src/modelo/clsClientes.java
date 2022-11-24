@@ -21,8 +21,9 @@ import java.util.logging.Logger;
  *
  * @author Est_Nautico
  */
-public class clsClientes extends clsMetodos implements Serializable{
-    private static final long serialVersionUID=6529685098267777690L; //determina la version de la clase
+public class clsClientes extends clsMetodos implements Serializable {
+
+    private static final long serialVersionUID = 6529685098267777690L; //determina la version de la clase
     private String cedula;
     private String nombre;
     private String apellidos;
@@ -74,19 +75,19 @@ public class clsClientes extends clsMetodos implements Serializable{
     public int guardar() {
         FileOutputStream ficheroSalida = null;
         try {
-            File bd= this.validarArchivo("clientes");
-            
+            File bd = this.validarArchivo("clientes");
+
             //abrir el flujo de escritura
-            ficheroSalida = new FileOutputStream(bd,true);
-            ObjectOutputStream objetoSalida=new ObjectOutputStream(ficheroSalida);
-            
+            ficheroSalida = new FileOutputStream(bd, true);
+            ObjectOutputStream objetoSalida = new ObjectOutputStream(ficheroSalida);
+
             //escribimos en el archivo
             objetoSalida.writeObject(this);
-            
+
         } catch (FileNotFoundException ex) {
             return 0;
         } catch (IOException ex) {
-             return 0;
+            return 0;
         } finally {
             try {
                 ficheroSalida.close();
@@ -109,21 +110,21 @@ public class clsClientes extends clsMetodos implements Serializable{
 
     @Override
     public ArrayList<Object> getRegistros() {
-        FileInputStream ficheroEntrada=null;
-        ArrayList<Object> clientes=new ArrayList<Object>();
+        FileInputStream ficheroEntrada = null;
+        ArrayList<Object> clientes = new ArrayList<Object>();
         try {
-            File bd=this.validarArchivo("clientes");            
+            File bd = this.validarArchivo("clientes");
             //abrir el flujo
-            ObjectInputStream objetoEntrada=null;
+            ObjectInputStream objetoEntrada = null;
             ficheroEntrada = new FileInputStream(bd);
-            
-            while (ficheroEntrada.available()>0) { 
-             
-                objetoEntrada= new ObjectInputStream(ficheroEntrada);
+
+            while (ficheroEntrada.available() > 0) {
+
+                objetoEntrada = new ObjectInputStream(ficheroEntrada);
 
                 clientes.add(objetoEntrada.readObject());
             }
-            
+
         } catch (FileNotFoundException ex) {
             return null;
         } catch (IOException ex) {
@@ -137,15 +138,13 @@ public class clsClientes extends clsMetodos implements Serializable{
                 Logger.getLogger(clsClientes.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-     return clientes;          
+        return clientes;
     }
 
     @Override
-    public Object getRegistro(int cedula) {
+    public Object getRegistro(int id) {
         ArrayList<Object> filas = this.getRegistros();
         return filas.get(id);
     }
 
-    
-    
 }
