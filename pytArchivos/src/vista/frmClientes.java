@@ -42,7 +42,6 @@ public class frmClientes extends javax.swing.JInternalFrame {
                 cl.getApellidos(),
                 cl.getTelefono()});
         }
-
     }
 
     /**
@@ -288,7 +287,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Cliente eliminado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                 this.cargarTabla();
             } else {
-                JOptionPane.showMessageDialog(null, "No se ha podido modificar la información", "Error", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No se ha podido eliminar la información", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
             CancelarBtn();
         }

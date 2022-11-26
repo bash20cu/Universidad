@@ -20,7 +20,7 @@ public abstract class clsMetodos {
    public File  validarArchivo(String archivo){
        //archivo a utilizar 
        //src\\archivos\\bdplatos.dat
-       File bd = new File("src\\archivos\\"+ archivo +".dat");       
+       File bd = new File("src/archivos/"+ archivo +".dat");       
        //verificar si existe el archivo
        if (!bd.exists()) {
            try {

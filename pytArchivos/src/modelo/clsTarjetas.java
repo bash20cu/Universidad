@@ -21,8 +21,9 @@ import java.util.logging.Logger;
  *
  * @author Est_Nautico
  */
-public class clsTarjetas extends clsMetodos implements Serializable{
-    private static final long serialVersionUID=6529685098267777690L; //determina la version de la clase
+public class clsTarjetas extends clsMetodos implements Serializable {
+
+    private static final long serialVersionUID = 6529685098267777690L; //determina la version de la clase
     private String cedula;
     private int numeroCuenta;
     private double montoLimite;
@@ -72,22 +73,22 @@ public class clsTarjetas extends clsMetodos implements Serializable{
 
     @Override
     public int guardar() {
-        FileOutputStream ficheroSalida= null;
+        FileOutputStream ficheroSalida = null;
         try {
-            File bdTarjetas= this.validarArchivo("tarjetas");
-            
+            File bd = this.validarArchivo("tarjetas");
+
             //abrir el flujo de escritura
-            ficheroSalida = new FileOutputStream(bdTarjetas,true);
+            ficheroSalida = new FileOutputStream(bd, true);
             ObjectOutputStream objetoSalida = new ObjectOutputStream(ficheroSalida);
-            
+
             //escribimos en el archivo
             objetoSalida.writeObject(this);
-            
+
         } catch (FileNotFoundException ex) {
             return 0;
         } catch (IOException ex) {
             System.out.println(ex);
-             return 0;
+            return 0;
         } finally {
             try {
                 ficheroSalida.close();
@@ -100,12 +101,70 @@ public class clsTarjetas extends clsMetodos implements Serializable{
 
     @Override
     public int modificar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        File bd = this.validarArchivo("tarjetas");
+
+        ArrayList<Object> tarjetas = this.getRegistros();
+
+        //borrar archivos
+        bd.delete();
+        //Volver a crear el archivo
+        bd = this.validarArchivo("tarjetas");
+
+        ObjectOutputStream objetoSalida = null;
+
+        try {
+            //Abriendo el flujo de datos
+            FileOutputStream ficheroSalida = new FileOutputStream(bd);
+
+            for (Object tarjeta : tarjetas) {
+                objetoSalida = new ObjectOutputStream(ficheroSalida);
+                clsTarjetas c = (clsTarjetas) tarjeta;
+
+                if (c.getCedula().compareToIgnoreCase(this.cedula) == 0) {
+                    objetoSalida.writeObject(this);
+                } else {
+                    objetoSalida.writeObject(tarjeta);
+                }
+            }
+
+        } catch (FileNotFoundException ex) {
+            return 0;
+        } catch (IOException ex) {
+            return 0;
+        }
+        return 1;
     }
 
     @Override
     public int eliminar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        File bd = this.validarArchivo("tarjetas");
+
+        ArrayList<Object> tarjetas = this.getRegistros();
+
+        //borrar archivos
+        bd.delete();
+        bd = this.validarArchivo("tarjetas");
+        ObjectOutputStream objetoSalida = null;
+
+        try {
+            //Abriendo el flujo de datos
+            FileOutputStream ficheroSalida = new FileOutputStream(bd);
+
+            for (Object tarjeta : tarjetas) {
+                objetoSalida = new ObjectOutputStream(ficheroSalida);
+                clsTarjetas c = (clsTarjetas) tarjeta;
+
+                if (c.getCedula().compareToIgnoreCase(this.cedula) != 0) {
+                    objetoSalida.writeObject(this);
+                }
+            }
+
+        } catch (FileNotFoundException ex) {
+            return 0;
+        } catch (IOException ex) {
+            return 0;
+        }
+        return 1;
     }
 
     @Override
@@ -118,7 +177,7 @@ public class clsTarjetas extends clsMetodos implements Serializable{
             ObjectInputStream objetoEntrada = null;
             ficheroEntrada = new FileInputStream(bd);
 
-            while (ficheroEntrada.available()>0) {
+            while (ficheroEntrada.available() > 0) {
 
                 objetoEntrada = new ObjectInputStream(ficheroEntrada);
 
@@ -128,6 +187,7 @@ public class clsTarjetas extends clsMetodos implements Serializable{
         } catch (FileNotFoundException ex) {
             return null;
         } catch (IOException ex) {
+            System.out.println(ex);
             return null;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(clsClientes.class.getName()).log(Level.SEVERE, null, ex);
@@ -142,9 +202,9 @@ public class clsTarjetas extends clsMetodos implements Serializable{
     }
 
     @Override
-    public Object getRegistro(int cedula) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object getRegistro(int id) {
+        ArrayList<Object> filas = this.getRegistros();
+        return filas.get(id);
     }
-    
-    
+
 }

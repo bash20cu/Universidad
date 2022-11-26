@@ -22,6 +22,9 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
      */
     public frmTarjetas() {
         initComponents();
+        btnGuardar.setEnabled(true);
+        btnModificar.setEnabled(false);
+        btnElminar.setEnabled(false);
         this.cargarTabla();
 
     }
@@ -48,6 +51,7 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
         btnGuardar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnElminar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         panOperaciones1 = new javax.swing.JPanel();
         scrScrollPlato1 = new javax.swing.JScrollPane();
         tblTarjetas = new javax.swing.JTable();
@@ -112,24 +116,35 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
             }
         });
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/cancel.png"))); // NOI18N
+        btnCancelar.setFocusCycleRoot(true);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panOperacionesLayout = new javax.swing.GroupLayout(panOperaciones);
         panOperaciones.setLayout(panOperacionesLayout);
         panOperacionesLayout.setHorizontalGroup(
             panOperacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panOperacionesLayout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
+            .addGroup(panOperacionesLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnElminar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addGap(29, 29, 29)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51))
         );
         panOperacionesLayout.setVerticalGroup(
             panOperacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnElminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(btnModificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         panOperaciones1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tarjetas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -170,7 +185,7 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
             panOperaciones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panOperaciones1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrScrollPlato1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                .addComponent(scrScrollPlato1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panOperaciones1Layout.setVerticalGroup(
@@ -188,9 +203,9 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panDatosCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panOperaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(27, 27, 27)
+                    .addComponent(panOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panDatosCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addComponent(panOperaciones1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -221,7 +236,6 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
             clsTarjetas cl = (clsTarjetas) tarjeta;
             //generar la fila
             model.addRow(new Object[]{cl.getCedula(),
-                cl.getCedula(),
                 cl.getNumeroCuenta(),
                 cl.getMontoLimite(),
                 cl.getSaldo()});
@@ -230,12 +244,13 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         clsTarjetas c = new clsTarjetas(txtCedula.getText(),
-                Integer.parseInt(txtNumeroCuenta.getText()) ,
-                Double. parseDouble(txtMontoLimite.getText()),
+                Integer.parseInt(txtNumeroCuenta.getText()),
+                Double.parseDouble(txtMontoLimite.getText()),
                 Double.parseDouble(txtSaldo.getText()));
         if (c.guardar() == 1) {
             JOptionPane.showMessageDialog(null, "Cliente Guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             this.cargarTabla();
+            CancelarBtn();
         } else {
             JOptionPane.showMessageDialog(null, "No se ha podido guardar la información", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -243,20 +258,81 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        int opc = JOptionPane.showConfirmDialog(null, "Estas seguro modificar este registro", "Mensaje", JOptionPane.YES_NO_OPTION);
 
+        if (opc == 0) {
+
+            clsTarjetas c = new clsTarjetas(txtCedula.getText(),
+                    Integer.parseInt(txtNumeroCuenta.getText()),
+                    Double.parseDouble(txtMontoLimite.getText()),
+                    Double.parseDouble(txtSaldo.getText()));
+
+            if (c.modificar() == 1) {
+                JOptionPane.showMessageDialog(null, "Cliente modificado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                this.cargarTabla();
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido modificar la información", "Error", JOptionPane.INFORMATION_MESSAGE);
+            }
+            CancelarBtn();
+        }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnElminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElminarActionPerformed
+        int opc = JOptionPane.showConfirmDialog(null, "Estas seguro eliminar este registro", "Mensaje", JOptionPane.YES_NO_OPTION);
 
+        if (opc == 0) {
+            clsTarjetas c = new clsTarjetas(txtCedula.getText(),
+                    Integer.parseInt(txtNumeroCuenta.getText()),
+                    Double.parseDouble(txtMontoLimite.getText()),
+                    Double.parseDouble(txtSaldo.getText()));
+
+            if (c.eliminar() == 1) {
+                JOptionPane.showMessageDialog(null, "Cliente eliminado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                this.cargarTabla();
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido eliminar la información", "Error", JOptionPane.INFORMATION_MESSAGE);
+            }
+            CancelarBtn();
+        }
     }//GEN-LAST:event_btnElminarActionPerformed
 
     private void tblTarjetasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTarjetasMouseClicked
+        btnGuardar.setEnabled(false);
+        btnModificar.setEnabled(true);
+        btnElminar.setEnabled(true);
 
+        clsTarjetas c = new clsTarjetas();
+        c = (clsTarjetas) c.getRegistro(tblTarjetas.getSelectedRow());
+        txtCedula.setText(c.getCedula());
+        txtNumeroCuenta.setText(String.valueOf(c.getNumeroCuenta()));
+        txtMontoLimite.setText(String.valueOf(c.getMontoLimite()));
+        txtSaldo.setText(String.valueOf(c.getSaldo()));
 
     }//GEN-LAST:event_tblTarjetasMouseClicked
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        btnGuardar.setEnabled(true);
+        btnModificar.setEnabled(false);
+        btnElminar.setEnabled(false);
+        limpiarCampos();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void limpiarCampos() {
+        txtCedula.setText("");
+        txtNumeroCuenta.setText("");
+        txtMontoLimite.setText("");
+        txtSaldo.setText("");
+    }
+
+    private void CancelarBtn() {
+        limpiarCampos();
+        btnGuardar.setEnabled(true);
+        btnModificar.setEnabled(false);
+        btnElminar.setEnabled(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnElminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnModificar;
