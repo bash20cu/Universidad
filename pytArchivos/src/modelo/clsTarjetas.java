@@ -99,12 +99,12 @@ public class clsTarjetas extends clsMetodos implements Serializable{
     }
 
     @Override
-    public int modificar(Object dato) {
+    public int modificar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int eliminar(int cedula) {
+    public int eliminar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

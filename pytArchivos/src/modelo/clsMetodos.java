@@ -8,8 +8,7 @@ package modelo;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -37,8 +36,8 @@ public abstract class clsMetodos {
     }
     
     public abstract int guardar();
-    public abstract int modificar(Object dato);
-    public abstract int eliminar(int cedula);
+    public abstract int modificar();
+    public abstract int eliminar();
     public abstract ArrayList<Object> getRegistros();
     public abstract Object getRegistro(int cedula);
     

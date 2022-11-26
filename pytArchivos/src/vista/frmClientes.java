@@ -256,20 +256,43 @@ public class frmClientes extends javax.swing.JInternalFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         int opc = JOptionPane.showConfirmDialog(null, "Estas seguro modificar este registro", "Mensaje", JOptionPane.YES_NO_OPTION);
-        
-        if (opc == 1) {
+
+        if (opc == 0) {
+
+            clsClientes c = new clsClientes(txtCedula.getText(),
+                    txtNombre.getText(),
+                    txtApellidos.getText(),
+                    txtTelefono.getText());
+
+            if (c.modificar() == 1) {
+                JOptionPane.showMessageDialog(null, "Cliente modificado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                this.cargarTabla();
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido modificar la información", "Error", JOptionPane.INFORMATION_MESSAGE);
+            }
             CancelarBtn();
         }
-        
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnElminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElminarActionPerformed
         int opc = JOptionPane.showConfirmDialog(null, "Estas seguro eliminar este registro", "Mensaje", JOptionPane.YES_NO_OPTION);
-        
-        if (opc == 1) {
+
+        if (opc == 0) {
+            clsClientes c = new clsClientes(txtCedula.getText(),
+                    txtNombre.getText(),
+                    txtApellidos.getText(),
+                    txtTelefono.getText());
+
+            if (c.eliminar() == 1) {
+                JOptionPane.showMessageDialog(null, "Cliente eliminado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                this.cargarTabla();
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido modificar la información", "Error", JOptionPane.INFORMATION_MESSAGE);
+            }
             CancelarBtn();
         }
-        
+
     }//GEN-LAST:event_btnElminarActionPerformed
 
     private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked

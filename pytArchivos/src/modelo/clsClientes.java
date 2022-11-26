@@ -99,12 +99,43 @@ public class clsClientes extends clsMetodos implements Serializable {
     }
 
     @Override
-    public int modificar(Object dato) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int modificar() {
+        File bd = this.validarArchivo("clientes");
+
+        ArrayList<Object> clientes = this.getRegistros();
+
+        //borrar archivos
+        bd.delete();
+        //Volver a crear el archivo
+        bd = this.validarArchivo("clientes");
+        
+        ObjectOutputStream objetoSalida = null;
+        
+        try {
+            //Abriendo el flujo de datos
+            FileOutputStream ficheroSalida = new FileOutputStream(bd, true);
+
+            for (Object cliente : clientes) {
+                objetoSalida = new ObjectOutputStream(ficheroSalida);
+                clsClientes c = (clsClientes) cliente;
+
+                if (c.getCedula().compareToIgnoreCase(this.cedula) == 0) {
+                    objetoSalida.writeObject(this);
+                } else {
+                    objetoSalida.writeObject(cliente);
+                }
+            }
+
+        } catch (FileNotFoundException ex) {
+            return 0;
+        } catch (IOException ex) {
+            return 0;
+        }
+        return 1;
     }
 
     @Override
-    public int eliminar(int cedula) {
+    public int eliminar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
