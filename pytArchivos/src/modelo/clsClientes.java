@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -74,22 +75,22 @@ public class clsClientes extends clsMetodos implements Serializable {
     @Override
     public int guardar() {
         FileOutputStream ficheroSalida = null;
+        ObjectOutputStream objetoSalida = null;
         try {
             File bd = this.validarArchivo("clientes");
-
             //abrir el flujo de escritura
             ficheroSalida = new FileOutputStream(bd, true);
-            ObjectOutputStream objetoSalida = new ObjectOutputStream(ficheroSalida);
+            objetoSalida = new ObjectOutputStream(ficheroSalida);
 
             //escribimos en el archivo
             objetoSalida.writeObject(this);
-
         } catch (FileNotFoundException ex) {
             return 0;
         } catch (IOException ex) {
             return 0;
         } finally {
             try {
+                objetoSalida.close();
                 ficheroSalida.close();
             } catch (IOException ex) {
                 Logger.getLogger(clsClientes.class.getName()).log(Level.SEVERE, null, ex);
@@ -101,35 +102,38 @@ public class clsClientes extends clsMetodos implements Serializable {
     @Override
     public int modificar() {
         File bd = this.validarArchivo("clientes");
-
         ArrayList<Object> clientes = this.getRegistros();
-
-        //borrar archivos
+        //borrar el contenido del archivo
         bd.delete();
-        //Volver a crear el archivo
-        bd = this.validarArchivo("clientes");
-
+        //vuelvo a crear el archivo
+        //bd= this.validarArchivo("clientes");
         ObjectOutputStream objetoSalida = null;
-
+        FileOutputStream ficheroSalida = null;
         try {
-            //Abriendo el flujo de datos
-            FileOutputStream ficheroSalida = new FileOutputStream(bd);
+            ficheroSalida = new FileOutputStream(bd);
 
             for (Object cliente : clientes) {
                 objetoSalida = new ObjectOutputStream(ficheroSalida);
                 clsClientes c = (clsClientes) cliente;
-
                 if (c.getCedula().compareToIgnoreCase(this.cedula) == 0) {
                     objetoSalida.writeObject(this);
                 } else {
                     objetoSalida.writeObject(cliente);
                 }
-            }
 
+            }
         } catch (FileNotFoundException ex) {
             return 0;
         } catch (IOException ex) {
             return 0;
+        } finally {
+            try {
+                objetoSalida.close();
+                ficheroSalida.close();
+            } catch (IOException ex) {
+                Logger.getLogger(clsClientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
         return 1;
     }
@@ -137,31 +141,38 @@ public class clsClientes extends clsMetodos implements Serializable {
     @Override
     public int eliminar() {
         File bd = this.validarArchivo("clientes");
-
         ArrayList<Object> clientes = this.getRegistros();
-
-        //borrar archivos
+        //borrar el contenido del archivo
         bd.delete();
-        bd = this.validarArchivo("clientes");
+        //vuelvo a crear el archivo
+        //bd= this.validarArchivo("clientes");
         ObjectOutputStream objetoSalida = null;
-
+        FileOutputStream ficheroSalida = null;
         try {
-            //Abriendo el flujo de datos
-            FileOutputStream ficheroSalida = new FileOutputStream(bd);
-
+            ficheroSalida = new FileOutputStream(bd, true);
+            //objetoSalida = new ObjectOutputStream(ficheroSalida);
             for (Object cliente : clientes) {
-                objetoSalida = new ObjectOutputStream(ficheroSalida);
                 clsClientes c = (clsClientes) cliente;
-
                 if (c.getCedula().compareToIgnoreCase(this.cedula) != 0) {
-                    objetoSalida.writeObject(this);
-                }
-            }
+                    objetoSalida = new ObjectOutputStream(ficheroSalida);
+                    objetoSalida.writeObject(cliente);
 
+                }
+
+            }
+            objetoSalida.close();
         } catch (FileNotFoundException ex) {
             return 0;
         } catch (IOException ex) {
             return 0;
+        } finally {
+            try {
+                //objetoSalida.close();
+                ficheroSalida.close();
+            } catch (IOException ex) {
+                Logger.getLogger(clsClientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
         return 1;
     }
@@ -170,31 +181,44 @@ public class clsClientes extends clsMetodos implements Serializable {
     public ArrayList<Object> getRegistros() {
         FileInputStream ficheroEntrada = null;
         ArrayList<Object> clientes = new ArrayList<Object>();
+        ObjectInputStream objetoEntrada = null;
         try {
             File bd = this.validarArchivo("clientes");
             //abrir el flujo
-            ObjectInputStream objetoEntrada = null;
+
             ficheroEntrada = new FileInputStream(bd);
-
+            //objetoEntrada = new ObjectInputStream(ficheroEntrada);
             while (ficheroEntrada.available() > 0) {
-
                 objetoEntrada = new ObjectInputStream(ficheroEntrada);
-
                 clientes.add(objetoEntrada.readObject());
+            }
+            if (objetoEntrada != null) {
+                objetoEntrada.close();
             }
 
         } catch (FileNotFoundException ex) {
-            return null;
+            Logger.getLogger(clsClientes.class
+                    .getName()).log(Level.SEVERE, null, ex);
+            return new ArrayList<Object>();
+
         } catch (IOException ex) {
-            System.out.println(ex);
+            Logger.getLogger(clsClientes.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
+
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(clsClientes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(clsClientes.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(clsClientes.class
+                    .getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 ficheroEntrada.close();
+
             } catch (IOException ex) {
-                Logger.getLogger(clsClientes.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(clsClientes.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         }
         return clientes;
