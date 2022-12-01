@@ -5,8 +5,11 @@
  */
 package vista;
 
+import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelo.clsClientes;
 import modelo.clsTarjetas;
@@ -68,6 +71,11 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
         panDatosCliente.add(lblCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 30, -1, -1));
 
         txtCedula.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtCedula.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCedulaFocusLost(evt);
+            }
+        });
         panDatosCliente.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 51, 114, -1));
 
         lblNumeroCuenta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -75,9 +83,19 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
         panDatosCliente.add(lblNumeroCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         txtNumeroCuenta.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtNumeroCuenta.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNumeroCuentaFocusLost(evt);
+            }
+        });
         panDatosCliente.add(txtNumeroCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 114, -1));
 
         txtMontoLimite.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtMontoLimite.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtMontoLimiteFocusLost(evt);
+            }
+        });
         panDatosCliente.add(txtMontoLimite, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 110, -1));
 
         lblMontoLimite.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -90,6 +108,11 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
 
         txtSaldo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtSaldo.setText("0");
+        txtSaldo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSaldoFocusLost(evt);
+            }
+        });
         panDatosCliente.add(txtSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 114, -1));
 
         panOperaciones.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Operaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -225,36 +248,21 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cargarTabla() {
-        clsTarjetas c = new clsTarjetas();
-        ArrayList<Object> tarjetas = c.getRegistros();
-        DefaultTableModel model = (DefaultTableModel) tblTarjetas.getModel();
-        //borrar filas
-        model.setRowCount(0);
-
-        for (Object tarjeta : tarjetas) {
-            clsTarjetas cl = (clsTarjetas) tarjeta;
-            //generar la fila
-            model.addRow(new Object[]{cl.getCedula(),
-                cl.getNumeroCuenta(),
-                cl.getMontoLimite(),
-                cl.getSaldo()});
-        }
-    }
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        clsTarjetas c = new clsTarjetas(txtCedula.getText(),
-                Integer.parseInt(txtNumeroCuenta.getText()),
-                Double.parseDouble(txtMontoLimite.getText()),
-                Double.parseDouble(txtSaldo.getText()));
-        if (c.guardar() == 1) {
-            JOptionPane.showMessageDialog(null, "Cliente Guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-            this.cargarTabla();
-            CancelarBtn();
-        } else {
-            JOptionPane.showMessageDialog(null, "No se ha podido guardar la información", "Error", JOptionPane.INFORMATION_MESSAGE);
+        if (this.validar()) {
+            clsTarjetas c = new clsTarjetas(txtCedula.getText(),
+                    Integer.parseInt(txtNumeroCuenta.getText()),
+                    Double.parseDouble(txtMontoLimite.getText()),
+                    Double.parseDouble(txtSaldo.getText()));
+            if (c.guardar() == 1) {
+                JOptionPane.showMessageDialog(null, "Cliente Guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                this.cargarTabla();
+                CancelarBtn();
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido guardar la información", "Error", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
-
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
@@ -317,6 +325,38 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
         limpiarCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void txtCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCedulaFocusLost
+        formatoNormal(txtCedula);
+    }//GEN-LAST:event_txtCedulaFocusLost
+
+    private void txtNumeroCuentaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroCuentaFocusLost
+        formatoNormal(txtNumeroCuenta); 
+    }//GEN-LAST:event_txtNumeroCuentaFocusLost
+
+    private void txtMontoLimiteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMontoLimiteFocusLost
+        formatoNormal(txtMontoLimite);
+    }//GEN-LAST:event_txtMontoLimiteFocusLost
+
+    private void txtSaldoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSaldoFocusLost
+        formatoNormal(txtSaldo);
+    }//GEN-LAST:event_txtSaldoFocusLost
+    private void cargarTabla() {
+        clsTarjetas c = new clsTarjetas();
+        ArrayList<Object> tarjetas = c.getRegistros();
+        DefaultTableModel model = (DefaultTableModel) tblTarjetas.getModel();
+        //borrar filas
+        model.setRowCount(0);
+
+        for (Object tarjeta : tarjetas) {
+            clsTarjetas cl = (clsTarjetas) tarjeta;
+            //generar la fila
+            model.addRow(new Object[]{cl.getCedula(),
+                cl.getNumeroCuenta(),
+                cl.getMontoLimite(),
+                cl.getSaldo()});
+        }
+    }
+
     private void limpiarCampos() {
         txtCedula.setText("");
         txtNumeroCuenta.setText("");
@@ -329,6 +369,104 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
         btnGuardar.setEnabled(true);
         btnModificar.setEnabled(false);
         btnElminar.setEnabled(false);
+    }
+
+    private boolean validar() {
+        //validar que digite una cedula
+        if (txtCedula.getText().length() == 0 || txtCedula.getText().compareTo("") == 0) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar una cedula de cliente", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtCedula);
+            return false;
+        }
+        //validar que lo ingresado sea numerico
+        try {
+            int x = Integer.parseInt(txtCedula.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar una Cedula con solo digitos numéricos, ejemplo 603210123", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtCedula);
+            return false;
+        }
+        //validar que sean 9 digitos
+        if (txtCedula.getText().length() != 9) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar 9 dígitos en la cedula el cliente", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtCedula);
+            return false;
+        }
+        
+        //Validar Numero cuenta
+        if (txtNumeroCuenta.getText().length() == 0 || txtNumeroCuenta.getText().compareTo("") == 0) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar numero de cuenta del cliente", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtNumeroCuenta);
+            return false;
+        }
+        try {
+            int x = Integer.parseInt(txtNumeroCuenta.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un numero de cuenta con solo digitos numéricos, ejemplo 603210123", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtNumeroCuenta);
+            return false;
+        }
+        if (txtNumeroCuenta.getText().length() != 10) {
+            JOptionPane.showMessageDialog(null, "El numero de cuenta del cliente tiene que ser de 10 digitos numericos exactos", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtNumeroCuenta);
+            return false;
+        }
+        
+        //Validacion Monto Limite
+        if (txtMontoLimite.getText().length() == 0 || txtMontoLimite.getText().compareTo("") == 0) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar monto limite de la cuenta del cliente", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtMontoLimite);
+            return false;
+        }
+        try {
+            int x = Integer.parseInt(txtMontoLimite.getText());
+            if(x <= 0){
+                JOptionPane.showMessageDialog(null, "El monto limite tiene que ser positivo mayor que 0", "Mensaje", JOptionPane.ERROR_MESSAGE);
+                this.formatoError(txtMontoLimite);
+                return false;
+            }            
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "El monto limite son solo digitos numericos", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtMontoLimite);
+            return false;
+        }
+        
+        //Validacion Monto Limite
+        if (txtSaldo.getText().length() == 0 || txtSaldo.getText().compareTo("") == 0) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar el saldo de la cuenta del cliente", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtSaldo);
+            return false;
+        }
+        try {
+            int x = Integer.parseInt(txtSaldo.getText());
+            if(x < 0){
+                JOptionPane.showMessageDialog(null, "El saldo tiene que ser positivo mayor que 0", "Mensaje", JOptionPane.ERROR_MESSAGE);
+                this.formatoError(txtSaldo);
+                return false;
+            }            
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "El saldo son solo digitos numericos", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtSaldo);
+            return false;
+        }
+        return true;
+    }
+
+    private void formatoError(Object campo) {
+        if (campo instanceof JTextField) {
+            JTextField txt = (JTextField) campo;
+            txt.setForeground(new Color(240, 44, 122));
+            txt.setBorder(BorderFactory.createLineBorder(new Color(240, 44, 122)));
+            txt.requestFocus();
+        }
+    }
+
+    private void formatoNormal(Object campo) {
+        if (campo instanceof JTextField) {
+            JTextField txt = (JTextField) campo;
+            txt.setForeground(Color.black);
+            txt.setBorder(BorderFactory.createLineBorder(Color.black));
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

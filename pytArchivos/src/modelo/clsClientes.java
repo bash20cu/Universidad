@@ -158,7 +158,6 @@ public class clsClientes extends clsMetodos implements Serializable {
                     objetoSalida.writeObject(cliente);
 
                 }
-
             }
             objetoSalida.close();
         } catch (FileNotFoundException ex) {

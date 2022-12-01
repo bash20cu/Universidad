@@ -5,8 +5,11 @@
  */
 package vista;
 
+import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelo.clsClientes;
 
@@ -25,23 +28,6 @@ public class frmClientes extends javax.swing.JInternalFrame {
         btnModificar.setEnabled(false);
         btnElminar.setEnabled(false);
         this.cargarTabla();
-    }
-
-    public void cargarTabla() {
-        clsClientes c = new clsClientes();
-        ArrayList<Object> clientes = c.getRegistros();
-        DefaultTableModel model = (DefaultTableModel) tblClientes.getModel();
-        //borrar filas
-        model.setRowCount(0);
-
-        for (Object cliente : clientes) {
-            clsClientes cl = (clsClientes) cliente;
-            //generar la fila
-            model.addRow(new Object[]{cl.getCedula(),
-                cl.getNombre(),
-                cl.getApellidos(),
-                cl.getTelefono()});
-        }
     }
 
     /**
@@ -83,6 +69,11 @@ public class frmClientes extends javax.swing.JInternalFrame {
         panDatosCliente.add(lblCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 30, -1, -1));
 
         txtCedula.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtCedula.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCedulaFocusLost(evt);
+            }
+        });
         panDatosCliente.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 51, 114, -1));
 
         lblNombre.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -90,9 +81,19 @@ public class frmClientes extends javax.swing.JInternalFrame {
         panDatosCliente.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         txtNombre.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombreFocusLost(evt);
+            }
+        });
         panDatosCliente.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 114, -1));
 
         txtApellidos.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtApellidos.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtApellidosFocusLost(evt);
+            }
+        });
         panDatosCliente.add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 220, -1));
 
         lblApellidos.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -104,6 +105,11 @@ public class frmClientes extends javax.swing.JInternalFrame {
         panDatosCliente.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
 
         txtTelefono.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtTelefono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTelefonoFocusLost(evt);
+            }
+        });
         panDatosCliente.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 114, -1));
 
         panOperaciones.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Operaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -240,38 +246,41 @@ public class frmClientes extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        clsClientes c = new clsClientes(txtCedula.getText(),
-                txtNombre.getText(),
-                txtApellidos.getText(),
-                txtTelefono.getText());
-        if (c.guardar() == 1) {
-            JOptionPane.showMessageDialog(null, "Cliente Guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-            this.cargarTabla();
-            CancelarBtn();
-        } else {
-            JOptionPane.showMessageDialog(null, "No se ha podido guardar la información", "Error", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        int opc = JOptionPane.showConfirmDialog(null, "Estas seguro modificar este registro", "Mensaje", JOptionPane.YES_NO_OPTION);
-
-        if (opc == 0) {
-
+        if (this.validar()) {
             clsClientes c = new clsClientes(txtCedula.getText(),
                     txtNombre.getText(),
                     txtApellidos.getText(),
                     txtTelefono.getText());
-
-            if (c.modificar() == 1) {
-                JOptionPane.showMessageDialog(null, "Cliente modificado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            if (c.guardar() == 1) {
+                JOptionPane.showMessageDialog(null, "Cliente Guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                 this.cargarTabla();
+                CancelarBtn();
             } else {
-                JOptionPane.showMessageDialog(null, "No se ha podido modificar la información", "Error", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No se ha podido guardar la información", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
-            CancelarBtn();
         }
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        if (this.validar()) {
+            int opc = JOptionPane.showConfirmDialog(null, "Estas seguro modificar este registro", "Mensaje", JOptionPane.YES_NO_OPTION);
+
+            if (opc == 0) {
+
+                clsClientes c = new clsClientes(txtCedula.getText(),
+                        txtNombre.getText(),
+                        txtApellidos.getText(),
+                        txtTelefono.getText());
+
+                if (c.modificar() == 1) {
+                    JOptionPane.showMessageDialog(null, "Cliente modificado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                    this.cargarTabla();
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se ha podido modificar la información", "Error", JOptionPane.INFORMATION_MESSAGE);
+                }
+                CancelarBtn();
+            }
+        }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnElminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElminarActionPerformed
@@ -298,6 +307,7 @@ public class frmClientes extends javax.swing.JInternalFrame {
         btnGuardar.setEnabled(false);
         btnModificar.setEnabled(true);
         btnElminar.setEnabled(true);
+        txtCedula.setEnabled(false);
 
         clsClientes c = new clsClientes();
         c = (clsClientes) c.getRegistro(tblClientes.getSelectedRow());
@@ -312,7 +322,41 @@ public class frmClientes extends javax.swing.JInternalFrame {
         btnModificar.setEnabled(false);
         btnElminar.setEnabled(false);
         limpiarCampos();
+        txtCedula.setEnabled(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCedulaFocusLost
+        formatoNormal(txtCedula);
+    }//GEN-LAST:event_txtCedulaFocusLost
+
+    private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
+        formatoNormal(txtNombre);
+    }//GEN-LAST:event_txtNombreFocusLost
+
+    private void txtApellidosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtApellidosFocusLost
+        formatoNormal(txtApellidos);
+    }//GEN-LAST:event_txtApellidosFocusLost
+
+    private void txtTelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefonoFocusLost
+        formatoNormal(txtTelefono);
+    }//GEN-LAST:event_txtTelefonoFocusLost
+
+    public void cargarTabla() {
+        clsClientes c = new clsClientes();
+        ArrayList<Object> clientes = c.getRegistros();
+        DefaultTableModel model = (DefaultTableModel) tblClientes.getModel();
+        //borrar filas
+        model.setRowCount(0);
+
+        for (Object cliente : clientes) {
+            clsClientes cl = (clsClientes) cliente;
+            //generar la fila
+            model.addRow(new Object[]{cl.getCedula(),
+                cl.getNombre(),
+                cl.getApellidos(),
+                cl.getTelefono()});
+        }
+    }
 
     private void limpiarCampos() {
         txtCedula.setText("");
@@ -323,9 +367,71 @@ public class frmClientes extends javax.swing.JInternalFrame {
 
     private void CancelarBtn() {
         limpiarCampos();
+        txtCedula.setEnabled(true);
         btnGuardar.setEnabled(true);
         btnModificar.setEnabled(false);
         btnElminar.setEnabled(false);
+    }
+
+    private boolean validar() {
+        //validar que digite una cedula
+        if (txtCedula.getText().length() == 0 || txtCedula.getText().compareTo("") == 0) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar una cedula de cliente", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtCedula);
+            return false;
+        }
+        //validar que lo ingresado sea numerico
+        try {
+            int x = Integer.parseInt(txtCedula.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar una Cedula con solo digitos numéricos, ejemplo 603210123", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtCedula);
+            return false;
+        }
+        //validar que sean 9 digitos
+        if (txtCedula.getText().length() != 9) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar 9 dígitos en la cedula el cliente", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtCedula);
+            return false;
+        }
+        if (txtNombre.getText().length() == 0 || txtNombre.getText().compareTo("") == 0) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar el nombre del ciente", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtNombre);
+            return false;
+        }
+        if (txtApellidos.getText().length() == 0 || txtApellidos.getText().compareTo("") == 0) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar los apellidos del cliente", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtApellidos);
+            return false;
+        }
+        if (txtTelefono.getText().length() == 0 || txtTelefono.getText().compareTo("") == 0) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar el télefono del cliente", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtTelefono);
+            return false;
+        }
+        if (txtTelefono.getText().length() != 9) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar 9 digits en el télefono del cliente, ejemplo: 8899-7766 ", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtTelefono);
+            return false;
+        }
+        return true;
+    }
+
+    private void formatoError(Object campo) {
+        if (campo instanceof JTextField) {
+            JTextField txt = (JTextField) campo;
+            txt.setForeground(new Color(240, 44, 122));
+            txt.setBorder(BorderFactory.createLineBorder(new Color(240, 44, 122)));
+            txt.requestFocus();
+        }
+    }
+
+    private void formatoNormal(Object campo) {
+        if (campo instanceof JTextField) {
+            JTextField txt = (JTextField) campo;
+            txt.setForeground(Color.black);
+            txt.setBorder(BorderFactory.createLineBorder(Color.black));
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
