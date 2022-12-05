@@ -59,8 +59,9 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
         scrScrollPlato1 = new javax.swing.JScrollPane();
         tblTarjetas = new javax.swing.JTable();
 
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setClosable(true);
-        setTitle("Catalogo de Clientes");
+        setTitle("Catalogo de Tarjetas");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/logo.png"))); // NOI18N
 
         panDatosCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Formulario Tarjetas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
@@ -208,7 +209,7 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
             panOperaciones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panOperaciones1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrScrollPlato1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+                .addComponent(scrScrollPlato1, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panOperaciones1Layout.setVerticalGroup(
@@ -308,6 +309,7 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
         btnGuardar.setEnabled(false);
         btnModificar.setEnabled(true);
         btnElminar.setEnabled(true);
+        txtCedula.setEnabled(false);
 
         clsTarjetas c = new clsTarjetas();
         c = (clsTarjetas) c.getRegistro(tblTarjetas.getSelectedRow());
@@ -323,6 +325,7 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
         btnModificar.setEnabled(false);
         btnElminar.setEnabled(false);
         limpiarCampos();
+        txtCedula.setEnabled(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCedulaFocusLost
@@ -369,6 +372,7 @@ public class frmTarjetas extends javax.swing.JInternalFrame {
         btnGuardar.setEnabled(true);
         btnModificar.setEnabled(false);
         btnElminar.setEnabled(false);
+        txtCedula.setEnabled(true);
     }
 
     private boolean validar() {
