@@ -1,6 +1,9 @@
 package objetos;
 
-public class Arista{
+import java.io.Serializable;
+
+public class Arista implements Serializable{
+    private static final long serialVersionUID = 6529685098267777690L;
     private int idArista;
     private String nombreArista;
     private int distancia;//Distancia entre dos puntos

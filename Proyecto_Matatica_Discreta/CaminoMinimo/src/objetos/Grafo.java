@@ -1,10 +1,21 @@
 package objetos;
 
 import java.awt.Color;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class Grafo{
+public class Grafo implements Serializable{
     private ArrayList<Nodo> listaNodo;
+    private static final long serialVersionUID = 6529685098267777690L;
 
     public Grafo(){
         listaNodo = new ArrayList<Nodo>();
@@ -228,5 +239,96 @@ public class Grafo{
     public void eliminarAristasEntrante(Nodo nodo){
         ArrayList<Arista> aristas = aristasEntrante(nodo)        ;
         eliminarAristas(nodo);
+    }
+    public File  validarArchivo(String archivo){
+       //archivo a utilizar 
+       //src\\archivos\\bdplatos.dat
+       File bd = new File("src/archivos/"+ archivo +".dat");       
+       //verificar si existe el archivo
+       if (!bd.exists()) {
+           try {
+               //si no existe lo creo
+               bd.createNewFile();
+           } catch (IOException ex) {
+               System.err.println("Error al abrir el archivo");
+           }catch (Exception ex){
+                System.err.println("Error al abrir el archivo");
+           }
+       }
+       return bd;
+    }
+    public int guardar() {
+        FileOutputStream ficheroSalida = null;
+        ObjectOutputStream objetoSalida = null;
+        System.out.println(listaNodo);
+        try {
+            File bd = this.validarArchivo("grafo");
+            //abrir el flujo de escritura
+            ficheroSalida = new FileOutputStream(bd, true);
+            objetoSalida = new ObjectOutputStream(ficheroSalida);
+
+            //escribimos en el archivo
+            objetoSalida.writeObject(listaNodo);
+            
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex);
+            return 0;
+        } catch (IOException ex) {
+            System.out.println(ex);
+            return 0;
+        } finally {
+            try {
+                objetoSalida.close();
+                ficheroSalida.close();
+            } catch (IOException ex) {
+                System.out.println(ex);
+                return 0;
+            }
+        }
+        return 1;
+    }
+    public ArrayList<Object> getGrafo() {
+        FileInputStream ficheroEntrada = null;
+        ObjectInputStream objetoEntrada = null;
+        ArrayList<Object> nodos = new ArrayList<Object>();
+        try {
+            File bd = this.validarArchivo("grafo");
+            //abrir el flujo
+
+            ficheroEntrada = new FileInputStream(bd);
+            //objetoEntrada = new ObjectInputStream(ficheroEntrada);
+            while (ficheroEntrada.available() > 0) {
+                objetoEntrada = new ObjectInputStream(ficheroEntrada);
+                //System.out.println(objetoEntrada.readObject());
+
+                nodos.add(objetoEntrada.readObject());
+            }
+            
+            
+            if (objetoEntrada != null) {
+                objetoEntrada.close();
+            }
+
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex);
+            return new ArrayList<Object>();
+
+        } catch (IOException ex) {
+           System.out.println(ex);
+            return null;
+
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        } catch (Exception ex) {
+            System.out.println(ex);
+        } finally {
+            try {
+                ficheroEntrada.close();
+
+            } catch (IOException ex) {
+                System.out.println(ex);
+            }
+        }
+        return nodos;
     }
 }

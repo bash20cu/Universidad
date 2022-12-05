@@ -1,10 +1,12 @@
 package objetos;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public class Circulo {
+public class Circulo implements Serializable{
 
     // Instanciando Variables
+    private static final long serialVersionUID = 6529685098267777690L;
     private Coordenadas coordenadas;
     private Color color;
     private int diametro;

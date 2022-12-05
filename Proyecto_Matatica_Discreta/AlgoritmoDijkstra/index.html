@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/css/style.css">
+    <title>Proyecto Algoritmo Dijkstra</title>
+</head>
+<body>
+    <section class="contenedorPrincipal">        
+        <div class="divBotones">
+            <button id="btnClear" class="btnClear">Limpiar</button>
+			<button id="btnCreateVertice" class="btnCreateVertice">Crear Vértice</button>
+			<button id="btnCreateEdge" class="btnCreateEdge">Crear Arista</button>
+			<button id="btnRoute" class="btnRoute">Calcular Ruta</button>
+
+            <form action="#" class="formVertices form">
+				<label for="positionVertice">Posición del vértice en coordenadas (x,y)</label>
+				<div class="formRow">
+					<input type="number" id="positionX" min="0" max="100" placeholder="X">
+					<input type="number" id="positionY" min="0" max="100" placeholder="Y">
+				</div>
+
+				<label for="nameVertice">Nombre del vértice</label>
+				<div class="formRow">
+					<input type="text" id="nameVertice" placeholder="Nombre del vertice">
+					<input type="submit" id="btnCrearV" value="Crear" class="btn"></input>
+				</div>
+			</form>
+
+			<form action="#" class="formEdges form">
+				<label for="initialV">Vértice inicial</label>
+				<select id="initialV"></select>
+
+				<label for="finalV">Vértice final</label>
+				<select id="finalV"></select>
+
+				<input type="submit" id="btnCrearE" value="Crear" class="btn"></input>
+			</form>
+
+			<form action="#" class="formCalculate form">
+				<label for="initialVC">Vértice inicial</label>
+				<select id="initialVC"></select>
+
+				<label for="finalVC">Vértice final</label>
+				<select id="finalVC"></select>
+
+				<input type="submit" id="btnCalcRoute" value="Calcular" class="btn"></input>                
+			</form>
+
+
+        </div>
+        <div class="divMapa">
+            <canvas id="mapa"></canvas>
+        </div>
+		<p id="distance"></p>					  
+    </section>
+</body>
+<script src="src/js/jquery-3.4.1.min.js"></script>
+<script src="src/js/Dijkstra.js"></script>
+<script src="src/js/app.js"></script>
+</html>

@@ -7,7 +7,10 @@
 
 package objetos;
 
-public class Enlace{
+import java.io.Serializable;
+
+public class Enlace implements Serializable{
+    private static final long serialVersionUID = 6529685098267777690L;
     private Arista arista;
     private Nodo nodo;
 

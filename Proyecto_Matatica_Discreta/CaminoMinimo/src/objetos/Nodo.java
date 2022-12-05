@@ -6,9 +6,11 @@
  */
 
 package objetos;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Nodo{
+public class Nodo implements Serializable{
+    private static final long serialVersionUID = 6529685098267777690L;
     private Object dato;
     private ArrayList<Enlace> listaNodoAdyacente;
     private boolean visitado = false;    

@@ -5,10 +5,12 @@
  * Para Comunidad IncanatoHack.com
  */
 package objetos;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Coordenadas extends ArrayList < int[] >
+public class Coordenadas extends ArrayList < int[] > implements Serializable
 {
+    private static final long serialVersionUID = 6529685098267777690L;
     private int xMaxima;
     private int yMaxima;
     public Coordenadas(){

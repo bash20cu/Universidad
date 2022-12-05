@@ -1,9 +1,11 @@
 package objetos;
 import java.awt.*;
+import java.io.Serializable;
 
-public class LineaQuebrada
+public class LineaQuebrada implements Serializable
 {
     // Instanciando variables
+    private static final long serialVersionUID = 6529685098267777690L;
     private Coordenadas coordenadas;
     private Color color;
     private float grosorLinea;
