@@ -1,4 +1,6 @@
 var canvas = document.getElementById("mapa");
+var grafos = {};
+var nameV;
 
 if (canvas && canvas.getContext) {
   var ctx = canvas.getContext("2d");
@@ -8,6 +10,7 @@ $(document).ready(function () {
   clearInformation();
   sizeCanvas();
   drawGrid();
+
 
   $("#btnCreateVertice").click(function () {
     clearForms();
@@ -31,15 +34,13 @@ $(document).ready(function () {
   });
 
   $("#btnSave").click(function(){
-    var jsonData = JSON.stringify(grafo) + JSON.stringify(coordenadas);
-    guardar(jsonData, 'json.txt', 'text/plain');
+    var jsonData = JSON.stringify(grafos);
+    guardar(jsonData, 'grafo.json', 'json/plain');
   });
   canvas.addEventListener("click", function (event) {
     let x = event.offsetX;
     let y = event.offsetY;
-    let nameV = prompt("Nombre del vertice?:").toUpperCase();
-
-    console.log(nameV, x, y);
+    nameV = prompt("Nombre del vertice?:").toUpperCase();
 
     if (nameV != "" && nameV != null) {
       let coordenada = [x, y];
@@ -66,7 +67,7 @@ $(document).ready(function () {
 
         if (!existe) {
           coordenadas[nameV] = [x, y];
-          grafo[nameV] = {};
+          grafo[nameV] = {xcoor:x, ycoor:y};
           $(".form select option").each(function () {
             $(this).remove();
           });          
@@ -78,6 +79,10 @@ $(document).ready(function () {
       } else {
         coordenadas[nameV] = [x, y];
         grafo[nameV] = {};
+        grafos = {
+            [nameV]: [x,y]            
+        }
+
         $(".form select option").each(function () {
           $(this).remove();
         });
@@ -104,7 +109,15 @@ $(document).ready(function () {
         let y1 = coordenadas[initialV][1];
         let x2 = coordenadas[finalV][0];
         let y2 = coordenadas[finalV][1];
-        //let peso = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+        grafos[initialV] = {
+            initialV:initialV,
+            finalV:finalV,
+            x1 : coordenadas[initialV][0],
+            y1 : coordenadas[initialV][1],
+            x2 : coordenadas[finalV][0],
+            y2 : coordenadas[finalV][1],
+            peso: peso,               
+        } 
 
         if (aristas.length > 0) {
           let existe = false;
@@ -121,6 +134,15 @@ $(document).ready(function () {
           }
 
           if (!existe) {
+            grafos[initialV] = {
+                initialV:initialV,
+                finalV:finalV,
+                x1 : coordenadas[initialV][0],
+                y1 : coordenadas[initialV][1],
+                x2 : coordenadas[finalV][0],
+                y2 : coordenadas[finalV][1],
+                peso: peso,               
+            } 
             grafo[initialV][finalV] = peso;
             grafo[finalV][initialV] = peso;
             aristas.push([initialV, finalV]);
@@ -131,6 +153,15 @@ $(document).ready(function () {
             alert(queExiste);
           }
         } else {
+            grafos[initialV] = {
+                initialV:initialV,
+                finalV:finalV,
+                x1 : coordenadas[initialV][0],
+                y1 : coordenadas[initialV][1],
+                x2 : coordenadas[finalV][0],
+                y2 : coordenadas[finalV][1],
+                peso: peso,               
+            } 
           grafo[initialV][finalV] = peso;
           grafo[finalV][initialV] = peso;
           aristas.push([initialV, finalV]);
@@ -265,11 +296,9 @@ function clearInformation() {
   $(".form select").val("");
   $("#distance").html("");
   $("#distance").slideUp(300);
-  console.log(grafo);
   for(const o in grafo){
     delete grafo[o];
   }
-  console.log(grafo);
 }
 
 function clearFormData() {
@@ -308,7 +337,6 @@ function fillSelects() {
   finalVC.add(optionDefault4);
 
   let nodos = Object.keys(grafo);
-
   for (let i = 0; i < nodos.length; i++) {
     let optionInitial = document.createElement("option");
     optionInitial.text = nodos[i];
@@ -342,19 +370,33 @@ function guardar(content, fileName, contentType) {
 }
 
 function cargar(event) {
-        var input = event.target;      
-        var reader = new FileReader();
+    clearInformation();
+    var input = event.target;      
+    var reader = new FileReader();
         reader.onload = function() {
           var text = reader.result;
-          //var node = document.getElementById('output');
-          //node.innerText = text;
-          //console.log(reader.result.substring(0, 200));
-          console.log(reader.result);
+          //console.log(reader.result);
           let temp = JSON.parse(reader.result);
-            console.log(temp);
+            //console.log(temp);
            for(let nodo in temp){
-            console.log(nodo);
-           }             
+            console.log(temp[nodo]);
+            nameV = temp[nodo].initialV;
+            tempNodoFinal = temp[nodo].finalV.toString();
+            grafo[nameV] = 
+            {
+                x:temp[nodo].x1,
+                y:temp[nodo].y1,
+                tempNodoFinal:temp[nodo].peso, 
+            };
+            drawVertex(temp[nodo].x1, temp[nodo].y1, 7, temp[nodo].initialV);
+            drawVertex(temp[nodo].x2, temp[nodo].y2, 7, temp[nodo].finalV);
+            drawEdge(temp[nodo].x1,temp[nodo].y1,temp[nodo].x2, temp[nodo].y2,temp[nodo].peso)                        
+           }
+           
+           console.log(grafo); 
+           fillSelects();        
+
         };
-        reader.readAsText(input.files[0]);
+        
+    reader.readAsText(input.files[0]);
   }
