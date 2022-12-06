@@ -11,6 +11,8 @@
     <section class="contenedorPrincipal">        
         <div class="divBotones">
             <button id="btnClear" class="btnClear">Limpiar</button>
+            <button id="btnSave" class="btnSave">Guardar</button>
+            <input type='file' accept='text/plain' onchange='cargar(event)'>
 			<button id="btnCreateVertice" class="btnCreateVertice">Crear Vértice</button>
 			<button id="btnCreateEdge" class="btnCreateEdge">Crear Arista</button>
 			<button id="btnRoute" class="btnRoute">Calcular Ruta</button>
@@ -25,7 +27,7 @@
 				<label for="nameVertice">Nombre del vértice</label>
 				<div class="formRow">
 					<input type="text" id="nameVertice" placeholder="Nombre del vertice">
-					<input type="submit" id="btnCrearV" value="Crear" class="btn"></input>
+					<input type="submit" id="btnCrearV" value="Crear Vertice" class="btn"></input>
 				</div>
 			</form>
 
@@ -35,8 +37,8 @@
 
 				<label for="finalV">Vértice final</label>
 				<select id="finalV"></select>
-
-				<input type="submit" id="btnCrearE" value="Crear" class="btn"></input>
+                <input type="number" id="peso" min="1" placeholder="Peso Arista"></input>
+				<input type="submit" id="btnCrearE" value="Crear Arista" class="btn"></input>
 			</form>
 
 			<form action="#" class="formCalculate form">
@@ -48,14 +50,13 @@
 
 				<input type="submit" id="btnCalcRoute" value="Calcular" class="btn"></input>                
 			</form>
-
-
         </div>
         <div class="divMapa">
             <canvas id="mapa"></canvas>
         </div>
 		<p id="distance"></p>					  
     </section>
+
 </body>
 <script src="src/js/jquery-3.4.1.min.js"></script>
 <script src="src/js/Dijkstra.js"></script>

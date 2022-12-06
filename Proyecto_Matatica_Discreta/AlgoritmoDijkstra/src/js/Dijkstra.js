@@ -61,7 +61,7 @@ const dijkstra = (grafo, nodoInicial, nodoFinal) => {
                 log("Evaluando el peso hasta el nodo " + n + " (buscando desde el nodo " + nodo + ")");
 				log("Último peso: " + pesos[n]);
 				
-				let nuevoPeso = peso + nodosHijo[n];
+				let nuevoPeso = parseFloat(peso) + parseFloat(nodosHijo[n]);
 				
 				log("Nuevo peso: " + nuevoPeso);
 				
