@@ -14,6 +14,9 @@
 
 <!--END_SECTION:badges-->
 
+
+https://bash20cu.github.io/Universidad/Proyecto_Matatica_Discreta/AlgoritmoDijkstra/
+
 ## Evolución de los Ejercicios en consola
 
 - [x] Ejercicio 1:
