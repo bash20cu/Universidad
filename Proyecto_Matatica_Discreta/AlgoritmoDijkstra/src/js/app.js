@@ -294,25 +294,27 @@ function fillSelects() {
 
   let nodos = Object.keys(grafo);
   for (let i = 0; i < nodos.length; i++) {
-    let optionInitial = document.createElement("option");
-    optionInitial.text = nodos[i];
-    optionInitial.value = nodos[i];
-    initialV.add(optionInitial);
-
-    let optionInitialC = document.createElement("option");
-    optionInitialC.text = nodos[i];
-    optionInitialC.value = nodos[i];
-    initialVC.add(optionInitialC);
-
-    let optionFinal = document.createElement("option");
-    optionFinal.text = nodos[i];
-    optionFinal.value = nodos[i];
-    finalV.add(optionFinal);
-
-    let optionFinalC = document.createElement("option");
-    optionFinalC.text = nodos[i];
-    optionFinalC.value = nodos[i];
-    finalVC.add(optionFinalC);
+    if(!nodos[i].match("Arista")){
+      let optionInitial = document.createElement("option");
+      optionInitial.text = nodos[i];
+      optionInitial.value = nodos[i];
+      initialV.add(optionInitial);
+  
+      let optionInitialC = document.createElement("option");
+      optionInitialC.text = nodos[i];
+      optionInitialC.value = nodos[i];
+      initialVC.add(optionInitialC);
+  
+      let optionFinal = document.createElement("option");
+      optionFinal.text = nodos[i];
+      optionFinal.value = nodos[i];
+      finalV.add(optionFinal);
+  
+      let optionFinalC = document.createElement("option");
+      optionFinalC.text = nodos[i];
+      optionFinalC.value = nodos[i];
+      finalVC.add(optionFinalC);
+    }
   }
 }
 
