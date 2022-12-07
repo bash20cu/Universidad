@@ -1,11 +1,11 @@
 // Este objeto almacena todo el contenido de nuestro grafo.
-const grafo = {};
+var grafo = {};
 
 // Este objeto almacena todas las coordenadas de cada vertice.
-const coordenadas = {};
+var coordenadas = {};
 
 // Este arreglo almacena todas las aristas de conexión entre vértices.
-const aristas = [];
+var aristas = [];
 
 // Esta función nos genera un mensaje indicando en que paso del algoritmo nos encontramos.
 function log(mensaje) {
