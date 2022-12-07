@@ -96,3 +96,12 @@
 <li> <a href="http://github.com/bash20cu/Universidad/commit/95a71601caa409107d804d4aaa4cfe6d50cd3638">view commit &bull;</a> laboratorio 8</li> 
 <li> <a href="http://github.com/bash20cu/Universidad/commit/956b58a13f8d5908e9658df7a9ae0dbfcb6d4eb6">view commit &bull;</a> pyt Matematica discreta</li> 
 <li> <a href="http://github.com/bash20cu/Universidad/commit/e60c86ca097ce151e0984fa307445084c5d7872a">view commit &bull;</a> Clase 11 , lab 9</li> 
+<li> <a href="http://github.com/bash20cu/Universidad/commit/68de96c96f4351598dbf2dc9243128a286153280">view commit &bull;</a> Update changelog.md</li> 
+<li> <a href="http://github.com/bash20cu/Universidad/commit/c29a32b1287ffb131bfc5b236ca50cb36114a502">view commit &bull;</a> Proyecto matematica discreta</li> 
+<li> <a href="http://github.com/bash20cu/Universidad/commit/ddb4e2ea35a6601620e41d72aa8c5eebfd707d9c">view commit &bull;</a> Proyecto matematica discreta</li> 
+<li> <a href="http://github.com/bash20cu/Universidad/commit/acce4a4fd1d30a6ca9476058f38060ca77d6bae2">view commit &bull;</a> proyecto matematica discreta</li> 
+<li> <a href="http://github.com/bash20cu/Universidad/commit/159b9b1445d8d6fd046cf4effde461788f229872">view commit &bull;</a> Update app.js</li> 
+<li> <a href="http://github.com/bash20cu/Universidad/commit/c3769122e122b2cd1f398ba558e53a244eb4a4be">view commit &bull;</a> Update README.md</li> 
+<li> <a href="http://github.com/bash20cu/Universidad/commit/3240f4c0c123b15e1f168ed9f827f266481ae828">view commit &bull;</a> Ptoyecto matematica discreta</li> 
+<li> <a href="http://github.com/bash20cu/Universidad/commit/e563babc8b2a01993079d9d6ca91c2604b3de8fb">view commit &bull;</a> Proyecto Matematica Discreta</li> 
+<li> <a href="http://github.com/bash20cu/Universidad/commit/6a26563f0832d2e3918682f04673a5626ce347a2">view commit &bull;</a> Update app.js</li> 
