@@ -5,22 +5,32 @@
 	font-family: 'Calibri cuerpo', sans-serif;
 }
 
+.contenedor{
+	display: flex;
+	flex-direction: column;
+}
 .contenedorPrincipal{
 	background: #badeeb;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: flex-start;
 	flex-wrap: nowrap;
+	align-items: center;
+}
+.contenedorSecundario{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;	
 }
 
 .divBotones {	
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	justify-content: flex-start;
 	align-items: flex-start;
 	align-self: center;
-	flex-wrap: wrap;
-	width: 30%;
+	height: 100%;
 }
 
 .divMapa {	
@@ -46,9 +56,6 @@ form {
 
 }
 
-.form {
-	display: none;
-}
 .formRow {	
 	flex-direction: row;
 	width: 100%;
@@ -65,16 +72,20 @@ label {
 }
 
 input, select {
-	width: 100%;
+	width: 70%;
 	height: 40px;
 	font-size: 17px;
 	color: #2b2b2b;
 	padding: 5px 10px;
 	margin: 5px;
 	border: none;
-	border-radius: 3px;
+	border: 2px solid red;
+	border-radius: 4px;
 }
-
+input[type=text] {
+	border: 2px solid red;
+	border-radius: 4px;
+}
 select {
 	margin-bottom: 20px;
 	height: 30px;
@@ -84,7 +95,7 @@ select {
 
 
 button {
-	width: 120px;
+	width: 200px;
 	color: #2b2b2b;
 	background: #d7f8d0;
 	padding: 10px 0;
@@ -116,7 +127,5 @@ button.btnClear {
 #distance {
 	bottom: 90px;
 	font-size: 20px;
-	color: #fff;
-	position: absolute;
-	display: none;
+	color: #0a0a0a;	
 }

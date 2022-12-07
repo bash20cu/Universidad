@@ -8,53 +8,41 @@
     <title>Proyecto Algoritmo Dijkstra</title>
 </head>
 <body>
-    <section class="contenedorPrincipal">        
-        <div class="divBotones">
-            <button id="btnClear" class="btnClear">Limpiar</button>
-            <button id="btnSave" class="btnSave">Guardar</button>
-            <input type='file' accept='text/plain' onchange='cargar(event)'>
-			<button id="btnCreateVertice" class="btnCreateVertice">Crear Vértice</button>
-			<button id="btnCreateEdge" class="btnCreateEdge">Crear Arista</button>
-			<button id="btnRoute" class="btnRoute">Calcular Ruta</button>
-
-            <form action="#" class="formVertices form">
-				<label for="positionVertice">Posición del vértice en coordenadas (x,y)</label>
-				<div class="formRow">
-					<input type="number" id="positionX" min="0" max="100" placeholder="X">
-					<input type="number" id="positionY" min="0" max="100" placeholder="Y">
+    <section class="contenedorPrincipal">
+		<div class="contenedorSecundario">
+			<div class="contenedor">
+				<div class="divBotones">
+					<button id="btnClear" class="btnClear">Limpiar</button>			
+					<button id="btnSave" class="btnSave">Guardar</button>
+					<input type='file' accept='text/plain' onchange='cargar(event)'>
 				</div>
-
-				<label for="nameVertice">Nombre del vértice</label>
-				<div class="formRow">
-					<input type="text" id="nameVertice" placeholder="Nombre del vertice">
-					<input type="submit" id="btnCrearV" value="Crear Vertice" class="btn"></input>
-				</div>
-			</form>
-
-			<form action="#" class="formEdges form">
-				<label for="initialV">Vértice inicial</label>
-				<select id="initialV"></select>
-
-				<label for="finalV">Vértice final</label>
-				<select id="finalV"></select>
-                <input type="number" id="peso" min="1" placeholder="Peso Arista"></input>
-				<input type="submit" id="btnCrearE" value="Crear Arista" class="btn"></input>
-			</form>
-
-			<form action="#" class="formCalculate form">
-				<label for="initialVC">Vértice inicial</label>
-				<select id="initialVC"></select>
-
-				<label for="finalVC">Vértice final</label>
-				<select id="finalVC"></select>
-
-				<input type="submit" id="btnCalcRoute" value="Calcular" class="btn"></input>                
-			</form>
-        </div>
-        <div class="divMapa">
-            <canvas id="mapa"></canvas>
-        </div>
-		<p id="distance"></p>					  
+				<div class="divBotones">
+					<form action="#" class="formEdges form">
+						<label for="initialV">Vértice inicial</label>
+						<select id="initialV"></select>
+						<label for="finalV">Vértice final</label>
+						<select id="finalV"></select>
+						<input type="number" id="peso" min="1" placeholder="Peso Arista"></input>
+						<input type="submit" id="btnCrearE" value="Crear Arista" class="btn"></input>
+					</form>
+		
+					<form action="#" class="formCalculate form">
+						<label for="initialVC">Vértice inicial</label>
+						<select id="initialVC"></select>
+						<label for="finalVC">Vértice final</label>
+						<select id="finalVC"></select>
+						<input type="submit" id="btnCalcRoute" value="Calcular Ruta" class="btn"></input>                
+					</form>						
+					<form action="#" class="form">
+						<p>Distancia : </p>
+						<p id="distance"></p>
+					</form>           			  
+				</div> 
+			</div>
+			<div class="divMapa">
+				<canvas id="mapa"></canvas>
+			</div>	 
+		</div>      
     </section>
 
 </body>

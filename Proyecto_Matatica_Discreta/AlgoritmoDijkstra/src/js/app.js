@@ -11,26 +11,10 @@ $(document).ready(function () {
   sizeCanvas();
   drawGrid();
 
-
-  $("#btnCreateVertice").click(function () {
-    clearForms();
-    $(".formVertices").slideDown(300);
-    $("#positionX").focus();
-  });
-
-  $("#btnCreateEdge").click(function () {
-    clearForms();
-    $(".formEdges").slideDown(300);
-    $("#positionX").focus();
-  });
-
-  $("#btnRoute").click(function () {
-    clearForms();
-    $(".formCalculate").slideDown(300);
-  });
-
   $("#btnClear").click(function () {
     clearInformation();
+    sizeCanvas();
+    drawGrid();
   });
 
   $("#btnSave").click(function(){
@@ -102,6 +86,14 @@ $(document).ready(function () {
     let initialV = $("#initialV").val();
     let finalV = $("#finalV").val();
     let peso = $("#peso").val();
+
+    console.log($("#peso").val())
+
+    if(peso <= 0 && peso === ""){
+      peso = 1;
+    }
+
+    console.log(peso);
 
     if (initialV != "" && finalV != "" && initialV != null && finalV != null) {
       if (initialV != finalV) {
@@ -292,8 +284,15 @@ function drawEdge(
 
 function clearInformation() {
   emptyCanvas();
-  $(".form input:not(input[type='submit'])").val("");
-  $(".form select").val("");
+  $(".form input:not(input[type='submit'])").empty();
+
+  console.log( $(".form input:not(input[type='submit'])").val(""));
+
+
+  $(".form select").empty();
+
+  console.log($(".form select").val(""));
+
   $("#distance").html("");
   $("#distance").slideUp(300);
   for(const o in grafo){
@@ -379,20 +378,26 @@ function cargar(event) {
           let temp = JSON.parse(reader.result);
             //console.log(temp);
            for(let nodo in temp){
-            console.log(temp[nodo]);
+            console.log(temp[nodo].finalV);
             nameV = temp[nodo].initialV;
-            tempNodoFinal = temp[nodo].finalV.toString();
-            grafo[nameV] = 
+            tempNodoFinal = temp[nodo].finalV;
+
+           grafo[nameV] = 
             {
                 x:temp[nodo].x1,
                 y:temp[nodo].y1,
-                tempNodoFinal:temp[nodo].peso, 
+
             };
+            grafo[nameV][tempNodoFinal] = temp[nodo].peso;
+
             drawVertex(temp[nodo].x1, temp[nodo].y1, 7, temp[nodo].initialV);
             drawVertex(temp[nodo].x2, temp[nodo].y2, 7, temp[nodo].finalV);
-            drawEdge(temp[nodo].x1,temp[nodo].y1,temp[nodo].x2, temp[nodo].y2,temp[nodo].peso)                        
+            //drawEdge(temp[nodo].x1,temp[nodo].y1,temp[nodo].x2, temp[nodo].y2,temp[nodo].peso)                        
            }
            
+           for(let nodo in temp){
+            drawEdge(temp[nodo].x1,temp[nodo].y1,temp[nodo].x2, temp[nodo].y2,temp[nodo].peso)
+          }
            console.log(grafo); 
            fillSelects();        
 
