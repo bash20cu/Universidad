@@ -67,8 +67,9 @@ $(document).ready(function () {
     let finalV = $("#finalV").val();
     let peso = $("#peso").val();
 
-    if (peso <= 0 && peso === "") {
+    if (peso <= 0 | peso === "") {
       peso = 1;
+      alert("El peso no puede ser negativo, se le colocara 1 en su lugar");
     }
 
     if (initialV != "" && finalV != "" && initialV != null && finalV != null) {
