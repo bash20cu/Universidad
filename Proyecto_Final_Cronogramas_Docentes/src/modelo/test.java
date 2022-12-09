@@ -15,15 +15,18 @@ public class test {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        clsDocente miguel;
-        miguel = new clsDocente("119200708407", "64524289", "Miguel Fernandez", "Calle Fallas");
+        clsCentroFormacion uia = new clsCentroFormacion("aa1", "UIA",
+                "San Jose", "0001-0002");
+        
+        //clsPrograma programa1  =  new clsPrograma(uia,
+          //      "0001", "aa10", "Idiomas", "2B", 2020);
+          
+        clsPrograma programa1  =  new clsPrograma(uia.getCodigo(), "aa10", "Idiomas", "2B", 2020);
+        //System.out.println(programa1.getCentroFormacion());
+        
+        System.out.println(programa1.getReferencia());
        
-        System.out.println(miguel.getCedula());
-        System.out.println(miguel.getDireccion());
-        System.out.println(miguel.getTelefono());
-
-        miguel.setCedula("200119708407");
-        System.out.println(miguel.getCedula());
+        
     }
     
 }

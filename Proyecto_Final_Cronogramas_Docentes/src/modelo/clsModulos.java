@@ -1,56 +1,52 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
-/**
- *
- * @author migue
- */
 public class clsModulos {
-    private int codigoModulos;
-    private int duracionModulos;
-    private String nombreModulos;
-    private String sectorModulos;
+    private String codigo;
+    private String nombre;
+    private String duracion;
+    private String sectores;
 
-    public clsModulos(int codigoModulos, int duracionModulos, String nombreModulos, String sectorModulos) {
-        this.codigoModulos = codigoModulos;
-        this.duracionModulos = duracionModulos;
-        this.nombreModulos = nombreModulos;
+    public clsModulos() {}
+    
+    public clsModulos(String codigo, String nombre, String duracion, String sectores) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.duracion = duracion;
+        this.sectores = sectores;
     }
 
-    public int getCodigoModulos() {
-        return codigoModulos;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCodigoModulos(int codigoModulos) {
-        this.codigoModulos = codigoModulos;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
-    public int getDuracionModulos() {
-        return duracionModulos;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setDuracionModulos(int duracionModulos) {
-        this.duracionModulos = duracionModulos;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getNombreModulos() {
-        return nombreModulos;
+    public String getDuracion() {
+        return duracion;
     }
 
-    public void setNombreModulos(String nombreModulos) {
-        this.nombreModulos = nombreModulos;
+    public void setDuracion(String duracion) {
+        this.duracion = duracion;
     }
 
-    public String getSectorModulos() {
-        return sectorModulos;
+    public String getSectores() {
+        return sectores;
     }
 
-    public void setSectorModulos(String sectorModulos) {
-        this.sectorModulos = sectorModulos;
+    public void setSectores(String sectores) {
+        this.sectores = sectores;
     }
+
     
     
     
