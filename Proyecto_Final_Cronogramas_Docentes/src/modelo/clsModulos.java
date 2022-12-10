@@ -4,7 +4,7 @@ public class clsModulos {
     private String codigo;
     private String nombre;
     private String duracion;
-    private String sectores;
+    private String sector;
 
     public clsModulos() {}
     
@@ -12,7 +12,7 @@ public class clsModulos {
         this.codigo = codigo;
         this.nombre = nombre;
         this.duracion = duracion;
-        this.sectores = sectores;
+        this.sector = sectores;
     }
 
     public String getCodigo() {
@@ -39,15 +39,21 @@ public class clsModulos {
         this.duracion = duracion;
     }
 
-    public String getSectores() {
-        return sectores;
+    public String getSector() {
+        return sector;
     }
 
-    public void setSectores(String sectores) {
-        this.sectores = sectores;
+    public void setSector(String sector) {
+        this.sector = sector;
     }
 
-    
-    
+    public String getModulo(){
+        String modulo = "\n"+
+                "Nombre del modulo: "+getNombre()+"\n"+
+                "Codigo del modulo: "+getCodigo()+"\n"+
+                "Duracion del modulo: "+getDuracion()+"\n"+
+                "Sector del modulo: "+getSector()+"\n";
+        return modulo;
+    }
     
 }

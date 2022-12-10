@@ -58,5 +58,14 @@ public class clsPersona {
     public void setDireccion(String Direccion) {
         this.direccion = Direccion;
     }
+    
+    public String getPersona(){
+        String persona = "Nombre: " +getNombre()+ "\n"+
+                "Apellidos: "+getApellidos()+"\n"+
+                "Telefono: "+getTelefono()+"\n"+
+                "Direccion: "+getDireccion()+"\n"+
+                "Cedula: "+getCedula();        
+        return persona;
+    }
 
 }

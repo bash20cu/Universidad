@@ -3,39 +3,33 @@ package modelo;
 
 public class clsPrograma {
     clsCentroFormacion centroFormacion = new clsCentroFormacion();
-    clsDocente docente = new clsDocente();
-    private String referencia;
-    private String codigo;
+    clsHorario horario = new clsHorario();
     private String sector;
+    private String codigoPrograma;
     private String grupo;
     private int anno;
-    private String horario;
-    private int horasPorDia;
-    private String estado;
+   
 
     public  clsPrograma(){}
     
     public clsPrograma(String referencia, String codigo, String sector, String grupo, int anno) {
-        this.referencia = referencia;
-        this.codigo = codigo;
         this.sector = sector;
         this.grupo = grupo;
         this.anno = anno;
     }
     
     
-    public clsPrograma(clsCentroFormacion centroFormacion, String codigo, String sector, String grupo, int anno) {
+    public clsPrograma(clsCentroFormacion centroFormacion,clsHorario horario, String codigo, String sector, String grupo, int anno) {
         this.centroFormacion = centroFormacion;
-        this.referencia = centroFormacion.getCodigo();
-        this.codigo = codigo;
         this.sector = sector;
         this.grupo = grupo;
         this.anno = anno;
+        this.horario = horario;
     }
     
 
     public clsCentroFormacion getCentroFormacion() {
-        System.out.println(centroFormacion.getDatos());
+        System.out.println("\n"+centroFormacion.getDatos()+"\n");
         return centroFormacion;
     }
 
@@ -43,23 +37,7 @@ public class clsPrograma {
         this.centroFormacion = centroFormacion;
     }
 
-    public String getReferencia() {
-        return referencia;
-    }
-
-    public void setReferencia(String referencia) {
-        this.referencia = referencia;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getSector() {
+   public String getSector() {
         return sector;
     }
 
@@ -82,9 +60,34 @@ public class clsPrograma {
     public void setAnno(int anno) {
         this.anno = anno;
     }
+
+    public clsHorario getHorario() {
+        return horario;
+    }
+
+    public void setHorario(clsHorario horario) {
+        this.horario = horario;
+    }
+
+    public String getCodigoPrograma() {
+        return codigoPrograma;
+    }
+
+    public void setCodigoPrograma(String codigoPrograma) {
+        this.codigoPrograma = codigoPrograma;
+    }
     
     
-    
-    
-    
+    public String getPrograma(){
+         String programa = "Centro de formacion: "+getCentroFormacion().getNombre()+"\n"+
+                "Codigo - Referencia del Programa: "+getCentroFormacion().getCodigo()+"\n"+
+                 "Codigo del Programa: "+getCodigoPrograma()+"\n"+
+                "Sector: "+getSector()+"\n"+
+                "Grupo: "+getGrupo()+"\n"+
+                "Anno: "+getAnno()+"\n"+
+                "--- Horario ---- "+
+                getHorario().getDatosHorario()+"\n"+
+                "\n";
+        return programa;
+    } 
 }

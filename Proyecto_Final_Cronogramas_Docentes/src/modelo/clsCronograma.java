@@ -4,56 +4,94 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+import java.util.Objects;
+
 /**
  *
  * @author miguel
  */
 public class clsCronograma {
-    private String cursos;
-    private String fechaInicio;
-    private String fechaFin;
-    private int totalHoras;
+    
+    private int totalHoras = 0;
+    private int vacaciones;
+    clsDocente docente = new clsDocente();
+    private ArrayList<clsModulos> modulos = new ArrayList<clsModulos>();
+    private ArrayList<clsPrograma> programas = new ArrayList<clsPrograma>();
+        
 
     public clsCronograma() {
     }
 
-    public clsCronograma(String cursos, String fechaInicio, String fechaFin, int totalHoras) {
-        this.cursos = cursos;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-        this.totalHoras = totalHoras;
+    public clsCronograma(clsDocente docente, ArrayList<clsModulos> modulos, 
+            ArrayList<clsPrograma> programas) {        
+        this.programas = programas;
+        this.modulos = modulos;
+        this.docente = docente;
+        setTotalHoras(docente.getTotalHoras());
     }
 
-    public String getCursos() {
-        return cursos;
+    public int getVacaciones() {
+        return vacaciones;
     }
 
-    public void setCursos(String cursos) {
-        this.cursos = cursos;
+    public void setVacaciones(int vacaciones) {
+        this.vacaciones = vacaciones;
     }
-
-    public String getFechaInicio() {
-        return fechaInicio;
-    }
-
-    public void setFechaInicio(String fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
-
-    public String getFechaFin() {
-        return fechaFin;
-    }
-
-    public void setFechaFin(String fechaFin) {
-        this.fechaFin = fechaFin;
-    }
-
+        
     public int getTotalHoras() {
         return totalHoras;
     }
 
-    public void setTotalHoras(int totalHoras) {
-        this.totalHoras = totalHoras;
-    } 
+    private void setTotalHoras(int totalHoras) {
+        if (totalHoras >= 2080) {
+            System.out.println("Total de horas excedido");
+             this.totalHoras = this.totalHoras;
+        }else{
+            this.totalHoras = totalHoras;
+        }     
+    }
+
+    public clsDocente getDocente() {
+        return docente;
+    }
+
+    public void setDocente(clsDocente docente) {
+        this.docente = docente;
+    }
+
+    public ArrayList<clsModulos> getModulos() {
+        System.out.println("---- ---- Modulos: ----- ----- ----");
+        this.modulos.forEach((e) -> {
+               System.out.println(e.getModulo());
+        });  
+        return modulos;
+    }
+
+    public void setModulos(ArrayList<clsModulos> modulos) {
+        this.modulos = modulos;
+    }
+
+    public ArrayList<clsPrograma> getProgramas() {
+        System.out.println("---- ---- Programas: ----- ----- ----");
+        this.programas.forEach((e) -> {
+            System.out.println(e.getPrograma());
+            
+        });
+        return programas;
+    }
+
+    public void setProgramas(ArrayList<clsPrograma> programas) {
+        this.programas = programas;
+    }
+    
+    public String getDatos(){
+        String datos =
+                "---- ---- Docente: ----- ----- ----"+"\n"+
+                getDocente().getPersona()+"\n"+  
+                getModulos()+"\n"+                
+                getProgramas()+"\n";
+        return datos;
+    }
     
 }
