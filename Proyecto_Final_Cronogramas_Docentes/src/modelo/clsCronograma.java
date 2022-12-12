@@ -1,23 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
-/**
- *
- * @author miguel
- */
+
 public class clsCronograma {
     
     private int totalHoras = 0;
     private int vacaciones;
     clsDocente docente = new clsDocente();
-    private ArrayList<clsModulos> modulos = new ArrayList<clsModulos>();
-    private ArrayList<clsPrograma> programas = new ArrayList<clsPrograma>();
+    private ArrayList<clsModulos> modulos = new ArrayList<>();
+    private ArrayList<clsPrograma> programas = new ArrayList<>();
         
 
     public clsCronograma() {
@@ -46,7 +38,7 @@ public class clsCronograma {
     private void setTotalHoras(int totalHoras) {
         if (totalHoras >= 2080) {
             System.out.println("Total de horas excedido");
-             this.totalHoras = this.totalHoras;
+             //this.totalHoras = this.totalHoras;
         }else{
             this.totalHoras = totalHoras;
         }     

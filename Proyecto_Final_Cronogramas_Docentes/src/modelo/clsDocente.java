@@ -2,7 +2,7 @@ package modelo;
 
 import java.util.ArrayList;
 
-public class clsDocente extends clsPersona {
+public class clsDocente extends clsPersona implements iTipoDocente{
 
     private ArrayList<clsCurso> cursos = new ArrayList<clsCurso>();
     private int totalHoras = 0;
@@ -57,5 +57,14 @@ public class clsDocente extends clsPersona {
     public void setTotalHoras(int totalHoras) {
         this.totalHoras += totalHoras;
     }  
-    
+
+    @Override
+    public boolean docenteDiurno() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean docenteMixto() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }    
 }

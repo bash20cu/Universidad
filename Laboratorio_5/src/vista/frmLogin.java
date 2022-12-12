@@ -1,22 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package vista;
 
 import javax.swing.JOptionPane;
 import modelo.clsCuenta;
 
-/**
- *
- * @author migue
- */
 public class frmLogin extends javax.swing.JFrame {
     
-    /**
-     * Creates new form frmLogin2
-     */
-    public frmLogin() {
+     public frmLogin() {
         initComponents();
     }
 
@@ -30,24 +19,24 @@ public class frmLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        lblTarjeta = new javax.swing.JLabel();
-        lblPin = new javax.swing.JLabel();
-        txtTarjeta = new javax.swing.JTextField();
+        lblUsuario = new javax.swing.JLabel();
+        lblContraseña = new javax.swing.JLabel();
+        txtUsuario = new javax.swing.JTextField();
         btnIniciar = new javax.swing.JButton();
-        pswPin = new javax.swing.JPasswordField();
+        pswContra = new javax.swing.JPasswordField();
         btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Iniciar Sesion");
         setResizable(false);
 
-        lblTarjeta.setText("Numero de Tarjeta");
+        lblUsuario.setText("Numero de Tarjeta");
 
-        lblPin.setText("Codigo PIN");
+        lblContraseña.setText("Codigo PIN");
 
-        txtTarjeta.addActionListener(new java.awt.event.ActionListener() {
+        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTarjetaActionPerformed(evt);
+                txtUsuarioActionPerformed(evt);
             }
         });
 
@@ -59,14 +48,14 @@ public class frmLogin extends javax.swing.JFrame {
             }
         });
 
-        pswPin.addActionListener(new java.awt.event.ActionListener() {
+        pswContra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pswPinActionPerformed(evt);
+                pswContraActionPerformed(evt);
             }
         });
-        pswPin.addKeyListener(new java.awt.event.KeyAdapter() {
+        pswContra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                pswPinKeyPressed(evt);
+                pswContraKeyPressed(evt);
             }
         });
 
@@ -86,10 +75,10 @@ public class frmLogin extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblTarjeta)
-                            .addComponent(txtTarjeta)
-                            .addComponent(lblPin)
-                            .addComponent(pswPin, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)))
+                            .addComponent(lblUsuario)
+                            .addComponent(txtUsuario)
+                            .addComponent(lblContraseña)
+                            .addComponent(pswContra, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -101,13 +90,13 @@ public class frmLogin extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTarjeta)
+                .addComponent(lblUsuario)
                 .addGap(12, 12, 12)
-                .addComponent(txtTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblPin)
+                .addComponent(lblContraseña)
                 .addGap(12, 12, 12)
-                .addComponent(pswPin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pswContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnIniciar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -136,9 +125,9 @@ public class frmLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTarjetaActionPerformed
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTarjetaActionPerformed
+    }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         // TODO add your handling code here:
@@ -153,8 +142,8 @@ public class frmLogin extends javax.swing.JFrame {
         //Comparacion de tarjetas, para validar
         for (String m:cuenta.getCuenta().keySet()) {            
                        
-            if (txtTarjeta.getText().equalsIgnoreCase(m) && 
-                    String.valueOf( pswPin.getPassword()).equals(cuenta.getCuenta().get(m))){
+            if (txtUsuario.getText().equalsIgnoreCase(m) && 
+                    String.valueOf( pswContra.getPassword()).equals(cuenta.getCuenta().get(m))){
                 
                 validacion = true;
                 
@@ -168,26 +157,26 @@ public class frmLogin extends javax.swing.JFrame {
         }
         // Mensaje en caso que no encuentre una validacion satisfactoria.
         if(!validacion){
-            txtTarjeta.setText("");
-            pswPin.setText("");
-            txtTarjeta.requestFocus();
+            txtUsuario.setText("");
+            pswContra.setText("");
+            txtUsuario.requestFocus();
             JOptionPane.showMessageDialog(null, "Numero de tarjeta o PIN incorrectos", "Informacion no valida", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnIniciarActionPerformed
 
-    private void pswPinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswPinActionPerformed
+    private void pswContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswContraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_pswPinActionPerformed
+    }//GEN-LAST:event_pswContraActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void pswPinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswPinKeyPressed
+    private void pswContraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswContraKeyPressed
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_pswPinKeyPressed
+    }//GEN-LAST:event_pswContraKeyPressed
 
     
     /**
@@ -232,9 +221,9 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lblPin;
-    private javax.swing.JLabel lblTarjeta;
-    private javax.swing.JPasswordField pswPin;
-    private javax.swing.JTextField txtTarjeta;
+    private javax.swing.JLabel lblContraseña;
+    private javax.swing.JLabel lblUsuario;
+    private javax.swing.JPasswordField pswContra;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
