@@ -55,6 +55,11 @@ public class mdiPrincipal extends javax.swing.JFrame {
 
         mniModulos.setMnemonic('s');
         mniModulos.setText("Modulos");
+        mniModulos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniModulosActionPerformed(evt);
+            }
+        });
         fmuCronograma.add(mniModulos);
 
         mniProgramas.setMnemonic('a');
@@ -96,11 +101,11 @@ public class mdiPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dskPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1012, Short.MAX_VALUE)
+            .addComponent(dskPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dskPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
+            .addComponent(dskPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
         );
 
         pack();
@@ -129,6 +134,12 @@ public class mdiPrincipal extends javax.swing.JFrame {
         dskPanel.add(d);
         d.setVisible(true);
     }//GEN-LAST:event_mniDocentesActionPerformed
+
+    private void mniModulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniModulosActionPerformed
+        frmModulos m = new frmModulos();
+        dskPanel.add(m);
+        m.setVisible(true);
+    }//GEN-LAST:event_mniModulosActionPerformed
 
     /**
      * @param args the command line arguments

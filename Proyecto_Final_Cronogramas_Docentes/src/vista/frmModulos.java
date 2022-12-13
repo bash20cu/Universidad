@@ -4,6 +4,14 @@
  */
 package vista;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import modelo.clsModulos;
+
 /**
  *
  * @author migue
@@ -15,6 +23,11 @@ public class frmModulos extends javax.swing.JInternalFrame {
      */
     public frmModulos() {
         initComponents();
+        btnGuardar.setEnabled(true);
+        btnModificar.setEnabled(false);
+        btnElminar.setEnabled(false);
+        this.cargarTabla();
+        
     }
 
     /**
@@ -43,6 +56,8 @@ public class frmModulos extends javax.swing.JInternalFrame {
         txtDuracion = new javax.swing.JTextField();
         lblSector = new javax.swing.JLabel();
         txtSector = new javax.swing.JTextField();
+
+        setClosable(true);
 
         panTabla.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tabla Modulos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 18))); // NOI18N
 
@@ -97,8 +112,8 @@ public class frmModulos extends javax.swing.JInternalFrame {
             panTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panTablaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(scrScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(120, 120, 120))
+                .addComponent(scrScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(131, 131, 131))
         );
 
         panOperaciones.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Operaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -156,11 +171,11 @@ public class frmModulos extends javax.swing.JInternalFrame {
             .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        panFormulario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Formulario Docentes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 18))); // NOI18N
+        panFormulario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Formulario Modulos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 18))); // NOI18N
 
         lblCodigo.setText("Codigo");
 
-        lblNombre.setText("Nombre del docente:");
+        lblNombre.setText("Nombre");
 
         lblDuracion.setText("Duracion");
 
@@ -180,11 +195,11 @@ public class frmModulos extends javax.swing.JInternalFrame {
                     .addComponent(lblDuracion))
                 .addGap(18, 18, 18)
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNombre)
+                    .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSector)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                     .addComponent(txtSector))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         panFormularioLayout.setVerticalGroup(
             panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,28 +230,24 @@ public class frmModulos extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(panOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(panTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(panFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(panOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(panFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -247,29 +258,24 @@ public class frmModulos extends javax.swing.JInternalFrame {
         btnModificar.setEnabled(true);
         btnElminar.setEnabled(true);
         txtCodigo.setEnabled(false);
-        
-        /*
-        clsDocentes d = new clsDocentes();
-        d = (clsDocentes) d.getRegistro(tblModulos.getSelectedRow());
-        txtCodigo.setText(d.getCedula());
-        txtNombre.setText(d.getNombre());
-        txtDuracion.setText(d.getApellidos());
-        txtDireccion.setText(d.getDireccion());
-        txtSector.setText(d.getTelefono());
-        */
+
+        clsModulos m = new clsModulos();
+        m = (clsModulos) m.getRegistro(tblModulos.getSelectedRow());
+        txtCodigo.setText(m.getCodigo());
+        txtNombre.setText(m.getNombre());
+        txtDuracion.setText(m.getDuracion());
+        txtSector.setText(m.getSector());
     }//GEN-LAST:event_tblModulosMouseClicked
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        
-        /*
+
         if (this.validar())
         {
-            clsDocentes d = new clsDocentes(txtCodigo.getText(),txtNombre.getText(),
-                txtDuracion.getText(),txtSector.getText(),
-                txtDireccion.getText());
-            if (d.guardar() == 1)
+            clsModulos m = new clsModulos(txtCodigo.getText(), txtNombre.getText(),
+                    txtDuracion.getText(), txtSector.getText());
+            if (m.guardar() == 1)
             {
-                JOptionPane.showMessageDialog(null, "Cliente Guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Modulo Guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                 this.cargarTabla();
                 CancelarBtn();
             } else
@@ -277,62 +283,140 @@ public class frmModulos extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "No se ha podido guardar la información", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
         }
-        */
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        
-        /*
-        if (this.validar()) {
+
+        if (this.validar())
+        {
             int opc = JOptionPane.showConfirmDialog(null, "Estas seguro modificar este registro", "Mensaje", JOptionPane.YES_NO_OPTION);
 
-            if (opc == 0) {
+            if (opc == 0)
+            {
 
-                clsDocentes d = new clsDocentes (txtCodigo.getText(),txtNombre.getText(),
-                    txtDuracion.getText(), txtSector.getText(),
-                    txtDireccion.getText());
-                if (d.modificar() == 1) {
-                    JOptionPane.showMessageDialog(null, "Docente modificado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                clsModulos m = new clsModulos(txtCodigo.getText(), txtNombre.getText(),
+                        txtDuracion.getText(), txtSector.getText());
+                if (m.modificar() == 1)
+                {
+                    JOptionPane.showMessageDialog(null, "Modulo modificado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                     this.cargarTabla();
-                } else {
+                } else
+                {
                     JOptionPane.showMessageDialog(null, "No se ha podido modificar la información", "Error", JOptionPane.INFORMATION_MESSAGE);
                 }
                 CancelarBtn();
             }
         }
-        */
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnElminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElminarActionPerformed
-        
-        /*
+
         int opc = JOptionPane.showConfirmDialog(null, "Estas seguro eliminar este registro", "Mensaje", JOptionPane.YES_NO_OPTION);
 
-        if (opc == 0) {
-            clsDocentes d = new clsDocentes (txtCodigo.getText(),txtNombre.getText(),
-                txtDuracion.getText(), txtSector.getText(),
-                txtDireccion.getText());
+        if (opc == 0)
+        {
+            clsModulos m = new clsModulos(txtCodigo.getText(), txtNombre.getText(),
+                    txtDuracion.getText(), txtSector.getText());
 
-            if (d.eliminar() == 1) {
-                JOptionPane.showMessageDialog(null, "El docente eliminado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            if (m.eliminar() == 1)
+            {
+                JOptionPane.showMessageDialog(null, "El modulo a sido eliminado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                 this.cargarTabla();
-            } else {
+            } else
+            {
                 JOptionPane.showMessageDialog(null, "No se ha podido eliminar la información", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
             CancelarBtn();
         }
-        */
     }//GEN-LAST:event_btnElminarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         btnGuardar.setEnabled(true);
         btnModificar.setEnabled(false);
         btnElminar.setEnabled(false);
-        //limpiarCampos();
+        limpiarCampos();
         txtCodigo.setEnabled(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void cargarTabla() {
+        limpiarCampos();
+        clsModulos Mod = new clsModulos();
+        ArrayList<Object> modulos = Mod.getRegistros();
+        DefaultTableModel model = (DefaultTableModel) tblModulos.getModel();
+        //borrar filas
+        model.setRowCount(0);
 
+        for (Object modulo : modulos)
+        {
+            clsModulos m = (clsModulos) modulo;
+            //generar la fila
+            model.addRow(new Object[]
+            {
+                m.getCodigo(),
+                m.getNombre(),
+                m.getDuracion(),
+                m.getSector()
+            });
+        }
+    }
+
+    private void CancelarBtn() {
+        limpiarCampos();
+        txtCodigo.setEnabled(true);
+        btnGuardar.setEnabled(true);
+        btnModificar.setEnabled(false);
+        btnElminar.setEnabled(false);
+    }
+
+    private boolean validar() {
+        //validar que digite una cedula
+        if (txtCodigo.getText().length() == 0 || txtCodigo.getText().compareTo("") == 0)
+        {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un codigo valido", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtCodigo);
+            return false;
+        }
+
+        if (txtNombre.getText().length() == 0 || txtNombre.getText().compareTo("") == 0)
+        {
+            JOptionPane.showMessageDialog(null, "Debe ingresar el nombre del modulo", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtNombre);
+            return false;
+        }
+
+        if (txtDuracion.getText().length() == 0 || txtDuracion.getText().compareTo("") == 0)
+        {
+            JOptionPane.showMessageDialog(null, "Debe ingresar la duracion del modulo en horas", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtDuracion);
+            return false;
+        }
+
+        if (txtSector.getText().length() == 0 || txtSector.getText().compareTo("") == 0)
+        {
+            JOptionPane.showMessageDialog(null, "Debe ingresar el sector del modulo", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtSector);
+            return false;
+        }
+        return true;
+    }
+
+    private void formatoError(Object campo) {
+        if (campo instanceof JTextField)
+        {
+            JTextField txt = (JTextField) campo;
+            txt.setForeground(new Color(240, 44, 122));
+            txt.setBorder(BorderFactory.createLineBorder(new Color(240, 44, 122)));
+            txt.requestFocus();
+        }
+    }
+
+    private void limpiarCampos() {
+        txtCodigo.setText("");
+        txtNombre.setText("");
+        txtDuracion.setText("");
+        txtSector.setText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnElminar;
@@ -352,4 +436,5 @@ public class frmModulos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtSector;
     // End of variables declaration//GEN-END:variables
+
 }
