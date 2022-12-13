@@ -28,6 +28,7 @@ public class mdiPrincipal extends javax.swing.JFrame {
         fmuCronograma = new javax.swing.JMenu();
         mniDocentes = new javax.swing.JMenuItem();
         mniModulos = new javax.swing.JMenuItem();
+        mniCentroFormacion = new javax.swing.JMenuItem();
         mniProgramas = new javax.swing.JMenuItem();
         mniCronograma = new javax.swing.JMenuItem();
         mniSalir = new javax.swing.JMenuItem();
@@ -62,8 +63,22 @@ public class mdiPrincipal extends javax.swing.JFrame {
         });
         fmuCronograma.add(mniModulos);
 
+        mniCentroFormacion.setMnemonic('a');
+        mniCentroFormacion.setText("Centro de Formacion");
+        mniCentroFormacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniCentroFormacionActionPerformed(evt);
+            }
+        });
+        fmuCronograma.add(mniCentroFormacion);
+
         mniProgramas.setMnemonic('a');
         mniProgramas.setText("Programas");
+        mniProgramas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniProgramasActionPerformed(evt);
+            }
+        });
         fmuCronograma.add(mniProgramas);
 
         mniCronograma.setMnemonic('x');
@@ -141,6 +156,18 @@ public class mdiPrincipal extends javax.swing.JFrame {
         m.setVisible(true);
     }//GEN-LAST:event_mniModulosActionPerformed
 
+    private void mniProgramasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniProgramasActionPerformed
+        frmProgramas p = new frmProgramas();
+        dskPanel.add(p);
+        p.setVisible(true);
+    }//GEN-LAST:event_mniProgramasActionPerformed
+
+    private void mniCentroFormacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCentroFormacionActionPerformed
+        frmCentroFormacion c = new frmCentroFormacion();
+        dskPanel.add(c);
+        c.setVisible(true);
+    }//GEN-LAST:event_mniCentroFormacionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -209,6 +236,7 @@ public class mdiPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu fmuAdministracion;
     private javax.swing.JMenu fmuCronograma;
     private javax.swing.JMenuBar mnbMenu;
+    private javax.swing.JMenuItem mniCentroFormacion;
     private javax.swing.JMenuItem mniCronograma;
     private javax.swing.JMenuItem mniDocentes;
     private javax.swing.JMenuItem mniModulos;

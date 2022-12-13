@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package vista;
 
 import java.awt.Color;
@@ -12,10 +8,6 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelo.clsModulos;
 
-/**
- *
- * @author migue
- */
 public class frmModulos extends javax.swing.JInternalFrame {
 
     /**
@@ -26,8 +18,7 @@ public class frmModulos extends javax.swing.JInternalFrame {
         btnGuardar.setEnabled(true);
         btnModificar.setEnabled(false);
         btnElminar.setEnabled(false);
-        this.cargarTabla();
-        
+        this.cargarTabla();        
     }
 
     /**
