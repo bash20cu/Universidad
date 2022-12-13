@@ -4,13 +4,13 @@ package modelo;
 
 public class clsHorario {
    private int horasDia;
-   clsDocente docente = new clsDocente();
+   clsDocentes docente = new clsDocentes();
    private String estado;
 
     public clsHorario() {
     }
 
-    public clsHorario(int horasDia, String estado, clsDocente docente) {
+    public clsHorario(int horasDia, String estado, clsDocentes docente) {
         this.horasDia = horasDia;
         this.estado = estado;
         this.docente = docente;
@@ -24,11 +24,11 @@ public class clsHorario {
         this.horasDia = horasDia;
     }
 
-    public clsDocente getDocente() {
+    public clsDocentes getDocente() {
         return docente;
     }
 
-    public void setDocente(clsDocente docente) {
+    public void setDocente(clsDocentes docente) {
         this.docente = docente;
     }
 
@@ -40,11 +40,4 @@ public class clsHorario {
         this.estado = estado;
     }
 
-    public String getDatosHorario(){
-        String Horario = "\n"+
-                "Horas por dia: " + getHorasDia() + "\n "+
-                "Docente: " + getDocente().getPersona()+ "\n "+
-                "Estado: " + getEstado()+"\n ";  
-        return Horario;
-    }
 }

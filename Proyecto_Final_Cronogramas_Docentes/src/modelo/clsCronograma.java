@@ -7,7 +7,7 @@ public class clsCronograma {
     
     private int totalHoras = 0;
     private int vacaciones;
-    clsDocente docente = new clsDocente();
+    clsDocentes docente = new clsDocentes();
     private ArrayList<clsModulos> modulos = new ArrayList<>();
     private ArrayList<clsPrograma> programas = new ArrayList<>();
         
@@ -15,7 +15,7 @@ public class clsCronograma {
     public clsCronograma() {
     }
 
-    public clsCronograma(clsDocente docente, ArrayList<clsModulos> modulos, 
+    public clsCronograma(clsDocentes docente, ArrayList<clsModulos> modulos, 
             ArrayList<clsPrograma> programas) {        
         this.programas = programas;
         this.modulos = modulos;
@@ -44,18 +44,18 @@ public class clsCronograma {
         }     
     }
 
-    public clsDocente getDocente() {
+    public clsDocentes getDocente() {
         return docente;
     }
 
-    public void setDocente(clsDocente docente) {
+    public void setDocente(clsDocentes docente) {
         this.docente = docente;
     }
 
     public ArrayList<clsModulos> getModulos() {
         System.out.println("---- ---- Modulos: ----- ----- ----");
         this.modulos.forEach((e) -> {
-               System.out.println(e.getModulo());
+               //System.out.println(e.getModulo());
         });  
         return modulos;
     }
@@ -67,8 +67,7 @@ public class clsCronograma {
     public ArrayList<clsPrograma> getProgramas() {
         System.out.println("---- ---- Programas: ----- ----- ----");
         this.programas.forEach((e) -> {
-            System.out.println(e.getPrograma());
-            
+           // System.out.println(e.getPrograma());            
         });
         return programas;
     }
@@ -76,14 +75,5 @@ public class clsCronograma {
     public void setProgramas(ArrayList<clsPrograma> programas) {
         this.programas = programas;
     }
-    
-    public String getDatos(){
-        String datos =
-                "---- ---- Docente: ----- ----- ----"+"\n"+
-                getDocente().getPersona()+"\n"+  
-                getModulos()+"\n"+                
-                getProgramas()+"\n";
-        return datos;
-    }
-    
+      
 }

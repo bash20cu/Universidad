@@ -1,6 +1,10 @@
 package modelo;
 
-public class clsModulos {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class clsModulos extends clsMetodos implements Serializable{
+    private static final long serialVersionUID = 6529685098267777690L; //determina la version de la clase
     private String codigo;
     private String nombre;
     private String duracion;
@@ -45,15 +49,31 @@ public class clsModulos {
 
     public void setSector(String sector) {
         this.sector = sector;
+    }   
+
+    @Override
+    public int guardar() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public String getModulo(){
-        String modulo = "\n"+
-                "Nombre del modulo: "+getNombre()+"\n"+
-                "Codigo del modulo: "+getCodigo()+"\n"+
-                "Duracion del modulo: "+getDuracion()+"\n"+
-                "Sector del modulo: "+getSector()+"\n";
-        return modulo;
+    @Override
+    public int modificar() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int eliminar() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ArrayList<Object> getRegistros() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Object getRegistro(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

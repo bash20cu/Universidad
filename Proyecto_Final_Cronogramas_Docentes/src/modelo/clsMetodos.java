@@ -39,7 +39,7 @@ public abstract class clsMetodos {
     public abstract int modificar();
     public abstract int eliminar();
     public abstract ArrayList<Object> getRegistros();
-    public abstract Object getRegistro(int cedula);
+    public abstract Object getRegistro(int id);
     
     
 }

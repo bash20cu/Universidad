@@ -76,18 +76,5 @@ public class clsPrograma {
     public void setCodigoPrograma(String codigoPrograma) {
         this.codigoPrograma = codigoPrograma;
     }
-    
-    
-    public String getPrograma(){
-         String programa = "Centro de formacion: "+getCentroFormacion().getNombre()+"\n"+
-                "Codigo - Referencia del Programa: "+getCentroFormacion().getCodigo()+"\n"+
-                 "Codigo del Programa: "+getCodigoPrograma()+"\n"+
-                "Sector: "+getSector()+"\n"+
-                "Grupo: "+getGrupo()+"\n"+
-                "Anno: "+getAnno()+"\n"+
-                "--- Horario ---- "+
-                getHorario().getDatosHorario()+"\n"+
-                "\n";
-        return programa;
-    } 
+     
 }

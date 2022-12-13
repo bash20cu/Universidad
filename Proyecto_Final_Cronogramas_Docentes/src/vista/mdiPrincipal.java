@@ -46,6 +46,11 @@ public class mdiPrincipal extends javax.swing.JFrame {
 
         mniDocentes.setMnemonic('o');
         mniDocentes.setText("Docentes");
+        mniDocentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniDocentesActionPerformed(evt);
+            }
+        });
         fmuCronograma.add(mniDocentes);
 
         mniModulos.setMnemonic('s');
@@ -54,7 +59,6 @@ public class mdiPrincipal extends javax.swing.JFrame {
 
         mniProgramas.setMnemonic('a');
         mniProgramas.setText("Programas");
-        mniProgramas.setDisplayedMnemonicIndex(5);
         fmuCronograma.add(mniProgramas);
 
         mniCronograma.setMnemonic('x');
@@ -119,6 +123,12 @@ public class mdiPrincipal extends javax.swing.JFrame {
         dskPanel.add(u);
         u.setVisible(true);
     }//GEN-LAST:event_mniUsuariosActionPerformed
+
+    private void mniDocentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDocentesActionPerformed
+        frmDocentes d = new frmDocentes();
+        dskPanel.add(d);
+        d.setVisible(true);
+    }//GEN-LAST:event_mniDocentesActionPerformed
 
     /**
      * @param args the command line arguments
