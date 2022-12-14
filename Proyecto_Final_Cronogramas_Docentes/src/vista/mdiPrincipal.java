@@ -92,6 +92,11 @@ public class mdiPrincipal extends javax.swing.JFrame {
 
         mniSalir.setMnemonic('a');
         mniSalir.setText("Salir");
+        mniSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniSalirActionPerformed(evt);
+            }
+        });
         fmuCronograma.add(mniSalir);
 
         mnbMenu.add(fmuCronograma);
@@ -128,7 +133,7 @@ public class mdiPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mniCronogramaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCronogramaActionPerformed
-        System.exit(0);
+        
     }//GEN-LAST:event_mniCronogramaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -167,6 +172,10 @@ public class mdiPrincipal extends javax.swing.JFrame {
         dskPanel.add(c);
         c.setVisible(true);
     }//GEN-LAST:event_mniCentroFormacionActionPerformed
+
+    private void mniSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_mniSalirActionPerformed
 
     /**
      * @param args the command line arguments

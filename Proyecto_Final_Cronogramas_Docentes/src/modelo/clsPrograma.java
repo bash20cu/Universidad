@@ -14,9 +14,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class clsPrograma  extends clsMetodos implements Serializable{
-    private static final long serialVersionUID = 6529685098267777690L; //determina la version de la clase
+    private static final long serialVersionUID = 6529685098267777690L; //determina la version de la clase 
     clsCentroFormacion centroFormacion = new clsCentroFormacion();
-    clsHorario horario = new clsHorario();
+    //clsHorario horario = new clsHorario();
+    ArrayList<clsModulos> modulos = new ArrayList<>();
+    private String referencia;
     private String sector;
     private String codigo;
     private String grupo;
@@ -26,18 +28,51 @@ public class clsPrograma  extends clsMetodos implements Serializable{
     public  clsPrograma(){}
     
     public clsPrograma(String codigo, String sector, String grupo, int anno) {
+        this.codigo = codigo;
         this.sector = sector;
         this.grupo = grupo;
         this.anno = anno;
     }
     
-    
-    public clsPrograma(clsCentroFormacion centroFormacion,clsHorario horario, String codigo, String sector, String grupo, int anno) {
-        this.centroFormacion = centroFormacion;
+    public clsPrograma(clsModulos modulo,clsCentroFormacion centroFormacion, String codigo, String sector, String grupo, int anno) {
+        this.codigo = codigo;
         this.sector = sector;
         this.grupo = grupo;
         this.anno = anno;
-        this.horario = horario;
+        this.modulos.add(modulo);
+        this.centroFormacion = centroFormacion;
+    }
+    
+    
+    
+    public clsPrograma(clsCentroFormacion centroFormacion,clsHorario horario, String codigo, String sector, String grupo, int anno) {
+        this.centroFormacion = centroFormacion;
+        this.codigo = codigo;
+        this.sector = sector;
+        this.grupo = grupo;
+        this.anno = anno;
+        //this.horario = horario;
+    }
+
+    public String getReferencia() {
+        return referencia;
+    }
+    
+
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
+    }
+
+    public ArrayList<clsModulos> getModulos() {
+        return modulos;
+    }
+
+    public void setModulos(ArrayList<clsModulos> modulos) {
+        this.modulos = modulos;
+    }
+    
+    public void setModulos(clsModulos modulo){
+        this.modulos.add(modulo);
     }
     
 
@@ -72,7 +107,7 @@ public class clsPrograma  extends clsMetodos implements Serializable{
     public void setAnno(int anno) {
         this.anno = anno;
     }
-
+/*
     public clsHorario getHorario() {
         return horario;
     }
@@ -80,7 +115,7 @@ public class clsPrograma  extends clsMetodos implements Serializable{
     public void setHorario(clsHorario horario) {
         this.horario = horario;
     }
-
+*/
     public String getCodigo() {
         return codigo;
     }
@@ -133,6 +168,9 @@ public class clsPrograma  extends clsMetodos implements Serializable{
             for (Object programa : programas) {
                 objetoSalida = new ObjectOutputStream(ficheroSalida);
                 clsPrograma m = (clsPrograma) programa;
+                
+                System.out.println(m.getCodigo());
+                
                 if (m.getCodigo().compareToIgnoreCase(this.codigo) == 0) {
                     objetoSalida.writeObject(this);
                 } else {
@@ -165,11 +203,14 @@ public class clsPrograma  extends clsMetodos implements Serializable{
         //bd= this.validarArchivo("docentes");
         ObjectOutputStream objetoSalida = null;
         FileOutputStream ficheroSalida = null;
+        
+        System.out.println(this.codigo);
+        
         try {
             ficheroSalida = new FileOutputStream(bd, true);
             //objetoSalida = new ObjectOutputStream(ficheroSalida);
             for (Object programa : programas) {
-                clsModulos m = (clsModulos) programa;
+                clsPrograma m = (clsPrograma) programa;
                 if (m.getCodigo().compareToIgnoreCase(this.codigo) != 0) {
                     objetoSalida = new ObjectOutputStream(ficheroSalida);
                     objetoSalida.writeObject(programa);

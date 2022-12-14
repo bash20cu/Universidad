@@ -1,8 +1,11 @@
 
 package modelo;
 
+import java.io.Serializable;
 
-public class clsHorario {
+
+public class clsHorario implements Serializable {
+   private static final long serialVersionUID = 6529685098267777690L; //determina la version de la clase 
    private int horasDia;
    clsDocentes docente = new clsDocentes();
    private String estado;

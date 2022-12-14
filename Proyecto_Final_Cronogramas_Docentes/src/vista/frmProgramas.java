@@ -3,12 +3,10 @@ package vista;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
+import modelo.clsCentroFormacion;
 import modelo.clsModulos;
 import modelo.clsPrograma;
 
@@ -19,6 +17,7 @@ public class frmProgramas extends javax.swing.JInternalFrame {
      */
     public frmProgramas() {
         initComponents();
+        cmbHorario.setEnabled(false);
         btnGuardar.setEnabled(true);
         btnModificar.setEnabled(false);
         btnElminar.setEnabled(false);
@@ -35,6 +34,10 @@ public class frmProgramas extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         panFormulario = new javax.swing.JPanel();
+        lblReferencia = new javax.swing.JLabel();
+        cmbReferencia = new javax.swing.JComboBox<>();
+        lblHorario = new javax.swing.JLabel();
+        cmbHorario = new javax.swing.JComboBox<>();
         lblSector = new javax.swing.JLabel();
         txtSector = new javax.swing.JTextField();
         lblCodigoPrograma = new javax.swing.JLabel();
@@ -43,7 +46,7 @@ public class frmProgramas extends javax.swing.JInternalFrame {
         txtGrupo = new javax.swing.JTextField();
         lblAnno = new javax.swing.JLabel();
         txtAnno = new javax.swing.JTextField();
-        cmbCentrosFormacion = new javax.swing.JComboBox<>();
+        cmbModulos = new javax.swing.JComboBox<>();
         lblModulo = new javax.swing.JLabel();
         panOperaciones = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
@@ -52,11 +55,18 @@ public class frmProgramas extends javax.swing.JInternalFrame {
         btnCancelar = new javax.swing.JButton();
         panTabla = new javax.swing.JPanel();
         scrScroll = new javax.swing.JScrollPane();
-        tblModulos = new javax.swing.JTable();
+        tblProgramas = new javax.swing.JTable();
 
         setClosable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("Programas");
 
         panFormulario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Formulario Programas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 18))); // NOI18N
+
+        lblReferencia.setText("Referencia:");
+
+        lblHorario.setText("Horario");
 
         lblSector.setText("Sector");
 
@@ -73,9 +83,17 @@ public class frmProgramas extends javax.swing.JInternalFrame {
         panFormularioLayout.setHorizontalGroup(
             panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panFormularioLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panFormularioLayout.createSequentialGroup()
+                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblReferencia))
+                        .addGap(18, 18, 18)
+                        .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblHorario)))
+                    .addGroup(panFormularioLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblSector)
                             .addComponent(txtSector, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
@@ -87,13 +105,28 @@ public class frmProgramas extends javax.swing.JInternalFrame {
                             .addComponent(lblAnno)
                             .addComponent(txtCodigoPrograma, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                             .addComponent(txtAnno)))
-                    .addComponent(cmbCentrosFormacion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbModulos, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblModulo))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         panFormularioLayout.setVerticalGroup(
             panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panFormularioLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panFormularioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panFormularioLayout.createSequentialGroup()
+                        .addComponent(lblReferencia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panFormularioLayout.createSequentialGroup()
+                        .addComponent(lblHorario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblModulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbModulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panFormularioLayout.createSequentialGroup()
                         .addGroup(panFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -113,11 +146,7 @@ public class frmProgramas extends javax.swing.JInternalFrame {
                         .addComponent(lblAnno)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtAnno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblModulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbCentrosFormacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(62, 62, 62))
         );
 
         panOperaciones.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Operaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -177,22 +206,22 @@ public class frmProgramas extends javax.swing.JInternalFrame {
 
         panTabla.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tabla Programas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 18))); // NOI18N
 
-        tblModulos.setModel(new javax.swing.table.DefaultTableModel(
+        tblProgramas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Nombre", "Duracion", "Sector"
+                "Codigo", "Referencia", "Modulos", "Sector", "Grupo", "Año", "Centro Formacion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -203,20 +232,29 @@ public class frmProgramas extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblModulos.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblProgramas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblModulosMouseClicked(evt);
+                tblProgramasMouseClicked(evt);
             }
         });
-        scrScroll.setViewportView(tblModulos);
+        scrScroll.setViewportView(tblProgramas);
+        if (tblProgramas.getColumnModel().getColumnCount() > 0) {
+            tblProgramas.getColumnModel().getColumn(0).setResizable(false);
+            tblProgramas.getColumnModel().getColumn(1).setResizable(false);
+            tblProgramas.getColumnModel().getColumn(2).setResizable(false);
+            tblProgramas.getColumnModel().getColumn(3).setResizable(false);
+            tblProgramas.getColumnModel().getColumn(4).setResizable(false);
+            tblProgramas.getColumnModel().getColumn(5).setResizable(false);
+            tblProgramas.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         javax.swing.GroupLayout panTablaLayout = new javax.swing.GroupLayout(panTabla);
         panTabla.setLayout(panTablaLayout);
         panTablaLayout.setHorizontalGroup(
             panTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panTablaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(scrScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(scrScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 822, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panTablaLayout.setVerticalGroup(
@@ -242,12 +280,13 @@ public class frmProgramas extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(panFormulario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
 
         pack();
@@ -256,9 +295,42 @@ public class frmProgramas extends javax.swing.JInternalFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
         if (this.validar())
-        {
-            clsPrograma m = new clsPrograma(txtSector.getText(), txtCodigoPrograma.getText(),
-                txtGrupo.getText(), Integer.parseInt(txtAnno.getText()));
+        {            
+            clsPrograma m = new clsPrograma(txtCodigoPrograma.getText(), txtSector.getText(),
+                    txtGrupo.getText(), Integer.parseInt(txtAnno.getText()));
+            
+            clsCentroFormacion centroFormacion = new clsCentroFormacion();
+            ArrayList<Object> centros = centroFormacion.getRegistros();
+            String selectedItem = (String) cmbReferencia.getSelectedItem();
+
+            clsModulos Mod1 = new clsModulos();
+            ArrayList<Object> modulos = Mod1.getRegistros();
+            String selectModulo = (String) cmbModulos.getSelectedItem();
+
+            for (Object centro : centros)
+            {
+                clsCentroFormacion tempCentro = (clsCentroFormacion) centro;
+                                
+                if(selectedItem.equals(tempCentro.getCodigo())){
+                  System.out.println(selectedItem);
+                  m.setReferencia(selectedItem);
+                  m.setCentroFormacion(tempCentro);
+                }
+            }
+
+            //rellenar la lista de modulos disponibles    
+            for (Object modulo : modulos)
+            {
+                clsModulos ModuloTemp = (clsModulos) modulo;
+                
+                clsModulos m1 = (clsModulos) modulo;
+                if(selectModulo.equals(ModuloTemp.getNombre())){
+                    System.out.println(ModuloTemp.getNombre());
+                    m.setModulos(m1);
+                }
+                
+            }
+             
             if (m.guardar() == 1)
             {
                 JOptionPane.showMessageDialog(null, "Programa Guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
@@ -283,7 +355,7 @@ public class frmProgramas extends javax.swing.JInternalFrame {
                     txtGrupo.getText(), Integer.parseInt(txtAnno.getText()));
                 if (m.modificar() == 1)
                 {
-                    JOptionPane.showMessageDialog(null, "Modulo modificado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Programa modificado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                     this.cargarTabla();
                 } else
                 {
@@ -299,8 +371,42 @@ public class frmProgramas extends javax.swing.JInternalFrame {
 
         if (opc == 0)
         {
-            clsPrograma m = new clsPrograma(txtSector.getText(), txtCodigoPrograma.getText(),
+           
+            
+            clsPrograma m = new clsPrograma( txtCodigoPrograma.getText(),txtSector.getText(),
                 txtGrupo.getText(), Integer.parseInt(txtAnno.getText()));
+            
+             clsCentroFormacion centroFormacion = new clsCentroFormacion();
+            ArrayList<Object> centros = centroFormacion.getRegistros();
+            String selectedItem = (String) cmbReferencia.getSelectedItem();
+
+            clsModulos Mod1 = new clsModulos();
+            ArrayList<Object> modulos = Mod1.getRegistros();
+            String selectModulo = (String) cmbModulos.getSelectedItem();
+
+            for (Object centro : centros)
+            {
+                clsCentroFormacion tempCentro = (clsCentroFormacion) centro;
+                                
+                if(selectedItem.equals(tempCentro.getCodigo())){
+                  System.out.println(selectedItem);
+                  m.setReferencia(selectedItem);
+                  m.setCentroFormacion(tempCentro);
+                }
+            }
+
+            //rellenar la lista de modulos disponibles    
+            for (Object modulo : modulos)
+            {
+                clsModulos ModuloTemp = (clsModulos) modulo;
+                
+                clsModulos m1 = (clsModulos) modulo;
+                if(selectModulo.equals(ModuloTemp.getNombre())){
+                    System.out.println(ModuloTemp.getNombre());
+                    m.setModulos(m1);
+                }
+                
+            }
 
             if (m.eliminar() == 1)
             {
@@ -315,26 +421,33 @@ public class frmProgramas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnElminarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        limpiarCampos();
         btnGuardar.setEnabled(true);
         btnModificar.setEnabled(false);
         btnElminar.setEnabled(false);
-        limpiarCampos();
+        txtCodigoPrograma.setEnabled(true);
         txtSector.setEnabled(true);
+        cmbReferencia.setEnabled(true);
+        cmbModulos.setEnabled(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void tblModulosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblModulosMouseClicked
+    private void tblProgramasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProgramasMouseClicked
         btnGuardar.setEnabled(false);
         btnModificar.setEnabled(true);
         btnElminar.setEnabled(true);
+        txtCodigoPrograma.setEnabled(false);
         txtSector.setEnabled(false);
+        cmbReferencia.setEnabled(false);
+        cmbModulos.setEnabled(false);
+        
 
         clsPrograma m = new clsPrograma();
-        m = (clsPrograma) m.getRegistro(tblModulos.getSelectedRow());
-        txtSector.setText(m.getCodigo());
+        m = (clsPrograma) m.getRegistro(tblProgramas.getSelectedRow());        
         txtCodigoPrograma.setText(m.getCodigo());
+        txtSector.setText(m.getSector());
         txtGrupo.setText(m.getGrupo());
         txtAnno.setText(String.valueOf(m.getAnno()));
-    }//GEN-LAST:event_tblModulosMouseClicked
+    }//GEN-LAST:event_tblProgramasMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -342,17 +455,21 @@ public class frmProgramas extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnElminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JComboBox<String> cmbCentrosFormacion;
+    private javax.swing.JComboBox<String> cmbHorario;
+    private javax.swing.JComboBox<String> cmbModulos;
+    private javax.swing.JComboBox<String> cmbReferencia;
     private javax.swing.JLabel lblAnno;
     private javax.swing.JLabel lblCodigoPrograma;
     private javax.swing.JLabel lblGrupo;
+    private javax.swing.JLabel lblHorario;
     private javax.swing.JLabel lblModulo;
+    private javax.swing.JLabel lblReferencia;
     private javax.swing.JLabel lblSector;
     private javax.swing.JPanel panFormulario;
     private javax.swing.JPanel panOperaciones;
     private javax.swing.JPanel panTabla;
     private javax.swing.JScrollPane scrScroll;
-    private javax.swing.JTable tblModulos;
+    private javax.swing.JTable tblProgramas;
     private javax.swing.JTextField txtAnno;
     private javax.swing.JTextField txtCodigoPrograma;
     private javax.swing.JTextField txtGrupo;
@@ -360,31 +477,29 @@ public class frmProgramas extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private boolean validar() {
-       if (txtCodigoPrograma.getText().length() == 0 || txtCodigoPrograma.getText().compareTo("") == 0)
+        if (txtSector.getText().length() == 0 || txtSector.getText().compareTo("") == 0)
         {
-            JOptionPane.showMessageDialog(null, "Debe ingresar un codigo valido", "Mensaje", JOptionPane.ERROR_MESSAGE);
-            this.formatoError(txtCodigoPrograma);
+            JOptionPane.showMessageDialog(null, "Debe ingresar el sector", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtSector);
             return false;
         }
 
+        if (txtCodigoPrograma.getText().length() == 0 || txtCodigoPrograma.getText().compareTo("") == 0)
+        {
+            JOptionPane.showMessageDialog(null, "Debe ingresar el codigo del programa", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtCodigoPrograma);
+            return false;
+        }             
+       if (txtAnno.getText().length() == 0 || txtAnno.getText().compareTo("") == 0)
+        {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un año valido", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            this.formatoError(txtAnno);
+            return false;
+        }
         if (txtGrupo.getText().length() == 0 || txtGrupo.getText().compareTo("") == 0)
         {
             JOptionPane.showMessageDialog(null, "Debe ingresar el grupo del programa", "Mensaje", JOptionPane.ERROR_MESSAGE);
             this.formatoError(txtGrupo);
-            return false;
-        }
-
-        if (txtAnno.getText().length() == 0 || txtAnno.getText().compareTo("") == 0)
-        {
-            JOptionPane.showMessageDialog(null, "Debe ingresar el año", "Mensaje", JOptionPane.ERROR_MESSAGE);
-            this.formatoError(txtAnno);
-            return false;
-        }
-
-        if (txtSector.getText().length() == 0 || txtSector.getText().compareTo("") == 0)
-        {
-            JOptionPane.showMessageDialog(null, "Debe ingresar el sector del modulo", "Mensaje", JOptionPane.ERROR_MESSAGE);
-            this.formatoError(txtSector);
             return false;
         }
         try {
@@ -394,42 +509,62 @@ public class frmProgramas extends javax.swing.JInternalFrame {
             this.formatoError(txtAnno);
             return false;
         }
+
         return true;
     }
 
     private void cargarTabla() {
         limpiarCampos();
+        clsCentroFormacion centroFormacion = new clsCentroFormacion();
+        ArrayList<Object> centros = centroFormacion.getRegistros();
+        
         clsPrograma Mod = new clsPrograma();
         ArrayList<Object> programas = Mod.getRegistros();
+        
         clsModulos Mod1 = new clsModulos();
         ArrayList<Object> modulos = Mod1.getRegistros();
-        DefaultTableModel model = (DefaultTableModel) tblModulos.getModel();
+        
+        DefaultTableModel model = (DefaultTableModel) tblProgramas.getModel();
         //borrar filas
-        model.setRowCount(0);
-        
-                 
-        
+        model.setRowCount(0);    
         
         for (Object programa : programas)
         {
+           
             clsPrograma m = (clsPrograma) programa;
+            
+             System.out.println(m.getCodigo());
+             
             //generar la fila
             model.addRow(new Object[]
             {
                 m.getCodigo(),
+                m.getReferencia(),
+                m.getModulos(),                
                 m.getSector(),
                 m.getGrupo(),
-                m.getAnno(),
+                m.getAnno(),                
+                m.getCentroFormacion().getNombre()
             });    
         }
+        
+        //rellenar Centros de formacion:     
+        cmbReferencia.removeAllItems();
+        for (Object centro : centros)
+        {
+            clsCentroFormacion tempCentro = (clsCentroFormacion) centro;
+
+            cmbReferencia.addItem(tempCentro.getCodigo());
+
+        }
+        cmbModulos.removeAllItems();
         //rellenar la lista de modulos disponibles    
         for (Object modulo : modulos)
         {
             clsModulos m1 = (clsModulos) modulo;
             //generar la fila
-            cmbCentrosFormacion.addItem(m1.getNombre());
+            cmbModulos.addItem(m1.getNombre());
         }
-        
     }
 
     private void CancelarBtn() {
@@ -445,6 +580,10 @@ public class frmProgramas extends javax.swing.JInternalFrame {
         txtGrupo.setText("");
         txtAnno.setText("");
         txtSector.setText("");
+        txtCodigoPrograma.setEnabled(true);
+        txtSector.setEnabled(true);
+        cmbReferencia.setEnabled(true);
+        cmbModulos.setEnabled(true);
     }
 
     private void formatoError(Object campo) {

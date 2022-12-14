@@ -20,7 +20,7 @@ public class clsCronograma {
         this.programas = programas;
         this.modulos = modulos;
         this.docente = docente;
-        setTotalHoras(docente.getTotalHoras());
+        this.setTotalHoras(docente.getTotalHoras());
     }
 
     public int getVacaciones() {
