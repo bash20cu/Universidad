@@ -123,7 +123,12 @@ public class clsPrograma  extends clsMetodos implements Serializable{
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-
+    /*
+    public String getPrograma(){
+        String programa = this.getReferencia()+" - "+this.getCodigo();
+        return programa;
+    }
+    */
  @Override
     public int guardar() {
        FileOutputStream ficheroSalida = null;

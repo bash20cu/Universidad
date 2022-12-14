@@ -133,7 +133,9 @@ public class mdiPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mniCronogramaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCronogramaActionPerformed
-        
+        frmCronogramas crono = new frmCronogramas();
+        dskPanel.add(crono);
+        crono.setVisible(true);
     }//GEN-LAST:event_mniCronogramaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
