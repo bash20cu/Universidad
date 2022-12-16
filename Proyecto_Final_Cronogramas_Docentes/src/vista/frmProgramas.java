@@ -273,11 +273,11 @@ public class frmProgramas extends javax.swing.JInternalFrame {
         panModulos.setLayout(panModulosLayout);
         panModulosLayout.setHorizontalGroup(
             panModulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 319, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panModulosLayout.setVerticalGroup(
             panModulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 271, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -600,6 +600,7 @@ public class frmProgramas extends javax.swing.JInternalFrame {
         for (JCheckBox checkbox : checkboxes) {
              panModulos.add(checkbox);
            }
+       
     }
 
     private void CancelarBtn() {
