@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="analisis1martes">
+  <ClassDiagramComponents>
+    <Class name="Analisis1Martes" package="analisis1martes" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Circulo" package="analisis1martes" visibility="public" xPosition="227.0" yPosition="155.0">
+      <Fields>
+        <Field name="radio" type="double" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="package">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="double" name="radio"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getRadio" returnType="double" visibility="public"/>
+        <Method name="setRadio" returnType="void" visibility="public">
+          <Argument type="double" name="radio"/>
+        </Method>
+        <Method name="area" returnType="double" visibility="public"/>
+        <Method name="nombre" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Esfera" package="analisis1martes" visibility="public" xPosition="230.0" yPosition="402.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="package">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="double" name="radio"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="area" returnType="double" visibility="public"/>
+        <Method name="volumen" returnType="double" visibility="public"/>
+        <Method name="nombre" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Figura" package="analisis1martes" visibility="public" isAbstract="true" xPosition="273.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="nombre" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Logica" package="analisis1martes" visibility="public" xPosition="20.0" yPosition="139.0">
+      <Fields>
+        <Field name="listafiguras" type="Punto[]" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="package"/>
+      </Constructors>
+      <Methods>
+        <Method name="inicializar" returnType="void" visibility="private"/>
+        <Method name="programa" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Punto" package="analisis1martes" visibility="public" xPosition="504.0" yPosition="84.0">
+      <Fields>
+        <Field name="x" type="int" visibility="protected"/>
+        <Field name="y" type="int" visibility="protected"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="nombre" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Interface name="iArea" package="analisis1martes" visibility="public" xPosition="541.0" yPosition="258.0">
+      <Methods>
+        <Method name="area" returnType="double" visibility="public" isAbstract="true"/>
+      </Methods>
+    </Interface>
+    <Interface name="iVolumen" package="analisis1martes" visibility="public" xPosition="514.0" yPosition="470.0">
+      <Methods>
+        <Method name="volumen" returnType="double" visibility="public" isAbstract="true"/>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="analisis1martes.Circulo" target="analisis1martes.iArea"/>
+    <IsRelation name="is" source="analisis1martes.Esfera" target="analisis1martes.Circulo"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="analisis1martes.Esfera" target="analisis1martes.iArea"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="analisis1martes.Esfera" target="analisis1martes.iVolumen"/>
+    <IsRelation name="is" source="analisis1martes.Punto" target="analisis1martes.Figura"/>
+    <IsRelation name="is" source="analisis1martes.Circulo" target="analisis1martes.Punto"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

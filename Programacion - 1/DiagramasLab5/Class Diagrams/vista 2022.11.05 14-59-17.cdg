@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="vista">
+  <ClassDiagramComponents>
+    <Class name="frmCuenta" package="vista" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="cuenta" type="clsCuenta" visibility="package"/>
+        <Field name="btnDeposito" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnRetiro" type="javax.swing.JToggleButton" visibility="private"/>
+        <Field name="btnSalir" type="javax.swing.JButton" visibility="private"/>
+        <Field name="lblDeposito" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblNumeroCuenta" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblRetiro" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblSaldo" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblSaldoDolar" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="panDeposito" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="panRetiro" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="panSaldo" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="txtDeposito" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtRetiro" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="formComponentShown" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ComponentEvent" name="evt"/>
+        </Method>
+        <Method name="btnSalirActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnRetiroActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnDepositoActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="frmLogin" package="vista" visibility="public" xPosition="20.0" yPosition="529.0">
+      <Fields>
+        <Field name="btnIniciar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnSalir" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jPanel2" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="lblPin" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblTarjeta" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="pswPin" type="javax.swing.JPasswordField" visibility="private"/>
+        <Field name="txtTarjeta" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="txtTarjetaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnIniciarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="pswPinActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnSalirActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="pswPinKeyPressed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.KeyEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations/>
+</ClassDiagram>
