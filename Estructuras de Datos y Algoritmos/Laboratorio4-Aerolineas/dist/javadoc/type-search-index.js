@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"laboratorio4.aerolineas.vista","l":"Laboratorio4Aerolineas"},{"p":"laboratorio4.aerolineas.controlador","l":"Lista"},{"p":"laboratorio4.aerolineas.vista","l":"ListaPasajeros"},{"p":"laboratorio4.aerolineas.modelo","l":"Nodo"},{"p":"laboratorio4.aerolineas.modelo","l":"Pasajero"}]
