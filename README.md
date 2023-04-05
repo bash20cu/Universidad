@@ -124,7 +124,7 @@
       Por cada paquete calculado, se debe preguntar a usuario si sea agregar otro, de ser 
       afirmativo, se repite el proceso, de lo contrario se finaliza la aplicación.
 
-  ![Tabla Ejericio](./img/TablaEjercicio3Lab2.jpg)
+  ![Tabla Ejericio](./Programacion%20-%201/img/TablaEjercicio3Lab2.jpg)
 
 - [x] laboratorio 3
       
