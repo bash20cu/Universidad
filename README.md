@@ -25,7 +25,6 @@
 ### [Proyecto Final](https://github.com/bash20cu/Universidad/tree/main/Proyecto_Matatica_Discreta)
 [Pagina del proyecto](https://bash20cu.github.io/Universidad/Proyecto_Matatica_Discreta/AlgoritmoDijkstra/)
 
-
 ## Estrucuturas de datos y Algoritmos - Java
 
 ### Laboratorios:
@@ -44,8 +43,9 @@
 [Proyecto Final ](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Donkey_Kong)
 
 
+## Programacion 1 - Java
+[Laboratorio 6 ](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Laboratorio_6)
 
-## Programacion 1 - 2022 - Java
 
 - [x] Ejercicio 1:
 
