@@ -1,7 +1,9 @@
 # Estudiante de Ingeniería de Software
+
 # en la Universidad Internacional de las Américas Costa Rica.
 
 <!--START_SECTION:badges-->
+
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
@@ -15,11 +17,13 @@
 
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/miguel1990/)
 [![Portfolio](https://img.shields.io/badge/Portfolio-%23000000.svg?style=for-the-badge&logo=firefox&logoColor=#FF7139)](https://bash20cu.github.io/Portfolio/)
+
 <!--END_SECTION:badges-->
 
-
-
 ## Programacion 1 - Java
+
+### Laboratorios
+
 [Laboratorio 1 ](https://github.com/bash20cu/Universidad/tree/main/Programacion_1/Laboratorio_1)
 
 [Laboratorio 2 ](https://github.com/bash20cu/Universidad/tree/main/Programacion_1/Laboratorio_2)
@@ -32,17 +36,18 @@
 
 [Laboratorio 6 ](https://github.com/bash20cu/Universidad/tree/main/Programacion_1/Laboratorio_6)
 
-[Proyecto final Cronograma de Docentes ](https://github.com/bash20cu/Universidad/tree/main/Programacion_1/Proyecto_Final_Cronogramas_Docentes)
+### [Proyecto final Cronograma de Docentes ](https://github.com/bash20cu/Universidad/tree/main/Programacion_1/Proyecto_Final_Cronogramas_Docentes)
 
-
-## Estructuras Discretas Aplicadas 
+## Estructuras Discretas Aplicadas
 
 ### [Proyecto Final](https://github.com/bash20cu/Universidad/tree/main/Proyecto_Matatica_Discreta)
+
 [Pagina del proyecto](https://bash20cu.github.io/Universidad/Proyecto_Matatica_Discreta/AlgoritmoDijkstra/)
 
 ## Estrucuturas de datos y Algoritmos - Java
 
 ### Laboratorios:
+
 [Analisis de caso 1](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Analisis_de_caso_1)
 
 [Analisis de caso 2](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Analisis_de_caso_2)
@@ -55,9 +60,4 @@
 
 [Laboratorio 6 ](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Laboratorio_6)
 
-[Proyecto Final ](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Donkey_Kong)
-
-
-## Programacion 1 - Java
-[Laboratorio 6 ](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Laboratorio_6)
-
+### [Proyecto Final ](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Donkey_Kong)
