@@ -21,7 +21,7 @@
 
 ### Proyecto Final Juego Donkey kong:
 #### Proyecto Final [archivos](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Donkey_Kong)
-
+![Ejericio](./img.gif)
 
 #### Nombre de (los) estudiante (s):
 ##### ● Joseline Chavarría
@@ -30,7 +30,8 @@
 #### PROFESOR
 ##### Daniel Álvarez Garro
 
-##### SAN JOSÉ, COSTA RICA
+##### SAN JOSÉ, COSTA RICA  
+
 
 ## Planteo del proyecto:
 
