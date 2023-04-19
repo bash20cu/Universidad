@@ -1,4 +1,5 @@
-# Estudiante en la Universidad Internacional de las Americas Costa Rica.
+# Estudiante de Ingeniería de Software
+# en la Universidad Internacional de las Américas Costa Rica.
 
 <!--START_SECTION:badges-->
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
@@ -19,6 +20,15 @@
 ## Estructuras Discretas Aplicadas 
 ### Proyecto Final - [Uso del algoritmo Dijkstra](https://bash20cu.github.io/Universidad/Proyecto_Matatica_Discreta/AlgoritmoDijkstra/)
 [Algoritmo Dijkstra](https://bash20cu.github.io/Universidad/Proyecto_Matatica_Discreta/AlgoritmoDijkstra/)
+
+
+## Estrucuturas de datos y Algoritmos - Java
+
+### Laboratorios:
+
+#### Analisis de caso 1 [archivos](https://github.com/bash20cu/Universidad/tree/main/Estructuras%20de%20Datos%20y%20Algoritmos/Analisis%20de%20caso%201/Analisis1Martes)
+
+
 
 
 ## Programacion 1 - 2022 - Java
