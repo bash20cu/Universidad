@@ -22,8 +22,8 @@
 
 ## Estructuras Discretas Aplicadas 
 
-### Proyecto Final - [Uso del algoritmo Dijkstra](https://github.com/bash20cu/Universidad/tree/main/Proyecto_Matatica_Discreta)
-[Algoritmo Dijkstra](https://bash20cu.github.io/Universidad/Proyecto_Matatica_Discreta/AlgoritmoDijkstra/)
+### [Proyecto Final](https://github.com/bash20cu/Universidad/tree/main/Proyecto_Matatica_Discreta)
+[Pagina del proyecto](https://bash20cu.github.io/Universidad/Proyecto_Matatica_Discreta/AlgoritmoDijkstra/)
 
 
 ## Estrucuturas de datos y Algoritmos - Java

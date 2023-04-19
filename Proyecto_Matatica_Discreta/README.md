@@ -18,7 +18,7 @@
 <!--END_SECTION:badges-->
 
 ## Estructuras Discretas Aplicadas - Javascript 
-### Proyecto Final - [Uso del algoritmo Dijkstra](https://bash20cu.github.io/Universidad/Proyecto_Matatica_Discreta/AlgoritmoDijkstra/)
+### [Pagina del proyecto](https://bash20cu.github.io/Universidad/Proyecto_Matatica_Discreta/AlgoritmoDijkstra/)
 
 De un vector dado por el profesor, que representa los vértices de un grafo, y un segundo vector de pares ordenados con peso que representa las aristas, confeccionar una solución programada en cualquier lenguaje de programación que aplique le mejor ruta para navegar de un vértice dado a un segundo vértice dado, escogiendo siempre la cantidad de aristas que sume el menor peso posible. 
 
