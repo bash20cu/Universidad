@@ -25,13 +25,13 @@
 ## Estrucuturas de datos y Algoritmos - Java
 
 ### Laboratorios:
-#### Analisis de caso 1 [archivos](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Analisis_de_caso_1) 
-#### Analisis de caso 2 [archivos](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Analisis_de_caso_2)
-#### Laboratorio 2  [archivos](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Laboratorio_2)
-#### Laboratorio 3  [archivos](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Laboratorio_3)
-#### Laboratorio 4  [archivos](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Laboratorio_4)
-#### Laboratorio 6  [archivos](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Laboratorio_6)
-#### Proyecto Final  [archivos](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Donkey_Kong)
+####  [Analisis de caso 1](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Analisis_de_caso_1) 
+####  [Analisis de caso 2](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Analisis_de_caso_2)
+####  [Laboratorio 2 ](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Laboratorio_2)
+####  [Laboratorio 3](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Laboratorio_3)
+####  [Laboratorio 4 ](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Laboratorio_4)
+####  [Laboratorio 6 ](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Laboratorio_6)
+####  [Proyecto Final ](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Donkey_Kong)
 
 
 
