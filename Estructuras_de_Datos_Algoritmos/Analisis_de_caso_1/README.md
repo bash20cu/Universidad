@@ -17,11 +17,6 @@
 [![Portfolio](https://img.shields.io/badge/Portfolio-%23000000.svg?style=for-the-badge&logo=firefox&logoColor=#FF7139)](https://bash20cu.github.io/Portfolio/)
 <!--END_SECTION:badges-->
 
-## Estructuras Discretas Aplicadas 
-### Proyecto Final - [Uso del algoritmo Dijkstra](https://bash20cu.github.io/Universidad/Proyecto_Matatica_Discreta/AlgoritmoDijkstra/)
-[Algoritmo Dijkstra](https://bash20cu.github.io/Universidad/Proyecto_Matatica_Discreta/AlgoritmoDijkstra/)
-
-
 ## Estrucuturas de datos y Algoritmos - Java
 
 ### Laboratorios:
