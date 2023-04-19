@@ -17,8 +17,12 @@
 [![Portfolio](https://img.shields.io/badge/Portfolio-%23000000.svg?style=for-the-badge&logo=firefox&logoColor=#FF7139)](https://bash20cu.github.io/Portfolio/)
 <!--END_SECTION:badges-->
 
+
+
+
 ## Estructuras Discretas Aplicadas 
-### Proyecto Final - [Uso del algoritmo Dijkstra](https://bash20cu.github.io/Universidad/Proyecto_Matatica_Discreta/AlgoritmoDijkstra/)
+
+### Proyecto Final - [Uso del algoritmo Dijkstra](https://github.com/bash20cu/Universidad/tree/main/Proyecto_Matatica_Discreta)
 [Algoritmo Dijkstra](https://bash20cu.github.io/Universidad/Proyecto_Matatica_Discreta/AlgoritmoDijkstra/)
 
 
