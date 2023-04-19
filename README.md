@@ -30,6 +30,7 @@
 
 [Laboratorio 5 ](https://github.com/bash20cu/Universidad/tree/main/Programacion_1/Laboratorio_5)
 
+[Laboratorio 6 ](https://github.com/bash20cu/Universidad/tree/main/Programacion_1/Laboratorio_6)
 
 
 
