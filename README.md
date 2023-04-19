@@ -32,6 +32,7 @@
 
 [Laboratorio 6 ](https://github.com/bash20cu/Universidad/tree/main/Programacion_1/Laboratorio_6)
 
+[Proyecto final Cronograma de Docentes ](https://github.com/bash20cu/Universidad/tree/main/Programacion_1/Proyecto_Final_Cronogramas_Docentes)
 
 
 ## Estructuras Discretas Aplicadas 
