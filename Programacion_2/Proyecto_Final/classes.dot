@@ -1,0 +1,5 @@
+digraph "classes" {
+rankdir=BT
+charset="utf-8"
+"explorer.Explorer" [color="black", fontcolor="black", label=<{Explorer|Actions : Actions<br ALIGN="LEFT"/>address_bar_handler : AddressBar<br ALIGN="LEFT"/>bloc_notas_instance : MainBlocNotas, NoneType<br ALIGN="LEFT"/>document_searcher : DocumentSearcher<br ALIGN="LEFT"/>file_system_model<br ALIGN="LEFT"/>security_manager : SecurityManager<br ALIGN="LEFT"/>|handle_tree_view_double_clicked(index)<br ALIGN="LEFT"/>on_expander_clicked(index)<br ALIGN="LEFT"/>on_tree_view_clicked(index)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+}

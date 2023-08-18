@@ -1,0 +1,89 @@
+<html>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+      <div class="mermaid">
+    
+        classDiagram
+          class Actions {
+            actionCopiar
+            actionCortar
+            actionEliminar
+            actionNuevaCarpeta
+            actionNuevoDocumentoTXT
+            actionPegar
+            actionProtect
+            actionTreeReport
+            address_bar
+            clipboard
+            context_menu
+            file_system_model
+            security_manager
+            tree_view
+            copiar_archivo()
+            cortar_archivo()
+            create_folder()
+            create_text_file()
+            deleteFile()
+            export_report_to_txt()
+            generate_tree_structure(current_folder_path, model)
+            pegar_archivo()
+            protect_directory()
+            show_context_menu(pos)
+          }
+          class AddressBar {
+            address_bar_widget
+            file_system_model
+            history : list
+            path : bytes, str
+            tree_view
+            get_current_folder_path()
+            get_file_path(index)
+            go_back()
+            go_up_directory()
+            handle_tree_view_double_clicked(index)
+            open_with_default_os(file_path)
+            save_current_directory()
+            update_address_bar(path)
+            update_tree_view(path)
+          }
+          class DocumentSearcher {
+            btBusqueda
+            file_system_model
+            search_bar
+            tree_view
+            filter_documents_by_name(name)
+            on_search_button_clicked()
+            search_documents_by_name(path, name)
+          }
+          class MainBlocNotas {
+            current_dir
+            current_fontsize : int
+            current_path : NoneType
+            closeEvent(event)
+            copy()
+            cut()
+            decFontSize()
+            incFontSize()
+            newFile()
+            paste()
+            redo()
+            saveFile()
+            saveFileAs()
+            setDarkMode()
+            setLightMode()
+            undo()
+          }
+          class SecurityManager {
+            conn
+            db_path
+            dir_path : str, bytes
+            add_folder(path, password)
+            check_password(path, password)
+            create_table()
+            is_protected_folder(path)
+            verify_password(path, password)
+          }
+  
+       </div>
+  </body>
+</html>
