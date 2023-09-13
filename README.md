@@ -2,6 +2,12 @@
 
 # en la Universidad Internacional de las Américas Costa Rica.
 
+## Donar
+
+Si te sirven los ejercicios, Comprame un café:
+
+<span class="paypal"><a href="https://paypal.me/migue304?country.x=CR&locale.x=es_XC" title="Donar a este proyecto usando Paypal"><img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" alt="PayPal boton donar" /></a></span>
+
 <!--START_SECTION:badges-->
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
