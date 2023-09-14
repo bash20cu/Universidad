@@ -8,16 +8,15 @@
         Title="Control de servicios" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="247*"/>
-            <ColumnDefinition Width="553*"/>
+            <ColumnDefinition Width="299*"/>
+            <ColumnDefinition Width="501*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="Label1" Content="Administrador" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="102"/>
-        <Label x:Name="Administrador" Content="Administrador:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="Texto" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Height="203" Margin="0,231,0,0" Background="#FFBBBABA" Foreground="#FFF3F0F0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2"/>
-        <Label Content="Info:" VerticalAlignment="Center" Margin="0,0,149,0" Height="28"/>
-        <CheckBox x:Name="mysql" Content="MySQL" HorizontalAlignment="Left" Margin="18,91,0,0" VerticalAlignment="Top" Height="17" Width="106"/>
-        <CheckBox x:Name="mssql" Content="MSSQL" HorizontalAlignment="Left" Margin="18,122,0,0" VerticalAlignment="Top" Height="17" Width="106"/>
-        <Button x:Name="btnShutdownServices" Content="Apagar Servicios" HorizontalAlignment="Left" Margin="18,57,0,0" VerticalAlignment="Top" Width="123" Click="btnShutdownServices_Click" />
-        <Button x:Name="btnEncenderServicios" Content="Encender Servicios" HorizontalAlignment="Left" Margin="151,57,0,0" VerticalAlignment="Top" Width="123" Grid.ColumnSpan="2" Click="btnEncenderServicios_Click"/>
+        <TextBox x:Name="Texto" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Height="262" Margin="0,172,0,0" Background="#FFBBBABA" Foreground="#FFF3F0F0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2"/>
+        <Label Content="Info:" VerticalAlignment="Top" Margin="0,139,255,0" Height="28"/>
+        <CheckBox x:Name="mysql" Content="MySQL" HorizontalAlignment="Left" Margin="19,50,0,0" VerticalAlignment="Top" Height="17" Width="228" Background="White"/>
+        <CheckBox x:Name="mssql" Content="MSSQL" HorizontalAlignment="Left" Margin="19,81,0,0" VerticalAlignment="Top" Height="17" Width="228"/>
+        <Button x:Name="btnShutdownServices" Content="Apagar Servicios" HorizontalAlignment="Left" Margin="18,11,0,0" VerticalAlignment="Top" Width="113" Click="btnShutdownServices_Click" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderThickness="1,1,1,1" ClipToBounds="True" Height="20" />
+        <Button x:Name="btnEncenderServicios" Content="Encender Servicios" HorizontalAlignment="Left" Margin="142,11,0,0" VerticalAlignment="Top" Width="105" Click="btnEncenderServicios_Click" ClipToBounds="True" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Height="20"/>
+        <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Left" Height="10" Margin="83,148,0,0" VerticalAlignment="Top" Width="288" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

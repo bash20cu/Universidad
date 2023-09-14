@@ -24,19 +24,26 @@ namespace Services_Control
         {
             InitializeComponent();
             Services services = new Services(this);
-            services.ListarServicios();
+            Graficos graficos = new Graficos(this);
+            
         }
 
         private void btnShutdownServices_Click(object sender, RoutedEventArgs e)
         {
+            // Inicializa la barra de progreso
+            ProgressBar.Value = 0;
+            ProgressBar.Maximum = 100; // Puedes ajustar este valor según tu preferencia
             Services services = new Services(this);
-            services.ApagarServicios();
+            services.ApagarServiciosAsync();
+            
         }
 
         private void btnEncenderServicios_Click(object sender, RoutedEventArgs e)
         {
+            ProgressBar.Value = 0;
+            ProgressBar.Maximum = 100;
             Services services = new Services(this);
-            services.EncenderServicios();
+            services.EncenderServiciosAsync();
         }
     }
 }

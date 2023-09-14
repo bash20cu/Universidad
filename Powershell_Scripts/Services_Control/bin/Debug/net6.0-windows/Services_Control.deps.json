@@ -8,12 +8,14 @@
     ".NETCoreApp,Version=v6.0": {
       "Services_Control/1.0.0": {
         "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.14",
           "System.ServiceProcess.ServiceController": "7.0.1"
         },
         "runtime": {
           "Services_Control.dll": {}
         }
       },
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.2.14": {},
       "System.Diagnostics.EventLog/7.0.0": {
         "runtime": {
           "lib/net6.0/System.Diagnostics.EventLog.dll": {
@@ -62,6 +64,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Microsoft.NETCore.UniversalWindowsPlatform/6.2.14": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7Mi4cS8JQ7gqm+W+SRCq13c2Rr0yZTuczC9EbV6gRigE2ZhQalnLHyat0ZshT5HDMSkFDxTyjwZymUgFuv3+eg==",
+      "path": "microsoft.netcore.universalwindowsplatform/6.2.14",
+      "hashPath": "microsoft.netcore.universalwindowsplatform.6.2.14.nupkg.sha512"
     },
     "System.Diagnostics.EventLog/7.0.0": {
       "type": "package",
