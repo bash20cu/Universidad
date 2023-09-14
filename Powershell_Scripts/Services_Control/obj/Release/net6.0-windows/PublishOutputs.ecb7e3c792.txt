@@ -1,0 +1,8 @@
+C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\bin\Release\net6.0-windows\publish\Services_Control.exe
+C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\bin\Release\net6.0-windows\publish\Services_Control.dll
+C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\bin\Release\net6.0-windows\publish\Services_Control.runtimeconfig.json
+C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\bin\Release\net6.0-windows\publish\Services_Control.pdb
+C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.Diagnostics.EventLog.Messages.dll
+C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.Diagnostics.EventLog.dll
+C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\bin\Release\net6.0-windows\publish\runtimes\win\lib\net6.0\System.ServiceProcess.ServiceController.dll
+C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\bin\Release\net6.0-windows\publish\Services_Control.deps.json

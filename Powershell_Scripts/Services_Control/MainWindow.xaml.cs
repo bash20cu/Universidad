@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Services_Control
 {
@@ -23,9 +11,27 @@ namespace Services_Control
         public MainWindow()
         {
             InitializeComponent();
-            Services services = new Services(this);
-            Graficos graficos = new Graficos(this);
-            
+            ProgressBar.Value = 0;
+            Services services = new Services(Texto);
+
+            if (!services.IsAdmin)
+            {
+                MessageBox.Show("Esta aplicacion necesita provilegios administrativos", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                btnEncenderServicios.IsEnabled = false;
+                btnShutdownServices.IsEnabled = false;
+                Texto.Text = "No tiene privilegios administratvos para acceder a los servicios, por favor ejecute la aplicacion como Administrador";
+            }
+            if (Texto.Text == "Servicios No Encontrados")
+            {
+                mssql.IsEnabled = false;
+                mysql.IsEnabled = false;
+                Texto.IsEnabled = false;
+            }
+
+
+            //Graficos graficos = new Graficos(this);
+
+
         }
 
         private void btnShutdownServices_Click(object sender, RoutedEventArgs e)
@@ -33,17 +39,17 @@ namespace Services_Control
             // Inicializa la barra de progreso
             ProgressBar.Value = 0;
             ProgressBar.Maximum = 100; // Puedes ajustar este valor según tu preferencia
-            Services services = new Services(this);
-            services.ApagarServiciosAsync();
-            
+            Services services = new Services(Texto);
+            services.ApagarServiciosAsync(Texto, ProgressBar, mysql, mssql);
+
         }
 
         private void btnEncenderServicios_Click(object sender, RoutedEventArgs e)
         {
             ProgressBar.Value = 0;
             ProgressBar.Maximum = 100;
-            Services services = new Services(this);
-            services.EncenderServiciosAsync();
+            Services services = new Services(Texto);
+            services.EncenderServiciosAsync(Texto, ProgressBar, mysql, mssql);
         }
     }
 }

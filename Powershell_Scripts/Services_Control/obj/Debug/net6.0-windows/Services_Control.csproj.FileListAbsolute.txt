@@ -25,3 +25,4 @@ C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services
 C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\obj\Debug\net6.0-windows\Services_Control.pdb
 C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\obj\Debug\net6.0-windows\Services_Control.genruntimeconfig.cache
 C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\obj\Debug\net6.0-windows\ref\Services_Control.dll
+C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\obj\Debug\net6.0-windows\Services_Control_Content.g.cs

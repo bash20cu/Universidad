@@ -1,36 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Security;
 using System.Security.Principal;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
-using System.Windows.Media;
-using System.Numerics;
-using System.Security.Policy;
 using System.Windows.Controls;
-using System.Threading;
-using System.Windows.Threading;
-using System.Windows;
-using System.Runtime.CompilerServices;
 
 namespace Services_Control
 {
     class Services
     {
-        private MainWindow mainWindow;
+        //private MainWindow mainWindow;
         private List<string> listaServicios = new List<string>();
-        public Services(MainWindow main)
+        private bool isAdmin { get; set; }
+        public Services(TextBox Texto)
         {
-            mainWindow = main;            
-            if (!TestAdminRights())
-            {
-                MessageBox.Show("Esta aplicacion necesita provilegios administrativos", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            // mainWindow.Texto.Text = "";
-            listaServicios = ListarServicios();
+            isAdmin = TestAdminRights(); // Valor inicial            
+            listaServicios = ListarServicios(Texto);
+        }
+
+        public bool IsAdmin
+        {
+            get { return isAdmin; }
         }
 
         private bool TestAdminRights()
@@ -38,29 +29,20 @@ namespace Services_Control
             WindowsIdentity identity = WindowsIdentity.GetCurrent();
             WindowsPrincipal principal = new WindowsPrincipal(identity);
             // Comprueba si el usuario actual tiene derechos administrativos
-            bool isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);  
-            if (!isAdmin) 
-            {
-                mainWindow.btnEncenderServicios.IsEnabled = false;
-                mainWindow.btnShutdownServices.IsEnabled = false;   
-            }
+            isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
             return isAdmin;
         }
 
-        private List<string> ListarServicios()
+        private List<string> ListarServicios(TextBox Texto)
         {
             ServiceController[] services = ServiceController.GetServices();
-            //List<string> listaServicios = new List<string>();
+            bool serviciosNoEncontrados = true;
 
             // Crear un StringBuilder para almacenar los resultados
             StringBuilder resultado = new StringBuilder();
             resultado.AppendLine(string.Format("{0,-28} {1,-60}", "Status", "Name"));
 
-            if (!TestAdminRights()) 
-            {
-                mainWindow.Texto.Text = "No tiene privilegios administratvos para acceder a los servicios, por favor ejecute la aplicacion como Administrador";
-            } 
-            else
+            if (isAdmin)
             {
                 foreach (ServiceController service in services)
                 {
@@ -68,6 +50,7 @@ namespace Services_Control
 
                     if (serviceName.Contains("MySQL") || serviceName.Contains("SQL Server"))
                     {
+                        serviciosNoEncontrados = false;
                         listaServicios.Add(service.ServiceName);
                         string nombreServicio = service.ServiceName;
                         string estadoServicio = service.Status.ToString();
@@ -77,22 +60,25 @@ namespace Services_Control
                         resultado.AppendLine(fila);
                     }
                 }
-
-                // Mostrar los resultados en formato de tabla
-                mainWindow.Texto.Text = "";
-                mainWindow.Texto.Text = resultado.ToString();
+                if (serviciosNoEncontrados)
+                {
+                    Texto.Text = "";
+                    Texto.Text = "Servicios No Encontrados";
+                    return listaServicios;
+                }
+                Texto.Text = resultado.ToString();
             }
             return listaServicios;
-
         }
 
-        public async Task ApagarServiciosAsync()
+        public async Task ApagarServiciosAsync(TextBox Texto, ProgressBar progressBar, CheckBox mysql, CheckBox mssql)
         {
-            mainWindow.Texto.Text = "";
-            bool isMySQLSelected = mainWindow.mysql.IsChecked ?? false;
-            bool isMSSQLSelected = mainWindow.mssql.IsChecked ?? false;
+            Texto.Text = "";
+            bool isMySQLSelected = mysql.IsChecked ?? false;
+            bool isMSSQLSelected = mssql.IsChecked ?? false;
             int totalServicios = listaServicios.Count;
             int serviciosApagados = 0;
+            progressBar.Value = 0;
 
 
             foreach (string serviceName in listaServicios)
@@ -104,34 +90,28 @@ namespace Services_Control
                     if ((isMSSQLSelected && service.Status == ServiceControllerStatus.Running) && service.DisplayName.Contains("SQL Server"))
                     {
                         await DetenerServicioAsync(service);
-                        // Actualiza la barra de progreso después de cada servicio apagado
-                        serviciosApagados++;
-                        int porcentajeCompleto = (serviciosApagados * 100) / totalServicios;
-                        // Muestra el servicio apagado en tiempo real
-                        mainWindow.Texto.AppendText($"Servicio apagado: {serviceName}\n");
                     }
 
                     if ((isMySQLSelected && service.Status == ServiceControllerStatus.Running && service.DisplayName.Contains("MySQL")))
                     {
                         await DetenerServicioAsync(service);
-                        // Actualiza la barra de progreso después de cada servicio apagado
-                        serviciosApagados++;
-                        int porcentajeCompleto = (serviciosApagados * 100) / totalServicios;
-                        // Muestra el servicio apagado en tiempo real
-                        mainWindow.Texto.AppendText($"Servicio apagado: {serviceName}\n");
                     }
-
+                    // Actualiza la barra de progreso después de cada servicio apagado
+                    serviciosApagados++;
+                    await UpdateProgressBarAsync(progressBar, serviciosApagados, totalServicios);
+                    // Muestra el servicio apagado en tiempo real
+                    Texto.AppendText($"Servicio apagado: {serviceName}\n");
                 }
                 catch (Exception ex)
                 {
                     // Manejo de errores si no se pudo detener el servicio
-                    mainWindow.Texto.AppendText($"Error al detener el servicio {serviceName}: {ex.Message}\n");
+                    Texto.AppendText($"Error al detener el servicio {serviceName}: {ex.Message}\n");
                 }
             }
 
             // Completado: Puedes mostrar un mensaje cuando se hayan apagado todos los servicios
-            mainWindow.Texto.AppendText("Servicios apagados correctamente\n");
-            listaServicios = ListarServicios();
+            Texto.AppendText("Servicios apagados correctamente\n");
+            listaServicios = ListarServicios(Texto);
         }
 
         private async Task DetenerServicioAsync(ServiceController service)
@@ -144,51 +124,49 @@ namespace Services_Control
             });
         }
 
-        public async Task EncenderServiciosAsync()
+        public async Task EncenderServiciosAsync(TextBox Texto, ProgressBar progressBar, CheckBox mysql, CheckBox mssql)
         {
             ServiceController[] services = ServiceController.GetServices();
-            bool isMySQLSelected = mainWindow.mysql.IsChecked ?? false;
-            bool isMSSQLSelected = mainWindow.mssql.IsChecked ?? false;
+            bool isMySQLSelected = mysql.IsChecked ?? false;
+            bool isMSSQLSelected = mssql.IsChecked ?? false;
+            int totalServicios = listaServicios.Count;
+            int serviciosEncendidos = 0;
+            progressBar.Value = 0;
 
-            mainWindow.Texto.Text = "";
-            mainWindow.Texto.Text = "Encendiendo Servicios";
+            Texto.Text = "";
 
-            foreach (ServiceController service in services)
+            foreach (string serviceName in listaServicios)
             {
                 try
                 {
-                    string serviceName = service.DisplayName;
+                    ServiceController service = new ServiceController(serviceName);
 
                     if ((isMSSQLSelected && service.Status == ServiceControllerStatus.Stopped) && service.DisplayName.Contains("SQL Server"))
                     {
                         await IniciarServicioAsync(service);
-                        // Actualiza la barra de progreso después de cada servicio apagado
-                        //serviciosApagados++;
-                        //int porcentajeCompleto = (serviciosApagados * 100) / totalServicios;
-                        // Muestra el servicio apagado en tiempo real
-                        mainWindow.Texto.AppendText($"Servicio encendido: {serviceName}\n");
                     }
 
                     if ((isMySQLSelected && service.Status == ServiceControllerStatus.Stopped && service.DisplayName.Contains("MySQL")))
                     {
                         await IniciarServicioAsync(service);
-                        // Actualiza la barra de progreso después de cada servicio apagado
-                        //serviciosApagados++;
-                        //int porcentajeCompleto = (serviciosApagados * 100) / totalServicios;
-                        // Muestra el servicio apagado en tiempo real
-                        mainWindow.Texto.AppendText($"Servicio encendido: {serviceName}\n");
                     }
+                    // Actualiza la barra de progreso después de cada servicio apagado
+                    serviciosEncendidos++;
+                    await UpdateProgressBarAsync(progressBar, serviciosEncendidos, totalServicios);
+                    // Muestra el servicio encendido en tiempo real
+                    Texto.AppendText($"Servicio encendido: {serviceName}\n");
+
                 }
                 catch (Exception ex)
                 {
                     // Manejo de errores si no se pudo iniciar el servicio
-                        mainWindow.Texto.Text = "";
-                        mainWindow.Texto.Text = "Error al encender el servicio: " + ex.Message;                   
+                    Texto.Text = "";
+                    Texto.Text = "Error al encender el servicio: " + ex.Message;
                 }
 
             }
-            mainWindow.Texto.Text = "Iniciados todos los servicios Servicios";
-            listaServicios = ListarServicios();
+            Texto.Text = "Iniciados todos los servicios Servicios";
+            listaServicios = ListarServicios(Texto);
         }
         private async Task IniciarServicioAsync(ServiceController service)
         {
@@ -198,6 +176,19 @@ namespace Services_Control
                 // Esperar hasta que se inicie o 30 segundos, lo que ocurra primero
                 service.WaitForStatus(ServiceControllerStatus.Running, TimeSpan.FromSeconds(30));
             });
+        }
+
+        private async Task UpdateProgressBarAsync(ProgressBar progressBar, int currentValue, int totalValue)
+        {
+            // Calcula el progreso como un porcentaje
+            int progressPercentage = (currentValue * 100) / totalValue;
+
+
+            // Actualiza la barra de progreso
+            progressBar.Value = progressPercentage;
+
+            // Espera un breve período de tiempo para que la interfaz de usuario tenga tiempo de reflejar el cambio
+            await Task.Delay(100);
         }
 
     }
