@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Services_Control</id>
+    <version>1.0.0</version>
+    <authors>Services_Control</authors>
+    <icon>icons8-settings-48.png</icon>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net6.0-windows7.0">
+        <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="6.2.14" exclude="Build,Analyzers" />
+        <dependency id="System.ServiceProcess.ServiceController" version="7.0.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net6.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+    </frameworkReferences>
+    <contentFiles>
+      <files include="any/net6.0-windows7.0/icons8-settings-48.ico" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\bin\Release\net6.0-windows\Services_Control.runtimeconfig.json" target="lib\net6.0-windows7.0\Services_Control.runtimeconfig.json" />
+    <file src="C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\bin\Release\net6.0-windows\Services_Control.dll" target="lib\net6.0-windows7.0\Services_Control.dll" />
+    <file src="C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\icons8-settings-48.ico" target="content\icons8-settings-48.ico" />
+    <file src="C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\icons8-settings-48.ico" target="contentFiles\any\net6.0-windows7.0\icons8-settings-48.ico" />
+    <file src="C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\icons8-settings-48.ico" target="\icons8-settings-48.ico" />
+    <file src="C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\icons8-settings-48.png" target="\icons8-settings-48.png" />
+  </files>
+</package>

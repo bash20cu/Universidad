@@ -90,17 +90,20 @@ namespace Services_Control
                     if ((isMSSQLSelected && service.Status == ServiceControllerStatus.Running) && service.DisplayName.Contains("SQL Server"))
                     {
                         await DetenerServicioAsync(service);
+                        // Muestra el servicio apagado en tiempo real
+                        Texto.AppendText($"Servicio apagado: {serviceName}\n");
                     }
 
                     if ((isMySQLSelected && service.Status == ServiceControllerStatus.Running && service.DisplayName.Contains("MySQL")))
                     {
                         await DetenerServicioAsync(service);
+                        // Muestra el servicio apagado en tiempo real
+                        Texto.AppendText($"Servicio apagado: {serviceName}\n");
                     }
                     // Actualiza la barra de progreso después de cada servicio apagado
                     serviciosApagados++;
                     await UpdateProgressBarAsync(progressBar, serviciosApagados, totalServicios);
-                    // Muestra el servicio apagado en tiempo real
-                    Texto.AppendText($"Servicio apagado: {serviceName}\n");
+                   
                 }
                 catch (Exception ex)
                 {
@@ -144,17 +147,20 @@ namespace Services_Control
                     if ((isMSSQLSelected && service.Status == ServiceControllerStatus.Stopped) && service.DisplayName.Contains("SQL Server"))
                     {
                         await IniciarServicioAsync(service);
+                        // Muestra el servicio encendido en tiempo real
+                        Texto.AppendText($"Servicio encendido: {serviceName}\n");
                     }
 
                     if ((isMySQLSelected && service.Status == ServiceControllerStatus.Stopped && service.DisplayName.Contains("MySQL")))
                     {
                         await IniciarServicioAsync(service);
+                        // Muestra el servicio encendido en tiempo real
+                        Texto.AppendText($"Servicio encendido: {serviceName}\n");
                     }
                     // Actualiza la barra de progreso después de cada servicio apagado
                     serviciosEncendidos++;
                     await UpdateProgressBarAsync(progressBar, serviciosEncendidos, totalServicios);
-                    // Muestra el servicio encendido en tiempo real
-                    Texto.AppendText($"Servicio encendido: {serviceName}\n");
+                    
 
                 }
                 catch (Exception ex)
