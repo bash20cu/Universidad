@@ -24,13 +24,19 @@ namespace Services_Control
         {
             InitializeComponent();
             Services services = new Services(this);
-            //services.Hello();
+            services.ListarServicios();
         }
 
-        private void btnCheckService_Click(object sender, RoutedEventArgs e)
+        private void btnShutdownServices_Click(object sender, RoutedEventArgs e)
         {
             Services services = new Services(this);
-            services.ListarServicios();
+            services.ApagarServicios();
+        }
+
+        private void btnEncenderServicios_Click(object sender, RoutedEventArgs e)
+        {
+            Services services = new Services(this);
+            services.EncenderServicios();
         }
     }
 }

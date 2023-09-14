@@ -8,21 +8,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Media;
+using System.Numerics;
+using System.Security.Policy;
 
 namespace Services_Control
-{   
+{
     class Services
     {
         private MainWindow mainWindow;
-        public Services(MainWindow main) 
+        public Services(MainWindow main)
         {
             mainWindow = main;
             TestAdminRights();
-
-            ListarServicios();
+            mainWindow.Texto.Text = "";
         }
-        
-        private void TestAdminRights() 
+
+        private void TestAdminRights()
         {
             WindowsIdentity identity = WindowsIdentity.GetCurrent();
             WindowsPrincipal principal = new WindowsPrincipal(identity);
@@ -41,13 +42,12 @@ namespace Services_Control
             // Crear un StringBuilder para almacenar los resultados
             StringBuilder resultado = new StringBuilder();
 
-            bool isMySQLSelected = mainWindow.mysql.IsChecked ?? false;
-            bool isMSSQLSelected = mainWindow.mssql.IsChecked ?? false;
+
 
             foreach (ServiceController service in services)
             {
-                if ((isMySQLSelected  && service.DisplayName.Contains("MySQL")) ||
-                    (isMSSQLSelected  && service.DisplayName.Contains("SQL Server")))
+
+                if (service.DisplayName.Contains("MySQL") || service.DisplayName.Contains("SQL Server"))
                 {
                     resultado.AppendLine("Nombre del servicio: " + service.ServiceName);
                     resultado.AppendLine("Estado del servicio: " + service.Status);
@@ -56,6 +56,83 @@ namespace Services_Control
 
                 // Agregar la información del servicio al TextBox
                 mainWindow.Texto.Text = resultado.ToString();
+            }
+        }
+
+        public void ApagarServicios()
+        {
+            ServiceController[] services = ServiceController.GetServices();
+            bool isMySQLSelected = mainWindow.mysql.IsChecked ?? false;
+            bool isMSSQLSelected = mainWindow.mssql.IsChecked ?? false;
+            mainWindow.Texto.Text = "";
+            mainWindow.Texto.Text = "Apagando Servicios";
+            foreach (ServiceController service in services)
+            {
+                string serviceName = service.DisplayName;
+
+                if ((isMySQLSelected && serviceName.Contains("MySQL")) ||
+                    (isMSSQLSelected && serviceName.Contains("SQL Server")))
+                {
+                    
+
+                    try
+                    {
+                        if (service.Status == ServiceControllerStatus.Running)
+                        {                            
+                            service.Stop();
+                            // Esperar hasta que se detenga o 30 segundos, lo que ocurra primero
+                            service.WaitForStatus(ServiceControllerStatus.Stopped, TimeSpan.FromSeconds(30));
+                            
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Manejo de errores si no se pudo detener el servicio
+                        //Console.WriteLine("Error al detener el servicio: " + ex.Message);
+                        mainWindow.Texto.Text = "";
+                        mainWindow.Texto.Text = "Error al detener el servicio: " + ex.Message;
+
+                    }
+                }
+            }        
+        
+        }
+        public void EncenderServicios()
+        {
+            ServiceController[] services = ServiceController.GetServices();
+            bool isMySQLSelected = mainWindow.mysql.IsChecked ?? false;
+            bool isMSSQLSelected = mainWindow.mssql.IsChecked ?? false;
+
+
+            mainWindow.Texto.Text = "";
+            mainWindow.Texto.Text = "Encendiendo Servicios";
+
+            foreach (ServiceController service in services)
+            {
+                string serviceName = service.DisplayName;
+
+                if ((isMySQLSelected && serviceName.Contains("MySQL")) ||
+                    (isMSSQLSelected && serviceName.Contains("SQL Server")))
+                {
+                    try
+                    {
+                        if (service.Status == ServiceControllerStatus.Stopped)
+                        {                            
+                            service.Start();
+                            // Esperar hasta que se detenga o 30 segundos, lo que ocurra primero
+                            service.WaitForStatus(ServiceControllerStatus.Running, TimeSpan.FromSeconds(30));
+                            
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Manejo de errores si no se pudo detener el servicio
+                        //Console.WriteLine("Error al detener el servicio: " + ex.Message);
+                        mainWindow.Texto.Text = "";
+                        mainWindow.Texto.Text = "Error al encender el servicio: " + ex.Message;
+
+                    }
+                }
             }
         }
 

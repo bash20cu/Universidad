@@ -17,6 +17,7 @@
         <Label Content="Info:" VerticalAlignment="Center" Margin="0,0,149,0" Height="28"/>
         <CheckBox x:Name="mysql" Content="MySQL" HorizontalAlignment="Left" Margin="18,91,0,0" VerticalAlignment="Top" Height="17" Width="106"/>
         <CheckBox x:Name="mssql" Content="MSSQL" HorizontalAlignment="Left" Margin="18,122,0,0" VerticalAlignment="Top" Height="17" Width="106"/>
-        <Button x:Name="btnCheckService" Content="Chequear servicios" HorizontalAlignment="Left" Margin="18,57,0,0" VerticalAlignment="Top" Width="123" Click="btnCheckService_Click"/>
+        <Button x:Name="btnShutdownServices" Content="Apagar Servicios" HorizontalAlignment="Left" Margin="18,57,0,0" VerticalAlignment="Top" Width="123" Click="btnShutdownServices_Click" />
+        <Button x:Name="btnEncenderServicios" Content="Encender Servicios" HorizontalAlignment="Left" Margin="151,57,0,0" VerticalAlignment="Top" Width="123" Grid.ColumnSpan="2" Click="btnEncenderServicios_Click"/>
     </Grid>
 </Window>
