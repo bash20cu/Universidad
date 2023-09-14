@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "lGIp1J02lH8tt4FHwwJuWf3qo/D7v7+oE/2yIHT9LgSHNwoPEJ/9jffu0Um0tv6kBW8tCY/JTU++LlMdjd0SlA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\migue\\OneDrive\\Documents\\GitHub\\Universidad\\Powershell_Scripts\\Service_Control_Console\\Service_Control_Console.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\migue\\.nuget\\packages\\system.diagnostics.eventlog\\7.0.0\\system.diagnostics.eventlog.7.0.0.nupkg.sha512",
+    "C:\\Users\\migue\\.nuget\\packages\\system.serviceprocess.servicecontroller\\7.0.1\\system.serviceprocess.servicecontroller.7.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
