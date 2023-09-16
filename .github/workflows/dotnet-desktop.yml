@@ -57,9 +57,9 @@ jobs:
 
     env:
       Solution_Name: Services_Control                        # Replace with your solution name, i.e. MyWpfApp.sln.
-      Test_Project_Path: Powershell_Scripts/Services_Control/Services_Control.csproj # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
-      Wap_Project_Directory:  Powershell_Scripts/Services_Control/    # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
-      Wap_Project_Path: Powershell_Scripts/Services_Control/                   # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
+      Test_Project_Path: Universidad\Powershell_Scripts\Services_Control\Services_Control.csproj # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
+      Wap_Project_Directory:  Universidad\Powershell_Scripts\Services_Control\   # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
+      Wap_Project_Path: Universidad\Powershell_Scripts\Services_Control\                  # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
 
     steps:
     - name: Services_Control
