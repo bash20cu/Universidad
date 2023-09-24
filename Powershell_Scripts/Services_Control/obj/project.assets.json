@@ -5059,19 +5059,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\migue\\.nuget\\packages\\": {}
+    "C:\\Users\\migue\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\migue\\OneDrive\\Documents\\GitHub\\Universidad\\Powershell_Scripts\\Services_Control\\Services_Control.csproj",
+      "projectUniqueName": "C:\\Users\\migue\\GitHub\\Universidad\\Powershell_Scripts\\Services_Control\\Services_Control.csproj",
       "projectName": "Services_Control",
-      "projectPath": "C:\\Users\\migue\\OneDrive\\Documents\\GitHub\\Universidad\\Powershell_Scripts\\Services_Control\\Services_Control.csproj",
+      "projectPath": "C:\\Users\\migue\\GitHub\\Universidad\\Powershell_Scripts\\Services_Control\\Services_Control.csproj",
       "packagesPath": "C:\\Users\\migue\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\migue\\OneDrive\\Documents\\GitHub\\Universidad\\Powershell_Scripts\\Services_Control\\obj\\",
+      "outputPath": "C:\\Users\\migue\\GitHub\\Universidad\\Powershell_Scripts\\Services_Control\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
         "C:\\Users\\migue\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

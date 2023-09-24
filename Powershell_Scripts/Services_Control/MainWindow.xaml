@@ -6,6 +6,28 @@
         xmlns:local="clr-namespace:Services_Control"
         mc:Ignorable="d"
         Title="Control de servicios" Height="449" Width="538" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style x:Key="BotonPersonalizado" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="ClipToBounds" Value="True" />
+            <Setter Property="Height" Value="20" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6,6,6,6">
+                            <!-- Aquí defines el Radio de Borde -->
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid Margin="0,0,0,-6" HorizontalAlignment="Left" Width="467">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -14,8 +36,15 @@
         <Label Content="Info:" VerticalAlignment="Top" Margin="0,139,207,0" Height="28"/>
         <CheckBox x:Name="mysql" Content="MySQL" Margin="19,50,41,0" VerticalAlignment="Top" Height="17" Background="White"/>
         <CheckBox x:Name="mssql" Content="MSSQL" HorizontalAlignment="Left" Margin="19,81,0,0" VerticalAlignment="Top" Height="17" Width="228"/>
-        <Button x:Name="btnShutdownServices" Content="Apagar Servicios" HorizontalAlignment="Left" Margin="18,11,0,0" VerticalAlignment="Top" Width="113" Click="btnShutdownServices_Click" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderThickness="1,1,1,1" ClipToBounds="True" Height="20" />
-        <Button x:Name="btnEncenderServicios" Content="Encender Servicios" HorizontalAlignment="Left" Margin="142,11,0,0" VerticalAlignment="Top" Width="105" Click="btnEncenderServicios_Click" ClipToBounds="True" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Height="20"/>
+        <Button x:Name="btnShutdownServices" Content="Apagar Servicios" 
+                HorizontalAlignment="Left" Margin="18,11,0,0" VerticalAlignment="Top" Width="113" 
+                Click="btnShutdownServices_Click" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
+                BorderThickness="1,1,1,1" ClipToBounds="True" Height="20" Style="{StaticResource BotonPersonalizado}"/>
+        <Button x:Name="btnEncenderServicios" Content="Encender Servicios" HorizontalAlignment="Left" 
+                Margin="142,11,0,0" VerticalAlignment="Top" Width="105" 
+                Click="btnEncenderServicios_Click" ClipToBounds="True" 
+                Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
+                Height="20" Style="{StaticResource BotonPersonalizado}"/>
         <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Left" Height="10" Margin="83,148,0,0" VerticalAlignment="Top" Width="288"/>
     </Grid>
 </Window>
