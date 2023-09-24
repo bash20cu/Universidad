@@ -22,11 +22,11 @@
     </contentFiles>
   </metadata>
   <files>
-    <file src="C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\bin\Release\net6.0-windows\Services_Control.runtimeconfig.json" target="lib\net6.0-windows7.0\Services_Control.runtimeconfig.json" />
-    <file src="C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\bin\Release\net6.0-windows\Services_Control.dll" target="lib\net6.0-windows7.0\Services_Control.dll" />
-    <file src="C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\icons8-settings-48.ico" target="content\icons8-settings-48.ico" />
-    <file src="C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\icons8-settings-48.ico" target="contentFiles\any\net6.0-windows7.0\icons8-settings-48.ico" />
-    <file src="C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\icons8-settings-48.ico" target="\icons8-settings-48.ico" />
-    <file src="C:\Users\migue\OneDrive\Documents\GitHub\Universidad\Powershell_Scripts\Services_Control\icons8-settings-48.png" target="\icons8-settings-48.png" />
+    <file src="C:\Users\migue\GitHub\Universidad\Powershell_Scripts\Services_Control\bin\Release\net6.0-windows\Services_Control.runtimeconfig.json" target="lib\net6.0-windows7.0\Services_Control.runtimeconfig.json" />
+    <file src="C:\Users\migue\GitHub\Universidad\Powershell_Scripts\Services_Control\bin\Release\net6.0-windows\Services_Control.dll" target="lib\net6.0-windows7.0\Services_Control.dll" />
+    <file src="C:\Users\migue\GitHub\Universidad\Powershell_Scripts\Services_Control\icons8-settings-48.ico" target="content\icons8-settings-48.ico" />
+    <file src="C:\Users\migue\GitHub\Universidad\Powershell_Scripts\Services_Control\icons8-settings-48.ico" target="contentFiles\any\net6.0-windows7.0\icons8-settings-48.ico" />
+    <file src="C:\Users\migue\GitHub\Universidad\Powershell_Scripts\Services_Control\icons8-settings-48.ico" target="\icons8-settings-48.ico" />
+    <file src="C:\Users\migue\GitHub\Universidad\Powershell_Scripts\Services_Control\icons8-settings-48.png" target="\icons8-settings-48.png" />
   </files>
 </package>

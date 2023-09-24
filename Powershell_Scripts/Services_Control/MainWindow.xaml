@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Control de servicios" Height="449" Width="538" ResizeMode="NoResize">
     <Window.Resources>
-        <Style x:Key="BotonPersonalizado" TargetType="Button">
+        <Style x:Key="Boton" TargetType="Button">
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="ClipToBounds" Value="True" />
@@ -15,36 +15,50 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="6,6,6,6">
+                        <Border x:Name="ButtonBorder"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="6,6,6,6">
                             <!-- Aquí defines el Radio de Borde -->
                             <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" />
+                                      VerticalAlignment="Center" />
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Trigger para cambiar el color de fondo al pasar el mouse -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#6495ED" />
+                            </Trigger>
+                            <!-- Trigger para el estado "Pressed" -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="DarkBlue" />
+                                <Setter TargetName="ButtonBorder" Property="BorderThickness" Value="2" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid Margin="0,0,0,-6" HorizontalAlignment="Left" Width="467">
+    <Grid Margin="0,10,0,-6" HorizontalAlignment="Left" Width="528">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="Texto" TextWrapping="Wrap" Text="TextBox" Margin="0,172,-57,5" Background="#FFBBBABA" Foreground="#FFF3F0F0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" IsReadOnly="True" FontSize="16"/>
-        <Label Content="Info:" VerticalAlignment="Top" Margin="0,139,207,0" Height="28"/>
-        <CheckBox x:Name="mysql" Content="MySQL" Margin="19,50,41,0" VerticalAlignment="Top" Height="17" Background="White"/>
-        <CheckBox x:Name="mssql" Content="MSSQL" HorizontalAlignment="Left" Margin="19,81,0,0" VerticalAlignment="Top" Height="17" Width="228"/>
+        <TextBox x:Name="Texto" TextWrapping="Wrap" Text="TextBox" Margin="-1,126,3,5" Background="#FF2F2D2D" Foreground="#FFF3F0F0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" IsReadOnly="True" FontSize="14" Width="526"/>
+        <CheckBox x:Name="mysql" Content="MySQL" Margin="22,56,365,0" VerticalAlignment="Top" Height="17" Background="White"/>
+        <CheckBox x:Name="mssql" Content="MSSQL" HorizontalAlignment="Left" Margin="114,56,0,0" VerticalAlignment="Top" Height="17" Width="112"/>
         <Button x:Name="btnShutdownServices" Content="Apagar Servicios" 
-                HorizontalAlignment="Left" Margin="18,11,0,0" VerticalAlignment="Top" Width="113" 
-                Click="btnShutdownServices_Click" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
-                BorderThickness="1,1,1,1" ClipToBounds="True" Height="20" Style="{StaticResource BotonPersonalizado}"/>
+                HorizontalAlignment="Left" Margin="18,11,0,0" VerticalAlignment="Top" Width="115" 
+                Click="btnShutdownServices_Click" Background="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" 
+                BorderThickness="1,1,1,1" ClipToBounds="True" Height="34" Style="{StaticResource Boton}" 
+                BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" 
+                Foreground="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" OpacityMask="{DynamicResource {x:Static SystemColors.InfoBrushKey}}"/>
         <Button x:Name="btnEncenderServicios" Content="Encender Servicios" HorizontalAlignment="Left" 
-                Margin="142,11,0,0" VerticalAlignment="Top" Width="105" 
+                Margin="142,11,0,0" VerticalAlignment="Top" Width="115" 
                 Click="btnEncenderServicios_Click" ClipToBounds="True" 
-                Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
-                Height="20" Style="{StaticResource BotonPersonalizado}"/>
-        <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Left" Height="10" Margin="83,148,0,0" VerticalAlignment="Top" Width="288"/>
+                Background="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" 
+                Height="34" Style="{StaticResource Boton}" BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" 
+                Foreground="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" OpacityMask="{DynamicResource {x:Static SystemColors.InfoBrushKey}}"/>
+        <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Center" Height="19" Margin="0,92,0,0" VerticalAlignment="Top" Width="494"/>
     </Grid>
 </Window>

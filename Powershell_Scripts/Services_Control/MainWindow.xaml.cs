@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Services_Control
 {
@@ -35,10 +36,11 @@ namespace Services_Control
         }
 
         private void btnShutdownServices_Click(object sender, RoutedEventArgs e)
-        {
+        {     
             // Inicializa la barra de progreso
             ProgressBar.Value = 0;
             ProgressBar.Maximum = 100; // Puedes ajustar este valor según tu preferencia
+
             Services services = new Services(Texto);
             services.ApagarServiciosAsync(Texto, ProgressBar, mysql, mssql);
 

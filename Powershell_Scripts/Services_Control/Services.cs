@@ -40,7 +40,7 @@ namespace Services_Control
 
             // Crear un StringBuilder para almacenar los resultados
             StringBuilder resultado = new StringBuilder();
-            resultado.AppendLine(string.Format("{0,-28} {1,-60}", "Status", "Name"));
+            resultado.AppendLine(string.Format("{0,-24} {1,-15} {2,-20}", "Estado", "Inicio", "Nombre"));
 
             if (isAdmin)
             {
@@ -54,9 +54,11 @@ namespace Services_Control
                         listaServicios.Add(service.ServiceName);
                         string nombreServicio = service.ServiceName;
                         string estadoServicio = service.Status.ToString();
+                        string startType = service.StartType.ToString(); // Obtener el tipo de inicio
 
                         // Formatear los datos en columnas
-                        string fila = string.Format("{0,-10}\t{1,-60}", estadoServicio, nombreServicio);
+                        string fila = string.Format("{0,-10}\t{1,-15} {2,-20}", estadoServicio, startType,nombreServicio );
+                        //string fila = string.Format("{0,-10}\t{1,-60}", estadoServicio, nombreServicio);
                         resultado.AppendLine(fila);
                     }
                 }
