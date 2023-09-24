@@ -41,7 +41,7 @@ Si los ejercicios y proyectos que he compartido te han sido útiles o inspirador
 ![GitHub top language](https://img.shields.io/github/languages/top/bash20cu/Universidad?style=plastik)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/bash20cu/Universidad?style=plastik)
 ![GitHub last commit](https://img.shields.io/github/last-commit/bash20cu/Universidad?style=plastik)
-![GitHub all releases](https://img.shields.io/github/downloads/bash20cu/https%3A%2F%2Fgithub.com%2Fbash20cu%2FUniversidad/total)
+![GitHub all releases](https://img.shields.io/github/downloads/bash20cu/Universidad/total)
 
 ### Conéctate conmigo
 
