@@ -26,7 +26,7 @@ Si los ejercicios y proyectos que he compartido te han sido útiles o inspirador
 ### Tecnologías Utilizadas
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=plastik&logo=java&logoColor=white)
-![CSharp](https://img.shields.io/badge/chsarp-%23ED8B00.svg?style=plastik&logo=java&logoColor=white)
+![CSharp](https://img.shields.io/badge/C%23-239120?style=plastik&logo=c-sharp&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=plastik&logo=javascript&logoColor=%23F7DF1E)
 ![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=plastik&logo=jquery&logoColor=white)
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=plastik&logo=mysql&logoColor=white)
