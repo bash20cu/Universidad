@@ -1,0 +1,110 @@
+﻿<DeploymentSnapshot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
+  <Target>
+    <Database>Laboratorio06</Database>
+    <Server>DEV</Server>
+    <ConnectionString>Data Source=DEV;Timeout=0</ConnectionString>
+  </Target>
+  <Options>
+    <TransactionalDeployment>false</TransactionalDeployment>
+    <PartitionDeployment>DeployPartitions</PartitionDeployment>
+    <RoleDeployment>DeployRolesRetainMembers</RoleDeployment>
+    <ProcessingOption>DoNotProcess</ProcessingOption>
+    <OutputScript></OutputScript>
+    <ImpactAnalysisFile></ImpactAnalysisFile>
+    <ConfigurationSettingsDeployment>Deploy</ConfigurationSettingsDeployment>
+    <OptimizationSettingsDeployment>Deploy</OptimizationSettingsDeployment>
+    <WriteBackTableCreation>UseExisting</WriteBackTableCreation>
+  </Options>
+  <Snapshot>
+    <ObjectSnapshots>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.RelationalDataSource</Type>
+        <TimeStamp>zrlu6obRXyX1KzpMkPSMYlv0wXw=3/16/2024 10:54:43 AM3/16/2024 10:54:05 AM</TimeStamp>
+        <ID>
+          <String>BI</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.DataSourceView</Type>
+        <TimeStamp>CzgEs1snzvsBeBgsDdMu6aNF8hA=3/16/2024 10:55:09 AM3/16/2024 10:55:09 AM</TimeStamp>
+        <ID>
+          <String>BI</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>BLfWBhS/sE6t7fMcuCEEEO2o1+Q=3/16/2024 10:56:40 AM3/16/2024 10:56:40 AM</TimeStamp>
+        <ID>
+          <String>Dimension Delito</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>xjKjhieTjKJ9idHv0Fs96drjo1c=3/16/2024 10:57:51 AM3/16/2024 10:57:38 AM</TimeStamp>
+        <ID>
+          <String>OIJ Dim Edad</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>27od5BSWclV0uMwXyWJD5tJOdTY=3/16/2024 11:03:05 AM3/16/2024 11:03:05 AM</TimeStamp>
+        <ID>
+          <String>Dimension Fecha</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>nOFJYcu033FDFe4zQWY/sYJ36Gk=3/16/2024 11:04:22 AM3/16/2024 11:03:46 AM</TimeStamp>
+        <ID>
+          <String>OIJ Dim Genero</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>CZBclKqXMEOKcP0e8wHXE+ulYZE=3/16/2024 11:04:56 AM3/16/2024 11:04:56 AM</TimeStamp>
+        <ID>
+          <String>Dimension Hora</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>GKdX9+BPyPQNjId54uXd6jTq0sw=3/16/2024 11:05:52 AM3/16/2024 11:05:52 AM</TimeStamp>
+        <ID>
+          <String>Dimension Nacionalidad</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>/J0+RaRnQwzNTP5OLyYZwG94e/0=3/16/2024 11:06:33 AM3/16/2024 11:06:33 AM</TimeStamp>
+        <ID>
+          <String>Dimension Provincia</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>SYOcrwWbxDl1qUNP+zWqhfoBGm4=3/16/2024 11:07:27 AM3/16/2024 11:07:27 AM</TimeStamp>
+        <ID>
+          <String>Dimension Victima</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Cube</Type>
+        <TimeStamp>iqvnVFRsQlqmGROYUEt9cuKpe/E=3/16/2024 11:10:53 AM3/16/2024 11:10:52 AM8dfChCZNT2MzmkKJyDBk7hzoVPE=3/16/2024 11:10:53 AM3/16/2024 11:10:52 AM</TimeStamp>
+        <ID>
+          <String>Cubo OIJ Delitos</String>
+        </ID>
+      </ObjectSnapshot>
+    </ObjectSnapshots>
+    <DatabaseSnapshot>
+      <Type>Microsoft.AnalysisServices.Database</Type>
+      <TimeStamp>Coc7+oZiHoerIujuymoEwRLY3ZA=3/16/2024 10:52:53 AM3/16/2024 10:52:53 AM</TimeStamp>
+      <ID>
+        <String>Laboratorio06</String>
+      </ID>
+    </DatabaseSnapshot>
+    <Granularity>Coarse</Granularity>
+  </Snapshot>
+  <AssemblyLocations />
+  <ProcessingComplete>true</ProcessingComplete>
+  <LastDeployed>2024-03-16T17:14:44.913333Z</LastDeployed>
+</DeploymentSnapshot>

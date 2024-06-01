@@ -20,35 +20,36 @@ Si tienes alguna pregunta o comentario sobre mi trabajo o deseas aprender más s
 
 Si los ejercicios y proyectos que he compartido te han sido útiles o inspiradores, considera apoyarme comprándome un café. Cualquier donación será muy apreciada y me ayudará a continuar mi educación y mi trabajo en el mundo de la programación.
 
-- [![PayPal](https://img.shields.io/badge/PayPal-00457C?style=plastik&logo=paypal&logoColor=white)](https://paypal.me/migue304?country.x=CR&locale.x=es_XC)
-- [![BuyMeACoffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?plastik=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/migue90092e)
+- [![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/migue304?country.x=CR&locale.x=es_XC)
+- [![BuyMeACoffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?for-the-badge=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/migue90092e)
 
 ### Tecnologías Utilizadas
 
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=plastik&logo=java&logoColor=white)
-![CSharp](https://img.shields.io/badge/C%23-239120?style=plastik&logo=c-sharp&logoColor=white)
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=plastik&logo=javascript&logoColor=%23F7DF1E)
-![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=plastik&logo=jquery&logoColor=white)
-![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=plastik&logo=mysql&logoColor=white)
-![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=plastik&logo=sqlite&logoColor=white)
-![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=plastik&logo=microsoft%20sql%20server&logoColor=white)
-![NetBeans IDE](https://img.shields.io/badge/NetBeansIDE-1B6AC6.svg?style=plastik&logo=apache-netbeans-ide&logoColor=white)
-![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=plastik&logo=visual-studio-code&logoColor=white)
-![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=plastik&logo=openai&logoColor=white)
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
+![CSharp](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
+![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
+![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)
+![NetBeans IDE](https://img.shields.io/badge/NetBeansIDE-1B6AC6.svg?style=for-the-badge&logo=apache-netbeans-ide&logoColor=white)
+![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+![Visual Studio](https://img.shields.io/badge/Visual%20Studio-5C2D91.svg?style=for-the-badge&logo=visual-studio&logoColor=white)
+![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
 
 ### Estadísticas del Repositorio
 
-![GitHub language count](https://img.shields.io/github/languages/count/bash20cu/Universidad?style=plastik)
-![GitHub top language](https://img.shields.io/github/languages/top/bash20cu/Universidad?style=plastik)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/bash20cu/Universidad?style=plastik)
-![GitHub last commit](https://img.shields.io/github/last-commit/bash20cu/Universidad?style=plastik)
-![GitHub all releases](https://img.shields.io/github/downloads/bash20cu/Universidad/total?style=plastik)
+![GitHub language count](https://img.shields.io/github/languages/count/bash20cu/Universidad?style=for-the-badge)
+![GitHub top language](https://img.shields.io/github/languages/top/bash20cu/Universidad?style=for-the-badge)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/bash20cu/Universidad?style=for-the-badge)
+![GitHub last commit](https://img.shields.io/github/last-commit/bash20cu/Universidad?style=for-the-badge)
+![GitHub all releases](https://img.shields.io/github/downloads/bash20cu/Universidad/total?style=for-the-badge)
 
 ### Conéctate conmigo
 
 - ¿Tienes alguna pregunta o sugerencia? ¡Hablemos!
-- Encuéntrame en LinkedIn: [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=plastik&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/miguel1990/)
-- Visita mi portafolio en línea: [![Portfolio](https://img.shields.io/badge/Portfolio-%23000000.svg?style=plastik&logo=firefox&logoColor=#FF7139)](https://bash20cu.github.io/Portfolio/)
+- Encuéntrame en LinkedIn: [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/miguel1990/)
+- Visita mi portafolio en línea: [![Portfolio](https://img.shields.io/badge/Portfolio-%23000000.svg?style=for-the-badge&logo=firefox&logoColor=#FF7139)](https://bash20cu.github.io/Portfolio/)
 
 ### Explora mis proyectos
 
@@ -95,3 +96,13 @@ Si los ejercicios y proyectos que he compartido te han sido útiles o inspirador
 - [Laboratorio 7](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/1/Lab-7)
 - [Laboratorio 9](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/1/Lab-9)
 - [Laboratorio 10](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/1/Lab-10)
+- [Proyecto Final](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/1/Proyecto_Final)
+
+##### Laboratorios Base de datos II
+
+- [Laboratorio 2](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/2/Lab-2)
+- [Laboratorio 3](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/2/Lab-3)
+- [Laboratorio 4](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/2/Lab-4)
+- [Laboratorio 5](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/2/Lab-5)
+- [Laboratorio 6](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/2/Lab-6)
+- [Laboratorio 10](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/2/Lab-10)

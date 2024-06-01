@@ -1,0 +1,161 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="64a8eb4d-329e-4d7e-bada-c769e7dcda71" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Cubo_Defunciones</ID>
+  <Name>Cubo_Defunciones</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Dimensions>
+    <Dimension dwd:design-time-name="6cd9ee43-3481-4f92-85d7-188835092f67">
+      <ID>Dimension Fecha</ID>
+      <Name>Dimension Fecha</Name>
+      <DimensionID>Dimension Fecha</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="820eb085-94ee-4e72-9db1-df80a15086a4">
+          <AttributeID>ID Fecha</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="9425ee29-eb4d-4d34-b52b-2456a339a4b0">
+          <AttributeID>Fecha Defuncion</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="9765c51f-b2db-45e7-8321-4fa18047df4e">
+          <AttributeID>Numero Dia</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="853e1d74-e43f-4d39-bb20-bbb08006cc51">
+          <AttributeID>Numero Mes</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="c432e0e9-a0e5-4970-abe2-38b8bd73b7e4">
+          <AttributeID>Anno</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="b713c5db-25e1-4e1f-b84e-a8c5e659c4af">
+          <AttributeID>Nombre Dia</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="04da952b-852c-4a1f-b733-6df7d47a5dd8">
+          <AttributeID>Nombre Mes</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="1dfd313b-5ef5-4428-a740-682a186c8683">
+      <ID>Dimension Provincia Canton</ID>
+      <Name>Dimension Provincia Canton</Name>
+      <DimensionID>Dimension Provincia Canton</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="e190c1bf-934a-461d-ba75-20f3a472cd8e">
+          <AttributeID>ID PC</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="0e141eac-6c57-4ce0-afad-1c31253ca150">
+          <AttributeID>Provincia</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="42e0b107-1411-4acf-a009-5e3e26223029">
+          <AttributeID>Canton</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+  </Dimensions>
+  <MeasureGroups>
+    <MeasureGroup dwd:design-time-name="57bb2db3-e927-4ae6-a310-f131d984f3fb">
+      <ID>Defunciones Fac Defunciones</ID>
+      <Name>Defunciones Fac Defunciones</Name>
+      <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+      <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+      <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+      <State>Unprocessed</State>
+      <Measures>
+        <Measure dwd:design-time-name="294f0463-b348-419d-b904-b848ad83f386">
+          <ID>Recuento Defunciones Fac Defunciones</ID>
+          <Name>Recuento Defunciones Fac Defunciones</Name>
+          <AggregateFunction>Count</AggregateFunction>
+          <Source dwd:design-time-name="93c940b9-a05b-4f87-956a-81f2003b5765">
+            <DataType>Integer</DataType>
+            <DataSize>4</DataSize>
+            <Source xsi:type="RowBinding" dwd:design-time-name="9e6f13ed-839b-4f68-b157-efa9449e3c3b">
+              <TableID>dbo_Defunciones_Fac_Defunciones</TableID>
+            </Source>
+          </Source>
+        </Measure>
+      </Measures>
+      <StorageMode>Molap</StorageMode>
+      <ProcessingMode>Regular</ProcessingMode>
+      <Dimensions>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="5896ffbd-97cd-47ff-8ba0-f4fc7071b6c5">
+          <CubeDimensionID>Dimension Fecha</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="d1556442-f471-4b2b-b2bd-258ce794412e">
+              <AttributeID>ID Fecha</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="c3c87863-1cdb-4ff7-8de6-cedca84610a3">
+                  <DataType>BigInt</DataType>
+                  <NullProcessing>UnknownMember</NullProcessing>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="b8fb242c-f487-4161-8847-18a68c967248">
+                    <TableID>dbo_Defunciones_Fac_Defunciones</TableID>
+                    <ColumnID>ID_Fecha</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="ecac603b-a0f5-4abe-9c7b-a9f4dc9a1501">
+          <CubeDimensionID>Dimension Provincia Canton</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="0618d74f-ddf2-4f76-a471-d429243ebea2">
+              <AttributeID>ID PC</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="d54260e5-bc11-4a2e-8409-eac968e4e0c0">
+                  <DataType>BigInt</DataType>
+                  <NullProcessing>UnknownMember</NullProcessing>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="cfcc87b7-cad0-4b61-b765-d1774d37063b">
+                    <TableID>dbo_Defunciones_Fac_Defunciones</TableID>
+                    <ColumnID>ID_PC</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+      </Dimensions>
+      <Partitions />
+    </MeasureGroup>
+  </MeasureGroups>
+  <Source dwd:design-time-name="c4e83e3e-1df8-406f-8c38-c2d68f4627d9">
+    <DataSourceViewID>BI</DataSourceViewID>
+  </Source>
+</Cube>

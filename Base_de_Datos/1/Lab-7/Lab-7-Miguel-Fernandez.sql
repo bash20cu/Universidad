@@ -1,10 +1,10 @@
-use UIALab07;
+use Lab07;
 -- Insertando permisos en el catalogo
 -- Insertar permisos relacionados con el menú  en catalogo_permisos
 INSERT INTO catalogo_permisos (idcatalogo_permisos, descripcion, activo) 
 VALUES (1, 'Administrar', 1), (2, 'Moderar', 1),(3, 'Usuario', 1), (4, 'Ayuda', 1);
 SELECT `catalogo_permisos`.`idcatalogo_permisos`, `catalogo_permisos`.`descripcion`, `catalogo_permisos`.`activo`
-FROM `uialab07`.`catalogo_permisos`;
+FROM `lab07`.`catalogo_permisos`;
 
 -- Insertar opciones de nivel del menú
 -- Insertar opciones de nivel 1 como permisos en la tabla "permisos"
@@ -18,21 +18,21 @@ INSERT INTO permisos (idPermisos, descripcion, activo, catalogo_permisos_idcatal
 VALUES (7, 'crear publicacion', 1, 3), (8, 'cancelar publicacion', 1, 3), (9, 'estadisticas de usuario', 1, 3);
 
 SELECT `permisos`.`idPermisos`,`permisos`.`descripcion`,`permisos`.`activo`, `permisos`.`catalogo_permisos_idcatalogo_permisos`
-FROM `uialab07`.`permisos`;
+FROM `lab07`.`permisos`;
 -- Revisando la tabla y las relaciones
 SELECT p.idPermisos, p.descripcion AS Permiso, c.descripcion AS Opcion_Catalogo
 FROM permisos AS p
 INNER JOIN catalogo_permisos AS c ON p.catalogo_permisos_idcatalogo_permisos = c.idcatalogo_permisos;
 
 -- Insertando Usuarios
-INSERT INTO `uialab07`.`usuario`
+INSERT INTO `lab07`.`usuario`
 (`idusuario`,`usuario`,`contrasena`,`activo`,`fecha_creado`,`usuario_idusuario`)
 VALUES
 (1,'admin','supercoolcontraseña',1,now(),1), -- usuario administrador
 (2,'moderador', 'contrasena_moderador', 1, NOW(), 1), -- usuario moderador
 (3,'usuario', 'contrasena_usuario', 1, NOW(), 2);  -- usuario 
 SELECT `usuario`.`idusuario`, `usuario`.`usuario`, `usuario`.`contrasena`, `usuario`.`activo`, `usuario`.`fecha_creado`, `usuario`.`usuario_idusuario`
-FROM `uialab07`.`usuario`;
+FROM `lab07`.`usuario`;
 
 -- Insertando los permisos a los usuarios
 -- Asignar todos los permisos al administrador
@@ -59,7 +59,7 @@ FROM usuario u
 INNER JOIN permisos p ON u.usuario = 'usuario' AND p.catalogo_permisos_idcatalogo_permisos = 3; 
 
 SELECT `usuario_permiso`.`usuario_idusuario`,`usuario_permiso`.`permisos_idPermisos`
-FROM `uialab07`.`usuario_permiso`
+FROM `lab07`.`usuario_permiso`
 ORDER BY  `usuario_permiso`.`usuario_idusuario` ASC;
 
 -- verificando los permisos

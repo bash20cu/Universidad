@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34616.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "PDC_Cubo_Lab05", "PDC_Cubo_Lab05\PDC_Cubo_Lab05.dwproj", "{751B5249-4038-4CF8-986C-5FC9D885D9ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{751B5249-4038-4CF8-986C-5FC9D885D9ED}.Development|Default.ActiveCfg = Development
+		{751B5249-4038-4CF8-986C-5FC9D885D9ED}.Development|Default.Build.0 = Development
+		{751B5249-4038-4CF8-986C-5FC9D885D9ED}.Development|Default.Deploy.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FDA5D75B-D863-4984-BCB3-7AA7BE9AEA80}
+	EndGlobalSection
+EndGlobal

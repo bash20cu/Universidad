@@ -1,0 +1,84 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio05\\Visual Studio\\PDC_Cubo_Lab05\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{751B5249-4038-4CF8-986C-5FC9D885D9ED}|PDC_Cubo_Lab05\\PDC_Cubo_Lab05.dwproj|C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio05\\Visual Studio\\PDC_Cubo_Lab05\\PDC_Cubo_Lab05\\Cubo_Defunciones.cube||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{751B5249-4038-4CF8-986C-5FC9D885D9ED}|PDC_Cubo_Lab05\\PDC_Cubo_Lab05.dwproj|solutionrelative:PDC_Cubo_Lab05\\Cubo_Defunciones.cube||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{751B5249-4038-4CF8-986C-5FC9D885D9ED}|PDC_Cubo_Lab05\\PDC_Cubo_Lab05.dwproj|C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio05\\Visual Studio\\PDC_Cubo_Lab05\\PDC_Cubo_Lab05\\Dimension Provincia Canton.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{751B5249-4038-4CF8-986C-5FC9D885D9ED}|PDC_Cubo_Lab05\\PDC_Cubo_Lab05.dwproj|solutionrelative:PDC_Cubo_Lab05\\Dimension Provincia Canton.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{751B5249-4038-4CF8-986C-5FC9D885D9ED}|PDC_Cubo_Lab05\\PDC_Cubo_Lab05.dwproj|C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio05\\Visual Studio\\PDC_Cubo_Lab05\\PDC_Cubo_Lab05\\Dimension Fecha.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{751B5249-4038-4CF8-986C-5FC9D885D9ED}|PDC_Cubo_Lab05\\PDC_Cubo_Lab05.dwproj|solutionrelative:PDC_Cubo_Lab05\\Dimension Fecha.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{751B5249-4038-4CF8-986C-5FC9D885D9ED}|PDC_Cubo_Lab05\\PDC_Cubo_Lab05.dwproj|C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio05\\Visual Studio\\PDC_Cubo_Lab05\\PDC_Cubo_Lab05\\BI.dsv||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{751B5249-4038-4CF8-986C-5FC9D885D9ED}|PDC_Cubo_Lab05\\PDC_Cubo_Lab05.dwproj|solutionrelative:PDC_Cubo_Lab05\\BI.dsv||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Cubo_Defunciones.cube [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio05\\Visual Studio\\PDC_Cubo_Lab05\\PDC_Cubo_Lab05\\Cubo_Defunciones.cube",
+              "RelativeDocumentMoniker": "PDC_Cubo_Lab05\\Cubo_Defunciones.cube",
+              "ToolTip": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio05\\Visual Studio\\PDC_Cubo_Lab05\\PDC_Cubo_Lab05\\Cubo_Defunciones.cube [Dise\u00F1o]",
+              "RelativeToolTip": "PDC_Cubo_Lab05\\Cubo_Defunciones.cube [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-03-09T22:10:53.031Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Dimension Provincia Canton.dim [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio05\\Visual Studio\\PDC_Cubo_Lab05\\PDC_Cubo_Lab05\\Dimension Provincia Canton.dim",
+              "RelativeDocumentMoniker": "PDC_Cubo_Lab05\\Dimension Provincia Canton.dim",
+              "ToolTip": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio05\\Visual Studio\\PDC_Cubo_Lab05\\PDC_Cubo_Lab05\\Dimension Provincia Canton.dim [Dise\u00F1o]",
+              "RelativeToolTip": "PDC_Cubo_Lab05\\Dimension Provincia Canton.dim [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-03-09T22:08:42.308Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Dimension Fecha.dim [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio05\\Visual Studio\\PDC_Cubo_Lab05\\PDC_Cubo_Lab05\\Dimension Fecha.dim",
+              "RelativeDocumentMoniker": "PDC_Cubo_Lab05\\Dimension Fecha.dim",
+              "ToolTip": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio05\\Visual Studio\\PDC_Cubo_Lab05\\PDC_Cubo_Lab05\\Dimension Fecha.dim [Dise\u00F1o]",
+              "RelativeToolTip": "PDC_Cubo_Lab05\\Dimension Fecha.dim [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-03-09T22:07:38.736Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BI.dsv [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio05\\Visual Studio\\PDC_Cubo_Lab05\\PDC_Cubo_Lab05\\BI.dsv",
+              "RelativeDocumentMoniker": "PDC_Cubo_Lab05\\BI.dsv",
+              "ToolTip": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio05\\Visual Studio\\PDC_Cubo_Lab05\\PDC_Cubo_Lab05\\BI.dsv [Dise\u00F1o]",
+              "RelativeToolTip": "PDC_Cubo_Lab05\\BI.dsv [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-03-09T22:06:13.03Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

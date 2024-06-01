@@ -1,0 +1,99 @@
+---
+title: "Lab_10"
+author: "Miguel Fernández Arteaga"
+date: "2024-04-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(reticulate)
+```
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+import nltk
+from nltk.corpus import stopwords
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from wordcloud import WordCloud, ImageColorGenerator 
+import wikipedia
+import numpy as np
+
+#Lectura del archivo con los comentarios negativos
+
+df = pd.read_csv("D:/BD2/Laboratorio10/reviewsfake.csv", delimiter=",")
+
+#nltk.download()
+
+#Muestra la informacion
+
+df.info ()
+
+df["category"]
+
+#WordCloud
+stop_words_sp = set(stopwords.words('spanish'))
+stop_words_sp
+text = " ".join(cat.split()[1] for cat in df.category)
+text
+word_cloud = WordCloud(collocations = False, background_color = 'lightcyan', stopwords=stop_words_sp, max_words=20).generate(text)
+ 
+print(word_cloud)
+
+#Grafico
+
+plt.imshow(word_cloud, interpolation='bilinear')
+plt.axis("off")
+
+(-0.5, 399.5, 199.5, -0.5)
+
+plt.show()
+
+wikipedia.set_lang("es")
+text= wikipedia.summary("Python (programming language)",sentences=100000)
+print(text)
+tokens = nltk.word_tokenize(text)
+print(tokens)
+
+#WORD CLOUD WIKI
+word_cloud = WordCloud(collocations = False, background_color = '#F0F0F0', stopwords=stop_words_sp, max_words=13).generate(text)
+print(word_cloud)
+
+plt.imshow(word_cloud, interpolation='bilinear')
+plt.axis("off")
+
+(-0.5, 399.5, 199.5, -0.5)
+
+plt.show()
+
+# Analsiis de sentimientos
+modelo = SentimentIntensityAnalyzer()
+sentimientos = np.array([])
+for x in df["category"]:
+  try:
+    sentimiento = modelo.polarity_scores(x)['compound']
+    if sentimiento > 0.1:
+      sentimientos = np.append(sentimientos,"positivo")
+    elif sentimiento < -0.1:
+      sentimientos = np.append(sentimientos,"negativo")
+    else:
+      sentimientos = np.append(sentimientos,"neutro")
+  except:
+    sentimientos = np.append(sentimientos,"no aplica")
+positivos = len(sentimientos[sentimientos == "positivo"])
+negativos = len(sentimientos[sentimientos == "negativo"])
+neutros = len(sentimientos[sentimientos == "neutro"])
+y = [positivos,negativos,neutros]
+labels = ["Positivo","Negativo","Neutro"]
+colors = ["green","yellow", "red"]
+y
+labels
+
+plt.pie(y,labels = labels, colors = colors,explode = (0.1,0,0),autopct = '%1.1f%%', startangle = 140)
+plt.axis = ('equal')
+plt.title('Distribucion de sentimientos')
+plt.show()
+
+
+```

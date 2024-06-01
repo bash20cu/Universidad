@@ -1,8 +1,8 @@
-USE UIA;
+USE ;
 
 exec sp_columns Padron_Electoral;
 
-/* 1.	Seleccionar a todas las personas que viven en el código electoral 10302023  */
+/* 1.	Seleccionar a todas las personas que viven en el cï¿½digo electoral 10302023  */
 Select PE.Cedula ID,PE.Nombre,PE.Apellido1 Primer_Apellido,PE.Apellido2 Segundo_Apellido, PE.Cod_Elec
 From Padron_Electoral PE
 Where PE.Cod_Elec = 10302023; 
@@ -13,14 +13,14 @@ where PE.Cod_Elec = 10302023;
 
 
 /*
-2.	Seleccionar la fecha de caducidad mayor y menor, en la misma instrucción, para ello debe investigar 
+2.	Seleccionar la fecha de caducidad mayor y menor, en la misma instrucciï¿½n, para ello debe investigar 
 el concepto de min y max. La fecha menor se debe llamar valor_min, la fecha mayor se debe llamar valor_max 
 */
 Select  MIN(PE.Fecha_Vencimiento) valor_min, MAX(PE.Fecha_Vencimiento) valor_max
 From Padron_Electoral PE;
 
 /*
-3.	Seleccionar el nombre más extenso y el menos extenso. Usar la función LEN. 
+3.	Seleccionar el nombre mï¿½s extenso y el menos extenso. Usar la funciï¿½n LEN. 
 
 Usando consultas anidadas
 */
@@ -29,15 +29,15 @@ SELECT
     (SELECT TOP 1 PE.Nombre FROM Padron_Electoral PE ORDER BY LEN(PE.Nombre) ASC, PE.Nombre) Nombre_Menos_Extenso;
 
 
-/* 4.	Seleccionar a todas las personas cuyo nombre contenga la palabra “RAMBO”. */
+/* 4.	Seleccionar a todas las personas cuyo nombre contenga la palabra ï¿½RAMBOï¿½. */
 Select  PE.Cedula ID,PE.Nombre,PE.Apellido1 Primer_Apellido,PE.Apellido2 Segundo_Apellido
 FROM Padron_Electoral PE
 WHERE PE.Nombre LIKE '%RAMBO%';
 
 
 /*
-5.	Seleccionar a todas las personas cuyo nombre contenga la palabra “RAMBO” y
-además el apellido1 y el apellido2 empiece con una vocal y termine con una vocal.
+5.	Seleccionar a todas las personas cuyo nombre contenga la palabra ï¿½RAMBOï¿½ y
+ademï¿½s el apellido1 y el apellido2 empiece con una vocal y termine con una vocal.
 
 [AEIOU] => Arreglos de vocales.
 */
@@ -50,14 +50,14 @@ And (
 )
 
 /* 
-6.	Contabilizar a todas las personas donde el nombre empiece con “KOBE BRY” 
+6.	Contabilizar a todas las personas donde el nombre empiece con ï¿½KOBE BRYï¿½ 
 */
 Select Count (PE.Nombre) Total
 From Padron_Electoral PE
 Where PE.Nombre Like 'KOBE BRY%';
 
 /*
-7.	Seleccionar a todas las personas donde el nombre empiece con “KOBE BRY” y 
+7.	Seleccionar a todas las personas donde el nombre empiece con ï¿½KOBE BRYï¿½ y 
 el primer apellido no empiece con una vocal. 
 */
 Select  PE.Cedula ID,PE.Nombre,PE.Apellido1 Primer_Apellido,PE.Apellido2 Segundo_Apellido
@@ -67,7 +67,7 @@ And PE.Apellido1 not like '[AEIOU]%[AEIOU]';
 
 
 /*
-8.	Seleccionar los 15 primeros apellidos (apellido1) más comunes y 
+8.	Seleccionar los 15 primeros apellidos (apellido1) mï¿½s comunes y 
 el total de ocurrencias por cada apellido. 
 */
 Select Top 15 PE.Apellido1 Apellidos, Count (Apellido1) Total
@@ -76,8 +76,8 @@ Group by PE.Apellido1
 Order By Total DESC;
 
 /*
-9.	Seleccionar los 10 códigos electorales donde existen mayor 
-población inscrita para votar. 
+9.	Seleccionar los 10 cï¿½digos electorales donde existen mayor 
+poblaciï¿½n inscrita para votar. 
 */
 
 Select Top 10
@@ -90,7 +90,7 @@ ORDER BY Poblacion_Total DESC;
 /*
 10.	Determinar todas las personas que en el nombre contenga JUAN y 
 el apellido1 sea SANTAMARIA y el apellido2 sea RODRIGUEZ, 
-sin importar si tildan (Santamaría) o Rodríguez.
+sin importar si tildan (Santamarï¿½a) o Rodrï¿½guez.
 
 */
 

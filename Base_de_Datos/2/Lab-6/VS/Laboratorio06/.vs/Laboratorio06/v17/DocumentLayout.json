@@ -1,0 +1,180 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Cubo OIJ Delitos.cube||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|solutionrelative:Laboratorio06\\Cubo OIJ Delitos.cube||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Victima.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|solutionrelative:Laboratorio06\\Dimension Victima.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Provincia.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|solutionrelative:Laboratorio06\\Dimension Provincia.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Nacionalidad.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|solutionrelative:Laboratorio06\\Dimension Nacionalidad.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Hora.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|solutionrelative:Laboratorio06\\Dimension Hora.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Genero.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|solutionrelative:Laboratorio06\\Dimension Genero.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Fecha.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|solutionrelative:Laboratorio06\\Dimension Fecha.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Edad.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|solutionrelative:Laboratorio06\\Dimension Edad.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Delito.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|solutionrelative:Laboratorio06\\Dimension Delito.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\BI.dsv||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{97FD6011-E944-4E0E-A098-64ED86FE1CA1}|Laboratorio06\\Laboratorio06.dwproj|solutionrelative:Laboratorio06\\BI.dsv||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Cubo OIJ Delitos.cube [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Cubo OIJ Delitos.cube",
+              "RelativeDocumentMoniker": "Laboratorio06\\Cubo OIJ Delitos.cube",
+              "ToolTip": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Cubo OIJ Delitos.cube [Dise\u00F1o]",
+              "RelativeToolTip": "Laboratorio06\\Cubo OIJ Delitos.cube [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-03-16T17:10:53.105Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Dimension Victima.dim [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Victima.dim",
+              "RelativeDocumentMoniker": "Laboratorio06\\Dimension Victima.dim",
+              "ToolTip": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Victima.dim [Dise\u00F1o]",
+              "RelativeToolTip": "Laboratorio06\\Dimension Victima.dim [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-03-16T17:07:27.092Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Dimension Provincia.dim [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Provincia.dim",
+              "RelativeDocumentMoniker": "Laboratorio06\\Dimension Provincia.dim",
+              "ToolTip": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Provincia.dim [Dise\u00F1o]",
+              "RelativeToolTip": "Laboratorio06\\Dimension Provincia.dim [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-03-16T17:06:33.66Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Dimension Nacionalidad.dim [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Nacionalidad.dim",
+              "RelativeDocumentMoniker": "Laboratorio06\\Dimension Nacionalidad.dim",
+              "ToolTip": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Nacionalidad.dim [Dise\u00F1o]",
+              "RelativeToolTip": "Laboratorio06\\Dimension Nacionalidad.dim [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-03-16T17:05:52.146Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Dimension Hora.dim [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Hora.dim",
+              "RelativeDocumentMoniker": "Laboratorio06\\Dimension Hora.dim",
+              "ToolTip": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Hora.dim [Dise\u00F1o]",
+              "RelativeToolTip": "Laboratorio06\\Dimension Hora.dim [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-03-16T17:04:56.454Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Dimension Genero.dim [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Genero.dim",
+              "RelativeDocumentMoniker": "Laboratorio06\\Dimension Genero.dim",
+              "ToolTip": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Genero.dim [Dise\u00F1o]",
+              "RelativeToolTip": "Laboratorio06\\Dimension Genero.dim [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-03-16T17:03:46.274Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Dimension Fecha.dim [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Fecha.dim",
+              "RelativeDocumentMoniker": "Laboratorio06\\Dimension Fecha.dim",
+              "ToolTip": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Fecha.dim [Dise\u00F1o]",
+              "RelativeToolTip": "Laboratorio06\\Dimension Fecha.dim [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-03-16T17:03:05.445Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Dimension Edad.dim [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Edad.dim",
+              "RelativeDocumentMoniker": "Laboratorio06\\Dimension Edad.dim",
+              "ToolTip": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Edad.dim [Dise\u00F1o]",
+              "RelativeToolTip": "Laboratorio06\\Dimension Edad.dim [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-03-16T16:57:38.99Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Dimension Delito.dim [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Delito.dim",
+              "RelativeDocumentMoniker": "Laboratorio06\\Dimension Delito.dim",
+              "ToolTip": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\Dimension Delito.dim [Dise\u00F1o]",
+              "RelativeToolTip": "Laboratorio06\\Dimension Delito.dim [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-03-16T16:56:40.537Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "BI.dsv [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\BI.dsv",
+              "RelativeDocumentMoniker": "Laboratorio06\\BI.dsv",
+              "ToolTip": "C:\\Users\\migue\\OneDrive - Universidad Internacional de las Am\u00E9ricas (UIA)\\Base de Datos 2\\Laboratorio06\\VS\\Laboratorio06\\Laboratorio06\\BI.dsv [Dise\u00F1o]",
+              "RelativeToolTip": "Laboratorio06\\BI.dsv [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-03-16T16:55:13.721Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

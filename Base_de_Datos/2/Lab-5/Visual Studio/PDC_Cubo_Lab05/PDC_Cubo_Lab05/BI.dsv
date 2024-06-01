@@ -1,0 +1,141 @@
+﻿<DataSourceView xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="f1b07616-e826-49ac-9dd2-0293698f35e0" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>BI</ID>
+  <Name>BI</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:CurrentLayout</Name>
+      <Value>_ALL_TABLES_</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:SchemaRestriction</Name>
+      <Value></Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:RetrieveRelationships</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:Layouts</Name>
+      <Value>
+        <Layouts xmlns="">
+          <Diagram>
+            <Name>_ALL_TABLES_</Name>
+            <DiagramLayout />
+            <ShowRelationshipNames>False</ShowRelationshipNames>
+            <UseDiagramDefaultLayout>True</UseDiagramDefaultLayout>
+            <DiagramViewPortLeft>0</DiagramViewPortLeft>
+            <DiagramViewPortTop>0</DiagramViewPortTop>
+            <DiagramBoundingLeft>0</DiagramBoundingLeft>
+            <DiagramBoundingTop>0</DiagramBoundingTop>
+            <DiagramZoom>100</DiagramZoom>
+          </Diagram>
+        </Layouts>
+      </Value>
+    </Annotation>
+  </Annotations>
+  <DataSourceID>BI</DataSourceID>
+  <Schema>
+    <xs:schema id="BI" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+      <xs:element name="BI" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:design-time-name="f927433b-20dd-407d-bcd7-536458fced62">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="dbo_Defunciones_Dim_Fecha" msprop:DbTableName="Defunciones_Dim_Fecha" msprop:FriendlyName="Defunciones_Dim_Fecha" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="b94cdc61-d348-4243-9ac7-d68a7aaea33c">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ID_Fecha" msprop:FriendlyName="ID_Fecha" msprop:DbColumnName="ID_Fecha" msprop:design-time-name="c0c53589-5645-4722-8016-1b1125aeba72" type="xs:long" />
+                  <xs:element name="Fecha_Defuncion" msprop:FriendlyName="Fecha_Defuncion" msprop:DbColumnName="Fecha_Defuncion" msprop:design-time-name="16fce7c4-e1ea-453c-bcd5-171cb1b7eace" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Numero_Dia" msprop:FriendlyName="Numero_Dia" msprop:DbColumnName="Numero_Dia" msprop:design-time-name="07180d6f-0d33-4898-8106-d4c0ba4c5b3b" type="xs:int" minOccurs="0" />
+                  <xs:element name="Numero_Mes" msprop:FriendlyName="Numero_Mes" msprop:DbColumnName="Numero_Mes" msprop:design-time-name="acb3ca81-1b25-47ea-ae90-f060b9ea0466" type="xs:int" minOccurs="0" />
+                  <xs:element name="Anno" msprop:FriendlyName="Anno" msprop:DbColumnName="Anno" msprop:design-time-name="39919935-cb64-44b4-95bb-c72816534b9b" type="xs:int" minOccurs="0" />
+                  <xs:element name="Nombre_Dia" msprop:FriendlyName="Nombre_Dia" msprop:DbColumnName="Nombre_Dia" msprop:design-time-name="6986e507-25c6-4d65-b928-55bb80906a0e" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="9" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Nombre_Mes" msprop:FriendlyName="Nombre_Mes" msprop:DbColumnName="Nombre_Mes" msprop:design-time-name="1de9558e-b8ea-44e1-8e48-c7118ae163c6" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Defunciones_Dim_ProvinciaCanton" msprop:DbTableName="Defunciones_Dim_ProvinciaCanton" msprop:FriendlyName="Defunciones_Dim_ProvinciaCanton" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="79f68cf2-9d07-425e-a725-eaab6bc7c4bb">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ID_PC" msprop:FriendlyName="ID_PC" msprop:DbColumnName="ID_PC" msprop:design-time-name="acb5f050-48d3-4fe7-abe9-411a338a7804" type="xs:long" />
+                  <xs:element name="Provincia" msprop:FriendlyName="Provincia" msprop:DbColumnName="Provincia" msprop:design-time-name="7fd7a295-364f-4369-97e6-fca341e6a17b" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Canton" msprop:FriendlyName="Canton" msprop:DbColumnName="Canton" msprop:design-time-name="d02b0e60-0fae-4a52-9e78-b211c0335ad8" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Defunciones_Fac_Defunciones" msprop:DbTableName="Defunciones_Fac_Defunciones" msprop:FriendlyName="Defunciones_Fac_Defunciones" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="d9184bab-a975-4ef9-bc0d-781a8384d94b">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ID" msprop:FriendlyName="ID" msprop:DbColumnName="ID" msprop:design-time-name="bbf553ba-62e0-465c-af3a-3a84c0c98ca8">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="ID_Fecha" msprop:FriendlyName="ID_Fecha" msprop:DbColumnName="ID_Fecha" msprop:design-time-name="46289cf3-ecb2-4eb8-a3c8-96be61a7079c" type="xs:long" minOccurs="0" />
+                  <xs:element name="ID_PC" msprop:FriendlyName="ID_PC" msprop:DbColumnName="ID_PC" msprop:design-time-name="2497aad4-a7fb-4fd5-8aaa-68a29fa6db65" type="xs:long" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+        <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Defunciones_Dim_Fecha" />
+          <xs:field xpath="ID_Fecha" />
+        </xs:unique>
+        <xs:unique name="dbo_Defunciones_Dim_ProvinciaCanton_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Defunciones_Dim_ProvinciaCanton" />
+          <xs:field xpath="ID_PC" />
+        </xs:unique>
+        <xs:unique name="dbo_Defunciones_Fac_Defunciones_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Defunciones_Fac_Defunciones" />
+          <xs:field xpath="ID" />
+        </xs:unique>
+        <xs:keyref name="FK_Defunciones_Fac_Defunciones_Defunciones_Dim_ProvinciaCanton" refer="dbo_Defunciones_Dim_ProvinciaCanton_Constraint1">
+          <xs:selector xpath=".//dbo_Defunciones_Fac_Defunciones" />
+          <xs:field xpath="ID_PC" />
+        </xs:keyref>
+        <xs:keyref name="FK_Defunciones_Fac_Defunciones_Defunciones_Dim_Fecha" refer="Constraint1">
+          <xs:selector xpath=".//dbo_Defunciones_Fac_Defunciones" />
+          <xs:field xpath="ID_Fecha" />
+        </xs:keyref>
+      </xs:element>
+    </xs:schema>
+    <BI xmlns="" />
+  </Schema>
+</DataSourceView>

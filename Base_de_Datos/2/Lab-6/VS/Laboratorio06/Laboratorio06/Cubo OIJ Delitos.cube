@@ -1,0 +1,356 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="875519c1-f2ca-4630-8e7a-78248aec0b19" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Cubo OIJ Delitos</ID>
+  <Name>Cubo OIJ Delitos</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Dimensions>
+    <Dimension dwd:design-time-name="1ce5fd7d-fa82-4c5b-a438-52d5c74e8ee5">
+      <ID>Dimension Delito</ID>
+      <Name>Dimension Delito</Name>
+      <DimensionID>Dimension Delito</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="84affbd7-cf61-487a-b394-ea0697417b7b">
+          <AttributeID>ID Robo</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="fcb8af04-4083-4a30-9fe4-5712b38a5600">
+          <AttributeID>Descripcion Delito</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="32310030-6096-427a-b3c1-d3555d34a016">
+      <ID>Dimension Genero</ID>
+      <Name>Dimension Genero</Name>
+      <DimensionID>OIJ Dim Genero</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="3351e1e9-2549-495a-95fc-91a3c9eb04e6">
+          <AttributeID>ID Genero</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="74c87c87-437b-4dd6-9351-682f873d5ec1">
+          <AttributeID>Genero</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="c15121af-b797-47cf-90a9-4f1984e69033">
+      <ID>Dimension Fecha</ID>
+      <Name>Dimension Fecha</Name>
+      <DimensionID>Dimension Fecha</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="ffb77e45-e4f4-4715-ae98-2769c2d8071c">
+          <AttributeID>ID Fecha</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="9af84d9f-e9eb-47a4-9c60-749ec74c1ede">
+          <AttributeID>Fecha</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="f8777954-947c-4981-a6d6-43679fb73fd4">
+          <AttributeID>Anno</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="e8e7debd-f443-4593-bd8f-4b7ae88923db">
+          <AttributeID>Numero Mes</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="d69b4b39-b256-4442-a593-5fcb918b9c1c">
+          <AttributeID>Nombre Mes</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="19363063-9c92-4cad-99ab-c9e72494d831">
+          <AttributeID>Numero Dia</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="e21be910-fcc6-4c1e-87fc-e6f384dac817">
+          <AttributeID>Nombre Dia</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="b63fe6ed-f130-4b31-a3df-16a4835cad49">
+          <AttributeID>Semestre</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="a0ee7fe9-c691-44b6-93a1-29bb063657b1">
+      <ID>Dimension Victima</ID>
+      <Name>Dimension Victima</Name>
+      <DimensionID>Dimension Victima</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="ad609bb6-e572-4e43-8b67-407fa351e0ac">
+          <AttributeID>ID Victima</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="b0099470-8c58-45a7-a1fc-93de121b3b5c">
+          <AttributeID>Victima</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="9b31e3c9-2cc0-4835-a886-50c0d2b1d7f6">
+      <ID>Dimension Nacionalidad</ID>
+      <Name>Dimension Nacionalidad</Name>
+      <DimensionID>Dimension Nacionalidad</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="9d48ff16-09e4-4f19-9a43-dcbb2492e101">
+          <AttributeID>ID Nacionalidad</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="c13ed47a-1180-461f-82d8-95c4f7ac0861">
+          <AttributeID>Nacionalidad</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="0f6f921e-0d98-423c-9276-56f3524a18cf">
+      <ID>Dimension Hora</ID>
+      <Name>Dimension Hora</Name>
+      <DimensionID>Dimension Hora</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="ba3e2f8d-4028-40ce-9e8a-2e18bd46365d">
+          <AttributeID>ID Hora</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="5b09139a-72de-41e8-a6cd-ba2ef905c2b0">
+          <AttributeID>Hora</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="cec41d37-6d5f-43c4-925c-9d9b65ed29ec">
+          <AttributeID>Descripcion Hora</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="347760fe-e55d-44cc-a582-e71b8112e2d2">
+      <ID>Dimension Edad</ID>
+      <Name>Dimension Edad</Name>
+      <DimensionID>OIJ Dim Edad</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="627d49ad-295c-45b7-9969-794fc9588f31">
+          <AttributeID>ID Edad</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="066eb133-055d-4ce2-960a-34937d03bcfe">
+          <AttributeID>Edad</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="b12b8881-389f-484c-a219-445aab90ce02">
+      <ID>Dimension Provincia</ID>
+      <Name>Dimension Provincia</Name>
+      <DimensionID>Dimension Provincia</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="e17d5632-3ee5-48e7-ad43-c75259d1d8d1">
+          <AttributeID>ID Provincia</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="ef71a866-6882-43b6-b658-0ff6bba77906">
+          <AttributeID>Provincia</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+  </Dimensions>
+  <MeasureGroups>
+    <MeasureGroup dwd:design-time-name="fcb04c3f-5ff4-4b71-b321-7ee8f9674f37">
+      <ID>OIJ Fac Delito</ID>
+      <Name>OIJ Fac Delito</Name>
+      <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+      <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+      <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+      <State>Unprocessed</State>
+      <Measures>
+        <Measure dwd:design-time-name="e222e45b-6f95-4081-9068-bedad4531ea4">
+          <ID>Recuento OIJ Fac Delito</ID>
+          <Name>Recuento OIJ Fac Delito</Name>
+          <AggregateFunction>Count</AggregateFunction>
+          <Source dwd:design-time-name="503a5eb9-99e1-4dcb-afc2-658d514919e2">
+            <DataType>Integer</DataType>
+            <DataSize>4</DataSize>
+            <Source xsi:type="RowBinding" dwd:design-time-name="bb38a1d4-edb9-4d79-a044-1caa804e2f10">
+              <TableID>dbo_OIJ_Fac_Delito</TableID>
+            </Source>
+          </Source>
+        </Measure>
+      </Measures>
+      <StorageMode>Molap</StorageMode>
+      <ProcessingMode>Regular</ProcessingMode>
+      <Dimensions>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="66fdc329-6d5c-40d8-9f90-06d14893906e">
+          <CubeDimensionID>Dimension Delito</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="b602f7a8-7e6e-465b-bf0b-6fdea2ad90c8">
+              <AttributeID>ID Robo</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="983c7fa2-bdab-4864-a178-2d5c5fa1ae3f">
+                  <DataType>BigInt</DataType>
+                  <NullProcessing>UnknownMember</NullProcessing>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="d6030276-92af-4347-9cc4-0e340949a84b">
+                    <TableID>dbo_OIJ_Fac_Delito</TableID>
+                    <ColumnID>ID_Robo</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="7f296867-1b6d-43d7-8ed4-a3fe5e2b5229">
+          <CubeDimensionID>Dimension Genero</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="6be1a361-a042-4632-81fc-277c141f1ea2">
+              <AttributeID>ID Genero</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="cb67d131-b1df-4576-99b9-7520dda26fdd">
+                  <DataType>BigInt</DataType>
+                  <NullProcessing>UnknownMember</NullProcessing>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="c0bae3de-ccc0-49cf-b494-4de33c40973b">
+                    <TableID>dbo_OIJ_Fac_Delito</TableID>
+                    <ColumnID>ID_Genero</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="80da6960-06c4-4bca-9daa-f3819131a803">
+          <CubeDimensionID>Dimension Fecha</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="60ecd5c1-ae68-4b26-8e6b-83761b4b6f05">
+              <AttributeID>ID Fecha</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="f20c06b1-0024-4865-adb9-5da32da61b01">
+                  <DataType>BigInt</DataType>
+                  <NullProcessing>UnknownMember</NullProcessing>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="be1e4b29-eeb5-4ef7-8c8e-bd50c7f45c95">
+                    <TableID>dbo_OIJ_Fac_Delito</TableID>
+                    <ColumnID>ID_Fecha</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="59705496-d0da-4fa1-9990-0e7c9f57f6e0">
+          <CubeDimensionID>Dimension Victima</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="ce742543-30f6-4ae8-aeb4-c5550c87a5dd">
+              <AttributeID>ID Victima</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="3d4cc18c-b60a-4d4d-88db-62e72fad0ac0">
+                  <DataType>BigInt</DataType>
+                  <NullProcessing>UnknownMember</NullProcessing>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="8b2e381d-6c99-4f5f-9bcf-87c400daf6a6">
+                    <TableID>dbo_OIJ_Fac_Delito</TableID>
+                    <ColumnID>ID_Victima</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="ac1dcb97-2f91-49cf-b204-9404cf24c7e0">
+          <CubeDimensionID>Dimension Nacionalidad</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="d80499c2-a91c-44e4-a70a-981940c80901">
+              <AttributeID>ID Nacionalidad</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="250a6cbc-cc95-4dbb-b2a5-cc9d99ae0f29">
+                  <DataType>BigInt</DataType>
+                  <NullProcessing>UnknownMember</NullProcessing>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="cbfeaa79-0ebe-405a-8222-4fae4389e345">
+                    <TableID>dbo_OIJ_Fac_Delito</TableID>
+                    <ColumnID>ID_Nacionalidad</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="0f62192f-e26d-4514-b733-4160cba15842">
+          <CubeDimensionID>Dimension Hora</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="0f6191de-db14-4852-9afa-c860b9cf34c7">
+              <AttributeID>ID Hora</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="86ef3573-7d2f-4975-8cc6-1dcc89ebee41">
+                  <DataType>BigInt</DataType>
+                  <NullProcessing>UnknownMember</NullProcessing>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="de0f32bd-e7d6-4c97-b580-d4b4bbfb2520">
+                    <TableID>dbo_OIJ_Fac_Delito</TableID>
+                    <ColumnID>ID_Hora</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="d583125a-b1df-4292-91b5-86ff5137c804">
+          <CubeDimensionID>Dimension Edad</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="e7068cbc-2329-4c82-814a-423b48a80c49">
+              <AttributeID>ID Edad</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="391a7a24-0d9d-4358-89b4-08b8b319fa27">
+                  <DataType>BigInt</DataType>
+                  <NullProcessing>UnknownMember</NullProcessing>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="5f931ce6-d4a0-4227-aee8-646882ae1f01">
+                    <TableID>dbo_OIJ_Fac_Delito</TableID>
+                    <ColumnID>ID_Edad</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="49eb1af0-2ff7-4a6a-8194-8c65a26e4ca4">
+          <CubeDimensionID>Dimension Provincia</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="e62a389d-370e-4d31-aa87-2f1324ee82c3">
+              <AttributeID>ID Provincia</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="ea9eda37-e44f-4db8-82b4-895db0c667cb">
+                  <DataType>BigInt</DataType>
+                  <NullProcessing>UnknownMember</NullProcessing>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="0094d7aa-6453-4a12-90c8-484f8567e379">
+                    <TableID>dbo_OIJ_Fac_Delito</TableID>
+                    <ColumnID>ID_Provincia</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+      </Dimensions>
+      <Partitions />
+    </MeasureGroup>
+  </MeasureGroups>
+  <Source dwd:design-time-name="de128ef1-d3e5-44c8-92da-d80f9e0c1245">
+    <DataSourceViewID>BI</DataSourceViewID>
+  </Source>
+</Cube>

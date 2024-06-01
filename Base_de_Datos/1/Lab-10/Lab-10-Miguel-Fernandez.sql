@@ -1,4 +1,4 @@
-use [UIA];
+use [];
 
 SELECT PE.Cedula cedula, PE.Nombre nombre, PE.Apellido1 apellido_1 , PE.Apellido1 apellido_2
 FROM Padron_Electoral PE
