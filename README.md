@@ -88,10 +88,11 @@ Si los ejercicios y proyectos que he compartido te han sido útiles o inspirador
 
 ##### Laboratorios Base de datos I
 
-- [Laboratorio 2](https://github.com/bash20cu/Universidad/tree/main/Base_de_datos/)
-- [Laboratorio 3](https://github.com/bash20cu/Universidad/tree/main/Base_de_datos/)
-- [Laboratorio 4](https://github.com/bash20cu/Universidad/tree/main/Base_de_datos/)
-- [Laboratorio 6](https://github.com/bash20cu/Universidad/tree/main/Base_de_datos/)
-- [Laboratorio 7](https://github.com/bash20cu/Universidad/tree/main/Base_de_datos/)
-- [Laboratorio 9](https://github.com/bash20cu/Universidad/tree/main/Base_de_datos/)
-- [Laboratorio 10](https://github.com/bash20cu/Universidad/tree/main/Base_de_datos/)
+- [Laboratorio 2](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/1/Lab-2)
+- [Laboratorio 3](https://github.com/bash20cu/Universidad/tree/main/Base_de_datos/1/Lab-3)
+- [Laboratorio 4](https://github.com/bash20cu/Universidad/tree/main/Base_de_datos/1/Lab-4)
+- [Laboratorio 6](https://github.com/bash20cu/Universidad/tree/main/Base_de_datos/1/Lab-6)
+- [Laboratorio 7](https://github.com/bash20cu/Universidad/tree/main/Base_de_datos/1/Lab-7)
+- [Laboratorio 9](https://github.com/bash20cu/Universidad/tree/main/Base_de_datos/1/Lab-9)
+- [Laboratorio 10](https://github.com/bash20cu/Universidad/tree/main/Base_de_datos/1/Lab-10)
+
