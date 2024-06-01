@@ -1,0 +1,39 @@
+<AnalysisServicesUserConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
+  <Configurations>
+    <Configuration>
+      <Name>Development</Name>
+      <Options>
+        <UserIDs>
+          <ConfigurationSetting>
+            <Id>DIM</Id>
+            <Name>DIM</Name>
+            <Value xsi:type="xsd:string">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA+ckPFxrE90alpdq+C5k9LQAAAAAIAAAARABJAE0AAAAQZgAAAAEAACAAAABSYC825piUqbMCpXuRAfcc5KW5jOF6JI8NqpanWu4KCQAAAAAOgAAAAAIAACAAAAB1V1FC2ssoI+sCOoXIIzCHfIGGIG5YR7GeokuPf3geLRAAAACYLksr2KJC9GZ/4Fr6Q6IRQAAAADczBGHJjSetcF+VVsLozznl9OjQDko/RvtDW4yddhQjMzknKmXsfD9tq6dLp+yPrxQO57du9vG2aV77syDHosU=</Value>
+          </ConfigurationSetting>
+          <ConfigurationSetting>
+            <Id>DIM 1</Id>
+            <Name>DIM 1</Name>
+            <Value xsi:type="xsd:string">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAUwIFxrrW+kSOBqduaJAz5gAAAAAMAAAARABJAE0AIAAxAAAAEGYAAAABAAAgAAAARcOUW0710+lkx4CDvrLlgwvWkDU8HhvI4d0IGBsvGcgAAAAADoAAAAACAAAgAAAAkV3z8IbWbR5CCndk7U6AeTP2ARDX13JUBf3sNTXY+lwQAAAAtZOgdPq6LlS9SKYX2TlOc0AAAAD4dRPVgcnVmHv9RABbudyw43JAL6Uyk77U9Rws3UaLb3KEhzRU5TNUszaug2rZYghrFlwIj+PEqxwLwdaX1e0F</Value>
+          </ConfigurationSetting>
+        </UserIDs>
+        <UserPasswords>
+          <ConfigurationSetting>
+            <Id>DIM</Id>
+            <Name>DIM</Name>
+            <Value xsi:type="xsd:string">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA+ckPFxrE90alpdq+C5k9LQAAAAAIAAAARABJAE0AAAAQZgAAAAEAACAAAAAPNlQf+37coCYdJbI01TSTycktmZckQfnzmjNw0dkzjwAAAAAOgAAAAAIAACAAAADacF0OnuUJNSVDTg8K6XK7PbRo0qvXF7FZ1BGguhXO3xAAAADyYKDwlUVacQj9O2jP7U8+QAAAAMK0/SPc3M/D0cz76PPHMqL6bdh9UWPw0XfyAbE8gRy0uS+Q3fKNJV3KLzRQtNSBl5Aur3chNa6wcfK+XzHuP7s=</Value>
+          </ConfigurationSetting>
+          <ConfigurationSetting>
+            <Id>DIM 1</Id>
+            <Name>DIM 1</Name>
+            <Value xsi:type="xsd:string">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAUwIFxrrW+kSOBqduaJAz5gAAAAAMAAAARABJAE0AIAAxAAAAEGYAAAABAAAgAAAACwoWhQTcHEVeTp+FFzSNsxCr1TTVnxDSPfV6wqZm52EAAAAADoAAAAACAAAgAAAApTFT9RnzsuEAwq2Zo/Xp8ZpigW5jzOZWEvzkNbOega8QAAAAdmrMhOUqXXS36Qw63D/p1EAAAAD3YfyKaqWH7xl8cuZV+3zV5ta/Zs5yA2eVIn6WOrKSmfDvKEdQsm64DlqnotntTOW+BwUfxvHPxMFYvmS7q9cq</Value>
+          </ConfigurationSetting>
+        </UserPasswords>
+        <TargetServer>DELL7567\MSSQLSERVER_UIA</TargetServer>
+        <TargetDatabase>DIM-PROYECTO</TargetDatabase>
+        <StartObject>
+          <ObjectId></ObjectId>
+          <ObjectType>Current</ObjectType>
+        </StartObject>
+      </Options>
+    </Configuration>
+  </Configurations>
+</AnalysisServicesUserConfiguration>

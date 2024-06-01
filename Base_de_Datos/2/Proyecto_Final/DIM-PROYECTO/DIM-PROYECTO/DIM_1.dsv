@@ -1,0 +1,340 @@
+﻿<DataSourceView xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="bb90bbf8-ec5e-48b7-800e-92ee3744d6ee" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>DIM_1</ID>
+  <Name>DIM_1</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:CurrentLayout</Name>
+      <Value>_ALL_TABLES_</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:SchemaRestriction</Name>
+      <Value></Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:RetrieveRelationships</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:Layouts</Name>
+      <Value>
+        <Layouts xmlns="">
+          <Diagram>
+            <Name>_ALL_TABLES_</Name>
+            <DiagramLayout />
+            <ShowRelationshipNames>False</ShowRelationshipNames>
+            <UseDiagramDefaultLayout>True</UseDiagramDefaultLayout>
+            <DiagramViewPortLeft>0</DiagramViewPortLeft>
+            <DiagramViewPortTop>0</DiagramViewPortTop>
+            <DiagramBoundingLeft>0</DiagramBoundingLeft>
+            <DiagramBoundingTop>0</DiagramBoundingTop>
+            <DiagramZoom>100</DiagramZoom>
+          </Diagram>
+        </Layouts>
+      </Value>
+    </Annotation>
+  </Annotations>
+  <DataSourceID>DIM 1</DataSourceID>
+  <Schema>
+    <xs:schema id="DIM_1" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+      <xs:element name="DIM_1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:design-time-name="32ea094e-a4eb-4dd7-852c-72dc0c597d75">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="dbo_OIJ_Delito_FAC" msprop:DbTableName="OIJ_Delito_FAC" msprop:FriendlyName="OIJ_Delito_FAC" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="fb5ae66b-41f5-4804-862d-cf32ad3f70c6">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ID_Delito" msprop:FriendlyName="ID_Delito" msprop:DbColumnName="ID_Delito" msprop:design-time-name="690c0dda-aadb-42c4-8c12-f64aa59c3433" type="xs:long" />
+                  <xs:element name="ID_Robo" msprop:FriendlyName="ID_Robo" msprop:DbColumnName="ID_Robo" msprop:design-time-name="9410a8fa-25e9-4719-97f3-3a09d655be0b" type="xs:long" minOccurs="0" />
+                  <xs:element name="ID_SubDelito" msprop:FriendlyName="ID_SubDelito" msprop:DbColumnName="ID_SubDelito" msprop:design-time-name="4114cbd6-154c-4ade-8047-509ce59f0dea" type="xs:long" minOccurs="0" />
+                  <xs:element name="ID_Fecha" msprop:FriendlyName="ID_Fecha" msprop:DbColumnName="ID_Fecha" msprop:design-time-name="c9c6dbff-1e30-49cb-a3b8-49acb971ecf6" type="xs:long" minOccurs="0" />
+                  <xs:element name="ID_Hora" msprop:FriendlyName="ID_Hora" msprop:DbColumnName="ID_Hora" msprop:design-time-name="1923cec0-2bcf-4a8a-87b9-ea6778c97ca1" type="xs:long" minOccurs="0" />
+                  <xs:element name="ID_Victima" msprop:FriendlyName="ID_Victima" msprop:DbColumnName="ID_Victima" msprop:design-time-name="e770ee27-bbf2-486b-9aa1-12a0c02497e5" type="xs:long" minOccurs="0" />
+                  <xs:element name="ID_Edad" msprop:FriendlyName="ID_Edad" msprop:DbColumnName="ID_Edad" msprop:design-time-name="2e295b1c-6382-43ff-b5b2-0f1ebdfcc370" type="xs:long" minOccurs="0" />
+                  <xs:element name="ID_Genero" msprop:FriendlyName="ID_Genero" msprop:DbColumnName="ID_Genero" msprop:design-time-name="16adbf2a-6934-4d39-bac9-04f73c209f5f" type="xs:long" minOccurs="0" />
+                  <xs:element name="ID_Nacionalidad" msprop:FriendlyName="ID_Nacionalidad" msprop:DbColumnName="ID_Nacionalidad" msprop:design-time-name="673c359c-2228-4664-b845-a96e397d8bfe" type="xs:long" minOccurs="0" />
+                  <xs:element name="ID_Provincia" msprop:FriendlyName="ID_Provincia" msprop:DbColumnName="ID_Provincia" msprop:design-time-name="381274e1-cf58-4ed2-ba0b-83f8aac20bdc" type="xs:long" minOccurs="0" />
+                  <xs:element name="ID_Canton" msprop:FriendlyName="ID_Canton" msprop:DbColumnName="ID_Canton" msprop:design-time-name="a2e8168e-c514-447a-90dd-e79575360cae" type="xs:long" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_OIJ_Dim_Canton" msprop:DbTableName="OIJ_Dim_Canton" msprop:FriendlyName="OIJ_Dim_Canton" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="246dad74-d9f7-4558-91f1-e8df80f81726">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ID_Canton" msprop:FriendlyName="ID_Canton" msprop:DbColumnName="ID_Canton" msprop:design-time-name="f389f69b-8a5f-494a-b215-fb2fad1aef35" type="xs:long" />
+                  <xs:element name="Canton" msprop:FriendlyName="Canton" msprop:DbColumnName="Canton" msprop:design-time-name="56f0e48f-719c-44ad-a0dd-4e7f2c08293e" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="200" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_OIJ_Dim_Delito" msprop:DbTableName="OIJ_Dim_Delito" msprop:FriendlyName="OIJ_Dim_Delito" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="5da592db-fbe4-41ac-b708-13bbc999f8e5">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ID_Robo" msprop:FriendlyName="ID_Robo" msprop:DbColumnName="ID_Robo" msprop:design-time-name="d4ccc66f-b772-4197-9492-649309e25ce4" type="xs:long" />
+                  <xs:element name="Descripcion_Delito" msprop:FriendlyName="Descripcion_Delito" msprop:DbColumnName="Descripcion_Delito" msprop:design-time-name="6bc8ff90-4c26-41c2-bed8-47023e532689" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="500" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_OIJ_Dim_Edad" msprop:DbTableName="OIJ_Dim_Edad" msprop:FriendlyName="OIJ_Dim_Edad" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="382d4c1c-1275-4c24-9ac9-32a70ced31ae">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ID_Edad" msprop:FriendlyName="ID_Edad" msprop:DbColumnName="ID_Edad" msprop:design-time-name="5a631dee-11ef-4871-97f3-a5cc1c6fcfca" type="xs:long" />
+                  <xs:element name="Edad" msprop:FriendlyName="Edad" msprop:DbColumnName="Edad" msprop:design-time-name="150e8b9e-79ce-476b-a1d8-2db68107bac6" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="500" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_OIJ_Dim_Fecha" msprop:DbTableName="OIJ_Dim_Fecha" msprop:FriendlyName="OIJ_Dim_Fecha" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="256aed11-3b74-4f77-bad2-8e55bf9ab064">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ID_Fecha" msprop:FriendlyName="ID_Fecha" msprop:DbColumnName="ID_Fecha" msprop:design-time-name="be62f28d-207b-4d7c-83fb-1957dab08374" type="xs:long" />
+                  <xs:element name="Fecha" msprop:FriendlyName="Fecha" msprop:DbColumnName="Fecha" msprop:design-time-name="8bcf186c-6d37-4f7a-a538-89e805799dc5" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="500" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Anno" msprop:FriendlyName="Anno" msprop:DbColumnName="Anno" msprop:design-time-name="be52205f-352e-41ce-a466-6c9ee9e74e68" type="xs:int" minOccurs="0" />
+                  <xs:element name="Numero_Mes" msprop:FriendlyName="Numero_Mes" msprop:DbColumnName="Numero_Mes" msprop:design-time-name="1ebcf3f1-234b-43ce-88fa-14755e70f733" type="xs:int" minOccurs="0" />
+                  <xs:element name="Nombre_Mes" msprop:FriendlyName="Nombre_Mes" msprop:DbColumnName="Nombre_Mes" msprop:design-time-name="aa62d8e4-dfde-4cd5-a00e-16704120b3bf" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="9" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Numero_Dia" msprop:FriendlyName="Numero_Dia" msprop:DbColumnName="Numero_Dia" msprop:design-time-name="c53874a8-1bfe-44ed-a10d-93a4e1ba9f8b" type="xs:int" minOccurs="0" />
+                  <xs:element name="Nombre_Dia" msprop:FriendlyName="Nombre_Dia" msprop:DbColumnName="Nombre_Dia" msprop:design-time-name="50f0f969-b61c-40fb-be1f-8b915eb3e9fb" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="9" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_OIJ_Dim_Genero" msprop:DbTableName="OIJ_Dim_Genero" msprop:FriendlyName="OIJ_Dim_Genero" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="9411e831-faf0-481f-8ea5-34d946ccf8b4">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ID_Genero" msprop:FriendlyName="ID_Genero" msprop:DbColumnName="ID_Genero" msprop:design-time-name="5c66e1d6-1fb4-4a3a-8d3b-61f1652f1622" type="xs:long" />
+                  <xs:element name="Genero" msprop:FriendlyName="Genero" msprop:DbColumnName="Genero" msprop:design-time-name="66144996-2177-4158-8534-248146020b4e" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="500" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_OIJ_Dim_Hora" msprop:DbTableName="OIJ_Dim_Hora" msprop:FriendlyName="OIJ_Dim_Hora" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="ad909136-024e-4126-97a9-c137a5604461">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ID_Hora" msprop:FriendlyName="ID_Hora" msprop:DbColumnName="ID_Hora" msprop:design-time-name="e4b4f070-7cc2-4936-b870-a2bed6349cb5" type="xs:long" />
+                  <xs:element name="Hora" msprop:FriendlyName="Hora" msprop:DbColumnName="Hora" msprop:design-time-name="e21bf500-c154-41d2-9688-6434c147291d" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="500" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Descripcion_Hora" msprop:FriendlyName="Descripcion_Hora" msprop:DbColumnName="Descripcion_Hora" msprop:design-time-name="9cb4a281-2878-47e9-bb1e-b914d8281fdf" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="6" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_OIJ_Dim_Nacionalidad" msprop:DbTableName="OIJ_Dim_Nacionalidad" msprop:FriendlyName="OIJ_Dim_Nacionalidad" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="c27b5e24-b4a8-4b43-93b5-cff9fc32ef98">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ID_Nacionalidad" msprop:FriendlyName="ID_Nacionalidad" msprop:DbColumnName="ID_Nacionalidad" msprop:design-time-name="e4c6e2b7-f5aa-4bfb-aebf-7ab99b88a3d9" type="xs:long" />
+                  <xs:element name="Nacionalidad" msprop:FriendlyName="Nacionalidad" msprop:DbColumnName="Nacionalidad" msprop:design-time-name="2e0151ef-e9b8-4548-b4e4-fc76c1a715a4" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="500" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_OIJ_Dim_Provincia" msprop:DbTableName="OIJ_Dim_Provincia" msprop:FriendlyName="OIJ_Dim_Provincia" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="1acb5507-c800-45f1-8860-99650b0f3227">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ID_Provincia" msprop:FriendlyName="ID_Provincia" msprop:DbColumnName="ID_Provincia" msprop:design-time-name="e264a363-9546-4913-a462-cb77363ddcfa" type="xs:long" />
+                  <xs:element name="Provincia" msprop:FriendlyName="Provincia" msprop:DbColumnName="Provincia" msprop:design-time-name="5dc478f6-373e-4dfa-b7c5-3d87a90068f3" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="200" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_OIJ_Dim_SubDelito" msprop:DbTableName="OIJ_Dim_SubDelito" msprop:FriendlyName="OIJ_Dim_SubDelito" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="b9fc9284-9c15-4327-b1fe-bb35a6ff97cd">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ID_SubDelito" msprop:FriendlyName="ID_SubDelito" msprop:DbColumnName="ID_SubDelito" msprop:design-time-name="28d563cd-72ce-431d-8013-48a0bd8819f9" type="xs:long" />
+                  <xs:element name="SubDelito" msprop:FriendlyName="SubDelito" msprop:DbColumnName="SubDelito" msprop:design-time-name="cdd5c8ea-8f64-4af6-9173-d77cd50bd953" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="200" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_OIJ_Dim_Victima" msprop:DbTableName="OIJ_Dim_Victima" msprop:FriendlyName="OIJ_Dim_Victima" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="149ada15-832c-4c6f-9851-f462b9994553">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ID_Victima" msprop:FriendlyName="ID_Victima" msprop:DbColumnName="ID_Victima" msprop:design-time-name="b390cb84-05b0-45b1-9d06-db3a1143bfae" type="xs:long" />
+                  <xs:element name="Victima" msprop:FriendlyName="Victima" msprop:DbColumnName="Victima" msprop:design-time-name="e5e8e08d-af7e-459a-b516-3ecb01007aa3" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="500" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_sysdiagrams" msprop:DbTableName="sysdiagrams" msprop:FriendlyName="sysdiagrams" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="e8406ae9-e4ae-4f5d-9175-ea9c493faa5e">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="name" msprop:FriendlyName="name" msprop:DbColumnName="name" msprop:design-time-name="8ece569e-80ac-4779-927f-61ed0b2ee9b8">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="128" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="principal_id" msprop:FriendlyName="principal_id" msprop:DbColumnName="principal_id" msprop:design-time-name="e9ffe952-f3c7-463e-8620-7652786dc4d4" type="xs:int" />
+                  <xs:element name="diagram_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="diagram_id" msprop:DbColumnName="diagram_id" msprop:design-time-name="8ad0f190-e43c-4763-8325-0e4e711f526c" type="xs:int" />
+                  <xs:element name="version" msprop:FriendlyName="version" msprop:DbColumnName="version" msprop:design-time-name="47f574e1-9b11-4be4-8161-3e71f66b608b" type="xs:int" minOccurs="0" />
+                  <xs:element name="definition" msprop:DataSize="2147483647" msprop:FriendlyName="definition" msprop:DbColumnName="definition" msprop:design-time-name="b02c9e69-2c18-41cd-a2a3-fa30295b15dc" type="xs:base64Binary" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+        <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_OIJ_Delito_FAC" />
+          <xs:field xpath="ID_Delito" />
+        </xs:unique>
+        <xs:unique name="dbo_OIJ_Dim_Canton_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_OIJ_Dim_Canton" />
+          <xs:field xpath="ID_Canton" />
+        </xs:unique>
+        <xs:unique name="dbo_OIJ_Dim_Delito_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_OIJ_Dim_Delito" />
+          <xs:field xpath="ID_Robo" />
+        </xs:unique>
+        <xs:unique name="dbo_OIJ_Dim_Edad_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_OIJ_Dim_Edad" />
+          <xs:field xpath="ID_Edad" />
+        </xs:unique>
+        <xs:unique name="dbo_OIJ_Dim_Fecha_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_OIJ_Dim_Fecha" />
+          <xs:field xpath="ID_Fecha" />
+        </xs:unique>
+        <xs:unique name="dbo_OIJ_Dim_Genero_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_OIJ_Dim_Genero" />
+          <xs:field xpath="ID_Genero" />
+        </xs:unique>
+        <xs:unique name="dbo_OIJ_Dim_Hora_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_OIJ_Dim_Hora" />
+          <xs:field xpath="ID_Hora" />
+        </xs:unique>
+        <xs:unique name="dbo_OIJ_Dim_Nacionalidad_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_OIJ_Dim_Nacionalidad" />
+          <xs:field xpath="ID_Nacionalidad" />
+        </xs:unique>
+        <xs:unique name="dbo_OIJ_Dim_Provincia_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_OIJ_Dim_Provincia" />
+          <xs:field xpath="ID_Provincia" />
+        </xs:unique>
+        <xs:unique name="dbo_OIJ_Dim_SubDelito_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_OIJ_Dim_SubDelito" />
+          <xs:field xpath="ID_SubDelito" />
+        </xs:unique>
+        <xs:unique name="dbo_OIJ_Dim_Victima_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_OIJ_Dim_Victima" />
+          <xs:field xpath="ID_Victima" />
+        </xs:unique>
+        <xs:unique name="dbo_sysdiagrams_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_sysdiagrams" />
+          <xs:field xpath="diagram_id" />
+        </xs:unique>
+        <xs:keyref name="FK_OIJ_Delito_FAC_OIJ_Dim_Nacionalidad" refer="dbo_OIJ_Dim_Nacionalidad_Constraint1">
+          <xs:selector xpath=".//dbo_OIJ_Delito_FAC" />
+          <xs:field xpath="ID_Genero" />
+        </xs:keyref>
+        <xs:keyref name="FK_OIJ_Delito_FAC_OIJ_Dim_Fecha" refer="dbo_OIJ_Dim_Fecha_Constraint1">
+          <xs:selector xpath=".//dbo_OIJ_Delito_FAC" />
+          <xs:field xpath="ID_Fecha" />
+        </xs:keyref>
+        <xs:keyref name="FK_OIJ_Delito_FAC_OIJ_Dim_Victima" refer="dbo_OIJ_Dim_Victima_Constraint1">
+          <xs:selector xpath=".//dbo_OIJ_Delito_FAC" />
+          <xs:field xpath="ID_Victima" />
+        </xs:keyref>
+        <xs:keyref name="FK_OIJ_Delito_FAC_OIJ_Dim_SubDelito" refer="dbo_OIJ_Dim_SubDelito_Constraint1">
+          <xs:selector xpath=".//dbo_OIJ_Delito_FAC" />
+          <xs:field xpath="ID_SubDelito" />
+        </xs:keyref>
+        <xs:keyref name="FK_OIJ_Delito_FAC_OIJ_Dim_Genero" refer="dbo_OIJ_Dim_Genero_Constraint1">
+          <xs:selector xpath=".//dbo_OIJ_Delito_FAC" />
+          <xs:field xpath="ID_Genero" />
+        </xs:keyref>
+        <xs:keyref name="FK_OIJ_Delito_FAC_OIJ_Dim_Hora" refer="dbo_OIJ_Dim_Hora_Constraint1">
+          <xs:selector xpath=".//dbo_OIJ_Delito_FAC" />
+          <xs:field xpath="ID_Hora" />
+        </xs:keyref>
+        <xs:keyref name="FK_OIJ_Delito_FAC_OIJ_Dim_Canton" refer="dbo_OIJ_Dim_Canton_Constraint1">
+          <xs:selector xpath=".//dbo_OIJ_Delito_FAC" />
+          <xs:field xpath="ID_Canton" />
+        </xs:keyref>
+        <xs:keyref name="FK_OIJ_Delito_FAC_OIJ_Dim_Delito" refer="dbo_OIJ_Dim_Delito_Constraint1">
+          <xs:selector xpath=".//dbo_OIJ_Delito_FAC" />
+          <xs:field xpath="ID_Robo" />
+        </xs:keyref>
+        <xs:keyref name="FK_OIJ_Delito_FAC_OIJ_Dim_Provincia" refer="dbo_OIJ_Dim_Provincia_Constraint1">
+          <xs:selector xpath=".//dbo_OIJ_Delito_FAC" />
+          <xs:field xpath="ID_Provincia" />
+        </xs:keyref>
+        <xs:keyref name="FK_OIJ_Delito_FAC_OIJ_Dim_Edad" refer="dbo_OIJ_Dim_Edad_Constraint1">
+          <xs:selector xpath=".//dbo_OIJ_Delito_FAC" />
+          <xs:field xpath="ID_Edad" />
+        </xs:keyref>
+      </xs:element>
+    </xs:schema>
+    <DIM_1 xmlns="" />
+  </Schema>
+</DataSourceView>
