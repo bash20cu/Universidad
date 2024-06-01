@@ -1,24 +1,26 @@
-# Repositorio de la Universidad Internacional de las Américas Costa Rica
-
-## Estudiante de Ingeniería de Software
+# Estudiante de Ingeniería de Software
 
 ¡Bienvenido a mi repositorio de la Universidad Internacional de las Américas en Costa Rica!
 
 Soy un estudiante de Ingeniería de Software apasionado por la programación y el desarrollo de software. Aquí encontrarás una colección de ejercicios y proyectos que he completado durante mi tiempo en la universidad.
 
-### Acerca de este Repositorio
+## Acerca de este Repositorio
 
 Este repositorio contiene ejercicios y proyectos que he realizado como estudiante de Ingeniería de Software en la Universidad Internacional de las Américas Costa Rica. Si bien estos ejercicios son ejemplos reales de trabajos académicos, es importante destacar que son mi trabajo personal y no representan oficialmente a la universidad ni a otros estudiantes.
 
 Estos ejercicios y proyectos son compartidos aquí con el propósito de demostrar mi experiencia y habilidades en programación y desarrollo de software. Cualquier uso de estos ejercicios en otros contextos debe ser considerado como referencia y aprendizaje, y se debe respetar la integridad académica y los derechos de autor.
 
-Si tienes alguna pregunta o comentario sobre mi trabajo o deseas aprender más sobre los ejercicios específicos, no dudes en contactarme. Estoy aquí para compartir mi pasión por la programación y la Ingeniería de Software.
+## Licencia
 
-### Donar
+Este repositorio está licenciado bajo la [Licencia Apache 2.0](LICENSE). Esto significa que puedes usar, modificar y distribuir el código, siempre y cuando cumplas con los términos de la licencia. Ten en cuenta que el código se proporciona "tal cual", sin garantías de ningún tipo.
 
-**¿Cómo puedes apoyarme?**
+## Donar
+
+### ¿Cómo puedes apoyarme?
 
 Si los ejercicios y proyectos que he compartido te han sido útiles o inspiradores, considera apoyarme comprándome un café. Cualquier donación será muy apreciada y me ayudará a continuar mi educación y mi trabajo en el mundo de la programación.
+
+Si tienes alguna pregunta o comentario sobre mi trabajo o deseas aprender más sobre los ejercicios específicos, no dudes en contactarme. Estoy aquí para compartir mi pasión por la programación y la Ingeniería de Software.
 
 - [![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/migue304?country.x=CR&locale.x=es_XC)
 - [![BuyMeACoffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?for-the-badge=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/migue90092e)
