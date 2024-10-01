@@ -46,3 +46,87 @@
 /Programacion_1/Laboratorio_6/build/
 /node_modules/
 /win-unpacked/
+
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.rsuser
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Auto-generated files
+*.g.*
+*.csproj.user
+*.lock.json
+*.log
+
+# NuGet packages
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Visual Studio
+.vs/
+.vscode/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code directory
+.vscode/
+
+# User-specific npm files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Node modules
+node_modules/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Local History for JetBrains products
+.idea/.idea.LocalHistory/
+
+# Windows Azure
+*.azureUserData
+
+# Dotnet pack
+*.nupkg
+*.snupkg
+
+# ASP.NET Core
+.project/
+
+# StyleCop
+StyleCopReport.xml
+
+# SonarQube
+.sonarqube/
+
+# Resharper
+_ReSharper*/

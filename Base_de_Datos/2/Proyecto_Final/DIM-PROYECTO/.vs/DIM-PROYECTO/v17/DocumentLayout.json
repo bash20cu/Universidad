@@ -54,16 +54,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "DIM_1.cube [Dise\u00F1o]",
               "DocumentMoniker": "D:\\Github\\Universidad\\Base_de_Datos\\2\\Proyecto_Final\\DIM-PROYECTO\\DIM-PROYECTO\\DIM_1.cube",
               "RelativeDocumentMoniker": "DIM-PROYECTO\\DIM_1.cube",
-              "ToolTip": "D:\\Github\\Universidad\\Base_de_Datos\\2\\Proyecto_Final\\DIM-PROYECTO\\DIM-PROYECTO\\DIM_1.cube [Dise\u00F1o]",
-              "RelativeToolTip": "DIM-PROYECTO\\DIM_1.cube [Dise\u00F1o]",
+              "ToolTip": "D:\\Github\\Universidad\\Base_de_Datos\\2\\Proyecto_Final\\DIM-PROYECTO\\DIM-PROYECTO\\DIM_1.cube [Dise\u00F1o]*",
+              "RelativeToolTip": "DIM-PROYECTO\\DIM_1.cube [Dise\u00F1o]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2024-04-17T05:51:10.521Z",
               "EditorCaption": " [Dise\u00F1o]"
@@ -77,8 +85,7 @@
               "ToolTip": "D:\\Github\\Universidad\\Base_de_Datos\\2\\Proyecto_Final\\DIM-PROYECTO\\DIM-PROYECTO\\OIJ Dim Canton.dim [Dise\u00F1o]",
               "RelativeToolTip": "DIM-PROYECTO\\OIJ Dim Canton.dim [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-04-17T05:50:07.295Z",
-              "EditorCaption": " [Dise\u00F1o]"
+              "WhenOpened": "2024-04-17T05:50:07.295Z"
             },
             {
               "$type": "Document",
@@ -89,8 +96,7 @@
               "ToolTip": "D:\\Github\\Universidad\\Base_de_Datos\\2\\Proyecto_Final\\DIM-PROYECTO\\DIM-PROYECTO\\OIJ Dim Delito.dim [Dise\u00F1o]",
               "RelativeToolTip": "DIM-PROYECTO\\OIJ Dim Delito.dim [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-04-17T05:49:54.825Z",
-              "EditorCaption": " [Dise\u00F1o]"
+              "WhenOpened": "2024-04-17T05:49:54.825Z"
             },
             {
               "$type": "Document",
