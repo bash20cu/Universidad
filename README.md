@@ -53,58 +53,61 @@ Si tienes alguna pregunta o comentario sobre mi trabajo o deseas aprender más s
 - Encuéntrame en LinkedIn: [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/miguel1990/)
 - Visita mi portafolio en línea: [![Portfolio](https://img.shields.io/badge/Portfolio-%23000000.svg?style=for-the-badge&logo=firefox&logoColor=#FF7139)](https://bash20cu.github.io/Portfolio/)
 
-### Explora mis proyectos
+## Mis Proyectos Universitarios
 
-#### Programación 1 - Java
+Bienvenido a mi colección de proyectos y laboratorios universitarios.  
+Aquí encontrarás trabajos desarrollados en distintas materias de programación, estructuras de datos, algoritmos y bases de datos, organizados por curso y tipo de trabajo.
 
-##### Laboratorios
+---
 
-- [Laboratorio 1](https://github.com/bash20cu/Universidad/tree/main/Programacion_1/Laboratorio_1)
-- [Laboratorio 2](https://github.com/bash20cu/Universidad/tree/main/Programacion_1/Laboratorio_2)
-- [Laboratorio 3](https://github.com/bash20cu/Universidad/tree/main/Programacion_1/Laboratorio_3)
-- [Laboratorio 4](https://github.com/bash20cu/Universidad/tree/main/Programacion_1/Laboratorio_4)
-- [Laboratorio 5](https://github.com/bash20cu/Universidad/tree/main/Programacion_1/Laboratorio_5)
-- [Laboratorio 6](https://github.com/bash20cu/Universidad/tree/main/Programacion_1/Laboratorio_6)
+## Programación 1 - Java
 
-##### Proyecto final
+**Laboratorios**  
+Ejercicios prácticos de conceptos básicos de Java, incluyendo estructuras de control, clases, objetos y manejo de datos.
 
-- [Cronograma de Docentes](https://github.com/bash20cu/Universidad/tree/main/Programacion_1/Proyecto_Final_Cronogramas_Docentes)
+**Proyecto Final**  
+Integración de los conocimientos adquiridos en los laboratorios, aplicando lógica de programación y diseño de aplicaciones.
 
-#### Estructuras Discretas Aplicadas
+---
 
-- Proyecto Final: [Explora el proyecto aquí](https://github.com/bash20cu/Universidad/tree/main/Proyecto_Matatica_Discreta) | [Página del proyecto](https://bash20cu.github.io/Universidad/Proyecto_Matatica_Discreta/AlgoritmoDijkstra/)
+## Estructuras Discretas Aplicadas
 
-#### Estructuras de Datos y Algoritmos - Java
+**Proyecto Final**  
+Implementación de algoritmos matemáticos y estructuras discretas, como grafos y algoritmos de búsqueda, para resolver problemas prácticos.
 
-- [Análisis de caso 1](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Analisis_de_caso_1)
-- [Análisis de caso 2](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Analisis_de_caso_2)
-- [Laboratorio 2](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Laboratorio_2)
-- [Laboratorio 3](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Laboratorio_3)
-- [Laboratorio 4](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Laboratorio_4)
-- [Laboratorio 6](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Laboratorio_6)
+---
 
-##### Proyecto Final
+## Estructuras de Datos y Algoritmos - Java
 
-- [Donkey Kong](https://github.com/bash20cu/Universidad/tree/main/Estructuras_de_Datos_Algoritmos/Donkey_Kong)
+**Laboratorios y análisis de casos**  
 
-#### Base de datos - MySQL, MSSQL
+- Implementación de estructuras de datos: listas, pilas, colas y árboles.  
+- Desarrollo de algoritmos de búsqueda y ordenamiento.  
+- Resolución de problemas mediante programación orientada a objetos.
 
-##### Laboratorios Base de datos I
+**Proyecto Final**  
+Aplicación integral que combina estructuras de datos y programación orientada a objetos para crear proyectos completos, como juegos y simulaciones.
 
-- [Laboratorio 2](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/1/Lab-2)
-- [Laboratorio 3](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/1/Lab-3)
-- [Laboratorio 4](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/1/Lab-4)
-- [Laboratorio 6](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/1/Lab-6)
-- [Laboratorio 7](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/1/Lab-7)
-- [Laboratorio 9](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/1/Lab-9)
-- [Laboratorio 10](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/1/Lab-10)
-- [Proyecto Final](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/1/Proyecto_Final)
+---
 
-##### Laboratorios Base de datos II
+## Base de Datos - MySQL, MSSQL y Analítica de Datos
 
-- [Laboratorio 2](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/2/Lab-2)
-- [Laboratorio 3](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/2/Lab-3)
-- [Laboratorio 4](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/2/Lab-4)
-- [Laboratorio 5](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/2/Lab-5)
-- [Laboratorio 6](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/2/Lab-6)
-- [Laboratorio 10](https://github.com/bash20cu/Universidad/tree/main/Base_de_Datos/2/Lab-10)
+Durante los cursos de bases de datos trabajé en proyectos que van desde consultas básicas hasta análisis avanzado de información.  
+
+**Laboratorios Base de Datos I y II**  
+
+- Consultas avanzadas en **T-SQL**, incluyendo joins, subconsultas, procedimientos almacenados y triggers.  
+- Creación y manipulación de estructuras de datos complejas para escenarios reales de gestión de información.  
+- Automatización y generación de reportes mediante **Python**.
+
+**Proyectos Finales y trabajos especiales**  
+
+- Implementación de **cubos OLAP** y modelos multidimensionales para análisis de información.  
+- Análisis estadístico y visualización de datos con **R / RStudio**.
+- Proyectos integrales combinando bases de datos, programación y análisis de datos.
+
+Estos proyectos muestran habilidades no solo en teoría de bases de datos, sino también en programación, análisis de datos y presentación profesional de resultados.
+
+---
+
+ Este repositorio refleja mi aprendizaje y evolución en distintas áreas de la informática, mostrando desde la programación básica hasta análisis avanzado de datos.
