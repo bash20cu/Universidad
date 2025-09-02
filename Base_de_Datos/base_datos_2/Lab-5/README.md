@@ -1,6 +1,6 @@
 # Estudiante de Ingeniería de Software
 
-# en la Universidad Internacional de las Américas Costa Rica.
+# en la Universidad Internacional de las Américas Costa Rica
 
 <!--START_SECTION:badges-->
 
@@ -13,7 +13,6 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/bash20cu/Universidad?style=for-the-badge)
 
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/miguel1990/)
-[![Portfolio](https://img.shields.io/badge/Portfolio-%23000000.svg?style=for-the-badge&logo=firefox&logoColor=#FF7139)](https://bash20cu.github.io/Portfolio/)
 
 <!--END_SECTION:badges-->
 

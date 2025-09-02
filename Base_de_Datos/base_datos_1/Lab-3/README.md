@@ -13,7 +13,6 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/bash20cu/Universidad?style=for-the-badge)
 
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/miguel1990/)
-[![Portfolio](https://img.shields.io/badge/Portfolio-%23000000.svg?style=for-the-badge&logo=firefox&logoColor=#FF7139)](https://bash20cu.github.io/Portfolio/)
 
 <!--END_SECTION:badges-->
 
@@ -29,3 +28,5 @@ Diagramar en la herramienta WorkBench los siguientes conceptos, aplicando las Fo
 - d. Telefono y Tipo de Telefono (Catálogo)
 - e. Correo_Electronico y Tipo de Correo Electronico (Catálogo)
 - f. Direccion (Utilizando todos los catálogos necesarios)
+
+![diagrama](../Lab-3/lab-3.png "Diagrama" )

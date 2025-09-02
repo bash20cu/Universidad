@@ -13,7 +13,6 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/bash20cu/Universidad?style=for-the-badge)
 
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/miguel1990/)
-[![Portfolio](https://img.shields.io/badge/Portfolio-%23000000.svg?style=for-the-badge&logo=firefox&logoColor=#FF7139)](https://bash20cu.github.io/Portfolio/)
 
 <!--END_SECTION:badges-->
 
@@ -38,3 +37,5 @@ i. Permisos disponibles
    b. Menú de opciones (3 de nivel 1, 3 de nivel 2)
    c. Permisos por usuario (3 permisos para cada usuario)
 6. Hacer un DQL con Join para un usuario en particular.
+
+![diagrama](../Lab-7/diagrama.png "Diagrama" )

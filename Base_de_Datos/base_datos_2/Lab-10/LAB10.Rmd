@@ -2,7 +2,9 @@
 title: "Lab_10"
 author: "Miguel Fernández Arteaga"
 date: "2024-04-11"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -22,7 +24,7 @@ import numpy as np
 
 #Lectura del archivo con los comentarios negativos
 
-df = pd.read_csv("D:/BD2/Laboratorio10/reviewsfake.csv", delimiter=",")
+df = pd.read_csv("reviewsfake.csv", delimiter=",")
 
 #nltk.download()
 

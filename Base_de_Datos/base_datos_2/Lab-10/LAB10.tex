@@ -1,0 +1,386 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Lab\_10},
+  pdfauthor={Miguel Fernández Arteaga},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Lab\_10}
+\author{Miguel Fernández Arteaga}
+\date{2024-04-11}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ nltk}
+\ImportTok{from}\NormalTok{ nltk.corpus }\ImportTok{import}\NormalTok{ stopwords}
+\ImportTok{from}\NormalTok{ nltk.sentiment.vader }\ImportTok{import}\NormalTok{ SentimentIntensityAnalyzer}
+\ImportTok{from}\NormalTok{ wordcloud }\ImportTok{import}\NormalTok{ WordCloud, ImageColorGenerator }
+\ImportTok{import}\NormalTok{ wikipedia}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\#Lectura del archivo con los comentarios negativos}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.read\_csv(}\StringTok{"reviewsfake.csv"}\NormalTok{, delimiter}\OperatorTok{=}\StringTok{","}\NormalTok{)}
+
+\CommentTok{\#nltk.download()}
+
+\CommentTok{\#Muestra la informacion}
+
+\NormalTok{df.info ()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <class 'pandas.core.frame.DataFrame'>
+## RangeIndex: 20 entries, 0 to 19
+## Data columns (total 3 columns):
+##  #   Column    Non-Null Count  Dtype 
+## ---  ------    --------------  ----- 
+##  0   id        20 non-null     int64 
+##  1   user      20 non-null     object
+##  2   category  20 non-null     object
+## dtypes: int64(1), object(2)
+## memory usage: 612.0+ bytes
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df[}\StringTok{"category"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 0     Los avances en IA están revolucionando la form...
+## 1     Me encanta explorar nuevas aplicaciones de IA ...
+## 2     ¿Alguien ha probado alguna aplicación de IA pa...
+## 3     Aunque mi pasión es la comida, no puedo evitar...
+## 4     Trabajando en un proyecto de IA para predecir ...
+## 5     ¿Se están utilizando algoritmos de IA para cre...
+## 6     ¡La IA es el futuro! Estoy emocionado por ver ...
+## 7     Incluso en el mundo de la gastronomía, la IA e...
+## 8     Desarrollando un nuevo algoritmo de IA para me...
+## 9     ¿Se pueden utilizar redes neuronales para mejo...
+## 10    La IA es como la magia moderna, ¡me encanta su...
+## 11    Curioso por saber si la IA puede ayudar a desc...
+## 12    La ciberseguridad y la IA van de la mano en la...
+## 13    ¿Se puede utilizar IA para optimizar la produc...
+## 14    Explorando el papel de la IA en el diseño de i...
+## 15    ¿Existe algún sistema de IA que pueda recomend...
+## 16    La IA es el motor detrás de la próxima ola de ...
+## 17    Interesado en cómo la IA puede contribuir a la...
+## 18    ¿Cuál es el último avance en algoritmos de IA ...
+## 19    ¿Se pueden utilizar algoritmos de IA para pers...
+## Name: category, dtype: object
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WordCloud}
+\NormalTok{stop\_words\_sp }\OperatorTok{=} \BuiltInTok{set}\NormalTok{(stopwords.words(}\StringTok{\textquotesingle{}spanish\textquotesingle{}}\NormalTok{))}
+\NormalTok{stop\_words\_sp}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## {'mis', 'tendrás', 'algunas', 'te', 'tienen', 'hubierais', 'hubieses', 'eres', 'suyo', 'será', 'nosotros', 'fuésemos', 'tened', 'quien', 'habíais', 'fuéramos', 'estada', 'vuestras', 'habéis', 'hubieseis', 'también', 'tuvieras', 'estados', 'habiendo', 'vosotros', 'sentidas', 'tuvieseis', 'estaréis', 'estéis', 'mucho', 'seríais', 'otros', 'muy', 'fueran', 'ese', 'habréis', 'fueras', 'estuvieron', 'tú', 'sean', 'tenida', 'estabas', 'tendremos', 'estáis', 'sea', 'fuimos', 'sois', 'tuviste', 'lo', 'nuestro', 'otra', 'unos', 'estuve', 'tuviera', 'hubisteis', 'poco', 'estaríamos', 'teniendo', 'tenía', 'más', 'eso', 'tuviéramos', 'mías', 'estás', 'hubieran', 'habrás', 'estés', 'fue', 'habrían', 'estaban', 'en', 'vuestra', 'habrías', 'tendrían', 'que', 'sentid', 'tuvierais', 'ante', 'tuviese', 'nuestras', 'mía', 'tus', 'para', 'hubo', 'tuvimos', 'ha', 'los', 'él', 'estuvieras', 'fuisteis', 'sentido', 'tenemos', 'tuviesen', 'fueron', 'hubiésemos', 'habrán', 'estarás', 'hubiesen', 'éramos', 'tuvieses', 'son', 'tuvisteis', 'desde', 'vuestros', 'otro', 'estas', 'estabais', 'estaría', 'serías', 'fuiste', 'tenían', 'una', 'hube', 'he', 'siente', 'estarías', 'estuviésemos', 'era', 'eran', 'suya', 'algunos', 'ti', 'tuya', 'habrá', 'sus', 'todos', 'vuestro', 'ni', 'tendríais', 'el', 'tanto', 'esos', 'os', 'fuese', 'has', 'eras', 'a', 'sin', 'vosotras', 'nuestros', 'o', 'seáis', 'tengáis', 'serán', 'sí', 'tendría', 'tenéis', 'estaré', 'hayamos', 'hemos', 'tuvieran', 'serás', 'tuyas', 'un', 'estuviste', 'tengamos', 'hubiera', 'tengan', 'hay', 'soy', 'habríamos', 'estuvieses', 'habidos', 'serían', 'haya', 'mí', 'al', 'estará', 'habría', 'habida', 'les', 'hayáis', 'como', 'hubieras', 'hayas', 'fueses', 'estamos', 'fuesen', 'nos', 'hubieron', 'había', 'es', 'habremos', 'tendré', 'tuviésemos', 'estuvieseis', 'hubiese', 'tienes', 'seréis', 'tiene', 'habidas', 'seamos', 'cual', 'esto', 'estuvisteis', 'tengo', 'tuvo', 'tenidos', 'porque', 'estaríais', 'tenido', 'están', 'suyas', 'tenidas', 'esta', 'nosotras', 'antes', 'hubiéramos', 'todo', 'mío', 'suyos', 'estuviéramos', 'estado', 'habías', 'yo', 'sentidos', 'habré', 'durante', 'míos', 'estuviera', 'fuerais', 'tuvieron', 'sentida', 'tuve', 'estad', 'fuera', 'nada', 'estarán', 'fui', 'hubimos', 'habían', 'le', 'estuvo', 'sería', 'sintiendo', 'habíamos', 'por', 'seríamos', 'muchos', 'mi', 'contra', 'tuyo', 'estuviese', 'tu', 'estaremos', 'del', 'erais', 'uno', 'y', 'esas', 'la', 'tendríamos', 'se', 'ellas', 'tendrías', 'estaba', 'las', 'hasta', 'estemos', 'estoy', 'este', 'otras', 'e', 'estén', 'estábamos', 'somos', 'algo', 'qué', 'no', 'seremos', 'tengas', 'fueseis', 'hubiste', 'su', 'ella', 'nuestra', 'ellos', 'tenías', 'estando', 'entre', 'estar', 'estuvierais', 'quienes', 'tendrán', 'hayan', 'de', 'seas', 'me', 'estadas', 'esté', 'tendrá', 'seré', 'estarían', 'estuvimos', 'teníais', 'pero', 'han', 'cuando', 'con', 'estuvieran', 'habido', 'donde', 'ya', 'teníamos', 'tenga', 'está', 'tuyos', 'estos', 'esa', 'tendréis', 'estuviesen', 'habríais', 'sobre'}
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{text }\OperatorTok{=} \StringTok{" "}\NormalTok{.join(cat.split()[}\DecValTok{1}\NormalTok{] }\ControlFlowTok{for}\NormalTok{ cat }\KeywordTok{in}\NormalTok{ df.category)}
+\NormalTok{text}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'avances encanta ha mi en están IA en un pueden IA por ciberseguridad puede el algún IA en es pueden'
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{word\_cloud }\OperatorTok{=}\NormalTok{ WordCloud(collocations }\OperatorTok{=} \VariableTok{False}\NormalTok{, background\_color }\OperatorTok{=} \StringTok{\textquotesingle{}lightcyan\textquotesingle{}}\NormalTok{, stopwords}\OperatorTok{=}\NormalTok{stop\_words\_sp, max\_words}\OperatorTok{=}\DecValTok{20}\NormalTok{).generate(text)}
+ 
+\BuiltInTok{print}\NormalTok{(word\_cloud)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <wordcloud.wordcloud.WordCloud object at 0x0000026D5315B890>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Grafico}
+
+\NormalTok{plt.imshow(word\_cloud, interpolation}\OperatorTok{=}\StringTok{\textquotesingle{}bilinear\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.axis(}\StringTok{"off"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## (np.float64(-0.5), np.float64(399.5), np.float64(199.5), np.float64(-0.5))
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\OperatorTok{{-}}\FloatTok{0.5}\NormalTok{, }\FloatTok{399.5}\NormalTok{, }\FloatTok{199.5}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## (-0.5, 399.5, 199.5, -0.5)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{LAB10_files/figure-latex/unnamed-chunk-1-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wikipedia.set\_lang(}\StringTok{"es"}\NormalTok{)}
+\NormalTok{text}\OperatorTok{=}\NormalTok{ wikipedia.summary(}\StringTok{"Python (programming language)"}\NormalTok{,sentences}\OperatorTok{=}\DecValTok{100000}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(text)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Python es un lenguaje de alto nivel de programación interpretado cuya filosofía hace hincapié en la legibilidad de su código. Se trata de un lenguaje de programación multiparadigma, ya que soporta parcialmente la orientación a objetos, programación imperativa y, en menor medida, programación funcional. Es un lenguaje interpretado, dinámico y multiplataforma.
+## Administrado por Python Software Foundation, posee una licencia de código abierto, denominada Python Software Foundation License.​ Python se clasifica constantemente como uno de los lenguajes de programación más populares, siendo ya en 2025 el más popular y además con una amplia diferencia récord histórico de más de 15 puntos porcentuales sobre el siguiente.​
+## 
+## 
+## == Historia ==
+## 
+## Python fue creado a finales de los años ochenta por Guido van Rossum en Stichting Mathematisch Centrum (CWI),​ en Países Bajos, como un sucesor del lenguaje de programación ABC, capaz de manejar excepciones e interactuar con el sistema operativo Amoeba.​
+## El nombre del lenguaje proviene de la afición de su creador por los humoristas británicos Monty Python.​
+## Guido van Rossum es el principal autor de Python, y su continuo rol central en decidir la dirección de Python es reconocido, refiriéndose a él como Benevolente Dictador Vitalicio (en inglés: Benevolent Dictator for Life, BDFL); sin embargo el 12 de julio de 2018 declinó de dicha situación de honor sin dejar un sucesor o sucesora y con una declaración altisonante:​
+## 
+##  
+## 
+## El 20 de febrero de 1991, van Rossum publicó el código por primera vez en alt.sources, con el número de versión 0.9.0.​ En esta etapa del desarrollo ya estaban presentes clases con herencia, manejo de excepciones, funciones y los tipos modulares, como: str, list, dict, entre otros. Además en este lanzamiento inicial aparecía un sistema de módulos adoptado de Modula-3; van Rossum describe el módulo como «una de las mayores unidades de programación de Python».​ El modelo de excepciones en Python es parecido al de Modula-3, con la adición de una cláusula else.​ En el año 1994 se formó comp.lang.python, el foro de discusión principal de Python, marcando un hito en el crecimiento del grupo de usuarios de este lenguaje.
+## Python alcanzó la versión 1.0 en enero de 1994. Una característica de este lanzamiento fueron las herramientas de la programación funcional: lambda, reduce, filter y map.​ Van Rossum explicó que «hace 12 años, Python adquirió lambda, reduce(), filter() y map(), cortesía de Amrit Perm, un hacker informático de Lisp que las implementó porque las extrañaba».​
+## La última versión liberada proveniente de CWI fue Python 1.2. En 1995, van Rossum continuó su trabajo en Python en la Corporation for National Research Initiatives (CNRI) en Reston, Virginia, donde lanzó varias versiones del software.
+## Durante su estancia en CNRI, van Rossum lanzó la iniciativa Computer Programming for Everybody (CP4E), con el fin de hacer la programación más accesible a más gente, con un nivel de 'alfabetización' básico en lenguajes de programación, similar a la alfabetización básica en inglés y habilidades matemáticas necesarias por muchos trabajadores. Python tuvo un papel crucial en este proceso: debido a su orientación hacia una sintaxis limpia, ya era idóneo, y las metas de CP4E presentaban similitudes con su predecesor, ABC. El proyecto fue patrocinado por DARPA.​ Para el año 2007, el proyecto CP4E se encontraba inactivo;​ a pesar de ello, Python continúa intentando ser fácil de aprender y no muy arcano en su sintaxis y semántica, con el objetivo de ser entendible incluso para no-programadores.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tokens }\OperatorTok{=}\NormalTok{ nltk.word\_tokenize(text)}
+\BuiltInTok{print}\NormalTok{(tokens)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## ['Python', 'es', 'un', 'lenguaje', 'de', 'alto', 'nivel', 'de', 'programación', 'interpretado', 'cuya', 'filosofía', 'hace', 'hincapié', 'en', 'la', 'legibilidad', 'de', 'su', 'código', '.', 'Se', 'trata', 'de', 'un', 'lenguaje', 'de', 'programación', 'multiparadigma', ',', 'ya', 'que', 'soporta', 'parcialmente', 'la', 'orientación', 'a', 'objetos', ',', 'programación', 'imperativa', 'y', ',', 'en', 'menor', 'medida', ',', 'programación', 'funcional', '.', 'Es', 'un', 'lenguaje', 'interpretado', ',', 'dinámico', 'y', 'multiplataforma', '.', 'Administrado', 'por', 'Python', 'Software', 'Foundation', ',', 'posee', 'una', 'licencia', 'de', 'código', 'abierto', ',', 'denominada', 'Python', 'Software', 'Foundation', 'License.\u200b', 'Python', 'se', 'clasifica', 'constantemente', 'como', 'uno', 'de', 'los', 'lenguajes', 'de', 'programación', 'más', 'populares', ',', 'siendo', 'ya', 'en', '2025', 'el', 'más', 'popular', 'y', 'además', 'con', 'una', 'amplia', 'diferencia', 'récord', 'histórico', 'de', 'más', 'de', '15', 'puntos', 'porcentuales', 'sobre', 'el', 'siguiente.\u200b', '==', 'Historia', '==', 'Python', 'fue', 'creado', 'a', 'finales', 'de', 'los', 'años', 'ochenta', 'por', 'Guido', 'van', 'Rossum', 'en', 'Stichting', 'Mathematisch', 'Centrum', '(', 'CWI', ')', ',', '\u200b', 'en', 'Países', 'Bajos', ',', 'como', 'un', 'sucesor', 'del', 'lenguaje', 'de', 'programación', 'ABC', ',', 'capaz', 'de', 'manejar', 'excepciones', 'e', 'interactuar', 'con', 'el', 'sistema', 'operativo', 'Amoeba.\u200b', 'El', 'nombre', 'del', 'lenguaje', 'proviene', 'de', 'la', 'afición', 'de', 'su', 'creador', 'por', 'los', 'humoristas', 'británicos', 'Monty', 'Python.\u200b', 'Guido', 'van', 'Rossum', 'es', 'el', 'principal', 'autor', 'de', 'Python', ',', 'y', 'su', 'continuo', 'rol', 'central', 'en', 'decidir', 'la', 'dirección', 'de', 'Python', 'es', 'reconocido', ',', 'refiriéndose', 'a', 'él', 'como', 'Benevolente', 'Dictador', 'Vitalicio', '(', 'en', 'inglés', ':', 'Benevolent', 'Dictator', 'for', 'Life', ',', 'BDFL', ')', ';', 'sin', 'embargo', 'el', '12', 'de', 'julio', 'de', '2018', 'declinó', 'de', 'dicha', 'situación', 'de', 'honor', 'sin', 'dejar', 'un', 'sucesor', 'o', 'sucesora', 'y', 'con', 'una', 'declaración', 'altisonante', ':', '\u200b', 'El', '20', 'de', 'febrero', 'de', '1991', ',', 'van', 'Rossum', 'publicó', 'el', 'código', 'por', 'primera', 'vez', 'en', 'alt.sources', ',', 'con', 'el', 'número', 'de', 'versión', '0.9.0.\u200b', 'En', 'esta', 'etapa', 'del', 'desarrollo', 'ya', 'estaban', 'presentes', 'clases', 'con', 'herencia', ',', 'manejo', 'de', 'excepciones', ',', 'funciones', 'y', 'los', 'tipos', 'modulares', ',', 'como', ':', 'str', ',', 'list', ',', 'dict', ',', 'entre', 'otros', '.', 'Además', 'en', 'este', 'lanzamiento', 'inicial', 'aparecía', 'un', 'sistema', 'de', 'módulos', 'adoptado', 'de', 'Modula-3', ';', 'van', 'Rossum', 'describe', 'el', 'módulo', 'como', '«', 'una', 'de', 'las', 'mayores', 'unidades', 'de', 'programación', 'de', 'Python', '»', '.\u200b', 'El', 'modelo', 'de', 'excepciones', 'en', 'Python', 'es', 'parecido', 'al', 'de', 'Modula-3', ',', 'con', 'la', 'adición', 'de', 'una', 'cláusula', 'else.\u200b', 'En', 'el', 'año', '1994', 'se', 'formó', 'comp.lang.python', ',', 'el', 'foro', 'de', 'discusión', 'principal', 'de', 'Python', ',', 'marcando', 'un', 'hito', 'en', 'el', 'crecimiento', 'del', 'grupo', 'de', 'usuarios', 'de', 'este', 'lenguaje', '.', 'Python', 'alcanzó', 'la', 'versión', '1.0', 'en', 'enero', 'de', '1994', '.', 'Una', 'característica', 'de', 'este', 'lanzamiento', 'fueron', 'las', 'herramientas', 'de', 'la', 'programación', 'funcional', ':', 'lambda', ',', 'reduce', ',', 'filter', 'y', 'map.\u200b', 'Van', 'Rossum', 'explicó', 'que', '«', 'hace', '12', 'años', ',', 'Python', 'adquirió', 'lambda', ',', 'reduce', '(', ')', ',', 'filter', '(', ')', 'y', 'map', '(', ')', ',', 'cortesía', 'de', 'Amrit', 'Perm', ',', 'un', 'hacker', 'informático', 'de', 'Lisp', 'que', 'las', 'implementó', 'porque', 'las', 'extrañaba', '»', '.\u200b', 'La', 'última', 'versión', 'liberada', 'proveniente', 'de', 'CWI', 'fue', 'Python', '1.2', '.', 'En', '1995', ',', 'van', 'Rossum', 'continuó', 'su', 'trabajo', 'en', 'Python', 'en', 'la', 'Corporation', 'for', 'National', 'Research', 'Initiatives', '(', 'CNRI', ')', 'en', 'Reston', ',', 'Virginia', ',', 'donde', 'lanzó', 'varias', 'versiones', 'del', 'software', '.', 'Durante', 'su', 'estancia', 'en', 'CNRI', ',', 'van', 'Rossum', 'lanzó', 'la', 'iniciativa', 'Computer', 'Programming', 'for', 'Everybody', '(', 'CP4E', ')', ',', 'con', 'el', 'fin', 'de', 'hacer', 'la', 'programación', 'más', 'accesible', 'a', 'más', 'gente', ',', 'con', 'un', 'nivel', 'de', "'alfabetización", "'", 'básico', 'en', 'lenguajes', 'de', 'programación', ',', 'similar', 'a', 'la', 'alfabetización', 'básica', 'en', 'inglés', 'y', 'habilidades', 'matemáticas', 'necesarias', 'por', 'muchos', 'trabajadores', '.', 'Python', 'tuvo', 'un', 'papel', 'crucial', 'en', 'este', 'proceso', ':', 'debido', 'a', 'su', 'orientación', 'hacia', 'una', 'sintaxis', 'limpia', ',', 'ya', 'era', 'idóneo', ',', 'y', 'las', 'metas', 'de', 'CP4E', 'presentaban', 'similitudes', 'con', 'su', 'predecesor', ',', 'ABC', '.', 'El', 'proyecto', 'fue', 'patrocinado', 'por', 'DARPA.\u200b', 'Para', 'el', 'año', '2007', ',', 'el', 'proyecto', 'CP4E', 'se', 'encontraba', 'inactivo', ';', '\u200b', 'a', 'pesar', 'de', 'ello', ',', 'Python', 'continúa', 'intentando', 'ser', 'fácil', 'de', 'aprender', 'y', 'no', 'muy', 'arcano', 'en', 'su', 'sintaxis', 'y', 'semántica', ',', 'con', 'el', 'objetivo', 'de', 'ser', 'entendible', 'incluso', 'para', 'no-programadores', '.']
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WORD CLOUD WIKI}
+\NormalTok{word\_cloud }\OperatorTok{=}\NormalTok{ WordCloud(collocations }\OperatorTok{=} \VariableTok{False}\NormalTok{, background\_color }\OperatorTok{=} \StringTok{\textquotesingle{}\#F0F0F0\textquotesingle{}}\NormalTok{, stopwords}\OperatorTok{=}\NormalTok{stop\_words\_sp, max\_words}\OperatorTok{=}\DecValTok{13}\NormalTok{).generate(text)}
+\BuiltInTok{print}\NormalTok{(word\_cloud)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <wordcloud.wordcloud.WordCloud object at 0x0000026D5590F5D0>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plt.imshow(word\_cloud, interpolation}\OperatorTok{=}\StringTok{\textquotesingle{}bilinear\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.axis(}\StringTok{"off"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## (np.float64(-0.5), np.float64(399.5), np.float64(199.5), np.float64(-0.5))
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\OperatorTok{{-}}\FloatTok{0.5}\NormalTok{, }\FloatTok{399.5}\NormalTok{, }\FloatTok{199.5}\NormalTok{, }\OperatorTok{{-}}\FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## (-0.5, 399.5, 199.5, -0.5)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{LAB10_files/figure-latex/unnamed-chunk-1-2.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Analsiis de sentimientos}
+\NormalTok{modelo }\OperatorTok{=}\NormalTok{ SentimentIntensityAnalyzer()}
+\NormalTok{sentimientos }\OperatorTok{=}\NormalTok{ np.array([])}
+\ControlFlowTok{for}\NormalTok{ x }\KeywordTok{in}\NormalTok{ df[}\StringTok{"category"}\NormalTok{]:}
+  \ControlFlowTok{try}\NormalTok{:}
+\NormalTok{    sentimiento }\OperatorTok{=}\NormalTok{ modelo.polarity\_scores(x)[}\StringTok{\textquotesingle{}compound\textquotesingle{}}\NormalTok{]}
+    \ControlFlowTok{if}\NormalTok{ sentimiento }\OperatorTok{\textgreater{}} \FloatTok{0.1}\NormalTok{:}
+\NormalTok{      sentimientos }\OperatorTok{=}\NormalTok{ np.append(sentimientos,}\StringTok{"positivo"}\NormalTok{)}
+    \ControlFlowTok{elif}\NormalTok{ sentimiento }\OperatorTok{\textless{}} \OperatorTok{{-}}\FloatTok{0.1}\NormalTok{:}
+\NormalTok{      sentimientos }\OperatorTok{=}\NormalTok{ np.append(sentimientos,}\StringTok{"negativo"}\NormalTok{)}
+    \ControlFlowTok{else}\NormalTok{:}
+\NormalTok{      sentimientos }\OperatorTok{=}\NormalTok{ np.append(sentimientos,}\StringTok{"neutro"}\NormalTok{)}
+  \ControlFlowTok{except}\NormalTok{:}
+\NormalTok{    sentimientos }\OperatorTok{=}\NormalTok{ np.append(sentimientos,}\StringTok{"no aplica"}\NormalTok{)}
+\NormalTok{positivos }\OperatorTok{=} \BuiltInTok{len}\NormalTok{(sentimientos[sentimientos }\OperatorTok{==} \StringTok{"positivo"}\NormalTok{])}
+\NormalTok{negativos }\OperatorTok{=} \BuiltInTok{len}\NormalTok{(sentimientos[sentimientos }\OperatorTok{==} \StringTok{"negativo"}\NormalTok{])}
+\NormalTok{neutros }\OperatorTok{=} \BuiltInTok{len}\NormalTok{(sentimientos[sentimientos }\OperatorTok{==} \StringTok{"neutro"}\NormalTok{])}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ [positivos,negativos,neutros]}
+\NormalTok{labels }\OperatorTok{=}\NormalTok{ [}\StringTok{"Positivo"}\NormalTok{,}\StringTok{"Negativo"}\NormalTok{,}\StringTok{"Neutro"}\NormalTok{]}
+\NormalTok{colors }\OperatorTok{=}\NormalTok{ [}\StringTok{"green"}\NormalTok{,}\StringTok{"yellow"}\NormalTok{, }\StringTok{"red"}\NormalTok{]}
+\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1, 1, 18]
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{labels}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## ['Positivo', 'Negativo', 'Neutro']
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plt.pie(y,labels }\OperatorTok{=}\NormalTok{ labels, colors }\OperatorTok{=}\NormalTok{ colors,explode }\OperatorTok{=}\NormalTok{ (}\FloatTok{0.1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{),autopct }\OperatorTok{=} \StringTok{\textquotesingle{}}\SpecialCharTok{\%1.1f\%\%}\StringTok{\textquotesingle{}}\NormalTok{, startangle }\OperatorTok{=} \DecValTok{140}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## ([<matplotlib.patches.Wedge object at 0x0000026D559F72D0>, <matplotlib.patches.Wedge object at 0x0000026D55A05910>, <matplotlib.patches.Wedge object at 0x0000026D55A07E10>], [Text(-1.0286007932889554, 0.6180456358921498, 'Positivo'), Text(-1.0718071159153977, 0.24744596637067523, 'Negativo'), Text(1.0199024222871251, -0.41206680163882997, 'Neutro')], [Text(-0.6000171294185572, 0.36052662093708737, '5.0%'), Text(-0.5846220632265805, 0.13497052711127738, '5.0%'), Text(0.5563104121566136, -0.22476370998481632, '90.0%')])
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plt.axis }\OperatorTok{=}\NormalTok{ (}\StringTok{\textquotesingle{}equal\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Distribucion de sentimientos\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{LAB10_files/figure-latex/unnamed-chunk-1-3.pdf}}
+
+\end{document}

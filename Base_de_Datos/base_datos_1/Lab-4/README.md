@@ -13,7 +13,6 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/bash20cu/Universidad?style=for-the-badge)
 
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/miguel1990/)
-[![Portfolio](https://img.shields.io/badge/Portfolio-%23000000.svg?style=for-the-badge&logo=firefox&logoColor=#FF7139)](https://bash20cu.github.io/Portfolio/)
 
 <!--END_SECTION:badges-->
 
@@ -32,3 +31,6 @@ de datos y las relaciones):
 - ID del permiso
 - Nombre del permiso
 - Permisos por usuario
+
+![diagrama](../Lab-4/lab-4.png "Diagrama" )
+
