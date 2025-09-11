@@ -183,8 +183,8 @@ Ejecutar el script desde tu host (Windows PowerShell o WSL):
 
 ```bash
 # asume que el contenedor se llama mssql_dev o mssql_dev según tu docker-compose
-# reemplaza <container_name> por el nombre real
-docker exec -it <container_name> /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "<SA_PASSWORD>" -i /initdb/init.sql
+docker exec -it mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "<SA_PASSWORD>" -i /initdb/init.sql
+docker exec -it mssql_dev /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P \"<SA_PASSWORD>\" -i /initdb/init.sql
 ```
 
 Sugerencia: copia la contraseña desde tu `.env.dev` o usa un pequeño script `scripts/run-init.sh` que lee `.env` y ejecuta `docker exec`.
