@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Topicos_Avanzados_Programacion",
+    "\\Topicos_Avanzados_Programacion\\Clase1",
+    "\\Topicos_Avanzados_Programacion\\Clase1\\MVPEjemplo",
+    "\\Topicos_Avanzados_Programacion\\Clase1\\MVPEjemplo\\MVPEjemplo.View.Console"
   ],
+  "SelectedNode": "\\Topicos_Avanzados_Programacion\\Clase1\\MVPEjemplo\\MVPEjemplo.sln",
   "PreviewInSolutionExplorer": false
 }
