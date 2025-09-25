@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="ServicioPersona" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8733/Personas/EjemploTecnologiasLegacy.SI.WCF/Service/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8733/Personas/EjemploTecnologiasLegacy.SI.WCF/Service/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8733/Personas/EjemploTecnologiasLegacy.SI.WCF/Service/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/EjemploTecnologiasLegacy.Model" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServicioPersona_ObtengaLaLista_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtengaLaLista" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_ObtengaLaLista_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtengaLaListaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_ObtengaLaListaDeActivos_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtengaLaListaDeActivos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_ObtengaLaListaDeActivos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtengaLaListaDeActivosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_ObtengaLaListaDeInActivos_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtengaLaListaDeInActivos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_ObtengaLaListaDeInActivos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtengaLaListaDeInActivosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_ObtengaLaPersona_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtengaLaPersona" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_ObtengaLaPersona_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtengaLaPersonaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_Agregue_InputMessage">
+    <wsdl:part name="parameters" element="tns:Agregue" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_Agregue_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AgregueResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_EditeLaPersona_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditeLaPersona" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_EditeLaPersona_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditeLaPersonaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_Active_InputMessage">
+    <wsdl:part name="parameters" element="tns:Active" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_Active_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_DesActive_InputMessage">
+    <wsdl:part name="parameters" element="tns:DesActive" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_DesActive_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DesActiveResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServicioPersona">
+    <wsdl:operation name="ObtengaLaLista">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPersona/ObtengaLaLista" message="tns:IServicioPersona_ObtengaLaLista_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPersona/ObtengaLaListaResponse" message="tns:IServicioPersona_ObtengaLaLista_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtengaLaListaDeActivos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPersona/ObtengaLaListaDeActivos" message="tns:IServicioPersona_ObtengaLaListaDeActivos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPersona/ObtengaLaListaDeActivosResponse" message="tns:IServicioPersona_ObtengaLaListaDeActivos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtengaLaListaDeInActivos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPersona/ObtengaLaListaDeInActivos" message="tns:IServicioPersona_ObtengaLaListaDeInActivos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPersona/ObtengaLaListaDeInActivosResponse" message="tns:IServicioPersona_ObtengaLaListaDeInActivos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtengaLaPersona">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPersona/ObtengaLaPersona" message="tns:IServicioPersona_ObtengaLaPersona_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPersona/ObtengaLaPersonaResponse" message="tns:IServicioPersona_ObtengaLaPersona_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Agregue">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPersona/Agregue" message="tns:IServicioPersona_Agregue_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPersona/AgregueResponse" message="tns:IServicioPersona_Agregue_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditeLaPersona">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPersona/EditeLaPersona" message="tns:IServicioPersona_EditeLaPersona_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPersona/EditeLaPersonaResponse" message="tns:IServicioPersona_EditeLaPersona_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Active">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPersona/Active" message="tns:IServicioPersona_Active_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPersona/ActiveResponse" message="tns:IServicioPersona_Active_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DesActive">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPersona/DesActive" message="tns:IServicioPersona_DesActive_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPersona/DesActiveResponse" message="tns:IServicioPersona_DesActive_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IServicioPersona" type="tns:IServicioPersona">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObtengaLaLista">
+      <soap:operation soapAction="http://tempuri.org/IServicioPersona/ObtengaLaLista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtengaLaListaDeActivos">
+      <soap:operation soapAction="http://tempuri.org/IServicioPersona/ObtengaLaListaDeActivos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtengaLaListaDeInActivos">
+      <soap:operation soapAction="http://tempuri.org/IServicioPersona/ObtengaLaListaDeInActivos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtengaLaPersona">
+      <soap:operation soapAction="http://tempuri.org/IServicioPersona/ObtengaLaPersona" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Agregue">
+      <soap:operation soapAction="http://tempuri.org/IServicioPersona/Agregue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditeLaPersona">
+      <soap:operation soapAction="http://tempuri.org/IServicioPersona/EditeLaPersona" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Active">
+      <soap:operation soapAction="http://tempuri.org/IServicioPersona/Active" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DesActive">
+      <soap:operation soapAction="http://tempuri.org/IServicioPersona/DesActive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServicioPersona">
+    <wsdl:port name="BasicHttpBinding_IServicioPersona" binding="tns:BasicHttpBinding_IServicioPersona">
+      <soap:address location="http://localhost:8733/Personas/EjemploTecnologiasLegacy.SI.WCF/Service/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

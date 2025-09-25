@@ -1,11 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Topicos_Avanzados_Programacion",
-    "\\Topicos_Avanzados_Programacion\\Clase1",
-    "\\Topicos_Avanzados_Programacion\\Clase1\\MVPEjemplo",
+    "\\config",
+    "\\config\\mssql",
     "\\Topicos_Avanzados_Programacion\\Clase1\\MVPEjemplo\\MVPEjemplo.View.Console"
   ],
-  "SelectedNode": "\\Topicos_Avanzados_Programacion\\Clase1\\MVPEjemplo\\MVPEjemplo.sln",
+  "SelectedNode": "\\config",
   "PreviewInSolutionExplorer": false
 }

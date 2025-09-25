@@ -1,0 +1,36 @@
+﻿<Window x:Class="Laboratorio1TecnologiasLegacy.UIWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Laboratorio1TecnologiasLegacy.UIWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Listado de Vehículos" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <DataGrid x:Name="VehiculosDataGrid"
+                  Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  Margin="0,0,0,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="60"/>
+                <DataGridTextColumn Header="Marca" Binding="{Binding Marca}" Width="120"/>
+                <DataGridTextColumn Header="Modelo" Binding="{Binding Modelo}" Width="150"/>
+                <DataGridTextColumn Header="Año" Binding="{Binding Anio}" Width="80"/>
+                <DataGridCheckBoxColumn Header="Doble Tracción" Binding="{Binding DobleTraccion}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StatusBar Grid.Row="2">
+            <StatusBarItem Content="Listo"/>
+        </StatusBar>
+    </Grid>
+</Window>

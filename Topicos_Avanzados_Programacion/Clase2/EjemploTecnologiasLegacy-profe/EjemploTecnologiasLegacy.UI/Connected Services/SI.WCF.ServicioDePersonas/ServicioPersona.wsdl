@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="ServicioPersona" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:52297/ServicioPersona.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:52297/ServicioPersona.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:52297/ServicioPersona.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/EjemploTecnologiasLegacy.Model" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServicioPersona_Obtener_InputMessage">
+    <wsdl:part name="parameters" element="tns:Obtener" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_Obtener_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_ObtenerPorId_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerPorId" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_ObtenerPorId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerPorIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_Agregar_InputMessage">
+    <wsdl:part name="parameters" element="tns:Agregar" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_Agregar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_Actualizar_InputMessage">
+    <wsdl:part name="parameters" element="tns:Actualizar" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_Actualizar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_Eliminar_InputMessage">
+    <wsdl:part name="parameters" element="tns:Eliminar" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_Eliminar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_Activar_InputMessage">
+    <wsdl:part name="parameters" element="tns:Activar" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_Activar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActivarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_Desactivar_InputMessage">
+    <wsdl:part name="parameters" element="tns:Desactivar" />
+  </wsdl:message>
+  <wsdl:message name="IServicioPersona_Desactivar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DesactivarResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServicioPersona">
+    <wsdl:operation name="Obtener">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPersona/Obtener" message="tns:IServicioPersona_Obtener_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPersona/ObtenerResponse" message="tns:IServicioPersona_Obtener_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPorId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPersona/ObtenerPorId" message="tns:IServicioPersona_ObtenerPorId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPersona/ObtenerPorIdResponse" message="tns:IServicioPersona_ObtenerPorId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Agregar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPersona/Agregar" message="tns:IServicioPersona_Agregar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPersona/AgregarResponse" message="tns:IServicioPersona_Agregar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Actualizar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPersona/Actualizar" message="tns:IServicioPersona_Actualizar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPersona/ActualizarResponse" message="tns:IServicioPersona_Actualizar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Eliminar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPersona/Eliminar" message="tns:IServicioPersona_Eliminar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPersona/EliminarResponse" message="tns:IServicioPersona_Eliminar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Activar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPersona/Activar" message="tns:IServicioPersona_Activar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPersona/ActivarResponse" message="tns:IServicioPersona_Activar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Desactivar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioPersona/Desactivar" message="tns:IServicioPersona_Desactivar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioPersona/DesactivarResponse" message="tns:IServicioPersona_Desactivar_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IServicioPersona" type="tns:IServicioPersona">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Obtener">
+      <soap:operation soapAction="http://tempuri.org/IServicioPersona/Obtener" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPorId">
+      <soap:operation soapAction="http://tempuri.org/IServicioPersona/ObtenerPorId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Agregar">
+      <soap:operation soapAction="http://tempuri.org/IServicioPersona/Agregar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Actualizar">
+      <soap:operation soapAction="http://tempuri.org/IServicioPersona/Actualizar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Eliminar">
+      <soap:operation soapAction="http://tempuri.org/IServicioPersona/Eliminar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Activar">
+      <soap:operation soapAction="http://tempuri.org/IServicioPersona/Activar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Desactivar">
+      <soap:operation soapAction="http://tempuri.org/IServicioPersona/Desactivar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServicioPersona">
+    <wsdl:port name="BasicHttpBinding_IServicioPersona" binding="tns:BasicHttpBinding_IServicioPersona">
+      <soap:address location="http://localhost:52297/ServicioPersona.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

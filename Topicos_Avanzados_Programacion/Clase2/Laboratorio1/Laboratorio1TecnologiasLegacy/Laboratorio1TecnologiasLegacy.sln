@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11012.119 d18.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorio1TecnologiasLegacy.Model", "Laboratorio1TecnologiasLegacy.Model\Laboratorio1TecnologiasLegacy.Model.csproj", "{81F43CC3-0B30-4606-B7F1-12C89AF33367}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorio1TecnologiasLegacy.BusinessLogicBL", "Laboratorio1TecnologiasLegacy.BusinessLogicBL\Laboratorio1TecnologiasLegacy.BusinessLogicBL.csproj", "{69A49F05-D675-4772-9BF7-210011460A2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorio1TecnologiasLegacy.SI.WCF", "Laboratorio1TecnologiasLegacy.SI.WCF\Laboratorio1TecnologiasLegacy.SI.WCF.csproj", "{2414F117-65D0-4DC0-BB78-AA076D4653B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorio1TecnologiasLegacy.SI.WebService", "Laboratorio1TecnologiasLegacy.SI.WebService\Laboratorio1TecnologiasLegacy.SI.WebService.csproj", "{5E6C7E40-49BF-4208-AB91-5C311B47DFD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorio1TecnologiasLegacy.UIConsole", "Laboratorio1TecnologiasLegacy.UIConsole\Laboratorio1TecnologiasLegacy.UIConsole.csproj", "{F2AB8ED5-166A-4980-A9F3-185E1D2C5C17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorio1TecnologiasLegacy.UIWPF", "Laboratorio1TecnologiasLegacy.UIWPF\Laboratorio1TecnologiasLegacy.UIWPF.csproj", "{4A62ACAA-EB0D-489E-B363-5FA0F810F81E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81F43CC3-0B30-4606-B7F1-12C89AF33367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81F43CC3-0B30-4606-B7F1-12C89AF33367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81F43CC3-0B30-4606-B7F1-12C89AF33367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81F43CC3-0B30-4606-B7F1-12C89AF33367}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69A49F05-D675-4772-9BF7-210011460A2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69A49F05-D675-4772-9BF7-210011460A2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69A49F05-D675-4772-9BF7-210011460A2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69A49F05-D675-4772-9BF7-210011460A2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2414F117-65D0-4DC0-BB78-AA076D4653B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2414F117-65D0-4DC0-BB78-AA076D4653B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2414F117-65D0-4DC0-BB78-AA076D4653B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2414F117-65D0-4DC0-BB78-AA076D4653B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E6C7E40-49BF-4208-AB91-5C311B47DFD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E6C7E40-49BF-4208-AB91-5C311B47DFD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E6C7E40-49BF-4208-AB91-5C311B47DFD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E6C7E40-49BF-4208-AB91-5C311B47DFD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2AB8ED5-166A-4980-A9F3-185E1D2C5C17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2AB8ED5-166A-4980-A9F3-185E1D2C5C17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2AB8ED5-166A-4980-A9F3-185E1D2C5C17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2AB8ED5-166A-4980-A9F3-185E1D2C5C17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A62ACAA-EB0D-489E-B363-5FA0F810F81E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A62ACAA-EB0D-489E-B363-5FA0F810F81E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A62ACAA-EB0D-489E-B363-5FA0F810F81E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A62ACAA-EB0D-489E-B363-5FA0F810F81E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D0960D66-EB18-4388-941C-698FDF915461}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="475ea269-2e31-433f-b999-c549310347e0" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8733/Personas/EjemploTecnologiasLegacy.SI.WCF/Service/" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="01fe8270-92ec-404d-b8e0-eed8bddb08ef" SourceId="1" SourceUrl="http://localhost:8733/Personas/EjemploTecnologiasLegacy.SI.WCF/Service/?xsd=xsd0" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="576ccd46-dacb-4f98-ad44-acc5a1c22009" SourceId="1" SourceUrl="http://localhost:8733/Personas/EjemploTecnologiasLegacy.SI.WCF/Service/?xsd=xsd1" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="78e12ef1-95b0-4d0b-8528-74cb02b8c6f8" SourceId="1" SourceUrl="http://localhost:8733/Personas/EjemploTecnologiasLegacy.SI.WCF/Service/?xsd=xsd2" />
+    <MetadataFile FileName="ServicioPersona.wsdl" MetadataType="Wsdl" ID="bd9395c2-40a7-45a2-9da7-8769e1220ea0" SourceId="1" SourceUrl="http://localhost:8733/Personas/EjemploTecnologiasLegacy.SI.WCF/Service/?wsdl" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="93d609e6-9bd4-4755-b259-199e0ba59542" SourceId="1" SourceUrl="http://localhost:8733/Personas/EjemploTecnologiasLegacy.SI.WCF/Service/?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

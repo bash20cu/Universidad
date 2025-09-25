@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="04f0c4ea-aa37-401f-a5c1-d5a2ea6f945c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:51932/ServiceWCFVehiculo.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServiceWCFVehiculo.wsdl" MetadataType="Wsdl" ID="37f8e201-9245-4613-81ef-1dadf30aec28" SourceId="1" SourceUrl="http://localhost:51932/ServiceWCFVehiculo.svc?wsdl" />
+    <MetadataFile FileName="ServiceWCFVehiculo.xsd" MetadataType="Schema" ID="fb9ee267-7707-46d1-abb7-7cf804758dbc" SourceId="1" SourceUrl="http://localhost:51932/ServiceWCFVehiculo.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServiceWCFVehiculo1.xsd" MetadataType="Schema" ID="7256b8e8-83aa-4238-afa6-a0f4492e9e41" SourceId="1" SourceUrl="http://localhost:51932/ServiceWCFVehiculo.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServiceWCFVehiculo.disco" MetadataType="Disco" ID="56d6556e-62f7-4b2f-a2a8-db0836ec1fd6" SourceId="1" SourceUrl="http://localhost:51932/ServiceWCFVehiculo.svc?disco" />
+    <MetadataFile FileName="ServiceWCFVehiculo2.xsd" MetadataType="Schema" ID="1b2a9b46-2b88-48bf-a6b6-7981eb0b2697" SourceId="1" SourceUrl="http://localhost:51932/ServiceWCFVehiculo.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,17 @@
+﻿/// <summary>
+/// Clase para representar una persona.
+/// </summary>
+
+using System;
+namespace EjemploTecnologiasLegacy.Model
+{
+
+    public class Persona
+    {
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public DateTime FechaNacimiento { get; set; }
+        public Estado Estado { get; set; }
+    }
+}

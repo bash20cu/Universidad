@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ObtengaLaLista">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObtengaLaListaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtengaLaListaResult" type="tns:ArrayOfPersona" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPersona">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Persona" nillable="true" type="tns:Persona" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Persona">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Identificacion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Apellidos" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaDeNacimiento" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Estado" type="tns:Estado" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="Estado">
+        <s:restriction base="s:string">
+          <s:enumeration value="Activo" />
+          <s:enumeration value="InActivo" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="Agregue">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="persona" type="tns:Persona" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregueResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ObtengaLaListaSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtengaLaLista" />
+  </wsdl:message>
+  <wsdl:message name="ObtengaLaListaSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtengaLaListaResponse" />
+  </wsdl:message>
+  <wsdl:message name="AgregueSoapIn">
+    <wsdl:part name="parameters" element="tns:Agregue" />
+  </wsdl:message>
+  <wsdl:message name="AgregueSoapOut">
+    <wsdl:part name="parameters" element="tns:AgregueResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServicioPersonaSoap">
+    <wsdl:operation name="ObtengaLaLista">
+      <wsdl:input message="tns:ObtengaLaListaSoapIn" />
+      <wsdl:output message="tns:ObtengaLaListaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Agregue">
+      <wsdl:input message="tns:AgregueSoapIn" />
+      <wsdl:output message="tns:AgregueSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServicioPersonaSoap" type="tns:ServicioPersonaSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObtengaLaLista">
+      <soap:operation soapAction="http://tempuri.org/ObtengaLaLista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Agregue">
+      <soap:operation soapAction="http://tempuri.org/Agregue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServicioPersonaSoap12" type="tns:ServicioPersonaSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObtengaLaLista">
+      <soap12:operation soapAction="http://tempuri.org/ObtengaLaLista" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Agregue">
+      <soap12:operation soapAction="http://tempuri.org/Agregue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServicioPersona">
+    <wsdl:port name="ServicioPersonaSoap" binding="tns:ServicioPersonaSoap">
+      <soap:address location="http://localhost:63669/ServicioPersona.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServicioPersonaSoap12" binding="tns:ServicioPersonaSoap12">
+      <soap12:address location="http://localhost:63669/ServicioPersona.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

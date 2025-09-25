@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://localhost:51932/ServiceWCFVehiculo.svc?wsdl" filename="ServiceWCFVehiculo.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://localhost:51932/ServiceWCFVehiculo.svc?xsd=xsd0" filename="ServiceWCFVehiculo.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://localhost:51932/ServiceWCFVehiculo.svc?xsd=xsd1" filename="ServiceWCFVehiculo0.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://localhost:51932/ServiceWCFVehiculo.svc?disco" filename="ServiceWCFVehiculo.disco" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://localhost:51932/ServiceWCFVehiculo.svc?xsd=xsd2" filename="ServiceWCFVehiculo1.xsd" />
+  </Results>
+</DiscoveryClientResultsFile>
