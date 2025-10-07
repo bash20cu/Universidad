@@ -1,10 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\config",
     "\\config\\mssql",
-    "\\Topicos_Avanzados_Programacion\\Clase1\\MVPEjemplo\\MVPEjemplo.View.Console"
+    "\\Topicos_Avanzados_Programacion",
+    "\\Topicos_Avanzados_Programacion\\Clase3",
+    "\\Topicos_Avanzados_Programacion\\Clase3\\API -con api key",
+    "\\Topicos_Avanzados_Programacion\\Clase3\\API -con api key\\GestionDePersonas.SI"
   ],
-  "SelectedNode": "\\config",
+  "SelectedNode": "\\Topicos_Avanzados_Programacion\\Clase3\\API -con api key\\GestionDePersonas.sln",
   "PreviewInSolutionExplorer": false
 }

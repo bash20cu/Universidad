@@ -19,8 +19,9 @@
 ## Clase 3 - Api Rest
 
 - Se estudia el desarrollo de serivicios web API REST y SOAP.
+- Se estudia el ejemplo con API Key y proteccion con middleware
+- Se estudia las pruebas unitarias con xUnit y Moq 
 - 
-
 
 
 ### Tecnologías utilizadas:
