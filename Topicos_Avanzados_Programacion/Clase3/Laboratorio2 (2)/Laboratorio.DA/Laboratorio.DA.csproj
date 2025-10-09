@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Laboratorio.BusinessLogicBL\Laboratorio.BusinessLogicBL.csproj" />
+    <ProjectReference Include="..\Laboratorio.Model\Laboratorio.Model.csproj" />
+  </ItemGroup>
+
+</Project>

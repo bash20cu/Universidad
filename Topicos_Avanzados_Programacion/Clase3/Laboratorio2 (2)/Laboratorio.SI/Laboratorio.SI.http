@@ -1,0 +1,6 @@
+@Laboratorio.SI_HostAddress = http://localhost:5066
+
+GET {{Laboratorio.SI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

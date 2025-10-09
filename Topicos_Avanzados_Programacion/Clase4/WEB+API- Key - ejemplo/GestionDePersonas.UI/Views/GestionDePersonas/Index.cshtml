@@ -1,0 +1,63 @@
+﻿@model IEnumerable<GestionDePersonas.Model.Persona>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Lista de Personas</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Registrar</a>
+</p>
+
+<form asp-controller="GestionDePersonas" asp-action="Index" method="get">
+    <p>
+        Nombre: <input type="text" name="nombre" />
+        <input type="submit" value="Filtrar" />
+    </p>
+</form>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellidos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellidos)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+            <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" }) 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
