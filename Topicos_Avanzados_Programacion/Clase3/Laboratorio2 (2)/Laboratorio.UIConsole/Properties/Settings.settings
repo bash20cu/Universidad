@@ -1,9 +1,0 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Laboratorio.UIConsole.Properties" GeneratedClassName="Settings">
-  <Profiles />
-  <Settings>
-    <Setting Name="Laboratorio_UIConsole_WebService_WCF_ServiceWCFVehiculo" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://localhost:59205/ServiceWCFVehiculo.svc</Value>
-    </Setting>
-  </Settings>
-</SettingsFile>

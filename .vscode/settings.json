@@ -21,5 +21,6 @@
                 "-Dappmap.output.directory=${command:appmap.getAppmapDir}"
             ]
         }
-    ]
+    ],
+    "dotnet.preferCSharpExtension": true
 }
