@@ -39,10 +39,10 @@ donde se iba a aplicar el desarrollo, todo esto en JAVA usando el IDE Netbeans.
     aplica con 4 clases de la siguiente forma:
 
 1. Credits:
-        Es la que se encarga de manejar y mostrar los créditos del jugador en el juego Donkey
-        Kong, pues carga las imágenes necesarias y las utiliza para construir una imagen del
-        puntaje actual del jugador, además tiene la capacidad de actualizar el puntaje y mostrar
-        una imagen que representa la suma de uno a la puntuación actual.
+    Es la que se encarga de manejar y mostrar los créditos del jugador en el juego Donkey
+    Kong, pues carga las imágenes necesarias y las utiliza para construir una imagen del
+    puntaje actual del jugador, además tiene la capacidad de actualizar el puntaje y mostrar
+    una imagen que representa la suma de uno a la puntuación actual.
 
 
     Métodos usados:
@@ -84,10 +84,10 @@ donde se iba a aplicar el desarrollo, todo esto en JAVA usando el IDE Netbeans.
 2. Jugador:
 
     Esta clase se encarga de definir las variables y métodos necesarios para representar al personaje del jugador en el juego,
-     como su posición, tipo de jugador, estado actual (corriendo, saltando, cayendo, inactivo, etc.), 
-     tamaño, y las imágenes correspondientes a cada estado del jugador. 
+    como su posición, tipo de jugador, estado actual (corriendo, saltando, cayendo, inactivo, etc.), 
+    tamaño, y las imágenes correspondientes a cada estado del jugador. 
     La clase implementa la interfaz "Element" del controlador del juego, lo que significa 
-     que puede ser actualizada y representada en pantalla.
+    que puede ser actualizada y representada en pantalla.
 
 Características de la clase jugador:
 ```
@@ -108,8 +108,8 @@ en pantalla.
 
 3. Lives: 
     Define una clase Java llamada "Lives" que es responsable de representar la
-        cantidad de vidas disponibles para el jugador en un juego. La clase tiene las siguientes
-        propiedades:
+    cantidad de vidas disponibles para el jugador en un juego. La clase tiene las siguientes
+    propiedades:
 
 ```
 Variables en uso:
@@ -237,7 +237,7 @@ elementos en la lista.
 ✓ Lista: es una referencia a la lista a partir de la cual se creó el iterador.
 ✓ Actual es una referencia para atravesar el nodo actual en la lista vinculada
 ✓ Anterior: es una referencia al nodo anterior al actual.
-✓ El constructor de la clase recibe como parámetro una instancia de ArrayList ,
+✓ constructor de la clase recibe como parámetro una instancia de ArrayList ,
 que es la lista a partir de la cual desea crear un iterador. En este constructor, se
 inicializan los nodos actual y anterior.
 ```
