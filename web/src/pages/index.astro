@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCourses, getParsedRootReadme } from '../utils/content';
+import { curriculum } from '../data/curriculum';
 import { marked } from 'marked';
 
 const courses = getCourses();
@@ -16,7 +17,10 @@ const technologies = [
     "https://img.shields.io/badge/NetBeansIDE-1B6AC6.svg?style=for-the-badge&logo=apache-netbeans-ide&logoColor=white",
     "https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white",
     "https://img.shields.io/badge/Visual%20Studio-5C2D91.svg?style=for-the-badge&logo=visual-studio&logoColor=white",
-    "https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white"
+    "https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white",
+    "https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black",
+    "https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white",
+    "https://img.shields.io/badge/AI-OpenAI-000000?style=for-the-badge&logo=openai&logoColor=white"
 ];
 
 const stats = [
@@ -36,22 +40,33 @@ const introHtml = `
 
 <Layout title="Mi Portafolio Universitario">
     <!-- Hero Section -->
-    <section class="max-w-6xl mx-auto pt-20 pb-12 px-6 text-center animate-fade-in">
-        <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-uia-gold via-yellow-200 to-white bg-clip-text text-transparent pb-3">
+    <section class="max-w-6xl mx-auto pt-24 pb-16 px-6 text-center">
+        <!-- Avatar -->
+        <div class="mb-8 animate-fade-in-up">
+            <img 
+                src="https://avatars.githubusercontent.com/u/53372986?v=4" 
+                alt="Miguel Fernández" 
+                class="w-32 h-32 md:w-40 md:h-40 rounded-full mx-auto border-4 border-uia-gold shadow-[0_0_30px_rgba(255,215,0,0.3)] hover:scale-105 transition-transform duration-300"
+            />
+        </div>
+
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-uia-gold via-yellow-200 to-white bg-clip-text text-transparent pb-3 animate-fade-in-up delay-100 opacity-0" style="animation-fill-mode: forwards;">
             Estudiante de Ingeniería de Software
         </h1>
-        <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed">
+        <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed font-light animate-fade-in-up delay-200 opacity-0" style="animation-fill-mode: forwards;">
             Universidad Internacional de las Américas - Costa Rica
         </p>
 
         <!-- Dynamic Stats Row from README -->
-        <div class="flex flex-wrap gap-3 justify-center mb-12 opacity-90 scale-100 hover:scale-[1.02] transition-transform">
-            {stats && stats.map(img => (
-                <img src={img} alt="Stat" class="h-8 shadow-lg rounded-sm" />
-            ))}
+        <div class="flex flex-wrap gap-3 justify-center mb-12 opacity-0 animate-fade-in-up delay-300" style="animation-fill-mode: forwards;">
+            <div class="animate-float">
+                {stats && stats.map(img => (
+                    <img src={img} alt="Stat" class="h-8 shadow-lg rounded-sm inline-block mx-1" />
+                ))}
+            </div>
         </div>
 
-        <div class="flex gap-4 justify-center">
+        <div class="flex gap-4 justify-center animate-fade-in-up delay-500 opacity-0" style="animation-fill-mode: forwards;">
             <a href="#about" class="px-8 py-3 bg-uia-gold hover:bg-yellow-400 text-black rounded-full font-bold transition-all hover:scale-105 shadow-lg shadow-yellow-500/20">
                 Sobre Mí
             </a>
@@ -61,12 +76,21 @@ const introHtml = `
         </div>
     </section>
 
+    <div class="max-w-6xl mx-auto px-6"><hr class="border-white/5" /></div>
+
+    <!-- Introduction / About -->
+    <section id="about" class="max-w-4xl mx-auto py-20 px-6 animate-fade-in" style="animation-delay: 0.2s">
+         <div class="prose prose-invert prose-lg max-w-none text-center text-gray-300 leading-relaxed prose-headings:text-uia-gold prose-a:text-uia-gold hover:prose-a:text-yellow-300">
+            <Fragment set:html={introHtml} />
+        </div>
+    </section>
+
     <!-- Tech Stack (Scraped from README) -->
-    <section class="max-w-6xl mx-auto py-12 px-6 animate-fade-in" style="animation-delay: 0.1s">
+    <section id="tech" class="max-w-6xl mx-auto py-12 px-6 animate-fade-in" style="animation-delay: 0.1s">
         <div class="bg-uia-blue-light/30 border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden backdrop-blur-sm">
             <div class="absolute top-0 right-0 w-64 h-64 bg-yellow-500/5 rounded-full blur-[80px] -z-10"></div>
             
-            <h2 class="text-2xl font-bold text-white mb-8 text-center">Tecnologías Principales</h2>
+            <h2 class="text-2xl font-bold text-white mb-8 text-center uppercase tracking-widest text-sm text-uia-gold">Tecnologías Principales</h2>
             
             <div class="flex flex-wrap justify-center gap-4">
                 {technologies && technologies.map(img => (
@@ -78,31 +102,27 @@ const introHtml = `
         </div>
     </section>
 
-    <!-- Introduction / About -->
-    <section id="about" class="max-w-4xl mx-auto py-12 px-6 animate-fade-in" style="animation-delay: 0.2s">
-         <div class="prose prose-invert prose-lg max-w-none text-center text-gray-300 leading-relaxed prose-headings:text-uia-gold prose-a:text-uia-gold hover:prose-a:text-yellow-300">
-            <Fragment set:html={introHtml} />
-        </div>
-    </section>
-
-    <!-- Courses Grid -->
-    <section id="projects" class="py-16 max-w-7xl mx-auto px-6 animate-fade-in" style="animation-delay: 0.3s">
-        <div class="flex items-center justify-between mb-12">
-            <h2 class="text-3xl font-bold text-white border-l-4 border-uia-gold pl-4">
-                Cursos y Materias
-            </h2>
+     <!-- Courses Grid -->
+    <section id="projects" class="py-24 max-w-7xl mx-auto px-6 animate-fade-in" style="animation-delay: 0.3s">
+        <div class="flex items-center justify-between mb-16">
+            <div>
+                <h2 class="text-3xl font-bold text-white border-l-4 border-uia-gold pl-4 mb-2">
+                    Proyectos Documentados
+                </h2>
+                <p class="text-gray-400 pl-5 text-sm">Explora las asignaturas con código disponible en este repositorio</p>
+            </div>
             <span class="text-sm font-medium text-uia-gold bg-uia-gold/10 px-4 py-2 rounded-full border border-uia-gold/20">
-                {courses.length} Cursos Documentados
+                {courses.length} Cursos
             </span>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {courses.map((course) => (
-                <a href={`/${course.path}`} class="group relative bg-uia-blue-light/40 border border-white/10 rounded-2xl overflow-hidden hover:border-uia-gold/50 transition-all hover:shadow-2xl hover:shadow-yellow-500/5 hover:-translate-y-1">
+                <a href={`/${course.path}`} class="group relative bg-uia-blue-light/40 border border-white/10 rounded-2xl overflow-hidden hover:border-uia-gold/50 transition-all hover:shadow-2xl hover:shadow-yellow-500/5 hover:-translate-y-1 flex flex-col h-full">
                     <!-- Card Header -->
                     <div class="h-1 bg-gradient-to-r from-uia-gold to-yellow-600"></div>
                     
-                    <div class="p-8">
+                    <div class="p-8 flex-1 flex flex-col">
                         <div class="flex items-start justify-between mb-4">
                             <div class="p-3 bg-uia-gold/10 rounded-xl">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-uia-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -118,11 +138,11 @@ const introHtml = `
                             {course.name}
                         </h3>
                         
-                        <p class="text-sm text-gray-400 mb-6 line-clamp-2">
+                        <p class="text-sm text-gray-400 mb-6 line-clamp-2 flex-1">
                             Explora los proyectos y ejercicios prácticos realizados en este curso.
                         </p>
                         
-                        <div class="flex items-center text-uia-gold text-sm font-bold group-hover:tracking-wider transition-all">
+                        <div class="flex items-center text-uia-gold text-sm font-bold group-hover:tracking-wider transition-all mt-auto">
                             Ver Contenido
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -133,6 +153,45 @@ const introHtml = `
             ))}
         </div>
     </section>
+
+    <!-- Curriculum / Plan de Estudios -->
+    <section id="curriculum" class="max-w-7xl mx-auto py-16 px-6">
+        <h2 class="text-3xl font-bold text-white mb-12 text-center">
+            <span class="border-b-4 border-uia-gold pb-2">Plan de Estudios</span>
+        </h2>
+        <div class="space-y-8">
+            {curriculum.map((term) => (
+                <div class="bg-uia-blue-light/20 border border-white/5 rounded-2xl p-6 hover:border-uia-gold/20 transition-colors">
+                    <h3 class="text-xl font-bold text-uia-gold mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-uia-gold"></span>
+                        {term.name}
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {term.courses.map((course) => (
+                            <div class={`p-4 rounded-xl border ${course.passed ? 'bg-uia-blue-dark/80 border-uia-gold/40' : 'bg-white/5 border-transparent opacity-60'} transition-all`}>
+                                <div class="flex justify-between items-start mb-2">
+                                    <span class="text-xs font-mono text-gray-500">{course.code}</span>
+                                    {course.passed && (
+                                        <span class="text-xs bg-uia-gold/20 text-uia-gold px-2 py-0.5 rounded-full font-bold">
+                                            {course.grade === 'REC' ? 'APROBADO' : course.grade}
+                                        </span>
+                                    )}
+                                </div>
+                                <h4 class={`font-bold text-sm ${course.passed ? 'text-white' : 'text-gray-400'}`}>
+                                    {course.name}
+                                </h4>
+                                {course.req && (
+                                    <p class="text-xs text-gray-600 mt-2">Req: {course.req}</p>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            ))}
+        </div>
+    </section>
+
+   
 
     <!-- Connect / Portfolio Section -->
     <section class="max-w-4xl mx-auto py-20 px-6 text-center animate-fade-in" style="animation-delay: 0.4s">
@@ -150,8 +209,26 @@ const introHtml = `
         </div>
     </section>
 
-    <footer class="text-center py-10 text-gray-500 text-sm border-t border-white/5 mt-0">
-        <p>Desarrollado con ❤️ para la Universidad Internacional de las Américas</p>
+    <!-- Disclaimer / Responsibility -->
+    <section class="max-w-5xl mx-auto pt-10 pb-6 px-8 text-center">
+        <div class="bg-red-900/10 border border-red-500/20 rounded-xl p-6 text-sm text-gray-400">
+            <h4 class="text-red-400 font-bold mb-2 flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Descargo de Responsabilidad
+            </h4>
+            <p>
+                Este sitio web y los proyectos contenidos en él son de carácter estrictamente <strong>académico y demostrativo</strong>. 
+                Se hace constar que el código, ejercicios y recursos aquí presentados pueden estar basados en material propiedad de la 
+                Universidad Internacional de las Américas (UIA). Se muestra este trabajo con fines de portafolio estudiantil, 
+                respetando la propiedad intelectual de la institución y sin fines de lucro comercial directo sobre los materiales del curso.
+            </p>
+        </div>
+    </section>
+
+    <footer class="text-center py-10 text-gray-500 text-sm border-t border-white/5 mt-0 bg-uia-blue-dark/50">
+        <p>Desarrollado con ❤️ por un estudiante de la Universidad Internacional de las Américas</p>
         <div class="flex justify-center gap-4 mt-4">
             <a href="https://github.com/bash20cu" target="_blank" class="hover:text-uia-gold transition-colors">GitHub</a>
             <a href="https://linkedin.com/in/miguel1990" target="_blank" class="hover:text-uia-gold transition-colors">LinkedIn</a>
