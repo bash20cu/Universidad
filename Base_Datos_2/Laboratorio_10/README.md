@@ -86,7 +86,7 @@
 
     plt.show()
 
-<img src="README2_files/figure-markdown_strict/unnamed-chunk-1-1.png" width="672" />
+<img src="https://raw.githubusercontent.com/bash20cu/Universidad/main/Base_Datos_2/Laboratorio_10/README2_files/figure-markdown_strict/unnamed-chunk-1-1.png" width="672" />
 
     wikipedia.set_lang("es")
     text= wikipedia.summary("Python (programming language)",sentences=100000)
@@ -131,7 +131,7 @@
 
     plt.show()
 
-<img src="README2_files/figure-markdown_strict/unnamed-chunk-1-2.png" width="672" />
+<img src="https://raw.githubusercontent.com/bash20cu/Universidad/main/Base_Datos_2/Laboratorio_10/README2_files/figure-markdown_strict/unnamed-chunk-1-2.png" width="672" />
 
     # Analsiis de sentimientos
     modelo = SentimentIntensityAnalyzer()
@@ -169,7 +169,7 @@
     plt.title('Distribucion de sentimientos')
     plt.show()
 
-<img src="README2_files/figure-markdown_strict/unnamed-chunk-1-3.png" width="672" />
+<img src="https://raw.githubusercontent.com/bash20cu/Universidad/main/Base_Datos_2/Laboratorio_10/README2_files/figure-markdown_strict/unnamed-chunk-1-3.png" width="672" />
 
 
 ## 🛠 Tecnologías

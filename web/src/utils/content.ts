@@ -141,13 +141,16 @@ export function getReadmeContent(relativePath: string): string | null {
             // Rewrite relative image paths to absolute GitHub raw URLs
             // Matches ![alt](path) where path does not start with http or https
             content = content.replace(/!\[(.*?)\]\((?!http)(.*?)\)/g, (match, alt, imgPath) => {
-                // Remove leading ./ or / if present to get clean relative path
                 const cleanPath = imgPath.replace(/^\.?\//, '');
-                // Construct absolute URL: root + relativePath + cleanPath
-                // relativePath is like "Base_de_Datos/Base_Datos_1/Laboratorio_2"
-                // We need to join them correctly
-                const absoluteUrl = `https://raw.githubusercontent.com/bash20cu/Universidad/master/${relativePath}/${cleanPath}`;
+                const absoluteUrl = `https://raw.githubusercontent.com/bash20cu/Universidad/main/${relativePath}/${cleanPath}`;
                 return `![${alt}](${absoluteUrl})`;
+            });
+
+            // Rewrite HTML img tags with relative paths
+            content = content.replace(/<img(.*?)src=["'](?!http)(.*?)["'](.*?)>/g, (match, before, imgPath, after) => {
+                const cleanPath = imgPath.replace(/^\.?\//, '');
+                const absoluteUrl = `https://raw.githubusercontent.com/bash20cu/Universidad/main/${relativePath}/${cleanPath}`;
+                return `<img${before}src="${absoluteUrl}"${after}>`;
             });
 
             return content;
