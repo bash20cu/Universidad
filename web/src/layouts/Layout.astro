@@ -1,0 +1,59 @@
+---
+import '@fontsource/inter';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+    description?: string;
+}
+
+const { title, description = "Mi Portafolio Universitario" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-blue-500 selection:text-white">
+        <!-- Background Pattern -->
+        <div class="fixed inset-0 -z-10 h-full w-full bg-slate-950">
+            <div class="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+        </div>
+		
+        <header class="fixed top-0 w-full z-50 border-b border-white/10 bg-slate-950/50 backdrop-blur-xl">
+            <nav class="container mx-auto px-6 h-16 flex items-center justify-between">
+                <a href="/" class="text-xl font-bold bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">
+                    Portafolio
+                </a>
+                <div class="flex gap-4 text-sm font-medium text-gray-400">
+                    <a href="/" class="hover:text-white transition-colors">Inicio</a>
+                    <!-- Placeholder for dynamic links later -->
+                </div>
+            </nav>
+        </header>
+
+		<main class="container mx-auto px-6 pt-28 pb-12 min-h-screen animate-fade-in">
+			<slot />
+		</main>
+
+        <footer class="border-t border-white/10 py-8 text-center text-sm text-gray-500">
+            <p>&copy; {new Date().getFullYear()} Portafolio Universitario. Construido con Astro.</p>
+        </footer>
+	</body>
+</html>
+
+<style>
+    @keyframes fade-in {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+        animation: fade-in 0.5s ease-out forwards;
+    }
+</style>
