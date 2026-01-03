@@ -1,0 +1,13 @@
+# Laboratorio 9: XML y Stored Procedures
+
+Escribir una instrucción DQL que este dentro de un Stored Procedure que genere
+un XML para el cliente con el customerID 1060. El XML debe cumplir con lo
+siguiente:
+
+- a. Nombre del nodo raíz: formulario_uia
+- b. Del cliente se debe desplegar el customerid como id_cliente, el
+  customername como el nombre_cliente y se debe desplegar dentro de una
+  etiqueta llamada facturas, cada una de las facturas que ese cliente ha
+  comprado, mostrando los datos de la fecha de la factura y el total facturado
+  (usando la ecuación quantity \* unitprice)
+- c. Se debe mostrar como elementos y no como atributos.
