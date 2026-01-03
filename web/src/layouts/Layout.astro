@@ -20,19 +20,21 @@ const { title, description = "Mi Portafolio Universitario" } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-blue-500 selection:text-white">
+	<body class="bg-uia-blue-dark text-slate-100 font-sans antialiased selection:bg-uia-gold selection:text-black">
         <!-- Background Pattern -->
-        <div class="fixed inset-0 -z-10 h-full w-full bg-slate-950">
-            <div class="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+        <div class="fixed inset-0 -z-10 h-full w-full bg-uia-blue-dark">
+            <div class="absolute inset-0 bg-[url('/diamond-pattern.svg')] opacity-20 bg-repeat"></div>
+            <!-- Fallback/CSS Pattern if SVG not used directly, using CSS grid/radial for tech look -->
+            <div class="absolute inset-0" style="background-image: radial-gradient(rgba(255, 215, 0, 0.1) 1px, transparent 1px); background-size: 40px 40px;"></div>
         </div>
 		
-        <header class="fixed top-0 w-full z-50 border-b border-white/10 bg-slate-950/50 backdrop-blur-xl">
+        <header class="fixed top-0 w-full z-50 border-b border-white/5 bg-uia-blue-dark/80 backdrop-blur-xl">
             <nav class="container mx-auto px-6 h-16 flex items-center justify-between">
-                <a href="/" class="text-xl font-bold bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">
+                <a href="/" class="text-xl font-bold bg-gradient-to-r from-uia-gold via-yellow-200 to-white bg-clip-text text-transparent">
                     Portafolio
                 </a>
                 <div class="flex gap-4 text-sm font-medium text-gray-400">
-                    <a href="/" class="hover:text-white transition-colors">Inicio</a>
+                    <a href="/" class="hover:text-uia-gold transition-colors">Inicio</a>
                     <!-- Placeholder for dynamic links later -->
                 </div>
             </nav>

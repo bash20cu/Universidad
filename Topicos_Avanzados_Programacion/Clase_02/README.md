@@ -1,6 +1,6 @@
-# Estudiante de Ingenier韆 de Software  
+# Estudiante de Ingenier铆a de Software  
 
-# en la Universidad Internacional de las Am閞icas Costa Rica  
+# en la Universidad Internacional de las Am茅ricas Costa Rica  
 
 <!--START_SECTION:badges-->
 
@@ -18,19 +18,19 @@
 
 ## Clase 2 - Consumo de Servicios Web Legacy (WCF y ASMX)
 
-- Se estudia c髆o consumir servicios web en **.NET Framework 4.8** utilizando tecnolog韆s **legacy** como **WCF** y **ASMX**.  
-- Ejemplo pr醕tico de invocaci髇 de un **servicio de personas**, realizando operaciones de **Agregar** y **Obtener Lista**.  
-- Comparaci髇 entre el consumo de un servicio **WCF** y un servicio **ASMX**.  
-- Uso de **Visual Studio 2022** para gestionar proyectos de consola con m鷏tiples capas (BL, Model, SI.WCF, SI.WebService).  
+- Se estudia c贸mo consumir servicios web en **.NET Framework 4.8** utilizando tecnolog铆as **legacy** como **WCF** y **ASMX**.  
+- Ejemplo pr谩ctico de invocaci贸n de un **servicio de personas**, realizando operaciones de **Agregar** y **Obtener Lista**.  
+- Comparaci贸n entre el consumo de un servicio **WCF** y un servicio **ASMX**.  
+- Uso de **Visual Studio 2022** para gestionar proyectos de consola con m煤ltiples capas (BL, Model, SI.WCF, SI.WebService).  
 
-### Tecnolog韆s utilizadas:
+### Tecnolog铆as utilizadas:
 - **.NET Framework 4.8**
 - **C#**
 - **Visual Studio 2022**
 - **Servicios Web WCF**
 - **Servicios Web ASMX**
 
-### Ejemplo de c骴igo (consumo ASMX)
+### Ejemplo de c贸digo (consumo ASMX)
 ```csharp
 var elServicio = new webservice.ServicioPersonaAsmx.ServicioPersona();
 var laPersona = new webservice.ServicioPersonaAsmx.Persona()
@@ -45,3 +45,4 @@ elServicio.Agregue(laPersona);
 
 var lasPersonas = elServicio.ObtengaLaLista();
 Console.WriteLine(lasPersonas);
+```

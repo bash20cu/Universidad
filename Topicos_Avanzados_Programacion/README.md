@@ -1,6 +1,6 @@
-# Estudiante de IngenierÌa de Software
+# Estudiante de Ingenier√≠a de Software
 
-# en la Universidad Internacional de las AmÈricas Costa Rica
+# en la Universidad Internacional de las Am√©ricas Costa Rica
 
 <!--START_SECTION:badges-->
 
@@ -17,9 +17,9 @@
 
 <!--END_SECTION:badges-->
 
-## Este repositorio contiene una muestra de mis habilidades y proyectos acadÈmicos en topicos avanzados de programaciÛn.
+## Este repositorio contiene una muestra de mis habilidades y proyectos acad√©micos en t√≥picos avanzados de programaci√≥n.
 
-### AquÌ podr· ver proyectos que demuestran mi capacidad para
+### Aqu√≠ podr√° ver proyectos que demuestran mi capacidad para
 
-- Clase 1, MVPP con ejemplos de codigo de consola y con interfaz grafica.
-- https://azure.microsoft.com/es-es/free/students/?msockid=1fd60d70d44c66be20c01b61d5396717  
+- Clase 1: MVPP con ejemplos de c√≥digo de consola y con interfaz gr√°fica.
+- Azure DevOps: https://azure.microsoft.com/es-es/free/students/

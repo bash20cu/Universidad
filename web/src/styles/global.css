@@ -1,2 +1,11 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+@theme {
+  --color-uia-gold: #FFD700;
+  --color-uia-black: #1a1a1a;
+  --color-uia-dark: #0a0a0a;
+  --color-uia-gray: #2d2d2d;
+  --color-uia-blue-dark: #0B1120;
+  --color-uia-blue-light: #1e293b;
+}

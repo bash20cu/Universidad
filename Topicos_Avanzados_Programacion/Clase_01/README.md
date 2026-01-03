@@ -1,6 +1,6 @@
-# Estudiante de Ingenier韆 de Software
+# Estudiante de Ingenier铆a de Software
 
-# en la Universidad Internacional de las Am閞icas Costa Rica
+# en la Universidad Internacional de las Am茅ricas Costa Rica
 
 <!--START_SECTION:badges-->
 
@@ -16,16 +16,15 @@
 
 <!--END_SECTION:badges-->
 
-## Clase 1 -  MVPP con ejemplos de codigo de consola y con interfaz grafica.
+## Clase 1 - MVPP con ejemplos de c贸digo de consola y con interfaz gr谩fica.
 
+- Configuraci贸n de entorno de desarrollo DevOps en Visual Studio 2022 con Azure DevOps.
+- Creaci贸n de repositorio en Azure DevOps y clonaci贸n en Visual Studio 2022.
+- Creaci贸n de proyecto de consola en C# .NET 8.0.
 
-- Configuracion de entorno de desarrollo DevOps en Visual Studio 2022 con Azure DevOps. https://azure.microsoft.com/es-es/free/students/?msockid=1fd60d70d44c66be20c01b61d5396717  
-- Creacion de repositorio en Azure DevOps y clonacion en Visual Studio 2022.
-- Creacion de proyecto de consola en C# .NET 8.0
-
-- ![Ejericio](./1.jpg)
-- ![Ejericio](./2.jpg)
-
+### Capturas
+![Ejercicio](./1.jpg)
+![Ejercicio](./2.jpg)
 
 ## 馃洜 Tecnolog铆as
 ![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white) ![.NET](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
