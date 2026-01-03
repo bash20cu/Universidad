@@ -26,3 +26,7 @@ Ejercicio #3
       Por cada ejercicio debe realizar un diagrama de clases, debe subir al e-campus tanto
       el diagrama como la carpeta de proyecto Netbeans con la solución de ambos
       ejercicios, para este caso debe subir los ejercicios en carpetas de proyecto individual
+
+
+## 🛠 Tecnologías
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)

@@ -10,3 +10,7 @@ Ejercicio #1:
       el usuario ingresa productos hasta que desea pagar, mostrando en pantalla el
       desglose a pagar(importe de cada uno de los productos del carrito, subtotal,
       impuesto(13%) y total a pagar).
+
+
+## 🛠 Tecnologías
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)

@@ -14,3 +14,6 @@ Ejercicio #2:
 Ejercicio #3: 
       
       Realice una función que genere un numero aleatorio entre x y y.
+
+## 🛠 Tecnologías
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)

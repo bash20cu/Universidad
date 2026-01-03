@@ -42,3 +42,6 @@
       Por cada paquete calculado, se debe preguntar a usuario si sea agregar otro, de ser 
       afirmativo, se repite el proceso, de lo contrario se finaliza la aplicación.
 ![Tabla Ejericio](./img.jpg)
+
+## 🛠 Tecnologías
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)

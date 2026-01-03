@@ -23,3 +23,7 @@ documentar cada una de las instrucciones DQL que se solicitan a continuación:
 10. Determinar todas las personas que en el nombre contenga JUAN y el apellido1 sea
     SANTAMARIA y el apellido2 sea RODRIGUEZ, sin importar si tildan (Santamaría) o
     Rodríguez.
+
+
+## 🛠 Tecnologías
+![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)

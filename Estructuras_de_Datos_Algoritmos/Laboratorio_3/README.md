@@ -23,3 +23,6 @@
        Después de este último paso de recolección, el arreglo original queda ordenado.
     
     Al finalizar el programa se debe imprimir el vector original y el vector ordenado.
+
+## 🛠 Tecnologías
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)

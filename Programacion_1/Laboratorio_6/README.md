@@ -19,3 +19,7 @@ Ejercicio #1: Analice el siguiente caso:
       administre los empleados de la empresa y permita imprimir en pantalla los datos
       personales de cada empleado y su sueldo semanal, para esta solución desarrolle una
       aplicación en consola.
+
+
+## 🛠 Tecnologías
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)

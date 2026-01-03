@@ -12,3 +12,7 @@ Generar un script de la siguiente forma:
 8. Desplegar los datos de la tabla bitácora
 9. ¿Explicar qué sucedió con el registro del punto 6?
 10. ¿Qué tipo de respaldo haría para incluirlo?
+
+
+## 🛠 Tecnologías
+![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)

@@ -25,3 +25,7 @@
 
 - ![Ejericio](./1.jpg)
 - ![Ejericio](./2.jpg)
+
+
+## 🛠 Tecnologías
+![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white) ![.NET](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)

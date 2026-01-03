@@ -19,3 +19,7 @@ i. Permisos disponibles
 6. Hacer un DQL con Join para un usuario en particular.
 
 ![diagrama](./diagrama.png "Diagrama" )
+
+
+## 🛠 Tecnologías
+![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)

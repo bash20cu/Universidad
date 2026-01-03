@@ -10,3 +10,6 @@ Diagramar en la herramienta WorkBench los siguientes conceptos, aplicando las Fo
 - f. Direccion (Utilizando todos los catálogos necesarios)
 
 ![diagrama](./lab-3.png "Diagrama" )
+
+## 🛠 Tecnologías
+![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)

@@ -9,3 +9,7 @@ Crear una función que reciba:
    tabla que se adjunta) y contemplar los créditos fiscales que se mencionan
    abajo.
    - 3 = se debe calcular ambas deducciones
+
+
+## 🛠 Tecnologías
+![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)

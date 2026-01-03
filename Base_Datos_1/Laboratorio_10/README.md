@@ -20,3 +20,7 @@ documentar cada una de las instrucciones DQL que se solicitan a continuación:
 8. Analice el plan de ejecución con base en las métricas vistas en clase.
 9. ¿Cuál de los dos escenarios (punto 4 y punto 7) es mejor en términos de rendimiento?
 10. ¿Cuál es la diferencia entre un índice agrupado y uno no agrupado?
+
+
+## 🛠 Tecnologías
+![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)

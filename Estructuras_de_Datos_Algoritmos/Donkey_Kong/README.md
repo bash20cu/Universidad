@@ -325,3 +325,6 @@ Referencias:
 
 Alvarez, M. A. (2014, enero 2). Qué es MVC. Desarrolloweb.com.
 https://desarrolloweb.com/articulos/que-es-mvc.html
+
+## 🛠 Tecnologías
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)

@@ -9,3 +9,7 @@
     Tenga también como entrada un par de pueblos (x, y). 
     La aplicación tiene que encontrar un camino entre ambos pueblos utilizando técnicas recursivas. 
     La salida ha de ser la ruta que ha de seguir para ir de x a y junto a la distancia de la ruta.
+
+
+## 🛠 Tecnologías
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)

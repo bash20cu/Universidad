@@ -11,3 +11,7 @@ siguiente:
   comprado, mostrando los datos de la fecha de la factura y el total facturado
   (usando la ecuación quantity \* unitprice)
 - c. Se debe mostrar como elementos y no como atributos.
+
+
+## 🛠 Tecnologías
+![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)

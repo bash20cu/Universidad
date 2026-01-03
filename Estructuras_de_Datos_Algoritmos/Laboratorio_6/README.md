@@ -32,3 +32,6 @@
 ![Ejericio](./img2.png)
 
     Esto quiere decir que si el nodo con número de nodo 2, tendría un número interno de procesamiento de 1, si el número de nodo es 3 el número interno de procesamiento es 2 y así sucesivamente.
+
+## 🛠 Tecnologías
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)

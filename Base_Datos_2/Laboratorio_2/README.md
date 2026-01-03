@@ -44,3 +44,7 @@ Realizar un script con lo siguiente:
 3. Conectarse a la base de datos con el usuario
 4. Intentar hacer un insert en la BD llamada UIALaboratorio02, tabla bitácora y
    documentar los resultados y explicar brevemente del por qué de los resultados.
+
+
+## 🛠 Tecnologías
+![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)

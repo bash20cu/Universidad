@@ -34,3 +34,6 @@
         v. Bollo relleno ¢1500
         vi. Se desea conocer el total recaudado por la venta de cada producto.
         vii. Se desea conocer el total recaudado de ventas.
+
+## 🛠 Tecnologías
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
