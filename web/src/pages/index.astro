@@ -4,9 +4,34 @@ import { getCourses, getParsedRootReadme } from '../utils/content';
 import { marked } from 'marked';
 
 const courses = getCourses();
-const { technologies, stats, intro } = getParsedRootReadme();
 
-const introHtml = intro ? await marked.parse(intro) : '';
+const technologies = [
+    "https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white",
+    "https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white",
+    "https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E",
+    "https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white",
+    "https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white",
+    "https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white",
+    "https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white",
+    "https://img.shields.io/badge/NetBeansIDE-1B6AC6.svg?style=for-the-badge&logo=apache-netbeans-ide&logoColor=white",
+    "https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white",
+    "https://img.shields.io/badge/Visual%20Studio-5C2D91.svg?style=for-the-badge&logo=visual-studio&logoColor=white",
+    "https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white"
+];
+
+const stats = [
+    "https://img.shields.io/github/languages/count/bash20cu/Universidad?style=for-the-badge",
+    "https://img.shields.io/github/languages/top/bash20cu/Universidad?style=for-the-badge",
+    "https://img.shields.io/github/commit-activity/m/bash20cu/Universidad?style=for-the-badge",
+    "https://img.shields.io/github/last-commit/bash20cu/Universidad?style=for-the-badge",
+    "https://img.shields.io/github/downloads/bash20cu/Universidad/total?style=for-the-badge"
+];
+
+// Content migrated from README.md
+const introHtml = `
+<p>¡Bienvenido a mi repositorio de la Universidad Internacional de las Américas en Costa Rica!</p>
+<p>Soy un estudiante de Ingeniería de Software apasionado por la programación y el desarrollo de software. Aquí encontrarás una colección de ejercicios y proyectos que he completado durante mi tiempo en la universidad.</p>
+`;
 ---
 
 <Layout title="Mi Portafolio Universitario">
