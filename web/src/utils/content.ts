@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const IGNORED_DIRS = ['.git', '.vscode', 'node_modules', 'web', 'config', 'Powershell_Scripts', '.gemini', '.agent'];
+const IGNORED_DIRS = ['.git', '.vscode', 'node_modules', 'web', 'config', '.gemini', '.agent'];
 const IGNORED_FILES = ['LICENSE', '.gitattributes', '.gitignore'];
 
 export interface Course {
