@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
+    "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.6",
     "astro-icon": "^1.1.5",
     "framer-motion": "^12.23.26",
+    "marked": "^17.0.1",
     "tailwindcss": "^4.1.18"
   }
 }

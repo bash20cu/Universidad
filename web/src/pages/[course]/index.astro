@@ -36,10 +36,18 @@ content.sort((a, b) => {
         {content.length === 0 ? (
             <p class="text-gray-500 col-span-full text-center py-12">No hay contenido visible en esta carpeta.</p>
         ) : (
-            content.map((item) => (
+            content.map((item) => {
+                // Determine URL: Internal if it has readme, external GitHub otherwise
+                const href = item.hasReadme 
+                    ? `/${course.path}/${item.name}` 
+                    : `https://github.com/bash20cu/Universidad/tree/master/${course.path}/${item.name}`;
+                
+                const target = item.hasReadme ? "_self" : "_blank";
+
+                return (
                 <a 
-                    href={`https://github.com/tu-usuario/Universidad/tree/master/${course.path}/${item.name}`} 
-                    target="_blank"
+                    href={href}
+                    target={target}
                     class="group flex items-center p-4 bg-slate-900/30 border border-white/5 rounded-xl hover:bg-slate-800/50 hover:border-blue-500/30 transition-all hover:translate-x-1"
                 >
                     <div class={`p-3 rounded-lg mr-4 ${item.type === 'directory' ? 'bg-blue-500/10 text-blue-400' : 'bg-purple-500/10 text-purple-400'}`}>
@@ -59,6 +67,7 @@ content.sort((a, b) => {
                         </h3>
                         <p class="text-xs text-gray-500 capitalize">
                             {item.type === 'directory' ? 'Carpeta' : 'Archivo'}
+                            {item.hasReadme && <span class="ml-2 inline-block px-2 py-0.5 bg-green-500/20 text-green-400 rounded-full text-[10px]">Documentado</span>}
                         </p>
                     </div>
                     <div class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-gray-500">
@@ -67,7 +76,7 @@ content.sort((a, b) => {
                         </svg>
                     </div>
                 </a>
-            ))
+            )})
         )}
     </div>
 </Layout>

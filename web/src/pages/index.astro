@@ -1,36 +1,50 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getCourses } from '../utils/content';
+import { getCourses, getRootReadme } from '../utils/content';
+import { marked } from 'marked';
 
 const courses = getCourses();
+const readmeContent = getRootReadme();
+let readmeHtml = '';
+
+if (readmeContent) {
+    readmeHtml = await marked.parse(readmeContent);
+}
+
+const BADGES_SECTION = `
+<div class="flex flex-wrap gap-2 justify-center mb-8">
+    <img src="https://img.shields.io/badge/Visual%20Studio-5C2D91.svg?style=for-the-badge&logo=visual-studio&logoColor=white" alt="Visual Studio">
+    <img src="https://img.shields.io/github/languages/count/bash20cu/Universidad?style=for-the-badge" alt="GitHub language count">
+    <img src="https://img.shields.io/github/languages/top/bash20cu/Universidad?style=for-the-badge" alt="GitHub top language">
+    <img src="https://img.shields.io/github/commit-activity/m/bash20cu/Universidad?style=for-the-badge" alt="GitHub commit activity">
+    <img src="https://img.shields.io/github/last-commit/bash20cu/Universidad?style=for-the-badge" alt="GitHub last commit">
+    <a href="https://www.linkedin.com/in/miguel1990/" target="_blank"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+    <a href="https://portfoliomiguel2025.netlify.app/" target="_blank"><img src="https://img.shields.io/badge/Portfolio-%23000000.svg?style=for-the-badge&logo=firefox&logoColor=#FF7139" alt="Portfolio"></a>
+</div>
+`;
+
 ---
 
 <Layout title="Mi Portafolio Universitario">
-    <section class="flex flex-col items-center justify-center py-20 text-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-blue-500/10 blur-[100px] rounded-full -z-10 transform scale-50"></div>
-        
-        <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent pb-2 animate-fade-in">
-            Portafolio Universitario
-        </h1>
-        <p class="text-xl text-gray-400 max-w-2xl mb-10 animate-fade-in" style="animation-delay: 0.1s">
-            Explorando el conocimiento a través del código. Una colección de proyectos y tareas de mi carrera universitaria.
-        </p>
-        <div class="flex gap-4 animate-fade-in" style="animation-delay: 0.2s">
-            <a href="#courses" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-medium transition-all hover:scale-105 shadow-lg shadow-blue-500/25">
-                Ver Cursos
-            </a>
-            <a href="https://github.com/bash20cu" target="_blank" class="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-full font-medium transition-all backdrop-blur-sm border border-white/10">
-                GitHub
-            </a>
+    <section class="max-w-4xl mx-auto py-20 px-6">
+        <!-- Badges (User requested specific block, we inject it nicely at the top) -->
+        <Fragment set:html={BADGES_SECTION} />
+
+        <div class="prose prose-invert prose-lg max-w-none 
+            prose-headings:text-transparent prose-headings:bg-clip-text prose-headings:bg-gradient-to-r prose-headings:from-blue-400 prose-headings:to-purple-400
+            prose-a:text-blue-400 hover:prose-a:text-blue-300 prose-img:rounded-xl shadow-2xl bg-slate-900/50 p-8 rounded-3xl border border-white/10 animate-fade-in">
+            {readmeHtml ? <Fragment set:html={readmeHtml} /> : (
+                <div class="text-center">
+                    <h1 class="text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-4">Portafolio Universitario</h1>
+                    <p class="text-gray-400">Explorando el conocimiento a través del código.</p>
+                </div>
+            )}
         </div>
     </section>
 
-    <section id="courses" class="py-12 animate-fade-in" style="animation-delay: 0.3s">
+    <section id="courses" class="py-12 max-w-7xl mx-auto px-6 animate-fade-in" style="animation-delay: 0.2s">
         <h2 class="text-3xl font-bold text-white mb-10 border-l-4 border-blue-500 pl-4 flex items-center">
-            Cursos y Materias
-            <span class="ml-4 text-sm font-normal text-gray-500 bg-gray-900 border border-gray-800 px-3 py-1 rounded-full">
-                {courses.length} encontrados
-            </span>
+            Explora los Cursos
         </h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
