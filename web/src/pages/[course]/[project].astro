@@ -62,9 +62,11 @@ const githubUrl = `https://github.com/bash20cu/Universidad/tree/master/${course.
             </div>
         </div>
 
-        <article class="prose prose-invert prose-lg max-w-none 
+        <article class="prose prose-invert prose-lg max-w-none w-full
             prose-headings:text-blue-100 prose-a:text-blue-400 hover:prose-a:text-blue-300
-            prose-pre:bg-[#1e1e1e] prose-pre:border prose-pre:border-white/10
+            prose-pre:bg-[#1e1e1e] prose-pre:border prose-pre:border-white/10 prose-pre:overflow-x-auto
+            prose-img:rounded-xl prose-img:shadow-lg prose-img:max-w-full
+            break-words overflow-hidden
             bg-slate-900/40 p-8 rounded-3xl border border-white/5 animate-fade-in" style="animation-delay: 0.1s">
             {readmeHtml ? <Fragment set:html={readmeHtml} /> : (
                 <div class="text-center py-10">
