@@ -78,7 +78,7 @@ export function getCourseContent(coursePath: string): Project[] {
                 const isDirectory = stats.isDirectory();
                 let hasReadme = false;
                 let description = undefined;
-                let technologies = [];
+                let technologies: string[] = [];
 
                 if (isDirectory) {
                     const readmePath = path.join(itemPath, 'README.md');
@@ -136,7 +136,21 @@ export function getReadmeContent(relativePath: string): string | null {
         const fullPath = path.join(rootDir, relativePath, 'README.md');
 
         if (fs.existsSync(fullPath)) {
-            return fs.readFileSync(fullPath, 'utf-8');
+            let content = fs.readFileSync(fullPath, 'utf-8');
+
+            // Rewrite relative image paths to absolute GitHub raw URLs
+            // Matches ![alt](path) where path does not start with http or https
+            content = content.replace(/!\[(.*?)\]\((?!http)(.*?)\)/g, (match, alt, imgPath) => {
+                // Remove leading ./ or / if present to get clean relative path
+                const cleanPath = imgPath.replace(/^\.?\//, '');
+                // Construct absolute URL: root + relativePath + cleanPath
+                // relativePath is like "Base_de_Datos/Base_Datos_1/Laboratorio_2"
+                // We need to join them correctly
+                const absoluteUrl = `https://raw.githubusercontent.com/bash20cu/Universidad/master/${relativePath}/${cleanPath}`;
+                return `![${alt}](${absoluteUrl})`;
+            });
+
+            return content;
         }
         return null;
     } catch (e) {
