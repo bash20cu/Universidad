@@ -13,31 +13,45 @@ export function getStaticPaths() {
 const { course } = Astro.props;
 const content = getCourseContent(course.path);
 
-// Sort content: Directories first, then files
+// Sort content: Directories with description first, then directories, then files
 content.sort((a, b) => {
+    if (a.hasReadme && !b.hasReadme) return -1;
+    if (!a.hasReadme && b.hasReadme) return 1;
     if (a.type === b.type) return a.name.localeCompare(b.name);
     return a.type === 'directory' ? -1 : 1;
 });
 ---
 
 <Layout title={`${course.name} - Portafolio Universitario`}>
-    <div class="mb-8 flex items-center gap-4 animate-fade-in">
-        <a href="/" class="p-2 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-        </a>
-        <h1 class="text-3xl md:text-5xl font-bold text-white">
+    <!-- Header -->
+    <div class="mb-12 animate-fade-in relative">
+         <div class="absolute -left-20 -top-20 w-64 h-64 bg-blue-500/20 rounded-full blur-[80px] -z-10"></div>
+         
+        <div class="flex items-center gap-4 mb-4">
+            <a href="/" class="p-2 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition-colors border border-transparent hover:border-white/10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+            </a>
+            <span class="text-sm font-medium text-blue-400 tracking-wider uppercase">Curso</span>
+        </div>
+        
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
             {course.name}
         </h1>
+        <p class="text-xl text-gray-400 max-w-2xl">
+            Explora la colección de proyectos, laboratorios y ejercicios prácticos.
+        </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-fade-in" style="animation-delay: 0.1s">
+    <!-- Content Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in" style="animation-delay: 0.1s">
         {content.length === 0 ? (
-            <p class="text-gray-500 col-span-full text-center py-12">No hay contenido visible en esta carpeta.</p>
+            <div class="col-span-full py-20 text-center border border-white/5 rounded-3xl bg-slate-900/50">
+                <p class="text-gray-500 text-lg">No hay contenido visible en esta carpeta.</p>
+            </div>
         ) : (
             content.map((item) => {
-                // Determine URL: Internal if it has readme, external GitHub otherwise
                 const href = item.hasReadme 
                     ? `/${course.path}/${item.name}` 
                     : `https://github.com/bash20cu/Universidad/tree/master/${course.path}/${item.name}`;
@@ -48,32 +62,57 @@ content.sort((a, b) => {
                 <a 
                     href={href}
                     target={target}
-                    class="group flex items-center p-4 bg-slate-900/30 border border-white/5 rounded-xl hover:bg-slate-800/50 hover:border-blue-500/30 transition-all hover:translate-x-1"
+                    class="group relative bg-slate-900/40 border border-white/10 rounded-2xl overflow-hidden hover:border-blue-500/50 transition-all hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-1 flex flex-col h-full"
                 >
-                    <div class={`p-3 rounded-lg mr-4 ${item.type === 'directory' ? 'bg-blue-500/10 text-blue-400' : 'bg-purple-500/10 text-purple-400'}`}>
-                        {item.type === 'directory' ? (
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-                            </svg>
-                        ) : (
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
-                        )}
-                    </div>
-                    <div>
-                        <h3 class="font-medium text-gray-200 group-hover:text-white transition-colors truncate max-w-[200px]" title={item.name}>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class={`p-3 rounded-xl ${item.type === 'directory' ? 'bg-blue-500/10 text-blue-400' : 'bg-purple-500/10 text-purple-400'}`}>
+                                {item.type === 'directory' ? (
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                                    </svg>
+                                ) : (
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                )}
+                            </div>
+                            
+                            {item.hasReadme && (
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-green-400 bg-green-500/10 px-2 py-1 rounded-full border border-green-500/20">
+                                    Documentado
+                                </span>
+                            )}
+                        </div>
+
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors break-words">
                             {item.name}
                         </h3>
-                        <p class="text-xs text-gray-500 capitalize">
-                            {item.type === 'directory' ? 'Carpeta' : 'Archivo'}
-                            {item.hasReadme && <span class="ml-2 inline-block px-2 py-0.5 bg-green-500/20 text-green-400 rounded-full text-[10px]">Documentado</span>}
-                        </p>
-                    </div>
-                    <div class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-gray-500">
-                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
+                        
+                        {item.description ? (
+                            <p class="text-sm text-gray-400 line-clamp-3 mb-4 leading-relaxed">
+                                {item.description}
+                            </p>
+                        ) : (
+                            <p class="text-sm text-gray-600 italic mb-4">
+                                Sin descripción disponible.
+                            </p>
+                        )}
+                        
+                        <div class="mt-auto pt-4 border-t border-white/5">
+                             {item.technologies && item.technologies.length > 0 ? (
+                                <div class="flex flex-wrap gap-2">
+                                     {item.technologies.slice(0, 4).map(tech => (
+                                         <img src={tech} alt="Tech" class="h-5 object-contain opacity-70 group-hover:opacity-100 transition-opacity" />
+                                     ))}
+                                     {item.technologies.length > 4 && (
+                                         <span class="text-xs text-gray-500 self-center">+{item.technologies.length - 4}</span>
+                                     )}
+                                </div>
+                             ) : (
+                                <div class="text-xs text-gray-600">Ver detalles &rarr;</div>
+                             )}
+                        </div>
                     </div>
                 </a>
             )})

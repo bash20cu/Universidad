@@ -16,6 +16,16 @@ export interface Project {
     path: string;
     type: 'file' | 'directory';
     hasReadme: boolean;
+    description?: string;
+    technologies?: string[];
+}
+
+export interface ReadmeData {
+    raw: string;
+    about?: string;
+    technologies?: string[]; // Array of image URLs
+    stats?: string[]; // Array of image URLs
+    intro?: string;
 }
 
 export function getCourses(): Course[] {
@@ -35,8 +45,6 @@ export function getCourses(): Course[] {
                 const fullPath = path.join(rootDir, dirName);
                 const contents = fs.readdirSync(fullPath);
 
-                // Estimate projects: subdirectories
-                // Also could verify if they have READMEs
                 const count = contents.filter(c => {
                     const cPath = path.join(fullPath, c);
                     return fs.statSync(cPath).isDirectory() && !c.startsWith('.');
@@ -69,16 +77,51 @@ export function getCourseContent(coursePath: string): Project[] {
                 const stats = fs.statSync(itemPath);
                 const isDirectory = stats.isDirectory();
                 let hasReadme = false;
+                let description = undefined;
+                let technologies = [];
 
                 if (isDirectory) {
-                    hasReadme = fs.existsSync(path.join(itemPath, 'README.md'));
+                    const readmePath = path.join(itemPath, 'README.md');
+                    hasReadme = fs.existsSync(readmePath);
+
+                    if (hasReadme) {
+                        try {
+                            const content = fs.readFileSync(readmePath, 'utf-8');
+
+                            // Extract Description: First paragraph that is not a header or image/badge
+                            const lines = content.split('\n');
+                            for (const line of lines) {
+                                const trimmed = line.trim();
+                                if (trimmed.length > 0 && !trimmed.startsWith('#') && !trimmed.startsWith('![') && !trimmed.startsWith('<')) {
+                                    description = trimmed;
+                                    break;
+                                }
+                            }
+
+                            // Extract Images (Potential technologies)
+                            const imgRegex = /!\[.*?\]\((.*?)\)/g;
+                            let match;
+                            while ((match = imgRegex.exec(content)) !== null) {
+                                // Filter for likely badge URLs or small icons if possible, but taking all for now allows user to see what they put
+                                if (match[1].includes('shield') || match[1].includes('badge') || match[1].includes('logo')) {
+                                    technologies.push(match[1]);
+                                }
+                            }
+                            // Dedup
+                            technologies = [...new Set(technologies)];
+                        } catch (e) {
+                            console.error("Error parsing project README:", e);
+                        }
+                    }
                 }
 
                 return {
                     name: item,
-                    path: path.join(coursePath, item), // Store full relative path
+                    path: path.join(coursePath, item),
                     type: isDirectory ? 'directory' : 'file',
-                    hasReadme
+                    hasReadme,
+                    description,
+                    technologies
                 };
             });
     } catch (e) {
@@ -95,9 +138,6 @@ export function getReadmeContent(relativePath: string): string | null {
         if (fs.existsSync(fullPath)) {
             return fs.readFileSync(fullPath, 'utf-8');
         }
-
-        // Try case insensitive check if exact match fails (linux is case sensitive but user usage might vary)
-        // Usually it's README.md, but let's stick to that for now.
         return null;
     } catch (e) {
         console.error(`Error reading README for ${relativePath}:`, e);
@@ -105,17 +145,47 @@ export function getReadmeContent(relativePath: string): string | null {
     }
 }
 
-// Special function for the root README
-export function getRootReadme(): string | null {
-    try {
-        const rootDir = path.resolve('../');
-        const fullPath = path.join(rootDir, 'README.md');
-        if (fs.existsSync(fullPath)) {
-            return fs.readFileSync(fullPath, 'utf-8');
-        }
-        return null;
-    } catch (e) {
-        console.error("Error reading root README:", e);
-        return null;
+export function getParsedRootReadme(): ReadmeData {
+    const rootDir = path.resolve('../');
+    const fullPath = path.join(rootDir, 'README.md');
+    let raw = '';
+
+    if (fs.existsSync(fullPath)) {
+        raw = fs.readFileSync(fullPath, 'utf-8');
     }
+
+    const techRegex = /### Tecnologías Utilizadas\s+([\s\S]*?)(?=###|$)/;
+    const techMatch = raw.match(techRegex);
+    const technologies: string[] = [];
+    if (techMatch) {
+        const techSection = techMatch[1];
+        const imgRegex = /!\[.*?\]\((.*?)\)/g;
+        let match;
+        while ((match = imgRegex.exec(techSection)) !== null) {
+            technologies.push(match[1]);
+        }
+    }
+
+    const statsRegex = /### Estadísticas del Repositorio\s+([\s\S]*?)(?=###|$)/;
+    const statsMatch = raw.match(statsRegex);
+    const stats: string[] = [];
+    if (statsMatch) {
+        const statsSection = statsMatch[1];
+        const imgRegex = /!\[.*?\]\((.*?)\)/g;
+        let match;
+        while ((match = imgRegex.exec(statsSection)) !== null) {
+            stats.push(match[1]);
+        }
+    }
+
+    const aboutRegex = /¡Bienvenido([\s\S]*?)(?=## Acerca|## Licencia|$)/;
+    const aboutMatch = raw.match(aboutRegex);
+    const intro = aboutMatch ? "¡Bienvenido" + aboutMatch[1].trim() : "";
+
+    return {
+        raw,
+        technologies,
+        stats,
+        intro
+    };
 }
