@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title or "IA - Dashboard" }}</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --panel: #ffffff;
+      --ink: #112233;
+      --muted: #5f6b7a;
+      --accent: #0f766e;
+      --line: #dbe2ea;
+    }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at top right, #e7f4ff, var(--bg));
+    }
+    .container { max-width: 1080px; margin: 24px auto; padding: 0 16px; }
+    .nav {
+      display: flex; gap: 12px; margin-bottom: 16px;
+    }
+    .nav a {
+      text-decoration: none; padding: 10px 14px; border-radius: 8px;
+      background: var(--panel); border: 1px solid var(--line); color: var(--ink);
+    }
+    .card {
+      background: var(--panel); border: 1px solid var(--line);
+      border-radius: 12px; padding: 16px; margin-bottom: 14px;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+    }
+    h1, h2, h3 { margin-top: 0; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { text-align: left; padding: 8px; border-bottom: 1px solid var(--line); }
+    .muted { color: var(--muted); }
+    .error { color: #b91c1c; font-weight: 600; }
+    .ok { color: var(--accent); font-weight: 700; }
+    input { width: 100%; box-sizing: border-box; margin: 4px 0 10px; padding: 10px; border: 1px solid var(--line); border-radius: 8px; }
+    button { background: var(--accent); color: #fff; border: 0; border-radius: 8px; padding: 10px 14px; cursor: pointer; }
+    textarea { width: 100%; min-height: 240px; box-sizing: border-box; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #0f172a; color: #e2e8f0; font-family: Consolas, monospace; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .tab-btn { background: #e2e8f0; color: #0f172a; border: 1px solid var(--line); }
+    .tab-btn.active { background: #0f766e; color: #fff; }
+    canvas { width: 100%; max-height: 340px; }
+    @media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    </div>
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

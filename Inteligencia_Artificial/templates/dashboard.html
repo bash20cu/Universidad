@@ -1,0 +1,287 @@
+{% extends "base.html" %}
+{% block content %}
+<div x-data="runnerApp()" x-init="init()">
+  <div class="card">
+    <h1>Panel del Proyecto IA</h1>
+    <p class="muted">Dashboard con métricas, gráficos, ejecución de fases e inferencia.</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn" :class="{ 'active': activeTab==='resumen' }" @click="activeTab='resumen'">Resumen</button>
+    <button class="tab-btn" :class="{ 'active': activeTab==='graficos' }" @click="activeTab='graficos'; renderCharts()">Gráficos</button>
+    <button class="tab-btn" :class="{ 'active': activeTab==='infer' }" @click="activeTab='infer'">Inferencia</button>
+    <button class="tab-btn" :class="{ 'active': activeTab==='fases' }" @click="activeTab='fases'">Ejecución</button>
+    <button class="tab-btn" :class="{ 'active': activeTab==='limitaciones' }" @click="activeTab='limitaciones'">Limitaciones</button>
+  </div>
+
+  <div x-show="activeTab==='resumen'" class="card">
+    <h2>Resumen</h2>
+    <p>Total dataset: <strong x-text="stats.manifest_summary?.total ?? 0"></strong></p>
+    <p>Train/Val/Test:
+      <strong x-text="(stats.manifest_summary?.per_split?.train ?? 0) + ' / ' + (stats.manifest_summary?.per_split?.val ?? 0) + ' / ' + (stats.manifest_summary?.per_split?.test ?? 0)"></strong>
+    </p>
+    <p>Epochs entrenadas: <strong x-text="stats.training_summary?.epochs ?? 0"></strong></p>
+    <p>Best val_acc: <strong x-text="format4(stats.training_summary?.best_val_acc)"></strong></p>
+    <p>Accuracy test (Fase 4): <strong x-text="format4(stats.phase4_metrics?.accuracy)"></strong></p>
+    <p>Macro F1 test (Fase 4): <strong x-text="format4(stats.phase4_metrics?.macro_f1)"></strong></p>
+    <button @click="refreshStats()">Refrescar</button>
+  </div>
+
+  <div x-show="activeTab==='graficos'" class="card">
+    <h2>Gráficos</h2>
+    <div class="grid-2">
+      <div>
+        <h3>Dispersión: train_acc vs val_acc por época</h3>
+        <canvas x-ref="scatterChart"></canvas>
+      </div>
+      <div>
+        <h3>Pastel: distribución por clase (dataset)</h3>
+        <canvas x-ref="pieChart"></canvas>
+      </div>
+    </div>
+    <div style="margin-top:12px;">
+      <h3>Barras: precisión, recall y f1 por clase (test)</h3>
+      <canvas x-ref="barChart"></canvas>
+    </div>
+  </div>
+
+  <div x-show="activeTab==='infer'" class="card">
+    <h2>Inferencia con subida de imagen</h2>
+    <label>Checkpoint (.pt)</label>
+    <input x-model="inferForm.checkpoint_path" placeholder="phase3_artifacts/best_checkpoint.pt">
+    <label>Tamaño imagen</label>
+    <input type="number" x-model.number="inferForm.image_size" min="64" step="32">
+    <label>Subir foto</label>
+    <input type="file" x-ref="imageFile" accept="image/*">
+    <button @click="predictUpload()">Subir y predecir</button>
+    <p class="error" x-show="inferError" x-text="inferError"></p>
+
+    <div x-show="inferResult" style="margin-top:12px;">
+      <p class="ok">Predicción: <strong x-text="inferResult?.pred_label"></strong> (<span x-text="format4(inferResult?.confidence)"></span>)</p>
+      <p>Device: <strong x-text="inferResult?.device_name"></strong></p>
+      <p>Epoch checkpoint: <strong x-text="inferResult?.checkpoint_epoch"></strong></p>
+      <table>
+        <thead><tr><th>Clase</th><th>Probabilidad</th></tr></thead>
+        <tbody>
+          <template x-for="(prob, className) in (inferResult?.probabilities || {})" :key="className">
+            <tr>
+              <td x-text="className"></td>
+              <td x-text="format4(prob)"></td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div x-show="activeTab==='fases'" class="card">
+    <h2>Ejecución de fases</h2>
+    <p class="muted">Ejecuta procesos en segundo plano y monitorea log en vivo.</p>
+    <div class="grid-2">
+      <div>
+        <h3>Fase 1</h3>
+        <input x-model="forms.phase1.dataset_root" placeholder="dataset root">
+        <label><input type="checkbox" x-model="forms.phase1.gpu_test"> GPU test</label>
+        <button @click="runTask('phase1', forms.phase1)">Run Fase 1</button>
+      </div>
+      <div>
+        <h3>Fase 2</h3>
+        <input x-model="forms.phase2.dataset_root" placeholder="dataset root">
+        <input x-model="forms.phase2.output_dir" placeholder="output dir">
+        <button @click="runTask('phase2', forms.phase2)">Run Fase 2</button>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <h3>Fase 3 Train</h3>
+        <input x-model="forms.phase3_train.manifest_csv" placeholder="manifest csv">
+        <input type="number" x-model.number="forms.phase3_train.epochs" placeholder="epochs">
+        <button @click="runTask('phase3_train', forms.phase3_train)">Run Fase 3 Train</button>
+      </div>
+      <div>
+        <h3>Fase 4 Evaluate</h3>
+        <input x-model="forms.phase4.manifest_csv" placeholder="manifest csv">
+        <input x-model="forms.phase4.checkpoint_path" placeholder="checkpoint .pt">
+        <button @click="runTask('phase4_evaluate', forms.phase4)">Run Fase 4 Evaluate</button>
+      </div>
+    </div>
+
+    <h3 style="margin-top:12px;">Log de ejecución</h3>
+    <p>Task: <strong x-text="task.id || '-'"></strong> | Status: <strong x-text="task.status || 'idle'"></strong> | RC: <strong x-text="task.returncode ?? '-'"></strong></p>
+    <textarea readonly x-model="task.log_text"></textarea>
+  </div>
+
+  <div x-show="activeTab==='limitaciones'" class="card">
+    <h2>Limitaciones técnicas</h2>
+    <ol>
+      <template x-for="(item, idx) in (stats.technical_limitations || [])" :key="idx">
+        <li x-text="item"></li>
+      </template>
+    </ol>
+  </div>
+</div>
+
+<script>
+window.__APP_INIT__ = {
+  initialStats: {{ stats|tojson }},
+  checkpointPath: {{ checkpoint_path|tojson }}
+};
+
+function runnerApp() {
+  const boot = window.__APP_INIT__ || {};
+  return {
+    activeTab: "resumen",
+    stats: boot.initialStats || {},
+    task: { id: null, status: "idle", returncode: null, log_text: "" },
+    poller: null,
+    inferResult: null,
+    inferError: "",
+    chartScatter: null,
+    chartPie: null,
+    chartBar: null,
+    inferForm: { checkpoint_path: boot.checkpointPath || "phase3_artifacts/best_checkpoint.pt", image_size: 128 },
+    forms: {
+      phase1: { dataset_root: "gatos_perros_pandas", gpu_test: true, matmul_size: 512, validate_max: 300, sample_size: 64 },
+      phase2: { dataset_root: "gatos_perros_pandas", output_dir: "phase2_artifacts", dedupe_mode: "sha1", batch_size: 16, verify_dataloaders: true, debug: true },
+      phase3_train: { manifest_csv: "phase2_artifacts/dataset_split.csv", output_dir: "phase3_artifacts", epochs: 5, batch_size: 32, image_size: 128, debug: true },
+      phase4: { manifest_csv: "phase2_artifacts/dataset_split.csv", checkpoint_path: "phase3_artifacts/best_checkpoint.pt", output_dir: "phase4_artifacts", split: "test", image_size: 128 }
+    },
+    init() {
+      this.$nextTick(() => this.renderCharts());
+    },
+    format4(v) {
+      if (v === null || v === undefined || Number.isNaN(Number(v))) return "-";
+      return Number(v).toFixed(4);
+    },
+    async refreshStats() {
+      const res = await fetch("/api/stats");
+      this.stats = await res.json();
+      this.$nextTick(() => this.renderCharts());
+    },
+    renderCharts() {
+      if (typeof Chart === "undefined") return;
+
+      const history = this.stats.metrics_history || [];
+      const scatterData = history.map(row => ({ x: Number(row.train_acc || 0), y: Number(row.val_acc || 0) }));
+      const scatterLabels = history.map(row => `e${row.epoch}`);
+
+      if (this.chartScatter) this.chartScatter.destroy();
+      this.chartScatter = new Chart(this.$refs.scatterChart, {
+        type: "scatter",
+        data: {
+          datasets: [{
+            label: "train_acc vs val_acc",
+            data: scatterData,
+            pointRadius: 5,
+            backgroundColor: "#0f766e"
+          }]
+        },
+        options: {
+          scales: {
+            x: { title: { display: true, text: "train_acc" }, min: 0, max: 1 },
+            y: { title: { display: true, text: "val_acc" }, min: 0, max: 1 }
+          },
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label: (ctx) => {
+                  const i = ctx.dataIndex;
+                  return `${scatterLabels[i]}: (${ctx.raw.x.toFixed(3)}, ${ctx.raw.y.toFixed(3)})`;
+                }
+              }
+            }
+          }
+        }
+      });
+
+      const perLabel = this.stats.manifest_summary?.per_label || {};
+      const pieLabels = Object.keys(perLabel);
+      const pieValues = Object.values(perLabel);
+      if (this.chartPie) this.chartPie.destroy();
+      this.chartPie = new Chart(this.$refs.pieChart, {
+        type: "pie",
+        data: {
+          labels: pieLabels,
+          datasets: [{
+            data: pieValues,
+            backgroundColor: ["#0f766e", "#0284c7", "#f59e0b"]
+          }]
+        }
+      });
+
+      const perClass = this.stats.phase4_metrics?.per_class || {};
+      const classLabels = Object.keys(perClass);
+      const precision = classLabels.map(k => Number(perClass[k].precision || 0));
+      const recall = classLabels.map(k => Number(perClass[k].recall || 0));
+      const f1 = classLabels.map(k => Number(perClass[k].f1 || 0));
+      if (this.chartBar) this.chartBar.destroy();
+      this.chartBar = new Chart(this.$refs.barChart, {
+        type: "bar",
+        data: {
+          labels: classLabels,
+          datasets: [
+            { label: "precision", data: precision, backgroundColor: "#0284c7" },
+            { label: "recall", data: recall, backgroundColor: "#16a34a" },
+            { label: "f1", data: f1, backgroundColor: "#f59e0b" }
+          ]
+        },
+        options: {
+          scales: { y: { min: 0, max: 1 } }
+        }
+      });
+    },
+    async predictUpload() {
+      this.inferError = "";
+      this.inferResult = null;
+      const fileInput = this.$refs.imageFile;
+      if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+        this.inferError = "Selecciona una imagen primero.";
+        return;
+      }
+      const formData = new FormData();
+      formData.append("image", fileInput.files[0]);
+      formData.append("checkpoint_path", this.inferForm.checkpoint_path);
+      formData.append("image_size", String(this.inferForm.image_size));
+      const res = await fetch("/api/predict-upload", { method: "POST", body: formData });
+      const data = await res.json();
+      if (!data.ok) {
+        this.inferError = data.error || "Error en inferencia";
+        return;
+      }
+      this.inferResult = data.result;
+    },
+    async runTask(taskType, payload) {
+      const res = await fetch("/api/run", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ task_type: taskType, payload })
+      });
+      const data = await res.json();
+      if (!data.ok) {
+        this.task.log_text = `ERROR: ${data.error}`;
+        return;
+      }
+      this.task.id = data.task_id;
+      this.task.status = "queued";
+      this.task.log_text = "";
+      this.startPolling();
+    },
+    startPolling() {
+      if (this.poller) clearInterval(this.poller);
+      this.poller = setInterval(async () => {
+        if (!this.task.id) return;
+        const res = await fetch(`/api/task/${this.task.id}`);
+        const data = await res.json();
+        if (!data.ok) return;
+        this.task = data;
+        if (["success", "failed"].includes(data.status)) {
+          clearInterval(this.poller);
+          this.poller = null;
+          this.refreshStats();
+        }
+      }, 1000);
+    }
+  };
+}
+</script>
+{% endblock %}

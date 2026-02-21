@@ -1,0 +1,51 @@
+{
+  "accuracy": 0.5822222222222222,
+  "macro_precision": 0.5696191236175635,
+  "macro_recall": 0.5822222222222222,
+  "macro_f1": 0.5682497408714117,
+  "weighted_precision": 0.5696191236175635,
+  "weighted_recall": 0.5822222222222222,
+  "weighted_f1": 0.5682497408714118,
+  "confusion_matrix": [
+    [
+      74,
+      41,
+      35
+    ],
+    [
+      57,
+      60,
+      33
+    ],
+    [
+      10,
+      12,
+      128
+    ]
+  ],
+  "per_class": {
+    "cats": {
+      "precision": 0.524822695035461,
+      "recall": 0.49333333333333335,
+      "f1": 0.5085910652920963,
+      "support": 150
+    },
+    "dogs": {
+      "precision": 0.5309734513274337,
+      "recall": 0.4,
+      "f1": 0.45627376425855515,
+      "support": 150
+    },
+    "panda": {
+      "precision": 0.6530612244897959,
+      "recall": 0.8533333333333334,
+      "f1": 0.7398843930635838,
+      "support": 150
+    }
+  },
+  "n_samples": 450,
+  "split": "test",
+  "skipped_images": 0,
+  "checkpoint_path": "D:\\projects\\Universidad\\Inteligencia_Artificial\\phase3_artifacts\\best_checkpoint.pt",
+  "manifest_path": "D:\\projects\\Universidad\\Inteligencia_Artificial\\phase2_artifacts\\dataset_split.csv"
+}

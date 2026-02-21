@@ -1,0 +1,740 @@
+ 
+ 
+    
+Universidad Internacional de las Américas 
+ 1 
+Universidad Internacional de las Américas 
+Escuela de Ingeniería Informática 
+Proyecto del curso   
+ 
+Nombre del curso: Inteligencia artificial aplicada 
+Nombre del docente: Bairon Pérez Cerdas 
+Valor del proyecto: 45% (30% Documento, 15% Exposición) 
+Fecha en que el docente entrega 
+el enunciado del proyecto a los 
+estudiantes: 
+06/02/2026 
+Fecha en que el estudiante o 
+grupo deben entregar el proyecto 
+al docente: 
+17 / 04 / 2026 
+El líder deberá subir el documento al ecampus a 
+más tardar a las 6:00pm de este día. 
+ 
+COMPETENCIAS QUE SE ESPERA QUE EL ESTUDIANTE ADQUIERA CON EL 
+DESARROLLO DEL PROYECTO: 
+ 
+• Aplicar algoritmos de Machine Learning y Deep Learning en el desarrollo de software. 
+• Implementar procesos de preprocesamiento, entrenamiento y validación de modelos de 
+IA. 
+• Diseñar soluciones de Business Intelligence usando Big Data y dashboards interactivos. 
+• Programar sistemas de Procesamiento de Lenguaje Natural (PLN) para clasificación y 
+análisis de texto. 
+• Implementar algoritmos evolutivos (selección, cruce y mutación) en problemas de 
+optimización. 
+• Desarrollar software siguiendo el ciclo de diseño, implementación, validación y 
+documentación. 
+• Seleccionar y justificar el uso de algoritmos, métricas y herramientas adecuadas al 
+problema. 
+• Generar reportes técnicos y dashboards que traduzcan datos en información útil para la 
+toma de decisiones. 
+ 
+
+ 
+ 
+    
+Universidad Internacional de las Américas 
+ 2 
+DESCRIPCIÓN DEL PROYECTO 
+En la siguiente tabla se muestran los temas del proyecto. Los cuáles serán asignados 
+aleatoriamente a cada equipo de trabajo durante la lección 3. Dicha distribución también 
+será documentada en el e-campus. 
+Nº del 
+equipo Título del Proyecto Requerimientos 
+1 
+Software que 
+clasifique clientes en 
+segmentos mediante 
+algoritmos 
+supervisados. 
+A. Diseñe un software que cargue un dataset de clientes. 
+B. Implemente 3 algoritmos (Machine Learning) supervisados. 
+C. Genere 3 métricas automáticas. 
+D. Compare resultados de ambos algoritmos en la interfaz. 
+E. Documente 5 limitaciones técnicas. 
+2 
+Software que 
+identifique objetos 
+básicos en imágenes 
+mediante redes 
+neuronales. 
+A. Diseñe un software que procese imágenes. 
+B. Implemente una red neuronal básica (Deep Learning). 
+C. Clasifique 3 tipos de objetos. 
+D. Genere 3 métricas de precisión. 
+E. Documente 5 limitaciones técnicas. 
+3 
+Software de 
+visualización que 
+muestre indicadores 
+académicos a partir de 
+datos masivos. 
+A. Diseñe un software que lea datos académicos. 
+B. Implemente clasificación básica. 
+C. Genere dashboards (PowerBI) con 5 indicadores. 
+D. Permita exportar reportes. 
+E. Documente 5 limitaciones técnicas. 
+4 
+Software que filtre 
+correos spam usando 
+clasificadores y redes 
+neuronales. 
+A. Diseñe un software que procese correos (Procesamiento de 
+Lenguaje Natural). 
+B. Implemente 1 clasificador y 1 red neuronal. 
+C. Genere 3 métricas de desempeño. 
+D. Compare ambos algoritmos. 
+E. Documente 5 limitaciones técnicas. 
+5 
+Software que 
+clasifique 
+publicaciones en 
+positivas, negativas o 
+neutras. 
+A. Diseñe un software que procese mensajes (Procesamiento 
+de Lenguaje Natural). 
+B. Entrene un clasificador con PLN. 
+C. Clasifique sentimientos en 3 categorías (positivas, negativas 
+o neutras). 
+D. Genere 3 métricas automáticas. 
+E. Documente 5 limitaciones técnicas. 
+6 
+Software que compare 
+desempeño de dos 
+algoritmos BigData en 
+datasets grandes. 
+A. Diseñe un software que ejecute 2 algoritmos de BigData. 
+B. Aplique un dataset grande. 
+C. Visualice 3 métricas en gráficos. 
+D. Genere reporte comparativo ambos algoritmos. 
+E. Documente 5 limitaciones técnicas. 
+
+ 
+ 
+    
+Universidad Internacional de las Américas 
+ 3 
+ 
+ 
+Los requerimientos A, B, C, D y E para cada tema de proyecto se describen en la tabla 
+anterior. El puntaje y criterios de aceptación de cada requerimiento se presenta en la 
+siguiente tabla: 
+ 
+Reque-
+rimento 
+Area de 
+evaluación 
+Criterios de aceptación Puntaje 
+A Diseño y 
+preprocesamiento. 
+• El software permite cargar datasets en al menos un 
+formato estándar (CSV, XLSX, JSON, etc.). 
+• Maneja errores básicos de carga (valores faltantes, 
+duplicados). 
+• Confirma cantidad de registros cargados. 
+• El dataset es coherente con el proyecto definido. 
+• Se adjunta el código fuente que evidencia lectura del 
+dataset. 
+• Breve explicación en el documento técnico. 
+15 pts 
+B Implementación 
+de algoritmos / 
+modelos. 
+• El software incluye la cantidad de algoritmos 
+solicitados, funcionales y entrenados con los datos 
+cargados. 
+• Se permite ajustar parámetros básicos en al menos un 
+algoritmo. 
+• El código está documentado y diferenciado para cada 
+técnica. 
+25pts 
+C Validación / 
+métricas. 
+• Se calculan al menos 3 métricas de evaluación 
+relevantes (accuracy, precision, recall, F1, error 
+medio, etc.). 
+• Código fuente que muestre el cálculo automático de 
+las métricas. 
+• Las métricas se actualizan al variar algoritmo o 
+dataset. 
+• Los resultados se muestran de forma clara en 
+reportes o interfaz. 
+ 
+25 pts 
+
+ 
+ 
+    
+Universidad Internacional de las Américas 
+ 4 
+D Interfaz / 
+visualización de 
+resultados. 
+• La interfaz permite comparar los resultados de los 
+algoritmos en una misma vista. 
+• Incluye al menos 5 parámetros de comparación. 
+• El diseño es legible, organizado y comprensible para 
+un usuario no experto. 
+• La comparación permite identificar el algoritmo más 
+efectivo. 
+20 pts 
+E Limitaciones 
+técnicas. 
+• Explica 5 limitaciones técnicas del modelo o 
+algoritmos implementados. 
+15 pts 
+ 
+TRABAJO ESCRITO  
+ 
+ 
+El grupo de estudiantes deberán entregar un documento con los siguientes apartados. 
+El trabajo escrito será evaluado según los requerimientos A, B, C, D y E descritos 
+anteriormente. Y se debe entregar los avances del mismo según el siguiente cronograma: 
+Semana Fecha Entrega de avance Puntaje 
+6 27 / 02 / 2026 Requerimiento A y Bitácora 1. 15 pts 
+8 13 / 03 / 2026 Requerimiento B y Bitácora 2. 25 pts 
+10 27 / 03 / 2026 Requerimiento C y Bitácora 3. 25 pts 
+12 10 / 04 / 2026 Requerimiento D y Bitácora 4. 20 pts 
+13 17 / 04 / 2026 Entrega final del documento incluyendo 
+los 5 requerimientos y las 5 bitácoras. 
+15 pts 
+El líder deberá subir los avances al ecampus a más tardar a las 6:00pm de su respectiva 
+fecha. Las bitácoras no tienen puntaje, pero son obligatorias, si no se entregan como parte 
+de los avances y en la entrega final: el total de la nota será de cero. 
+ 
+Cada entregable será calificado según los siguientes criterios de evaluación: 
+ 
+Criterios Excelente  Bueno  Regular  Pobre 
+
+ 
+ 
+    
+Universidad Internacional de las Américas 
+ 5 
+de 
+evaluación 75% - 100%  50% - 75%  25% - 50%  0% - 25% 
+1. Forma 
+(20%) 
+Se cumple a 
+cabalidad con la 
+estructura 
+formal solicitada 
+por el docente. 
+El producto 
+entregado está 
+ordenado de 
+forma lógica y 
+esto facilita su 
+comprensión. 
+Se cumple a 
+cabalidad con la 
+estructura formal 
+solicitada por el 
+docente. El orden 
+podría mejorarse 
+para facilitar su 
+comprensión. 
+No se cumplen 
+con algunas 
+consignas de 
+forma solicitadas 
+por el docente y el 
+orden podría 
+mejorarse para 
+facilitar la 
+comprensión de la 
+entrega. 
+No se cumple 
+con la mayoría 
+de las 
+consignas de 
+forma 
+solicitadas por 
+el docente. 
+2. Comple-
+titud (30%) 
+Se han 
+desarrollado 
+todas las 
+asignaciones 
+solicitadas por el 
+docente en 
+términos de 
+contenido del 
+proyecto. Cada 
+consigna ha sido 
+desarrollada en 
+su totalidad. 
+Se han 
+desarrollado 
+todas las 
+consignas 
+solicitadas por el 
+docente en 
+términos de 
+contenido del 
+proyecto, pero 
+algunas están 
+parcialmente 
+incompletas. 
+Se han 
+desarrollado la 
+mayoría de las 
+consignas 
+solicitadas por el 
+docente en 
+términos de 
+contenido del 
+proyecto, aunque 
+algunas no se 
+desarrollaron del 
+todo. 
+Se han 
+desarrollado la 
+minoría de las 
+consignas 
+solicitadas por 
+el docente en 
+términos de 
+contenido del 
+proyecto, la 
+mayoría no se 
+desarrolló. 
+3. Conteni-
+do (50%) 
+El producto 
+entregado 
+demuestra 
+excelente 
+comprensión de 
+la materia en 
+estudio porque 
+cumple con la 
+función que se 
+espera que tenga 
+y lo hace de 
+forma óptima. 
+El producto 
+entregado 
+demuestra buena 
+comprensión de 
+la materia en 
+estudio, porque 
+en su mayoría 
+cumple con la 
+función que se 
+espera que tenga 
+y lo hace de 
+forma óptima. 
+El producto 
+entregado 
+demuestra regular 
+comprensión de la 
+materia en 
+estudio, no 
+cumple con todo 
+lo que se espera 
+del mismo o lo 
+hace de una forma 
+que no es la 
+mejor. 
+El producto 
+entregado 
+demuestra 
+pobre 
+comprensión 
+de la materia 
+en estudio, 
+porque no 
+cumple con la 
+función que se 
+esperaba que 
+tuviera. 
+ 
+EXPOSICIÓN DEL PROYECTO  
+ 
+Criterios Excelente  Bueno  Regular  Pobre 
+
+ 
+ 
+    
+Universidad Internacional de las Américas 
+ 6 
+de 
+evaluación 75% - 100%  50% - 75%  25% - 50%  0% - 25% 
+1. 
+Completit
+ud 
+(20%) 
+Se desarrollan 
+todos los 
+segmentos 
+solicitados. Cada 
+segmento queda 
+completo y 
+detalla los 
+aspectos 
+solicitados por el 
+docente. 
+Algunos 
+segmentos 
+quedan 
+incompletos. 
+Se han desarrollado 
+la mayoría de los 
+segmentos 
+solicitados, pero 
+algunos faltan. 
+Se han 
+desarrollado la 
+minoría de los 
+segmentos 
+solicitados. 
+2. 
+Contenido 
+(40%) 
+El desarrollo 
+muestra dominio 
+de la materia 
+estudiada, ya 
+que, cada idea 
+principal estuvo 
+adecuadamente 
+argumentada y 
+apoyada con 
+hechos 
+relevantes y/o 
+ejemplos 
+acordes a la 
+materia en 
+estudio. 
+El desarrollo 
+muestra parcial 
+dominio de la 
+materia 
+estudiada, ya 
+que, algunas 
+ideas principales 
+se argumentan 
+incorrectamente 
+según lo 
+estudiado, no se 
+apoyaron 
+correctamente 
+en hechos 
+relevantes o 
+carecen de 
+ejemplos 
+acorde a la 
+materia en 
+estudio. 
+El desarrollo 
+muestra pobre 
+dominio de la 
+materia estudiada, 
+ya que, la mayoría 
+de las ideas 
+principales se 
+argumentan 
+incorrectamente 
+según lo 
+estudiado, no se 
+apoyaron 
+correctamente 
+en hechos 
+relevantes o 
+carecen de 
+ejemplos 
+acorde a la 
+materia en 
+estudio.  
+El contenido 
+no se 
+relaciona con 
+el material 
+estudiado ni se 
+soporta en él. 
+3. Uso del 
+lenguaje 
+técnico al 
+exponer 
+(10%) 
+El estudiante 
+siempre usa el 
+vocabulario 
+aprendido 
+durante el curso. 
+En ningún 
+momento utiliza 
+el vocabulario de 
+forma errónea. 
+El estudiante 
+siempre usa el 
+vocabulario 
+aprendido 
+durante el curso. 
+En algunos 
+momentos utiliza 
+el vocabulario de 
+forma errónea. 
+El estudiante en la 
+mayoría de las 
+ocasiones usa el 
+vocabulario 
+aprendido durante 
+el curso. En 
+algunos momentos 
+utiliza el 
+vocabulario de 
+forma errónea. 
+El estudiante, 
+prácticamente 
+no usa el 
+vocabulario 
+aprendido 
+durante el 
+curso. 
+4. El estudiante se El estudiante se El estudiante se El estudiante 
+
+ 
+ 
+    
+Universidad Internacional de las Américas 
+ 7 
+Expresión 
+oral y 
+capacidad 
+de 
+transmitir 
+el 
+mensaje 
+(30%) 
+expresa 
+verbalmente de 
+forma correcta: 
+modula la voz, 
+articula las 
+palabras, hace 
+pausas siempre 
+que sea 
+apropiado, no 
+repite palabras 
+(“muletillas”). 
+Su expresión 
+corporal es 
+cuidada (no 
+hace 
+movimientos 
+exagerados, 
+pero tampoco 
+adopta una 
+rigidez 
+antinatural) y 
+transmite su 
+mensaje en el 
+tiempo 
+estipulado. 
+expresa 
+verbalmente de 
+forma correcta: 
+modula la voz, 
+articula las 
+palabras, hace 
+pausas siempre 
+que sea 
+apropiado, no 
+repite palabras 
+(“muletillas”), 
+hace buen uso 
+del tiempo 
+estipulado, pero 
+su expresión 
+corporal podría 
+mejorar porque 
+distrae del 
+mensaje, ya sea 
+porque hace 
+movimientos 
+exagerados o 
+porque adopta 
+una rigidez 
+antinatural. 
+expresa 
+verbalmente de 
+forma correcta: 
+modula la voz, 
+articula las 
+palabras, hace 
+pausas siempre 
+que sea 
+apropiado, no 
+repite palabras 
+(“muletillas”), 
+hace buen uso 
+del tiempo 
+estipulado, pero 
+su expresión 
+corporal es 
+pobre, transmite 
+la sensación de 
+estar incómodo: 
+postura 
+encorvada, 
+rigidez, mirada 
+que vaga o 
+gestos que no 
+acompañan el 
+mensaje 
+se expresa 
+verbalmente 
+de forma 
+pobre: a 
+veces habla 
+muy 
+bajo como 
+para 
+escucharlo 
+correctamente, 
+repite palabras 
+innecesariame
+nte 
+o no hace 
+pausas 
+para permitir a 
+su 
+audiencia 
+asimilar el 
+mensaje. Su 
+expresión 
+corporal es 
+pobre: postura 
+encorvada, 
+rigidez, 
+mirada 
+que vaga o 
+gestos 
+que no 
+acompañan el 
+mensaje y 
+hace 
+mal uso del 
+tiempo 
+estipulado. 
+ 
+ 
+INDICACIONES:    
+1. Si el estudiante no incluye alguno de los rubros que se indican como obligatorio, el 
+total de la nota será de cero. 
+
+ 
+ 
+    
+Universidad Internacional de las Américas 
+ 8 
+2. Los proyectos se realizan en equipo y ningún estudiante puede excluir a compañeros 
+del equipo.  Si existe algún inconveniente deberá conversarse con el docente o bien 
+con la Directora de la Escuela. 
+3. Bitácoras de trabajo:  Todos los equipos de trabajo deberán utilizar el formato de 
+la bitácora que el docente subirá al ecampus.  Estas bitácoras son obligatorias.  En 
+las bitácoras se debe indicar de forma clara las tareas asignadas a los integrantes de 
+los equipos, así como una descripción de lo que se asigna, se cumple o no se 
+cumple.   Cuando un miembro del equipo no aporta o no se comunica o no entrega 
+lo asignado en tiempo y forma, se deberá describir claramente, ya que esto será la 
+evidencia para no asignarle nota.  Cada equipo deberá llenar, firmar y presentar al 
+menos cinco bitácoras.  Todos los integrantes del equipo deben conocer el 
+contenido de las bitácoras y no solamente el líder.  El líder puede asignar a un 
+integrante para que se encargue de elaborarlas.  Antes de entregar las bitácoras al 
+docente, todos los miembros del equipo deberán firmarlas.  Las bitácoras se deberán 
+colocar como apéndices.  El docente puede solicitar la revisión de las bitácoras 
+cuando lo considere conveniente. 
+4. El docente indicará cuál integrante del equipo expondrá y qué parte. 
+5. Cuando un miembro del equipo no responda a la convocatoria o asignaciones que se 
+le hagan, se deberá describir en la bitácora. 
+6. Un miembro del equipo que no tenga nota para el documento, tampoco podrá 
+exponer y su nota total será cero. 
+7. Todo equipo de trabajo deberá tener un líder, el cual se encargará de supervisar que 
+su equipo trabaje y documentar todo el proceso. 
+8. Si los miembros del equipo indican que el líder no está realizando su trabajo, o que 
+mantiene una actitud o trato incorrectos con el equipo, los miembros del equipo 
+deberán enviar un correo a la Directora exponiendo la situación. 
+9. Para la exposición, el estudiante deberá utilizar vestimenta formal., esto significa 
+que deben vestir pantalón, camisa, falta, vestido, formal.  Queda prohibido el uso de 
+escotes, minifaldas, minisetas, tenis, gorras, jeans, zapatos tenis y otro accesorio o 
+atuendo no permitido.  (este punto aplica solamente para el proyecto) 
+10. El documento debe ser realizado en Word, letra times new roman, tamaño 12, 
+párrafos justificados.  Se deberá aplicar normas APA, versión 7, utilizada en la UIA. 
+11. Si un estudiante o grupo no entrega el documento escrito, no podrá exponer y la 
+nota total será de cero 
+12. Si un estudiante o grupo entrega el documento escrito y no se presenta el día que 
+corresponde a exponer, la nota total será de cero. 
+13. El contenido y detalle de este documento debe mostrar la excelencia de un trabajo 
+hecho por un futuro profesional 
+
+ 
+ 
+    
+Universidad Internacional de las Américas 
+ 9 
+14. Los trabajos deben ser diferentes, en caso de plagio del trabajo o descarga de 
+internet sin la debida referencia, el estudiante será sancionado según lo indicado en 
+el Reglamento de la Universidad para tales efectos 
+15. No se aceptarán trabajos después de la fecha y hora indicada. 
+16. Se deberá elaborar una exposición en Power Point u otro software.  Esta 
+presentación es obligatoria, y se deberá utilizar como apoyo en la exposición.  Si 
+no presenta el PPT no podrá exponer y la nota final del proyecto será cero. 
+17. En el PPT se deberá considerar lo siguiente: 
+• Utilizar como base de la presentación la plantilla que el docente suba al e -
+campus 
+• Las letras deben ser legibles  
+• No deberá existir exceso de texto 
+• Deberá combinar diseños y texto  
+• No deben existir faltas ortográficas o de redacción 
+• Si utiliza algún párrafo de algún autor, deberá indicar la cita bibliográfica 
+18. Toda situación no incluida en estas indicaciones deberá contar con la autorización 
+de la Dirección de la Escuela de Ingeniería Informática. 
+  
+
+ 
+ 
+    
+Universidad Internacional de las Américas 
+ 10 
+UNIVERSIDAD INTERNACIONAL 
+DE LAS AMÉRICAS 
+ 
+ESCUELA DE INGENIERÍA INFORMÁTICA 
+ 
+PROYECTO  
+ 
+ 
+CURSO 
+ Inteligencia artificial aplicada 
+ 
+ 
+ 
+ 
+Nombre de (los) estudiante (s) 
+ 
+ 
+ 
+PROFESOR 
+Bairon Pérez Cerdas 
+ 
+ 
+ 
+ 
+SAN JOSÉ, COSTA RICA 
+ 
+ 
+ 
+ 

@@ -46,6 +46,11 @@
 /Programacion_1/Laboratorio_6/build/
 /node_modules/
 /win-unpacked/
+/Inteligencia_Artificial/.venv/
+/Inteligencia_Artificial/gatos_perros_pandas/
+
+*.pyc
+__pycache__/
 
 # Build results
 bin/
@@ -130,3 +135,8 @@ StyleCopReport.xml
 
 # Resharper
 _ReSharper*/
+
+# IA large local datasets/artifacts (do not version)
+Inteligencia_Artificial/docs/*.zip
+Inteligencia_Artificial/uploads/
+Inteligencia_Artificial/.venv/
