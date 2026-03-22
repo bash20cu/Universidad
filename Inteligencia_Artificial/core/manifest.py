@@ -16,6 +16,34 @@ class ManifestItem:
     split: str
 
 
+def resolve_manifest_path(manifest_csv: Path, raw_path: str, raw_relative: str | None) -> Path:
+    candidate = Path(raw_path)
+    if candidate.exists():
+        return candidate
+
+    manifest_csv = manifest_csv.resolve()
+    project_root = manifest_csv.parent.parent
+    relative_candidates: list[Path] = []
+
+    if raw_relative:
+        rel = Path(raw_relative)
+        relative_candidates.extend(
+            [
+                project_root / "gatos_perros_pandas" / rel,
+                project_root / rel,
+            ]
+        )
+
+    if candidate.name:
+        relative_candidates.extend(project_root.rglob(candidate.name))
+
+    for option in relative_candidates:
+        if option.exists():
+            return option.resolve()
+
+    return candidate
+
+
 def load_manifest(manifest_csv: Path) -> list[ManifestItem]:
     items: list[ManifestItem] = []
     with manifest_csv.open("r", encoding="utf-8", newline="") as f:
@@ -26,7 +54,11 @@ def load_manifest(manifest_csv: Path) -> list[ManifestItem]:
         for row in reader:
             items.append(
                 ManifestItem(
-                    path=Path(row["path"]),
+                    path=resolve_manifest_path(
+                        manifest_csv=manifest_csv,
+                        raw_path=row["path"],
+                        raw_relative=row.get("path_relative"),
+                    ),
                     label=row["label"],
                     label_id=int(row["label_id"]),
                     split=row["split"],

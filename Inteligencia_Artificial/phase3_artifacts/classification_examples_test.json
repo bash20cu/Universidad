@@ -1,0 +1,41 @@
+[
+  {
+    "true_label": "cats",
+    "pred_label": "dogs",
+    "confidence": 0.48270323872566223,
+    "is_correct": false,
+    "split": "test",
+    "image_path": "/Volumes/projects/GitHub/Universidad/Inteligencia_Artificial/gatos_perros_pandas/animals/cats/cats_00736.jpg",
+    "probabilities": {
+      "cats": 0.39024725556373596,
+      "dogs": 0.48270323872566223,
+      "panda": 0.1270495057106018
+    }
+  },
+  {
+    "true_label": "dogs",
+    "pred_label": "dogs",
+    "confidence": 0.5034567713737488,
+    "is_correct": true,
+    "split": "test",
+    "image_path": "/Volumes/projects/GitHub/Universidad/Inteligencia_Artificial/gatos_perros_pandas/animals/dogs/dogs_00858.jpg",
+    "probabilities": {
+      "cats": 0.46309778094291687,
+      "dogs": 0.5034567713737488,
+      "panda": 0.033445462584495544
+    }
+  },
+  {
+    "true_label": "panda",
+    "pred_label": "panda",
+    "confidence": 0.7792031168937683,
+    "is_correct": true,
+    "split": "test",
+    "image_path": "/Volumes/projects/GitHub/Universidad/Inteligencia_Artificial/gatos_perros_pandas/animals/panda/panda_00976.jpg",
+    "probabilities": {
+      "cats": 0.16162899136543274,
+      "dogs": 0.05916784703731537,
+      "panda": 0.7792031168937683
+    }
+  }
+]

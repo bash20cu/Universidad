@@ -1,51 +1,51 @@
 {
-  "accuracy": 0.5822222222222222,
-  "macro_precision": 0.5696191236175635,
-  "macro_recall": 0.5822222222222222,
-  "macro_f1": 0.5682497408714117,
-  "weighted_precision": 0.5696191236175635,
-  "weighted_recall": 0.5822222222222222,
-  "weighted_f1": 0.5682497408714118,
+  "accuracy": 0.62,
+  "macro_precision": 0.6232657059578325,
+  "macro_recall": 0.62,
+  "macro_f1": 0.6154307171995943,
+  "weighted_precision": 0.6232657059578325,
+  "weighted_recall": 0.62,
+  "weighted_f1": 0.6154307171995942,
   "confusion_matrix": [
     [
-      74,
-      41,
-      35
+      67,
+      68,
+      15
     ],
     [
-      57,
-      60,
-      33
+      38,
+      88,
+      24
     ],
     [
-      10,
-      12,
-      128
+      4,
+      22,
+      124
     ]
   ],
   "per_class": {
     "cats": {
-      "precision": 0.524822695035461,
-      "recall": 0.49333333333333335,
-      "f1": 0.5085910652920963,
+      "precision": 0.6146788990825688,
+      "recall": 0.44666666666666666,
+      "f1": 0.5173745173745173,
       "support": 150
     },
     "dogs": {
-      "precision": 0.5309734513274337,
-      "recall": 0.4,
-      "f1": 0.45627376425855515,
+      "precision": 0.4943820224719101,
+      "recall": 0.5866666666666667,
+      "f1": 0.5365853658536585,
       "support": 150
     },
     "panda": {
-      "precision": 0.6530612244897959,
-      "recall": 0.8533333333333334,
-      "f1": 0.7398843930635838,
+      "precision": 0.7607361963190185,
+      "recall": 0.8266666666666667,
+      "f1": 0.7923322683706071,
       "support": 150
     }
   },
   "n_samples": 450,
   "split": "test",
   "skipped_images": 0,
-  "checkpoint_path": "D:\\projects\\Universidad\\Inteligencia_Artificial\\phase3_artifacts\\best_checkpoint.pt",
-  "manifest_path": "D:\\projects\\Universidad\\Inteligencia_Artificial\\phase2_artifacts\\dataset_split.csv"
+  "checkpoint_path": "/Users/miguel/Documents/GitHub/Universidad/Inteligencia_Artificial/phase3_artifacts/best_checkpoint.pt",
+  "manifest_path": "/Users/miguel/Documents/GitHub/Universidad/Inteligencia_Artificial/phase2_artifacts/dataset_split.csv"
 }

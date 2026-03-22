@@ -36,4 +36,24 @@ python .\app.py
 .\.venv\Scripts\python.exe app.py
 
 
+# Notas para macOS / Hackintosh AMD
+
+# En macOS con GPU AMD, PyTorch normalmente no tendra CUDA ni DirectML.
+# Si MPS no esta disponible, el proyecto usara CPU.
+
+# Verificar backend detectado
+python3 -m core.phase1 --dataset-root gatos_perros_pandas --gpu-test --matmul-size 128
+
+# Entrenar un checkpoint portable en este equipo
+python3 -m core.phase3_train --manifest-csv phase2_artifacts/dataset_split.csv --output-dir phase3_artifacts --epochs 5 --batch-size 32 --image-size 128 --debug
+
+# Evaluar usando el checkpoint portable recien generado
+python3 -m core.phase4_evaluate --manifest-csv phase2_artifacts/dataset_split.csv --checkpoint-path phase3_artifacts/best_checkpoint.pt --output-dir phase4_artifacts --split test --image-size 128
+
+
+python3 -m core.phase3_train --manifest-csv phase2_artifacts/dataset_split.csv --output-dir phase3_artifacts --epochs 5 --batch-size 32 --image-size 128 --debug
+python3 -m core.phase4_evaluate --manifest-csv phase2_artifacts/dataset_split.csv --checkpoint-path phase3_artifacts/best_checkpoint.pt --output-dir phase4_artifacts --split test --image-size 128
+
+
+
 

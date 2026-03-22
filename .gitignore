@@ -52,6 +52,9 @@
 *.pyc
 __pycache__/
 
+.DS_Store
+**/.DS_Store
+
 # Build results
 bin/
 obj/
@@ -140,3 +143,4 @@ _ReSharper*/
 Inteligencia_Artificial/docs/*.zip
 Inteligencia_Artificial/uploads/
 Inteligencia_Artificial/.venv/
+

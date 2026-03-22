@@ -14,6 +14,7 @@ from PIL import Image, UnidentifiedImageError
 
 from core.constants import IMAGE_EXTENSIONS
 from core.labeling import detect_label
+from core.model import explain_device_choice, select_device
 
 
 @dataclass(frozen=True)
@@ -81,28 +82,18 @@ def run_compute_backend_test(size: int) -> str:
     except ImportError:
         return "Torch no instalado. Backend de computo no probado."
 
-    device_name = "cpu"
-    device = torch.device("cpu")
-
-    if torch.cuda.is_available():
-        device_name = "cuda"
-        device = torch.device("cuda")
-    else:
-        try:
-            import torch_directml
-
-            dml_device = torch_directml.device()
-            device_name = "directml"
-            device = dml_device
-        except ImportError:
-            pass
+    device, device_name = select_device(torch)
+    device_note = explain_device_choice(torch)
 
     start = time.perf_counter()
     x = torch.rand((size, size), device=device)
     y = torch.rand((size, size), device=device)
     _ = x @ y
     elapsed_ms = (time.perf_counter() - start) * 1000
-    return f"Backend detectado: {device_name}. MatMul {size}x{size} en {elapsed_ms:.2f} ms."
+    return (
+        f"Backend detectado: {device_name}. {device_note} "
+        f"MatMul {size}x{size} en {elapsed_ms:.2f} ms."
+    )
 
 
 def parse_args() -> argparse.Namespace:

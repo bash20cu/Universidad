@@ -57,9 +57,28 @@ def load_manifest(path: Path) -> list[Item]:
         required = {"path", "label_id", "split"}
         if not required.issubset(reader.fieldnames or set()):
             raise ValueError(f"CSV invalido. Debe incluir columnas: {sorted(required)}")
+        manifest_csv = path.resolve()
+        project_root = manifest_csv.parent.parent
         for row in reader:
+            raw_path = Path(row["path"])
+            if raw_path.exists():
+                resolved_path = raw_path
+            else:
+                raw_relative = row.get("path_relative", "")
+                candidates = []
+                if raw_relative:
+                    rel = Path(raw_relative)
+                    candidates.extend(
+                        [
+                            project_root / "gatos_perros_pandas" / rel,
+                            project_root / rel,
+                        ]
+                    )
+                if raw_path.name:
+                    candidates.extend(project_root.rglob(raw_path.name))
+                resolved_path = next((p.resolve() for p in candidates if p.exists()), raw_path)
             items.append(
-                Item(path=Path(row["path"]), label_id=int(row["label_id"]), split=row["split"])
+                Item(path=resolved_path, label_id=int(row["label_id"]), split=row["split"])
             )
     return items
 
@@ -132,6 +151,25 @@ def build_components():
         return total_loss / total_count, total_correct / total_count
 
     return torch, nn, DataLoader, SplitDataset, SimpleCNN, run_epoch
+
+
+def cpu_state_dict(torch_module, model) -> dict[str, object]:
+    return {key: value.detach().to("cpu") for key, value in model.state_dict().items()}
+
+
+def cpu_optimizer_state(torch_module, optimizer) -> dict[str, object]:
+    def to_cpu(value):
+        if isinstance(value, torch_module.Tensor):
+            return value.detach().to("cpu")
+        if isinstance(value, dict):
+            return {k: to_cpu(v) for k, v in value.items()}
+        if isinstance(value, list):
+            return [to_cpu(v) for v in value]
+        if isinstance(value, tuple):
+            return tuple(to_cpu(v) for v in value)
+        return value
+
+    return to_cpu(optimizer.state_dict())
 
 
 def main() -> int:
@@ -207,8 +245,8 @@ def main() -> int:
             torch.save(
                 {
                     "epoch": epoch,
-                    "model_state_dict": model.state_dict(),
-                    "optimizer_state_dict": optimizer.state_dict(),
+                    "model_state_dict": cpu_state_dict(torch, model),
+                    "optimizer_state_dict": cpu_optimizer_state(torch, optimizer),
                     "val_acc": val_acc,
                 },
                 output_dir / "best_checkpoint.pt",
@@ -217,8 +255,8 @@ def main() -> int:
     torch.save(
         {
             "epoch": args.epochs,
-            "model_state_dict": model.state_dict(),
-            "optimizer_state_dict": optimizer.state_dict(),
+            "model_state_dict": cpu_state_dict(torch, model),
+            "optimizer_state_dict": cpu_optimizer_state(torch, optimizer),
             "val_acc": history[-1]["val_acc"] if history else 0.0,
         },
         output_dir / "last_checkpoint.pt",

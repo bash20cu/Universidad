@@ -56,20 +56,35 @@ def load_phase4_metrics(metrics_path: Path) -> dict[str, Any]:
     return data if isinstance(data, dict) else {}
 
 
+def load_classification_examples(examples_path: Path) -> list[dict[str, Any]]:
+    if not examples_path.exists():
+        return []
+    with examples_path.open("r", encoding="utf-8") as f:
+        data = json.load(f)
+    return data if isinstance(data, list) else []
+
+
 def build_dashboard_stats(
     manifest_csv: Path,
     metrics_history_json: Path,
     phase4_metrics_json: Path | None = None,
+    classification_examples_json: Path | None = None,
 ) -> dict[str, Any]:
     manifest_items = load_manifest(manifest_csv) if manifest_csv.exists() else []
     manifest_summary = summarize_manifest(manifest_items) if manifest_items else {}
     metrics_history = load_metrics_history(metrics_history_json)
     training_summary = summarize_training(metrics_history)
     phase4_metrics = load_phase4_metrics(phase4_metrics_json) if phase4_metrics_json else {}
+    classification_examples = (
+        load_classification_examples(classification_examples_json)
+        if classification_examples_json
+        else []
+    )
     return {
         "manifest_summary": manifest_summary,
         "training_summary": training_summary,
         "metrics_history": metrics_history,
         "phase4_metrics": phase4_metrics,
+        "classification_examples": classification_examples,
         "technical_limitations": TECH_LIMITATIONS,
     }

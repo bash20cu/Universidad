@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import platform
 from pathlib import Path
 
 import numpy as np
@@ -14,12 +15,40 @@ def select_device(torch_module) -> tuple[object, str]:
     torch = torch_module
     if torch.cuda.is_available():
         return torch.device("cuda"), "cuda"
+    mps_backend = getattr(torch.backends, "mps", None)
+    if mps_backend is not None and mps_backend.is_available():
+        return torch.device("mps"), "mps"
     try:
         import torch_directml
 
         return torch_directml.device(), "directml"
     except ImportError:
         return torch.device("cpu"), "cpu"
+
+
+def explain_device_choice(torch_module) -> str:
+    torch = torch_module
+    system_name = platform.system().lower()
+
+    if torch.cuda.is_available():
+        return "GPU detectada por CUDA. Se usara aceleracion por NVIDIA."
+
+    mps_backend = getattr(torch.backends, "mps", None)
+    if mps_backend is not None and mps_backend.is_available():
+        return "GPU detectada por MPS. Se usara aceleracion por Metal en macOS."
+
+    if system_name == "darwin":
+        return (
+            "Usando CPU. En macOS/Hackintosh con GPU AMD normalmente PyTorch no "
+            "dispone de un backend acelerado equivalente a CUDA o DirectML."
+        )
+
+    try:
+        import torch_directml  # noqa: F401
+
+        return "GPU detectada por DirectML. Se usara aceleracion compatible con Windows."
+    except ImportError:
+        return "Usando CPU. No se detecto un backend de GPU compatible en este entorno."
 
 
 def build_simple_cnn(nn_module):
@@ -60,9 +89,22 @@ def load_model_from_checkpoint(
     import torch.nn as nn
 
     device, device_name = select_device(torch)
+    device_note = explain_device_choice(torch)
     SimpleCNN = build_simple_cnn(nn)
     model = SimpleCNN(num_classes=num_classes)
-    checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
+    try:
+        checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
+    except NotImplementedError as exc:
+        message = str(exc)
+        if "PrivateUse1" in message:
+            raise RuntimeError(
+                "No se pudo cargar el checkpoint porque fue guardado desde un backend "
+                "no portable (por ejemplo DirectML/PrivateUse1). Este entorno macOS no "
+                "puede reconstruir ese tensor. La solucion es regenerar el checkpoint en "
+                "CPU/CUDA/MPS o guardar un checkpoint portable con pesos en CPU. "
+                f"Backend seleccionado actualmente: {device_name}. {device_note}"
+            ) from exc
+        raise
     model.load_state_dict(checkpoint["model_state_dict"])
     model = model.to(device)
     model.eval()

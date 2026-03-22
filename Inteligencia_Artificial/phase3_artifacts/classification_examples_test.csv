@@ -1,0 +1,4 @@
+true_label,pred_label,confidence,is_correct,split,image_path
+cats,dogs,0.482703,False,test,/Volumes/projects/GitHub/Universidad/Inteligencia_Artificial/gatos_perros_pandas/animals/cats/cats_00736.jpg
+dogs,dogs,0.503457,True,test,/Volumes/projects/GitHub/Universidad/Inteligencia_Artificial/gatos_perros_pandas/animals/dogs/dogs_00858.jpg
+panda,panda,0.779203,True,test,/Volumes/projects/GitHub/Universidad/Inteligencia_Artificial/gatos_perros_pandas/animals/panda/panda_00976.jpg

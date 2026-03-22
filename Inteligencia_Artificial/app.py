@@ -19,6 +19,7 @@ from core.stats import build_dashboard_stats
 BASE_DIR = Path(__file__).resolve().parent
 DEFAULT_MANIFEST = BASE_DIR / "phase2_artifacts" / "dataset_split.csv"
 DEFAULT_METRICS = BASE_DIR / "phase3_artifacts" / "metrics_history.json"
+DEFAULT_PHASE3_EXAMPLES = BASE_DIR / "phase3_artifacts" / "classification_examples_test.json"
 DEFAULT_PHASE4_METRICS = BASE_DIR / "phase4_artifacts" / "metrics_test.json"
 DEFAULT_CHECKPOINT = BASE_DIR / "phase3_artifacts" / "best_checkpoint.pt"
 UPLOADS_DIR = BASE_DIR / "uploads"
@@ -72,6 +73,16 @@ def build_task_command(task_type: str, payload: dict[str, Any]) -> list[str]:
             raise ValueError("image_path es requerido para phase3_infer")
         cmd += ["-m", "core.phase3_infer", "--image-path", image_path]
         cmd += ["--checkpoint-path", payload.get("checkpoint_path", "phase3_artifacts/best_checkpoint.pt")]
+        cmd += ["--image-size", str(payload.get("image_size", 128))]
+        return cmd
+
+    if task_type == "phase3_evidence":
+        cmd += ["-m", "core.phase3_evidence"]
+        cmd += ["--manifest-csv", payload.get("manifest_csv", "phase2_artifacts/dataset_split.csv")]
+        cmd += ["--checkpoint-path", payload.get("checkpoint_path", "phase3_artifacts/best_checkpoint.pt")]
+        cmd += ["--output-dir", payload.get("output_dir", "phase3_artifacts")]
+        cmd += ["--split", payload.get("split", "test")]
+        cmd += ["--samples-per-class", str(payload.get("samples_per_class", 1))]
         cmd += ["--image-size", str(payload.get("image_size", 128))]
         return cmd
 
@@ -159,7 +170,12 @@ def home():
 
 @app.get("/dashboard")
 def dashboard():
-    stats = build_dashboard_stats(DEFAULT_MANIFEST, DEFAULT_METRICS, DEFAULT_PHASE4_METRICS)
+    stats = build_dashboard_stats(
+        DEFAULT_MANIFEST,
+        DEFAULT_METRICS,
+        DEFAULT_PHASE4_METRICS,
+        DEFAULT_PHASE3_EXAMPLES,
+    )
     return render_template(
         "dashboard.html",
         manifest_path=str(DEFAULT_MANIFEST),
@@ -171,7 +187,12 @@ def dashboard():
 
 @app.get("/api/stats")
 def api_stats():
-    stats = build_dashboard_stats(DEFAULT_MANIFEST, DEFAULT_METRICS, DEFAULT_PHASE4_METRICS)
+    stats = build_dashboard_stats(
+        DEFAULT_MANIFEST,
+        DEFAULT_METRICS,
+        DEFAULT_PHASE4_METRICS,
+        DEFAULT_PHASE3_EXAMPLES,
+    )
     return jsonify(stats)
 
 

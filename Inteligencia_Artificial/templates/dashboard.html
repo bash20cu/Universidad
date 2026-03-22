@@ -9,6 +9,7 @@
   <div class="tabs">
     <button class="tab-btn" :class="{ 'active': activeTab==='resumen' }" @click="activeTab='resumen'">Resumen</button>
     <button class="tab-btn" :class="{ 'active': activeTab==='graficos' }" @click="activeTab='graficos'; renderCharts()">Gráficos</button>
+    <button class="tab-btn" :class="{ 'active': activeTab==='evidencia' }" @click="activeTab='evidencia'">Evidencia 3 Clases</button>
     <button class="tab-btn" :class="{ 'active': activeTab==='infer' }" @click="activeTab='infer'">Inferencia</button>
     <button class="tab-btn" :class="{ 'active': activeTab==='fases' }" @click="activeTab='fases'">Ejecución</button>
     <button class="tab-btn" :class="{ 'active': activeTab==='limitaciones' }" @click="activeTab='limitaciones'">Limitaciones</button>
@@ -72,6 +73,61 @@
         </tbody>
       </table>
     </div>
+  </div>
+
+  <div x-show="activeTab==='evidencia'" class="card">
+    <h2>Evidencia Automática del Requerimiento C</h2>
+    <p class="muted">Genera una muestra de clasificación por clase para dejar evidencia reproducible de `cats`, `dogs` y `panda`.</p>
+
+    <div class="grid-2">
+      <div>
+        <label>Manifest CSV</label>
+        <input x-model="forms.phase3_evidence.manifest_csv" placeholder="manifest csv">
+      </div>
+      <div>
+        <label>Checkpoint (.pt)</label>
+        <input x-model="forms.phase3_evidence.checkpoint_path" placeholder="checkpoint .pt">
+      </div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <label>Split</label>
+        <input x-model="forms.phase3_evidence.split" placeholder="test">
+      </div>
+      <div>
+        <label>Muestras por clase</label>
+        <input type="number" x-model.number="forms.phase3_evidence.samples_per_class" min="1" max="10">
+      </div>
+    </div>
+
+    <button @click="runTask('phase3_evidence', forms.phase3_evidence)">Generar evidencia</button>
+
+    <div x-show="(stats.classification_examples || []).length" style="margin-top:12px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Clase real</th>
+            <th>Predicción</th>
+            <th>Confidence</th>
+            <th>Correcta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <template x-for="(row, idx) in (stats.classification_examples || [])" :key="idx">
+            <tr>
+              <td x-text="row.true_label"></td>
+              <td x-text="row.pred_label"></td>
+              <td x-text="format4(row.confidence)"></td>
+              <td x-text="row.is_correct ? 'si' : 'no'"></td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </div>
+
+    <p x-show="!(stats.classification_examples || []).length" class="muted" style="margin-top:12px;">
+      Todavía no hay evidencia generada. Ejecuta el proceso para crear el reporte automático.
+    </p>
   </div>
 
   <div x-show="activeTab==='fases'" class="card">
@@ -144,6 +200,7 @@ function runnerApp() {
       phase1: { dataset_root: "gatos_perros_pandas", gpu_test: true, matmul_size: 512, validate_max: 300, sample_size: 64 },
       phase2: { dataset_root: "gatos_perros_pandas", output_dir: "phase2_artifacts", dedupe_mode: "sha1", batch_size: 16, verify_dataloaders: true, debug: true },
       phase3_train: { manifest_csv: "phase2_artifacts/dataset_split.csv", output_dir: "phase3_artifacts", epochs: 5, batch_size: 32, image_size: 128, debug: true },
+      phase3_evidence: { manifest_csv: "phase2_artifacts/dataset_split.csv", checkpoint_path: "phase3_artifacts/best_checkpoint.pt", output_dir: "phase3_artifacts", split: "test", samples_per_class: 1, image_size: 128 },
       phase4: { manifest_csv: "phase2_artifacts/dataset_split.csv", checkpoint_path: "phase3_artifacts/best_checkpoint.pt", output_dir: "phase4_artifacts", split: "test", image_size: 128 }
     },
     init() {
