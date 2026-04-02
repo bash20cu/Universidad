@@ -19,12 +19,16 @@ from core.model import explain_device_choice, select_device
 
 @dataclass(frozen=True)
 class ScanSummary:
+    """Resume el conteo de imagenes por clase durante la inspeccion inicial."""
+
     total_images: int
     per_class: Counter[str]
     unknown_class: int
 
 
 def list_image_files(root: Path) -> list[Path]:
+    """Lista solo archivos de imagen con extensiones soportadas dentro de una raiz."""
+
     return [
         file_path
         for file_path in root.rglob("*")
@@ -33,6 +37,8 @@ def list_image_files(root: Path) -> list[Path]:
 
 
 def scan_dataset(dataset_root: Path) -> tuple[ScanSummary, list[Path]]:
+    """Escanea el dataset completo y devuelve resumen mas listado de imagenes validas."""
+
     image_files = list_image_files(dataset_root)
     per_class: Counter[str] = Counter(detect_label(path) for path in image_files)
     unknown_class = per_class.pop("unknown", 0)
@@ -45,6 +51,8 @@ def scan_dataset(dataset_root: Path) -> tuple[ScanSummary, list[Path]]:
 
 
 def validate_images(paths: Iterable[Path], max_files: int) -> tuple[int, int]:
+    """Verifica una muestra de archivos para detectar imagenes corruptas o ilegibles."""
+
     ok_count = 0
     error_count = 0
 
@@ -60,6 +68,8 @@ def validate_images(paths: Iterable[Path], max_files: int) -> tuple[int, int]:
 
 
 def preprocess_sample(paths: Iterable[Path], sample_size: int) -> tuple[int, tuple[int, ...] | None]:
+    """Aplica un preprocesamiento basico a una muestra para validar forma y flujo."""
+
     processed = 0
     last_shape: tuple[int, ...] | None = None
 
@@ -77,6 +87,8 @@ def preprocess_sample(paths: Iterable[Path], sample_size: int) -> tuple[int, tup
 
 
 def run_compute_backend_test(size: int) -> str:
+    """Ejecuta una multiplicacion de matrices para evidenciar el backend disponible."""
+
     try:
         import torch
     except ImportError:
@@ -97,6 +109,8 @@ def run_compute_backend_test(size: int) -> str:
 
 
 def parse_args() -> argparse.Namespace:
+    """Define los parametros CLI de la fase 1."""
+
     parser = argparse.ArgumentParser(description="Fase 1 - Conteo y prueba basica de imagenes.")
     parser.add_argument("--dataset-root", type=Path, default=Path("gatos_perros_pandas"))
     parser.add_argument("--validate-max", type=int, default=300)
@@ -107,6 +121,8 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
+    """Orquesta la inspeccion inicial del dataset y la prueba opcional de backend."""
+
     args = parse_args()
     dataset_root = args.dataset_root.resolve()
 

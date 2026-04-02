@@ -21,10 +21,13 @@ python .\app.py
 .\.venv\Scripts\python.exe -m core.phase2 --dataset-root gatos_perros_pandas --output-dir phase2_artifacts --dedupe-mode sha1 --verify-dataloaders --batch-size 16 --debug
 
 # Fase 3 entrenamiento
-.\.venv\Scripts\python.exe -m core.phase3_train --manifest-csv phase2_artifacts/dataset_split.csv --output-dir phase3_artifacts --epochs 5 --batch-size 32 --debug
+.\.venv\Scripts\python.exe -m core.phase3_train --manifest-csv phase2_artifacts/dataset_split.csv --output-dir phase3_artifacts --epochs 5 --batch-size 32 --image-size 128 --seed 42 --debug
 
 # Fase 3 inferencia
-.\.venv\Scripts\python.exe -m core.phase3_infer --image-path gatos_perros_pandas\animals\animals\cats\cats_00001.jpg --checkpoint-path phase3_artifacts\best_checkpoint.pt --image-size 128
+.\.venv\Scripts\python.exe -m core.phase3_infer --image-path gatos_perros_pandas\animals\cats\cats_00001.jpg --checkpoint-path phase3_artifacts\best_checkpoint.pt --image-size 128
+
+# Fase 3 evidencia
+.\.venv\Scripts\python.exe -m core.phase3_evidence --manifest-csv phase2_artifacts/dataset_split.csv --checkpoint-path phase3_artifacts\best_checkpoint.pt --output-dir phase3_artifacts --split test --samples-per-class 1 --image-size 128
 
 # Fase 4 evaluacion
 .\.venv\Scripts\python.exe -m core.phase4_evaluate --manifest-csv phase2_artifacts/dataset_split.csv --checkpoint-path phase3_artifacts/best_checkpoint.pt --output-dir phase4_artifacts --split test --image-size 128

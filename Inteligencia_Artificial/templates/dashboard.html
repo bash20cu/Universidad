@@ -1,181 +1,323 @@
 {% extends "base.html" %}
+{% block shell_attrs %}x-data="runnerApp()" x-init="init()"{% endblock %}
+{% block topbar_menu %}
+<nav class="tabs">
+  <button class="tab-btn" :class="{ 'active': activeTab==='resumen' }" @click="activeTab='resumen'">Resumen</button>
+  <button class="tab-btn" :class="{ 'active': activeTab==='graficos' }" @click="activeTab='graficos'; renderCharts()">Gráficos</button>
+  <button class="tab-btn" :class="{ 'active': activeTab==='evidencia' }" @click="activeTab='evidencia'">Evidencia</button>
+  <button class="tab-btn" :class="{ 'active': activeTab==='infer' }" @click="activeTab='infer'">Inferencia</button>
+  <button class="tab-btn" :class="{ 'active': activeTab==='fases' }" @click="activeTab='fases'">Ejecución</button>
+  <button class="tab-btn" :class="{ 'active': activeTab==='limitaciones' }" @click="activeTab='limitaciones'">Limitaciones</button>
+</nav>
+{% endblock %}
 {% block content %}
-<div x-data="runnerApp()" x-init="init()">
-  <div class="card">
-    <h1>Panel del Proyecto IA</h1>
-    <p class="muted">Dashboard con métricas, gráficos, ejecución de fases e inferencia.</p>
-  </div>
-
-  <div class="tabs">
-    <button class="tab-btn" :class="{ 'active': activeTab==='resumen' }" @click="activeTab='resumen'">Resumen</button>
-    <button class="tab-btn" :class="{ 'active': activeTab==='graficos' }" @click="activeTab='graficos'; renderCharts()">Gráficos</button>
-    <button class="tab-btn" :class="{ 'active': activeTab==='evidencia' }" @click="activeTab='evidencia'">Evidencia 3 Clases</button>
-    <button class="tab-btn" :class="{ 'active': activeTab==='infer' }" @click="activeTab='infer'">Inferencia</button>
-    <button class="tab-btn" :class="{ 'active': activeTab==='fases' }" @click="activeTab='fases'">Ejecución</button>
-    <button class="tab-btn" :class="{ 'active': activeTab==='limitaciones' }" @click="activeTab='limitaciones'">Limitaciones</button>
-  </div>
-
-  <div x-show="activeTab==='resumen'" class="card">
-    <h2>Resumen</h2>
-    <p>Total dataset: <strong x-text="stats.manifest_summary?.total ?? 0"></strong></p>
-    <p>Train/Val/Test:
-      <strong x-text="(stats.manifest_summary?.per_split?.train ?? 0) + ' / ' + (stats.manifest_summary?.per_split?.val ?? 0) + ' / ' + (stats.manifest_summary?.per_split?.test ?? 0)"></strong>
-    </p>
-    <p>Epochs entrenadas: <strong x-text="stats.training_summary?.epochs ?? 0"></strong></p>
-    <p>Best val_acc: <strong x-text="format4(stats.training_summary?.best_val_acc)"></strong></p>
-    <p>Accuracy test (Fase 4): <strong x-text="format4(stats.phase4_metrics?.accuracy)"></strong></p>
-    <p>Macro F1 test (Fase 4): <strong x-text="format4(stats.phase4_metrics?.macro_f1)"></strong></p>
-    <button @click="refreshStats()">Refrescar</button>
-  </div>
-
-  <div x-show="activeTab==='graficos'" class="card">
-    <h2>Gráficos</h2>
-    <div class="grid-2">
+  <section class="hero">
+    <div class="hero-grid">
       <div>
-        <h3>Dispersión: train_acc vs val_acc por época</h3>
-        <canvas x-ref="scatterChart"></canvas>
+        <div class="eyebrow">Centro de control del proyecto</div>
+        <h1>Pipeline visual de inteligencia artificial aplicada.</h1>
+        <p>
+          Reúne en un solo lugar el manifest del dataset, el entrenamiento de la CNN,
+          las métricas de evaluación, la evidencia de clasificación y la inferencia
+          manual del proyecto académico.
+        </p>
       </div>
-      <div>
-        <h3>Pastel: distribución por clase (dataset)</h3>
-        <canvas x-ref="pieChart"></canvas>
+      <div class="hero-meta">
+        <div>
+          <span>Registros del manifest</span>
+          <strong x-text="stats.manifest_summary?.total ?? 0"></strong>
+          <span>imágenes detectadas</span>
+        </div>
+        <div>
+          <span>Mejor validación</span>
+          <strong x-text="format4(stats.training_summary?.best_val_acc)"></strong>
+          <span>best `val_acc` histórico</span>
+        </div>
+        <div>
+          <span>Accuracy en test</span>
+          <strong x-text="format4(stats.phase4_metrics?.accuracy)"></strong>
+          <span>resultado de la fase 4</span>
+        </div>
       </div>
     </div>
-    <div style="margin-top:12px;">
-      <h3>Barras: precisión, recall y f1 por clase (test)</h3>
-      <canvas x-ref="barChart"></canvas>
-    </div>
-  </div>
+  </section>
 
-  <div x-show="activeTab==='infer'" class="card">
-    <h2>Inferencia con subida de imagen</h2>
-    <label>Checkpoint (.pt)</label>
-    <input x-model="inferForm.checkpoint_path" placeholder="phase3_artifacts/best_checkpoint.pt">
-    <label>Tamaño imagen</label>
-    <input type="number" x-model.number="inferForm.image_size" min="64" step="32">
-    <label>Subir foto</label>
-    <input type="file" x-ref="imageFile" accept="image/*">
-    <button @click="predictUpload()">Subir y predecir</button>
-    <p class="error" x-show="inferError" x-text="inferError"></p>
-
-    <div x-show="inferResult" style="margin-top:12px;">
-      <p class="ok">Predicción: <strong x-text="inferResult?.pred_label"></strong> (<span x-text="format4(inferResult?.confidence)"></span>)</p>
-      <p>Device: <strong x-text="inferResult?.device_name"></strong></p>
-      <p>Epoch checkpoint: <strong x-text="inferResult?.checkpoint_epoch"></strong></p>
-      <table>
-        <thead><tr><th>Clase</th><th>Probabilidad</th></tr></thead>
-        <tbody>
-          <template x-for="(prob, className) in (inferResult?.probabilities || {})" :key="className">
-            <tr>
-              <td x-text="className"></td>
-              <td x-text="format4(prob)"></td>
-            </tr>
-          </template>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div x-show="activeTab==='evidencia'" class="card">
-    <h2>Evidencia Automática del Requerimiento C</h2>
-    <p class="muted">Genera una muestra de clasificación por clase para dejar evidencia reproducible de `cats`, `dogs` y `panda`.</p>
-
-    <div class="grid-2">
-      <div>
-        <label>Manifest CSV</label>
-        <input x-model="forms.phase3_evidence.manifest_csv" placeholder="manifest csv">
+  <main class="content">
+    <section x-show="activeTab==='resumen'" class="panel">
+      <div class="panel-section">
+        <div class="section-head">
+          <div>
+            <h2>Vista general del proyecto</h2>
+            <p>Una lectura rápida del estado del dataset, el entrenamiento y el desempeño actual del modelo.</p>
+          </div>
+          <button class="secondary" @click="refreshStats()">Refrescar datos</button>
+        </div>
+        <div class="metric-grid">
+          <article class="metric-card">
+            <span>Dataset total</span>
+            <strong x-text="stats.manifest_summary?.total ?? 0"></strong>
+            <span>Total de imágenes registradas en el manifest principal.</span>
+          </article>
+          <article class="metric-card">
+            <span>Épocas entrenadas</span>
+            <strong x-text="stats.training_summary?.epochs ?? 0"></strong>
+            <span>Historial de entrenamiento guardado en artefactos.</span>
+          </article>
+          <article class="metric-card">
+            <span>Macro F1</span>
+            <strong x-text="format4(stats.phase4_metrics?.macro_f1)"></strong>
+            <span>Balance global entre precisión y recall en prueba.</span>
+          </article>
+        </div>
       </div>
-      <div>
-        <label>Checkpoint (.pt)</label>
-        <input x-model="forms.phase3_evidence.checkpoint_path" placeholder="checkpoint .pt">
+      <div class="panel-section grid-2">
+        <article class="subpanel">
+          <h3>Distribución del manifest</h3>
+          <p class="helper">Resume cómo quedó repartido el dataset entre entrenamiento, validación y prueba.</p>
+          <table>
+            <thead><tr><th>Segmento</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>Train</td><td x-text="stats.manifest_summary?.per_split?.train ?? 0"></td></tr>
+              <tr><td>Validación</td><td x-text="stats.manifest_summary?.per_split?.val ?? 0"></td></tr>
+              <tr><td>Test</td><td x-text="stats.manifest_summary?.per_split?.test ?? 0"></td></tr>
+            </tbody>
+          </table>
+        </article>
+        <article class="subpanel">
+          <h3>Lectura rápida del modelo</h3>
+          <p class="helper">Referencia operativa para interpretar el estado de entrenamiento y prueba.</p>
+          <ul class="note-list">
+            <li>Mejor época: <strong x-text="stats.training_summary?.best_epoch ?? '-'"></strong></li>
+            <li>Último `train_acc`: <strong x-text="format4(stats.training_summary?.last_train_acc)"></strong></li>
+            <li>Último `val_acc`: <strong x-text="format4(stats.training_summary?.last_val_acc)"></strong></li>
+            <li>Accuracy de test: <strong x-text="format4(stats.phase4_metrics?.accuracy)"></strong></li>
+          </ul>
+        </article>
       </div>
-    </div>
-    <div class="grid-2">
-      <div>
-        <label>Split</label>
-        <input x-model="forms.phase3_evidence.split" placeholder="test">
-      </div>
-      <div>
-        <label>Muestras por clase</label>
-        <input type="number" x-model.number="forms.phase3_evidence.samples_per_class" min="1" max="10">
-      </div>
-    </div>
+    </section>
 
-    <button @click="runTask('phase3_evidence', forms.phase3_evidence)">Generar evidencia</button>
-
-    <div x-show="(stats.classification_examples || []).length" style="margin-top:12px;">
-      <table>
-        <thead>
-          <tr>
-            <th>Clase real</th>
-            <th>Predicción</th>
-            <th>Confidence</th>
-            <th>Correcta</th>
-          </tr>
-        </thead>
-        <tbody>
-          <template x-for="(row, idx) in (stats.classification_examples || [])" :key="idx">
-            <tr>
-              <td x-text="row.true_label"></td>
-              <td x-text="row.pred_label"></td>
-              <td x-text="format4(row.confidence)"></td>
-              <td x-text="row.is_correct ? 'si' : 'no'"></td>
-            </tr>
-          </template>
-        </tbody>
-      </table>
-    </div>
-
-    <p x-show="!(stats.classification_examples || []).length" class="muted" style="margin-top:12px;">
-      Todavía no hay evidencia generada. Ejecuta el proceso para crear el reporte automático.
-    </p>
-  </div>
-
-  <div x-show="activeTab==='fases'" class="card">
-    <h2>Ejecución de fases</h2>
-    <p class="muted">Ejecuta procesos en segundo plano y monitorea log en vivo.</p>
-    <div class="grid-2">
-      <div>
-        <h3>Fase 1</h3>
-        <input x-model="forms.phase1.dataset_root" placeholder="dataset root">
-        <label><input type="checkbox" x-model="forms.phase1.gpu_test"> GPU test</label>
-        <button @click="runTask('phase1', forms.phase1)">Run Fase 1</button>
+    <section x-show="activeTab==='graficos'" class="panel">
+      <div class="panel-section">
+        <div class="section-head">
+          <div>
+            <h2>Lectura visual de métricas</h2>
+            <p>Los gráficos ayudan a ver si el entrenamiento mejora, cómo se reparte el dataset y qué clases se comportan mejor.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <article class="subpanel">
+            <h3>Train vs validation por época</h3>
+            <p class="helper">Dispersión para detectar si la validación acompaña el aprendizaje o se estanca.</p>
+            <canvas x-ref="scatterChart"></canvas>
+          </article>
+          <article class="subpanel">
+            <h3>Distribución por clase</h3>
+            <p class="helper">Visualiza el peso relativo de `cats`, `dogs` y `panda` dentro del dataset actual.</p>
+            <canvas x-ref="pieChart"></canvas>
+          </article>
+        </div>
       </div>
-      <div>
-        <h3>Fase 2</h3>
-        <input x-model="forms.phase2.dataset_root" placeholder="dataset root">
-        <input x-model="forms.phase2.output_dir" placeholder="output dir">
-        <button @click="runTask('phase2', forms.phase2)">Run Fase 2</button>
+      <div class="panel-section">
+        <article class="subpanel">
+          <h3>Precisión, recall y F1 por clase</h3>
+          <p class="helper">Comparación directa del comportamiento del modelo por categoría durante la evaluación.</p>
+          <canvas x-ref="barChart"></canvas>
+        </article>
       </div>
-    </div>
-    <div class="grid-2">
-      <div>
-        <h3>Fase 3 Train</h3>
-        <input x-model="forms.phase3_train.manifest_csv" placeholder="manifest csv">
-        <input type="number" x-model.number="forms.phase3_train.epochs" placeholder="epochs">
-        <button @click="runTask('phase3_train', forms.phase3_train)">Run Fase 3 Train</button>
-      </div>
-      <div>
-        <h3>Fase 4 Evaluate</h3>
-        <input x-model="forms.phase4.manifest_csv" placeholder="manifest csv">
-        <input x-model="forms.phase4.checkpoint_path" placeholder="checkpoint .pt">
-        <button @click="runTask('phase4_evaluate', forms.phase4)">Run Fase 4 Evaluate</button>
-      </div>
-    </div>
+    </section>
 
-    <h3 style="margin-top:12px;">Log de ejecución</h3>
-    <p>Task: <strong x-text="task.id || '-'"></strong> | Status: <strong x-text="task.status || 'idle'"></strong> | RC: <strong x-text="task.returncode ?? '-'"></strong></p>
-    <textarea readonly x-model="task.log_text"></textarea>
-  </div>
+    <section x-show="activeTab==='infer'" class="panel">
+      <div class="panel-section">
+        <div class="section-head">
+          <div>
+            <h2>Inferencia manual</h2>
+            <p>Sube una imagen, selecciona el checkpoint y revisa la predicción con sus probabilidades por clase.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <article class="subpanel">
+            <h3>Entrada</h3>
+            <label>Checkpoint (.pt)</label>
+            <input x-model="inferForm.checkpoint_path" placeholder="phase3_artifacts/best_checkpoint.pt">
+            <label>Tamaño de imagen</label>
+            <input type="number" x-model.number="inferForm.image_size" min="64" step="32">
+            <label>Subir imagen</label>
+            <input type="file" x-ref="imageFile" accept="image/*">
+            <button @click="predictUpload()">Subir y predecir</button>
+            <p class="error" x-show="inferError" x-text="inferError" style="margin-top: 12px;"></p>
+          </article>
+          <article class="subpanel">
+            <h3>Salida del modelo</h3>
+            <template x-if="inferResult">
+              <div>
+                <p class="ok">Predicción principal: <strong x-text="inferResult?.pred_label"></strong> (<span x-text="format4(inferResult?.confidence)"></span>)</p>
+                <div class="status-row">
+                  <span class="badge">Device: <strong x-text="inferResult?.device_name"></strong></span>
+                  <span class="badge">Checkpoint: <strong x-text="inferResult?.checkpoint_epoch"></strong></span>
+                </div>
+                <table>
+                  <thead><tr><th>Clase</th><th>Probabilidad</th></tr></thead>
+                  <tbody>
+                    <template x-for="(prob, className) in (inferResult?.probabilities || {})" :key="className">
+                      <tr><td x-text="className"></td><td x-text="format4(prob)"></td></tr>
+                    </template>
+                  </tbody>
+                </table>
+              </div>
+            </template>
+            <template x-if="!inferResult">
+              <p class="helper">Aquí aparecerá la predicción una vez que cargues una imagen válida.</p>
+            </template>
+          </article>
+        </div>
+      </div>
+    </section>
 
-  <div x-show="activeTab==='limitaciones'" class="card">
-    <h2>Limitaciones técnicas</h2>
-    <ol>
-      <template x-for="(item, idx) in (stats.technical_limitations || [])" :key="idx">
-        <li x-text="item"></li>
-      </template>
-    </ol>
-  </div>
-</div>
+    <section x-show="activeTab==='evidencia'" class="panel">
+      <div class="panel-section">
+        <div class="section-head">
+          <div>
+            <h2>Evidencia automática de clasificación</h2>
+            <p>Genera muestras del split elegido para demostrar de forma reproducible que el sistema clasifica `cats`, `dogs` y `panda`.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <article class="subpanel">
+            <h3>Configuración</h3>
+            <label>Manifest CSV</label>
+            <input x-model="forms.phase3_evidence.manifest_csv" placeholder="phase2_artifacts/dataset_split.csv">
+            <label>Checkpoint (.pt)</label>
+            <input x-model="forms.phase3_evidence.checkpoint_path" placeholder="phase3_artifacts/best_checkpoint.pt">
+            <label>Split</label>
+            <input x-model="forms.phase3_evidence.split" placeholder="test">
+            <label>Muestras por clase</label>
+            <input type="number" x-model.number="forms.phase3_evidence.samples_per_class" min="1" max="10">
+            <button @click="runTask('phase3_evidence', forms.phase3_evidence)">Generar evidencia</button>
+          </article>
+          <article class="subpanel">
+            <h3>Resultado disponible</h3>
+            <template x-if="(stats.classification_examples || []).length">
+              <table>
+                <thead><tr><th>Clase real</th><th>Predicción</th><th>Confianza</th><th>Correcta</th></tr></thead>
+                <tbody>
+                  <template x-for="(row, idx) in (stats.classification_examples || [])" :key="idx">
+                    <tr>
+                      <td x-text="row.true_label"></td>
+                      <td x-text="row.pred_label"></td>
+                      <td x-text="format4(row.confidence)"></td>
+                      <td x-text="row.is_correct ? 'sí' : 'no'"></td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </template>
+            <template x-if="!(stats.classification_examples || []).length">
+              <p class="helper">Todavía no hay evidencia generada. Ejecuta el proceso para crear el JSON y CSV de apoyo para el informe.</p>
+            </template>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section x-show="activeTab==='fases'" class="panel">
+      <div class="panel-section">
+        <div class="section-head">
+          <div>
+            <h2>Ejecución de fases en tiempo real</h2>
+            <p>La conexión WebSocket mantiene la sesión viva y actualiza estado, logs y recursos del sistema sin refrescar la página.</p>
+          </div>
+        </div>
+        <div class="metric-grid">
+          <article class="metric-card">
+            <span>Progreso</span>
+            <strong x-text="formatPercent(task.progress_pct)"></strong>
+            <span x-text="task.current_step || 'Sin tarea activa'"></span>
+          </article>
+          <article class="metric-card">
+            <span>CPU del sistema</span>
+            <strong x-text="formatPercent(systemMetrics.cpu_percent)"></strong>
+            <span>Lectura instantánea del host.</span>
+          </article>
+          <article class="metric-card">
+            <span>Memoria del proceso</span>
+            <strong x-text="formatMemory(task.resource_usage?.memory_mb)"></strong>
+            <span>Uso del proceso Python que corre la fase.</span>
+          </article>
+        </div>
+      </div>
+      <div class="panel-section">
+        <div class="grid-2">
+          <article class="subpanel">
+            <h3>Fase 1 · Inspección</h3>
+            <label>Dataset root</label>
+            <input x-model="forms.phase1.dataset_root" placeholder="gatos_perros_pandas">
+            <label class="check-row"><input type="checkbox" x-model="forms.phase1.gpu_test"> Ejecutar prueba de backend GPU</label>
+            <button @click="runTask('phase1', forms.phase1)">Ejecutar Fase 1</button>
+          </article>
+          <article class="subpanel">
+            <h3>Fase 2 · Preparación</h3>
+            <label>Dataset root</label>
+            <input x-model="forms.phase2.dataset_root" placeholder="gatos_perros_pandas">
+            <label>Output dir</label>
+            <input x-model="forms.phase2.output_dir" placeholder="phase2_artifacts">
+            <button @click="runTask('phase2', forms.phase2)">Ejecutar Fase 2</button>
+          </article>
+        </div>
+        <div class="grid-2" style="margin-top: 14px;">
+          <article class="subpanel">
+            <h3>Fase 3 · Entrenamiento</h3>
+            <label>Manifest CSV</label>
+            <input x-model="forms.phase3_train.manifest_csv" placeholder="phase2_artifacts/dataset_split.csv">
+            <label>Épocas</label>
+            <input type="number" x-model.number="forms.phase3_train.epochs" placeholder="5">
+            <button @click="runTask('phase3_train', forms.phase3_train)">Ejecutar Fase 3</button>
+          </article>
+          <article class="subpanel">
+            <h3>Fase 4 · Evaluación</h3>
+            <label>Manifest CSV</label>
+            <input x-model="forms.phase4.manifest_csv" placeholder="phase2_artifacts/dataset_split.csv">
+            <label>Checkpoint (.pt)</label>
+            <input x-model="forms.phase4.checkpoint_path" placeholder="phase3_artifacts/best_checkpoint.pt">
+            <button @click="runTask('phase4_evaluate', forms.phase4)">Ejecutar Fase 4</button>
+          </article>
+        </div>
+      </div>
+      <div class="panel-section">
+        <div class="section-head">
+          <div>
+            <h3>Bitácora de ejecución</h3>
+            <p>Supervisa la tarea activa, el retorno, los recursos y la salida de consola en tiempo real.</p>
+          </div>
+        </div>
+        <div class="status-row">
+          <span class="badge">Task: <strong x-text="task.id || '-'"></strong></span>
+          <span class="badge">Estado: <strong x-text="task.status || 'idle'"></strong></span>
+          <span class="badge">Return code: <strong x-text="task.returncode ?? '-'"></strong></span>
+          <span class="badge">CPU tarea: <strong x-text="formatPercent(task.resource_usage?.cpu_percent)"></strong></span>
+          <span class="badge">Tiempo: <strong x-text="formatSeconds(task.elapsed_seconds)"></strong></span>
+        </div>
+        <textarea readonly x-model="task.log_text"></textarea>
+      </div>
+    </section>
+
+    <section x-show="activeTab==='limitaciones'" class="panel">
+      <div class="panel-section">
+        <div class="section-head">
+          <div>
+            <h2>Limitaciones técnicas</h2>
+            <p>Lista base para el informe y la exposición sobre los límites reales del modelo y del pipeline actual.</p>
+          </div>
+        </div>
+        <div class="subpanel">
+          <ol class="note-list">
+            <template x-for="(item, idx) in (stats.technical_limitations || [])" :key="idx">
+              <li x-text="item"></li>
+            </template>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
 
 <script>
 window.__APP_INIT__ = {
@@ -188,8 +330,18 @@ function runnerApp() {
   return {
     activeTab: "resumen",
     stats: boot.initialStats || {},
-    task: { id: null, status: "idle", returncode: null, log_text: "" },
-    poller: null,
+    task: {
+      id: null,
+      status: "idle",
+      returncode: null,
+      log_text: "",
+      progress_pct: null,
+      current_step: "Sin tarea activa",
+      elapsed_seconds: 0,
+      resource_usage: {}
+    },
+    systemMetrics: { cpu_percent: null, memory_percent: null, memory_total_gb: null, memory_used_gb: null },
+    socket: null,
     inferResult: null,
     inferError: "",
     chartScatter: null,
@@ -204,20 +356,60 @@ function runnerApp() {
       phase4: { manifest_csv: "phase2_artifacts/dataset_split.csv", checkpoint_path: "phase3_artifacts/best_checkpoint.pt", output_dir: "phase4_artifacts", split: "test", image_size: 128 }
     },
     init() {
+      this.connectSocket();
       this.$nextTick(() => this.renderCharts());
+    },
+    connectSocket() {
+      if (typeof io === "undefined") return;
+      this.socket = io({ transports: ["websocket", "polling"] });
+      this.socket.on("connect", () => {
+        this.fetchSystemMetrics();
+      });
+      this.socket.on("task_snapshot", (tasks) => {
+        if (!Array.isArray(tasks) || tasks.length === 0) return;
+        const latest = tasks[tasks.length - 1];
+        if (latest) this.task = { ...this.task, ...latest };
+      });
+      this.socket.on("task_update", (payload) => {
+        if (!payload) return;
+        this.task = { ...this.task, ...payload };
+        if (["success", "failed"].includes(payload.status)) {
+          this.refreshStats();
+        }
+      });
+      this.socket.on("system_metrics", (payload) => {
+        if (!payload) return;
+        this.systemMetrics = { ...this.systemMetrics, ...payload };
+      });
     },
     format4(v) {
       if (v === null || v === undefined || Number.isNaN(Number(v))) return "-";
       return Number(v).toFixed(4);
+    },
+    formatPercent(v) {
+      if (v === null || v === undefined || Number.isNaN(Number(v))) return "-";
+      return `${Number(v).toFixed(1)}%`;
+    },
+    formatMemory(v) {
+      if (v === null || v === undefined || Number.isNaN(Number(v))) return "-";
+      return `${Number(v).toFixed(1)} MB`;
+    },
+    formatSeconds(v) {
+      if (v === null || v === undefined || Number.isNaN(Number(v))) return "-";
+      if (Number(v) < 60) return `${Number(v).toFixed(0)} s`;
+      return `${(Number(v) / 60).toFixed(1)} min`;
     },
     async refreshStats() {
       const res = await fetch("/api/stats");
       this.stats = await res.json();
       this.$nextTick(() => this.renderCharts());
     },
+    async fetchSystemMetrics() {
+      const res = await fetch("/api/system-metrics");
+      this.systemMetrics = await res.json();
+    },
     renderCharts() {
       if (typeof Chart === "undefined") return;
-
       const history = this.stats.metrics_history || [];
       const scatterData = history.map(row => ({ x: Number(row.train_acc || 0), y: Number(row.val_acc || 0) }));
       const scatterLabels = history.map(row => `e${row.epoch}`);
@@ -225,14 +417,7 @@ function runnerApp() {
       if (this.chartScatter) this.chartScatter.destroy();
       this.chartScatter = new Chart(this.$refs.scatterChart, {
         type: "scatter",
-        data: {
-          datasets: [{
-            label: "train_acc vs val_acc",
-            data: scatterData,
-            pointRadius: 5,
-            backgroundColor: "#0f766e"
-          }]
-        },
+        data: { datasets: [{ label: "train_acc vs val_acc", data: scatterData, pointRadius: 5, backgroundColor: "#2f6fed" }] },
         options: {
           scales: {
             x: { title: { display: true, text: "train_acc" }, min: 0, max: 1 },
@@ -252,17 +437,12 @@ function runnerApp() {
       });
 
       const perLabel = this.stats.manifest_summary?.per_label || {};
-      const pieLabels = Object.keys(perLabel);
-      const pieValues = Object.values(perLabel);
       if (this.chartPie) this.chartPie.destroy();
       this.chartPie = new Chart(this.$refs.pieChart, {
         type: "pie",
         data: {
-          labels: pieLabels,
-          datasets: [{
-            data: pieValues,
-            backgroundColor: ["#0f766e", "#0284c7", "#f59e0b"]
-          }]
+          labels: Object.keys(perLabel),
+          datasets: [{ data: Object.values(perLabel), backgroundColor: ["#2f6fed", "#60a5fa", "#93c5fd"] }]
         }
       });
 
@@ -277,14 +457,12 @@ function runnerApp() {
         data: {
           labels: classLabels,
           datasets: [
-            { label: "precision", data: precision, backgroundColor: "#0284c7" },
-            { label: "recall", data: recall, backgroundColor: "#16a34a" },
-            { label: "f1", data: f1, backgroundColor: "#f59e0b" }
+            { label: "precision", data: precision, backgroundColor: "#2f6fed" },
+            { label: "recall", data: recall, backgroundColor: "#1f8f61" },
+            { label: "f1", data: f1, backgroundColor: "#c57a18" }
           ]
         },
-        options: {
-          scales: { y: { min: 0, max: 1 } }
-        }
+        options: { scales: { y: { min: 0, max: 1 } } }
       });
     },
     async predictUpload() {
@@ -316,27 +494,13 @@ function runnerApp() {
       const data = await res.json();
       if (!data.ok) {
         this.task.log_text = `ERROR: ${data.error}`;
+        this.task.status = "failed";
         return;
       }
       this.task.id = data.task_id;
       this.task.status = "queued";
+      this.task.current_step = "Tarea en cola";
       this.task.log_text = "";
-      this.startPolling();
-    },
-    startPolling() {
-      if (this.poller) clearInterval(this.poller);
-      this.poller = setInterval(async () => {
-        if (!this.task.id) return;
-        const res = await fetch(`/api/task/${this.task.id}`);
-        const data = await res.json();
-        if (!data.ok) return;
-        this.task = data;
-        if (["success", "failed"].includes(data.status)) {
-          clearInterval(this.poller);
-          this.poller = null;
-          this.refreshStats();
-        }
-      }, 1000);
     }
   };
 }

@@ -1,77 +1,106 @@
-Dataset recomendado (3 clases “limpias” y directas)
-1) Rock–Paper–Scissors (Piedra/Papel/Tijera)
+# Proyecto de Inteligencia Artificial
 
-3 clases exactas (rock, paper, scissors), ideal para comenzar y demostrar resultados rápido.
-Por qué sirve: clasificación simple, carpetas por clase, muy usado en ejemplos de CNN.
+Aplicacion academica para clasificar imagenes de tres clases (`cats`, `dogs`, `panda`) usando una CNN basica en PyTorch. El repositorio incluye scripts por fase, artefactos generados y un dashboard web en Flask para inspeccionar metricas, lanzar procesos e inferir imagenes nuevas.
 
-Alternativas (también 3 clases)
-2) Animal Image Dataset: Cats, Dogs, and Foxes (3 clases)
+## Estructura
 
-Dataset pequeño (útil si tu compu no es potente).
+- `core/`: logica principal de fases, carga de manifest, modelo e inferencia.
+- `phase2_artifacts/`: manifest del dataset preparado.
+- `phase3_artifacts/`: checkpoints y metricas del entrenamiento.
+- `phase4_artifacts/`: evaluacion final, matriz de confusion y reporte por clase.
+- `templates/`: interfaz web del dashboard Flask.
+- `docs/`: material del curso, bitacoras e insumos del informe.
 
-3) Animal Image Dataset: Dog, Cat and Panda (3 clases)
+## Requisitos
 
-También directo y claro (perro/gato/panda).
+- Python 3.10 o superior
+- Windows, macOS o Linux
+- Dataset local con imagenes etiquetables como `cats`, `dogs` y `panda`
 
-Cómo cumple tu proyecto (A–E)
-A) Diseñe un software que procese imágenes
+Dependencias principales:
 
-Módulos mínimos del “software”:
+- `torch`
+- `numpy`
+- `Pillow`
+- `Flask`
+- `rich`
 
-Carga de dataset (leer carpetas por clase).
+## Instalacion
 
-Preprocesado: resize (p.ej. 128×128), normalización [0,1].
+```powershell
+cd D:\GitHub\Universidad\Inteligencia_Artificial
+python -m venv .venv
+.\.venv\Scripts\activate
+python -m pip install -r requirements.txt
+```
 
-Aumento de datos: rotación leve, flips, zoom (para generalizar).
+## Flujo recomendado
 
-Entrenamiento / Validación / Test con split (p.ej. 70/15/15).
+### Fase 1: inspeccion del dataset
 
-Inferencia: una función predict(image) que devuelva clase + probabilidad.
+```powershell
+.\.venv\Scripts\python.exe -m core.phase1 --dataset-root gatos_perros_pandas
+.\.venv\Scripts\python.exe -m core.phase1 --dataset-root gatos_perros_pandas --gpu-test --matmul-size 512
+```
 
-Reporte: guardar métricas + matriz de confusión.
+### Fase 2: preparacion y split
 
-B) Implemente una red neuronal básica (Deep Learning)
+```powershell
+.\.venv\Scripts\python.exe -m core.phase2 --dataset-root gatos_perros_pandas --output-dir phase2_artifacts --dedupe-mode sha1 --verify-dataloaders --batch-size 16 --debug
+```
 
-Arquitectura CNN simple (suficiente para “básica”):
+### Fase 3: entrenamiento
 
-Conv(32) → ReLU → MaxPool
+```powershell
+.\.venv\Scripts\python.exe -m core.phase3_train --manifest-csv phase2_artifacts/dataset_split.csv --output-dir phase3_artifacts --epochs 5 --batch-size 32 --image-size 128 --seed 42 --debug
+```
 
-Conv(64) → ReLU → MaxPool
+### Fase 3: inferencia de una imagen
 
-Flatten → Dense(128) → Dropout(0.5)
+```powershell
+.\.venv\Scripts\python.exe -m core.phase3_infer --image-path gatos_perros_pandas\animals\cats\cats_00001.jpg --checkpoint-path phase3_artifacts\best_checkpoint.pt --image-size 128
+```
 
-Dense(3) con Softmax
+### Fase 3: evidencia automatica
 
-C) Clasifique 3 tipos de objetos
+```powershell
+.\.venv\Scripts\python.exe -m core.phase3_evidence --manifest-csv phase2_artifacts/dataset_split.csv --checkpoint-path phase3_artifacts\best_checkpoint.pt --output-dir phase3_artifacts --split test --samples-per-class 1 --image-size 128
+```
 
-Usa cualquiera de los datasets anteriores:
+### Fase 4: evaluacion
 
-RPS: {rock, paper, scissors}
+```powershell
+.\.venv\Scripts\python.exe -m core.phase4_evaluate --manifest-csv phase2_artifacts/dataset_split.csv --checkpoint-path phase3_artifacts\best_checkpoint.pt --output-dir phase4_artifacts --split test --image-size 128
+```
 
-Animales: {cat, dog, fox}
+## Dashboard web
 
-Animales: {dog, cat, panda}
+```powershell
+.\.venv\Scripts\python.exe app.py
+```
 
-D) Genere 3 métricas de precisión
+Luego abre `http://127.0.0.1:5000/dashboard`.
 
-Tres métricas típicas y aceptadas (multiclase):
+El dashboard permite:
 
-Accuracy (exactitud global)
+- ver resumen del dataset y del entrenamiento
+- consultar metricas y graficos
+- generar evidencia de clasificacion
+- correr las fases en segundo plano
+- subir una imagen para inferencia
 
-Precision (macro) (promedio de precisión por clase)
+## Artefactos esperados
 
-F1-score (macro) (balance entre precision y recall)
+- `phase2_artifacts/dataset_split.csv`
+- `phase3_artifacts/best_checkpoint.pt`
+- `phase3_artifacts/metrics_history.json`
+- `phase4_artifacts/metrics_test.json`
+- `phase4_artifacts/confusion_matrix_test.csv`
+- `phase4_artifacts/classification_report_test.csv`
 
-(Opcional para fortalecer el informe: matriz de confusión y recall macro.)
+## Notas tecnicas
 
-E) Documente 5 limitaciones técnicas (ejemplos listos para tu reporte)
-
-Variación de iluminación/fondo: cambia mucho la apariencia del objeto y baja el desempeño fuera del dataset.
-
-Overfitting si el dataset es pequeño: la red memoriza en vez de generalizar (se mitiga con augmentación y dropout).
-
-Sesgo del dataset / domain shift: si las fotos reales difieren (ángulos/cámaras), el modelo falla en producción.
-
-Requerimientos de cómputo: entrenar CNN en CPU es lento; con GPU mejora, pero no siempre disponible.
-
-Calidad/ruido en datos: imágenes borrosas, recortes malos o etiquetas imperfectas degradan métricas.
+- La fase 2 deduplica por contenido en modo `sha1`, no solo por nombre.
+- La fase 3 usa semilla para `random`, `numpy` y PyTorch para mejorar reproducibilidad.
+- La app web resuelve checkpoints relativos respecto a la carpeta del proyecto.
+- Si no hay backend GPU disponible, el proyecto funciona en CPU.

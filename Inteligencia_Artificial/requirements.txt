@@ -2,5 +2,8 @@ numpy>=1.26.0,<2
 Pillow>=10.0.0
 rich>=13.7.0
 Flask>=3.0.0
+Flask-SocketIO>=5.3.6
+simple-websocket>=1.0.0
+psutil>=6.0.0
 torch>=2.2.0
 torch-directml>=0.2.5.dev240914; platform_system == "Windows"

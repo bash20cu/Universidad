@@ -1,4 +1,4 @@
-"""Modelo y utilidades de inferencia/checkpoint."""
+"""Modelo base y utilidades de inferencia para el proyecto."""
 
 from __future__ import annotations
 
@@ -12,6 +12,8 @@ from .constants import ID_TO_CLASS
 
 
 def select_device(torch_module) -> tuple[object, str]:
+    """Selecciona el backend disponible con prioridad CUDA, MPS, DirectML y CPU."""
+
     torch = torch_module
     if torch.cuda.is_available():
         return torch.device("cuda"), "cuda"
@@ -27,6 +29,8 @@ def select_device(torch_module) -> tuple[object, str]:
 
 
 def explain_device_choice(torch_module) -> str:
+    """Explica en texto humano por que se eligio un backend de computo concreto."""
+
     torch = torch_module
     system_name = platform.system().lower()
 
@@ -52,11 +56,14 @@ def explain_device_choice(torch_module) -> str:
 
 
 def build_simple_cnn(nn_module):
+    """Construye una CNN pequena y suficiente para tres clases basicas."""
+
     nn = nn_module
 
     class SimpleCNN(nn.Module):
         def __init__(self, num_classes: int = 3):
             super().__init__()
+            # Bloque extractor de caracteristicas.
             self.features = nn.Sequential(
                 nn.Conv2d(3, 32, kernel_size=3, padding=1),
                 nn.ReLU(inplace=True),
@@ -68,6 +75,7 @@ def build_simple_cnn(nn_module):
                 nn.ReLU(inplace=True),
                 nn.AdaptiveAvgPool2d((1, 1)),
             )
+            # Clasificador final sobre el embedding de 128 canales.
             self.classifier = nn.Sequential(
                 nn.Flatten(),
                 nn.Dropout(p=0.2),
@@ -85,6 +93,8 @@ def load_model_from_checkpoint(
     checkpoint_path: Path,
     num_classes: int = 3,
 ):
+    """Reconstruye el modelo desde un checkpoint portable y lo mueve al dispositivo elegido."""
+
     import torch
     import torch.nn as nn
 
@@ -105,6 +115,7 @@ def load_model_from_checkpoint(
                 f"Backend seleccionado actualmente: {device_name}. {device_note}"
             ) from exc
         raise
+    # Los checkpoints se guardan con tensores en CPU para poder abrirlos en otros entornos.
     model.load_state_dict(checkpoint["model_state_dict"])
     model = model.to(device)
     model.eval()
@@ -117,12 +128,15 @@ def predict_image(
     image_path: Path,
     image_size: int = 128,
 ) -> dict[str, object]:
+    """Ejecuta inferencia sobre una imagen y devuelve la clase ganadora con probabilidades."""
+
     import torch
 
     with Image.open(image_path) as img:
         img = img.convert("RGB").resize((image_size, image_size))
         arr = np.asarray(img, dtype=np.float32) / 255.0
 
+    # El modelo espera tensores BCHW normalizados en el rango [0, 1].
     x = torch.from_numpy(arr).permute(2, 0, 1).contiguous().unsqueeze(0).to(device)
 
     with torch.no_grad():

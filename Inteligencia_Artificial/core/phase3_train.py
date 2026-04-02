@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import csv
 import json
 import random
 import time
@@ -16,6 +15,7 @@ from rich.console import Console
 from rich.progress import track
 from rich.table import Table
 
+from core.manifest import load_manifest as load_manifest_items
 from core.model import build_simple_cnn, select_device
 
 console = Console()
@@ -23,6 +23,8 @@ console = Console()
 
 @dataclass(frozen=True)
 class Item:
+    """Representa una muestra lista para entrenamiento, validacion o prueba."""
+
     path: Path
     label_id: int
     split: str
@@ -46,44 +48,37 @@ def parse_args() -> argparse.Namespace:
 
 
 def set_seed(seed: int) -> None:
+    """Fija semillas de librerias principales para mejorar reproducibilidad."""
+
     random.seed(seed)
     np.random.seed(seed)
+    try:
+        import torch
+    except ImportError:
+        return
+
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+    cudnn = getattr(torch.backends, "cudnn", None)
+    if cudnn is not None:
+        cudnn.deterministic = True
+        cudnn.benchmark = False
 
 
 def load_manifest(path: Path) -> list[Item]:
-    items: list[Item] = []
-    with path.open("r", encoding="utf-8", newline="") as f:
-        reader = csv.DictReader(f)
-        required = {"path", "label_id", "split"}
-        if not required.issubset(reader.fieldnames or set()):
-            raise ValueError(f"CSV invalido. Debe incluir columnas: {sorted(required)}")
-        manifest_csv = path.resolve()
-        project_root = manifest_csv.parent.parent
-        for row in reader:
-            raw_path = Path(row["path"])
-            if raw_path.exists():
-                resolved_path = raw_path
-            else:
-                raw_relative = row.get("path_relative", "")
-                candidates = []
-                if raw_relative:
-                    rel = Path(raw_relative)
-                    candidates.extend(
-                        [
-                            project_root / "gatos_perros_pandas" / rel,
-                            project_root / rel,
-                        ]
-                    )
-                if raw_path.name:
-                    candidates.extend(project_root.rglob(raw_path.name))
-                resolved_path = next((p.resolve() for p in candidates if p.exists()), raw_path)
-            items.append(
-                Item(path=resolved_path, label_id=int(row["label_id"]), split=row["split"])
-            )
-    return items
+    """Adapta el manifest comun del proyecto a la estructura usada por entrenamiento."""
+
+    manifest_items = load_manifest_items(path)
+    return [
+        Item(path=item.path, label_id=item.label_id, split=item.split)
+        for item in manifest_items
+    ]
 
 
 def build_components():
+    """Importa PyTorch de forma diferida y construye clases auxiliares de entrenamiento."""
+
     try:
         import torch
         import torch.nn as nn
@@ -109,6 +104,7 @@ def build_components():
             except (OSError, UnidentifiedImageError) as exc:
                 raise RuntimeError(f"Error cargando imagen: {row.path}") from exc
 
+            # Aumento minimo y barato para evitar memorizar el entrenamiento tal cual.
             if self.split == "train" and random.random() < 0.5:
                 arr = np.ascontiguousarray(np.flip(arr, axis=1))
 
@@ -154,10 +150,14 @@ def build_components():
 
 
 def cpu_state_dict(torch_module, model) -> dict[str, object]:
+    """Convierte el estado del modelo a CPU para que el checkpoint sea portable."""
+
     return {key: value.detach().to("cpu") for key, value in model.state_dict().items()}
 
 
 def cpu_optimizer_state(torch_module, optimizer) -> dict[str, object]:
+    """Mueve recursivamente el estado del optimizador a CPU antes de guardarlo."""
+
     def to_cpu(value):
         if isinstance(value, torch_module.Tensor):
             return value.detach().to("cpu")

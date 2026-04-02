@@ -1,41 +1,41 @@
 [
   {
     "true_label": "cats",
-    "pred_label": "dogs",
-    "confidence": 0.48270323872566223,
-    "is_correct": false,
+    "pred_label": "cats",
+    "confidence": 0.5075094103813171,
+    "is_correct": true,
     "split": "test",
-    "image_path": "/Volumes/projects/GitHub/Universidad/Inteligencia_Artificial/gatos_perros_pandas/animals/cats/cats_00736.jpg",
+    "image_path": "D:\\GitHub\\Universidad\\Inteligencia_Artificial\\gatos_perros_pandas\\animals\\cats\\cats_00512.jpg",
     "probabilities": {
-      "cats": 0.39024725556373596,
-      "dogs": 0.48270323872566223,
-      "panda": 0.1270495057106018
+      "cats": 0.5075094103813171,
+      "dogs": 0.46363526582717896,
+      "panda": 0.028855256736278534
     }
   },
   {
     "true_label": "dogs",
     "pred_label": "dogs",
-    "confidence": 0.5034567713737488,
+    "confidence": 0.4066086411476135,
     "is_correct": true,
     "split": "test",
-    "image_path": "/Volumes/projects/GitHub/Universidad/Inteligencia_Artificial/gatos_perros_pandas/animals/dogs/dogs_00858.jpg",
+    "image_path": "D:\\GitHub\\Universidad\\Inteligencia_Artificial\\gatos_perros_pandas\\animals\\dogs\\dogs_00513.jpg",
     "probabilities": {
-      "cats": 0.46309778094291687,
-      "dogs": 0.5034567713737488,
-      "panda": 0.033445462584495544
+      "cats": 0.19805018603801727,
+      "dogs": 0.4066086411476135,
+      "panda": 0.39534109830856323
     }
   },
   {
     "true_label": "panda",
     "pred_label": "panda",
-    "confidence": 0.7792031168937683,
+    "confidence": 0.8064848780632019,
     "is_correct": true,
     "split": "test",
-    "image_path": "/Volumes/projects/GitHub/Universidad/Inteligencia_Artificial/gatos_perros_pandas/animals/panda/panda_00976.jpg",
+    "image_path": "D:\\GitHub\\Universidad\\Inteligencia_Artificial\\gatos_perros_pandas\\animals\\panda\\panda_00663.jpg",
     "probabilities": {
-      "cats": 0.16162899136543274,
-      "dogs": 0.05916784703731537,
-      "panda": 0.7792031168937683
+      "cats": 0.05805187299847603,
+      "dogs": 0.13546329736709595,
+      "panda": 0.8064848780632019
     }
   }
 ]

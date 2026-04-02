@@ -14,6 +14,8 @@ console = Console()
 
 
 def parse_args() -> argparse.Namespace:
+    """Define los parametros CLI para inferencia individual."""
+
     parser = argparse.ArgumentParser(
         description="Fase 3 - Inferencia de una imagen (cats/dogs/panda)."
     )
@@ -24,6 +26,8 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
+    """Carga el checkpoint, procesa una imagen y muestra la prediccion resultante."""
+
     args = parse_args()
     image_path = args.image_path.resolve()
     checkpoint_path = args.checkpoint_path.resolve()

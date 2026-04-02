@@ -20,6 +20,8 @@ console = Console()
 
 
 def parse_args() -> argparse.Namespace:
+    """Define los parametros CLI para evaluar un split con el modelo entrenado."""
+
     parser = argparse.ArgumentParser(
         description="Fase 4 - Evaluacion con accuracy, precision, recall, f1 y matriz de confusion."
     )
@@ -32,16 +34,22 @@ def parse_args() -> argparse.Namespace:
 
 
 def load_image_tensor(torch_module, image_path: Path, image_size: int):
+    """Carga una imagen, la normaliza y la convierte al tensor esperado por el modelo."""
+
     with Image.open(image_path) as img:
         arr = np.asarray(img.convert("RGB").resize((image_size, image_size)), dtype=np.float32) / 255.0
     return torch_module.from_numpy(arr).permute(2, 0, 1).contiguous().unsqueeze(0)
 
 
 def safe_div(num: float, den: float) -> float:
+    """Evita divisiones por cero en el calculo de metricas."""
+
     return float(num / den) if den else 0.0
 
 
 def compute_metrics(y_true: list[int], y_pred: list[int], num_classes: int) -> dict[str, object]:
+    """Calcula metricas globales y por clase a partir de etiquetas reales y predichas."""
+
     y_true_arr = np.asarray(y_true, dtype=np.int64)
     y_pred_arr = np.asarray(y_pred, dtype=np.int64)
 
@@ -96,6 +104,8 @@ def compute_metrics(y_true: list[int], y_pred: list[int], num_classes: int) -> d
 
 
 def save_outputs(output_dir: Path, metrics: dict[str, object], split: str) -> None:
+    """Persiste resultados de evaluacion en JSON y CSV para consumo posterior."""
+
     output_dir.mkdir(parents=True, exist_ok=True)
 
     metrics_json = output_dir / f"metrics_{split}.json"
@@ -127,6 +137,8 @@ def save_outputs(output_dir: Path, metrics: dict[str, object], split: str) -> No
 
 
 def print_summary(metrics: dict[str, object], split: str, output_dir: Path) -> None:
+    """Muestra un resumen tabular de las metricas calculadas."""
+
     global_table = Table(title=f"Fase 4 - Metricas globales ({split})")
     global_table.add_column("Metrica", style="bold")
     global_table.add_column("Valor")
@@ -160,6 +172,8 @@ def print_summary(metrics: dict[str, object], split: str, output_dir: Path) -> N
 
 
 def main() -> int:
+    """Evalua el split seleccionado y exporta artefactos de metricas y confusion."""
+
     args = parse_args()
     manifest_csv = args.manifest_csv.resolve()
     checkpoint_path = args.checkpoint_path.resolve()

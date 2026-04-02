@@ -26,17 +26,23 @@ console = Console()
 
 @dataclass(frozen=True)
 class Record:
+    """Representa una imagen etiquetada y su split asignado."""
+
     path: Path
     label: str
     split: str
 
 
 def debug_log(enabled: bool, message: str) -> None:
+    """Imprime mensajes de depuracion solo cuando el modo debug esta activo."""
+
     if enabled:
         console.print(f"[cyan]DEBUG:[/cyan] {message}")
 
 
 def list_labeled_images(dataset_root: Path, debug: bool = False) -> tuple[list[tuple[Path, str]], int]:
+    """Recorre el dataset y devuelve solo las imagenes cuya clase pudo inferirse."""
+
     labeled: list[tuple[Path, str]] = []
     unknown = 0
     all_paths = list(dataset_root.rglob("*"))
@@ -55,6 +61,8 @@ def list_labeled_images(dataset_root: Path, debug: bool = False) -> tuple[list[t
 
 
 def compute_sha1(file_path: Path, chunk_size: int = 1024 * 1024) -> str:
+    """Calcula el hash SHA1 del contenido para detectar duplicados reales."""
+
     sha1 = hashlib.sha1()
     with file_path.open("rb") as f:
         while True:
@@ -68,12 +76,14 @@ def compute_sha1(file_path: Path, chunk_size: int = 1024 * 1024) -> str:
 def dedupe_records(
     items: Iterable[tuple[Path, str]], mode: str, debug: bool = False
 ) -> tuple[list[tuple[Path, str]], int]:
+    """Elimina duplicados por nombre/tamano o por contenido segun el modo indicado."""
+
     if mode == "none":
         data = list(items)
         return data, 0
 
     items_list = list(items)
-    seen: set[tuple[str, str] | tuple[str, str, int] | tuple[str, str, int, str]] = set()
+    seen: set[tuple[str, str] | tuple[str, int, str]] = set()
     deduped: list[tuple[Path, str]] = []
     removed = 0
 
@@ -83,7 +93,7 @@ def dedupe_records(
         if mode == "name_size":
             key = (label, path.name.lower(), stat.st_size)
         elif mode == "sha1":
-            key = (label, path.name.lower(), stat.st_size, compute_sha1(path))
+            key = (label, stat.st_size, compute_sha1(path))
         else:
             raise ValueError(f"Modo de deduplicacion no soportado: {mode}")
 
@@ -105,6 +115,8 @@ def split_stratified(
     test_ratio: float,
     seed: int,
 ) -> list[Record]:
+    """Genera un split estratificado intentando dejar muestras en todos los subconjuntos."""
+
     if abs((train_ratio + val_ratio + test_ratio) - 1.0) > 1e-9:
         raise ValueError("Las proporciones train/val/test deben sumar 1.0")
 
@@ -150,6 +162,8 @@ def split_stratified(
 
 
 def export_manifest(records: list[Record], dataset_root: Path, output_csv: Path) -> None:
+    """Exporta el split a un CSV reutilizable por entrenamiento y evaluacion."""
+
     output_csv.parent.mkdir(parents=True, exist_ok=True)
     with output_csv.open("w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
@@ -167,6 +181,8 @@ def export_manifest(records: list[Record], dataset_root: Path, output_csv: Path)
 
 
 def print_summary(records: list[Record]) -> None:
+    """Muestra en consola un resumen legible del split generado."""
+
     total = len(records)
     per_split = Counter(rec.split for rec in records)
     per_label = Counter(rec.label for rec in records)
@@ -208,6 +224,8 @@ def verify_dataloaders(
     batch_size: int,
     num_workers: int,
 ) -> str:
+    """Prueba que los DataLoaders puedan leer al menos un batch por split."""
+
     try:
         import torch
         from torch.utils.data import DataLoader, Dataset
@@ -258,6 +276,8 @@ def verify_dataloaders(
 
 
 def parse_args() -> argparse.Namespace:
+    """Define los parametros CLI de la fase 2."""
+
     parser = argparse.ArgumentParser(
         description="Fase 2 - Preparacion de split train/val/test y verificacion de dataloaders."
     )
@@ -281,6 +301,8 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
+    """Orquesta limpieza, deduplicacion, split y exportacion del manifest."""
+
     args = parse_args()
     dataset_root = args.dataset_root.resolve()
     output_dir = args.output_dir.resolve()

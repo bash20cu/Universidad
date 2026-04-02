@@ -22,6 +22,8 @@ console = Console() if Console is not None else None
 
 
 def print_line(message: str) -> None:
+    """Imprime por rich cuando esta disponible o por consola simple en fallback."""
+
     if console is not None:
         console.print(message)
     else:
@@ -29,6 +31,8 @@ def print_line(message: str) -> None:
 
 
 def parse_args() -> argparse.Namespace:
+    """Define los parametros CLI para generar evidencia automatica."""
+
     parser = argparse.ArgumentParser(
         description="Fase 3 - Genera evidencia de clasificacion por clase usando el modelo entrenado."
     )
@@ -42,6 +46,8 @@ def parse_args() -> argparse.Namespace:
 
 
 def select_examples(items, split: str, samples_per_class: int):
+    """Selecciona una cantidad fija de muestras por clase para documentar evidencia."""
+
     selected = []
     for class_name in KNOWN_CLASSES:
         class_items = [item for item in items if item.split == split and item.label == class_name]
@@ -50,6 +56,8 @@ def select_examples(items, split: str, samples_per_class: int):
 
 
 def save_outputs(output_dir: Path, rows: list[dict[str, object]], split: str) -> tuple[Path, Path]:
+    """Guarda la evidencia generada en formatos JSON y CSV."""
+
     output_dir.mkdir(parents=True, exist_ok=True)
     json_path = output_dir / f"classification_examples_{split}.json"
     csv_path = output_dir / f"classification_examples_{split}.csv"
@@ -85,6 +93,8 @@ def save_outputs(output_dir: Path, rows: list[dict[str, object]], split: str) ->
 
 
 def main() -> int:
+    """Genera predicciones de ejemplo por clase para respaldar el requerimiento C."""
+
     args = parse_args()
     manifest_csv = args.manifest_csv.resolve()
     checkpoint_path = args.checkpoint_path.resolve()

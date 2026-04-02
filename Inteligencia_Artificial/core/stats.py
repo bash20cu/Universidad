@@ -18,6 +18,8 @@ TECH_LIMITATIONS = [
 
 
 def load_metrics_history(metrics_path: Path) -> list[dict[str, Any]]:
+    """Lee el historial de entrenamiento si existe y devuelve una lista segura."""
+
     if not metrics_path.exists():
         return []
     with metrics_path.open("r", encoding="utf-8") as f:
@@ -28,6 +30,8 @@ def load_metrics_history(metrics_path: Path) -> list[dict[str, Any]]:
 
 
 def summarize_training(metrics_history: list[dict[str, Any]]) -> dict[str, Any]:
+    """Extrae mejor epoca y ultimo estado a partir del historial de entrenamiento."""
+
     if not metrics_history:
         return {
             "epochs": 0,
@@ -49,6 +53,8 @@ def summarize_training(metrics_history: list[dict[str, Any]]) -> dict[str, Any]:
 
 
 def load_phase4_metrics(metrics_path: Path) -> dict[str, Any]:
+    """Lee el JSON de evaluacion final si esta disponible."""
+
     if not metrics_path.exists():
         return {}
     with metrics_path.open("r", encoding="utf-8") as f:
@@ -57,6 +63,8 @@ def load_phase4_metrics(metrics_path: Path) -> dict[str, Any]:
 
 
 def load_classification_examples(examples_path: Path) -> list[dict[str, Any]]:
+    """Lee ejemplos de clasificacion generados como evidencia automatica."""
+
     if not examples_path.exists():
         return []
     with examples_path.open("r", encoding="utf-8") as f:
@@ -70,6 +78,8 @@ def build_dashboard_stats(
     phase4_metrics_json: Path | None = None,
     classification_examples_json: Path | None = None,
 ) -> dict[str, Any]:
+    """Construye el paquete de datos que consume el dashboard Flask."""
+
     manifest_items = load_manifest(manifest_csv) if manifest_csv.exists() else []
     manifest_summary = summarize_manifest(manifest_items) if manifest_items else {}
     metrics_history = load_metrics_history(metrics_history_json)
