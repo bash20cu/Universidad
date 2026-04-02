@@ -1,0 +1,30 @@
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">Centro de control del proyecto</div>
+      <h1>Pipeline visual de inteligencia artificial aplicada.</h1>
+      <p>
+        Recorre el proyecto en el orden natural del trabajo: preparar datos,
+        entrenar el modelo, evaluar resultados, probar predicciones y cerrar
+        la evidencia para la entrega académica.
+      </p>
+    </div>
+    <div class="hero-meta">
+      <div>
+        <span>Registros del manifest</span>
+        <strong x-text="stats.manifest_summary?.total ?? 0"></strong>
+        <span>imágenes detectadas</span>
+      </div>
+      <div>
+        <span>Mejor validación</span>
+        <strong x-text="format4(stats.training_summary?.best_val_acc)"></strong>
+        <span>best `val_acc` histórico</span>
+      </div>
+      <div>
+        <span>Accuracy en test</span>
+        <strong x-text="format4(stats.phase4_metrics?.accuracy)"></strong>
+        <span>resultado de la fase 4</span>
+      </div>
+    </div>
+  </div>
+</section>

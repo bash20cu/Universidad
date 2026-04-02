@@ -1,0 +1,188 @@
+<section x-show="activeTab==='entrenamiento'" class="panel">
+  <div class="panel-section">
+    <div class="section-head">
+      <div>
+        <h2>Entrenamiento del modelo</h2>
+        <p>Con el manifest listo, esta etapa ajusta la CNN y guarda checkpoints, historial y métricas por época.</p>
+      </div>
+    </div>
+    <div class="grid-2">
+      <article class="subpanel form-stack">
+        <h3>Fase 3 · Entrenamiento</h3>
+        <label>Manifest CSV</label>
+        <input x-model="forms.phase3_train.manifest_csv" placeholder="phase2_artifacts/dataset_split.csv">
+        <p class="field-help">Archivo CSV generado en Fase 2 con rutas, clases y split de cada imagen.</p>
+        <label>Directorio de salida</label>
+        <input x-model="forms.phase3_train.output_dir" placeholder="phase3_artifacts">
+        <p class="field-help">Carpeta donde se guardan checkpoints y el historial de métricas del entrenamiento.</p>
+        <label>Épocas</label>
+        <input type="number" x-model.number="forms.phase3_train.epochs" min="1" step="1">
+        <p class="field-help">Cantidad de pasadas completas sobre el conjunto de entrenamiento. Más épocas pueden mejorar o sobreajustar.</p>
+        <label>Batch size</label>
+        <input type="number" x-model.number="forms.phase3_train.batch_size" min="1" step="1">
+        <p class="field-help">Número de imágenes procesadas por lote en cada actualización del modelo.</p>
+        <label>Tamaño de imagen</label>
+        <input type="number" x-model.number="forms.phase3_train.image_size" min="64" step="32">
+        <p class="field-help">Resolución usada para redimensionar cada imagen antes de entrar a la CNN.</p>
+        <label class="check-row"><input type="checkbox" x-model="forms.phase3_train.debug"> Modo debug</label>
+        <p class="field-help">Imprime métricas por época en tiempo real para seguir el entrenamiento con más detalle.</p>
+        <div class="form-actions">
+          <button @click="runTask('phase3_train', forms.phase3_train)">Ejecutar Fase 3</button>
+        </div>
+        <p class="field-help">Inicia el entrenamiento del modelo y actualiza el panel con progreso, mejor época y métricas recientes.</p>
+      </article>
+      <article class="subpanel">
+        <h3>Siguiente paso recomendado</h3>
+        <p class="helper">Usa esta fase para entrenar la CNN con el manifest preparado y luego revisar si la validación mejora de forma estable.</p>
+        <ul class="note-list">
+          <li>Confirma que `train`, `val` y `test` no estén vacíos.</li>
+          <li>Activa `debug` para ver métricas por época en vivo.</li>
+          <li>Si `val_acc` se estanca, ajusta épocas o tamaño de imagen.</li>
+          <li>Al terminar, pasa a `Evaluación` para medir el modelo final.</li>
+        </ul>
+      </article>
+    </div>
+    <div class="phase-shell" style="margin-top: 14px;">
+      <div class="phase-hero">
+        <article class="phase-progress-card">
+          <div class="phase-progress-head">
+            <div>
+              <div class="eyebrow">Estado actual</div>
+              <h3 x-text="phase3CurrentStep(task)"></h3>
+              <p class="helper" x-text="phase3Narrative(task)"></p>
+            </div>
+            <span class="phase-status-pill" x-text="phaseStatusLabel(task.status)"></span>
+          </div>
+          <div class="phase-bar-track">
+            <div class="phase-bar-fill" :style="`width: ${safeProgress(task.progress_pct)}%`"></div>
+          </div>
+          <div class="status-row">
+            <span class="badge">Progreso: <strong x-text="formatPercent(task.progress_pct)"></strong></span>
+            <span class="badge">Tiempo: <strong x-text="formatSeconds(task.elapsed_seconds)"></strong></span>
+            <span class="badge">CPU tarea: <strong x-text="formatPercent(task.resource_usage?.cpu_percent)"></strong></span>
+            <span class="badge">RAM tarea: <strong x-text="formatMemory(task.resource_usage?.memory_mb)"></strong></span>
+          </div>
+          <div class="phase-stage-list">
+            <template x-for="stage in getPhase3Stages(task)" :key="stage.key">
+              <div class="phase-stage-item" :class="stageClass(stage)">
+                <span class="phase-stage-dot"></span>
+                <div>
+                  <div class="phase-stage-label" x-text="stage.label"></div>
+                  <div class="helper" x-text="stage.description"></div>
+                </div>
+                <div class="phase-stage-state" x-text="stage.stateLabel"></div>
+              </div>
+            </template>
+          </div>
+        </article>
+        <article class="phase-progress-card">
+          <div class="eyebrow">Lectura rápida</div>
+          <h3>Resumen del entrenamiento</h3>
+          <div class="phase-kpi" style="margin-top: 14px;">
+            <div class="phase-mini">
+              <span>Época actual</span>
+              <strong x-text="textOrDash(phase3EpochLabel(task))"></strong>
+              <span class="helper">Seguimiento del avance dentro del entrenamiento.</span>
+            </div>
+            <div class="phase-mini">
+              <span>Mejor época</span>
+              <strong x-text="textOrDash(phase3BestEpoch(task))"></strong>
+              <span class="helper">Mejor punto de validación encontrado hasta ahora.</span>
+            </div>
+            <div class="phase-mini">
+              <span>Último train_acc</span>
+              <strong x-text="textOrDash(format4(phase3Details(task).last_train_acc))"></strong>
+              <span class="helper">Precisión observada en entrenamiento.</span>
+            </div>
+            <div class="phase-mini">
+              <span>Último val_acc</span>
+              <strong x-text="textOrDash(format4(phase3Details(task).last_val_acc))"></strong>
+              <span class="helper">Referencia principal para guardar el mejor checkpoint.</span>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="grid-3">
+        <article class="subpanel">
+          <h4>Registros usados</h4>
+          <ul class="phase-plain-list">
+            <li><span>Train</span><strong x-text="textOrDash(phase3Details(task).train_count || stats.manifest_summary?.per_split?.train)"></strong></li>
+            <li><span>Validación</span><strong x-text="textOrDash(phase3Details(task).val_count || stats.manifest_summary?.per_split?.val)"></strong></li>
+            <li><span>Test</span><strong x-text="textOrDash(phase3Details(task).test_count || stats.manifest_summary?.per_split?.test)"></strong></li>
+          </ul>
+        </article>
+        <article class="subpanel">
+          <h4>Últimas métricas</h4>
+          <ul class="phase-plain-list">
+            <li><span>train_loss</span><strong x-text="textOrDash(format4(phase3Details(task).last_train_loss))"></strong></li>
+            <li><span>val_loss</span><strong x-text="textOrDash(format4(phase3Details(task).last_val_loss))"></strong></li>
+            <li><span>best_val_acc</span><strong x-text="textOrDash(format4(phase3BestValAcc(task)))"></strong></li>
+          </ul>
+        </article>
+        <article class="subpanel">
+          <h4>Checkpoint y artefactos</h4>
+          <ul class="phase-plain-list">
+            <li><span>Device</span><strong x-text="textOrDash(phase3Details(task).device_name)"></strong></li>
+            <li><span>Checkpoint</span><strong x-text="phase3Details(task).best_checkpoint ? 'listo' : 'pendiente'"></strong></li>
+            <li><span>Historial</span><strong x-text="phase3Details(task).metrics_history ? 'listo' : 'pendiente'"></strong></li>
+          </ul>
+          <div style="margin-top: 14px;">
+            <p class="helper">Best checkpoint</p>
+            <div class="mono-inline" x-text="phase3Details(task).best_checkpoint || 'Todavía no generado'"></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+  <div class="panel-section">
+    <div class="section-head">
+      <div>
+        <h3>Lectura histórica del entrenamiento</h3>
+        <p>Estos datos salen de los artefactos guardados y ayudan a comparar el desempeño global del modelo.</p>
+      </div>
+    </div>
+    <div class="metric-grid">
+      <article class="metric-card">
+        <span>Épocas entrenadas</span>
+        <strong x-text="stats.training_summary?.epochs ?? 0"></strong>
+        <span>Historial disponible en artefactos.</span>
+      </article>
+      <article class="metric-card">
+        <span>Mejor época</span>
+        <strong x-text="stats.training_summary?.best_epoch ?? '-'"></strong>
+        <span>Checkpoint con mejor validación.</span>
+      </article>
+      <article class="metric-card">
+        <span>Mejor val_acc</span>
+        <strong x-text="format4(stats.training_summary?.best_val_acc)"></strong>
+        <span>Se usa como referencia principal.</span>
+      </article>
+    </div>
+  </div>
+  <div class="panel-section">
+    <div class="grid-2">
+      <article class="subpanel">
+        <h3>Train vs validation por época</h3>
+        <p class="helper">Dispersión para detectar si la validación acompaña el aprendizaje o se estanca.</p>
+        <canvas x-ref="scatterChart"></canvas>
+      </article>
+      <article class="subpanel">
+        <h3>Historial reciente</h3>
+        <table>
+          <thead><tr><th>Época</th><th>train_acc</th><th>val_acc</th><th>train_loss</th><th>val_loss</th></tr></thead>
+          <tbody>
+            <template x-for="row in (stats.metrics_history || []).slice(-5)" :key="row.epoch">
+              <tr>
+                <td x-text="row.epoch"></td>
+                <td x-text="format4(row.train_acc)"></td>
+                <td x-text="format4(row.val_acc)"></td>
+                <td x-text="format4(row.train_loss)"></td>
+                <td x-text="format4(row.val_loss)"></td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </article>
+    </div>
+  </div>
+</section>

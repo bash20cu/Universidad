@@ -117,6 +117,14 @@
       color: var(--muted);
     }
 
+    .field-help {
+      margin-top: -2px;
+      margin-bottom: 2px;
+      color: #7a8599;
+      font-size: 0.76rem;
+      line-height: 1.45;
+    }
+
     .hero {
       position: relative;
       overflow: hidden;
@@ -210,7 +218,7 @@
 
     .tabs {
       display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 10px;
       padding: 0;
       margin: 0;
@@ -244,6 +252,54 @@
       background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
       color: #f8fbff;
       box-shadow: 0 10px 22px rgba(47, 111, 237, 0.24);
+    }
+
+    .subtabs {
+      display: inline-grid;
+      grid-auto-flow: column;
+      grid-auto-columns: max-content;
+      gap: 8px;
+      padding: 6px;
+      border-radius: 14px;
+      background: rgba(47, 111, 237, 0.06);
+      border: 1px solid rgba(47, 111, 237, 0.1);
+    }
+
+    .subtab-btn {
+      border: 0;
+      border-radius: 10px;
+      padding: 10px 14px;
+      background: transparent;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.84rem;
+      cursor: pointer;
+      box-shadow: none;
+      min-height: 0;
+    }
+
+    .subtab-btn:hover {
+      transform: none;
+      box-shadow: none;
+      background: rgba(47, 111, 237, 0.08);
+      color: var(--ink);
+    }
+
+    .subtab-btn.active {
+      background: #ffffff;
+      color: var(--accent-strong);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .form-stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-start;
+      margin-top: 10px;
     }
 
     .section-head {
@@ -282,6 +338,12 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
     .metric-card,
     .subpanel {
       padding: 15px;
@@ -295,6 +357,181 @@
       font-size: 1.6rem;
       line-height: 1;
       letter-spacing: -0.05em;
+    }
+
+    .phase-shell {
+      display: grid;
+      gap: 14px;
+    }
+
+    .phase-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .phase-progress-card {
+      padding: 18px;
+      border-radius: 18px;
+      background:
+        linear-gradient(135deg, rgba(47, 111, 237, 0.1), rgba(96, 165, 250, 0.06)),
+        var(--surface-strong);
+      border: 1px solid rgba(47, 111, 237, 0.12);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .phase-progress-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .phase-progress-head h3,
+    .phase-progress-card h4 {
+      margin: 0;
+    }
+
+    .phase-progress-head p,
+    .phase-progress-card p {
+      margin: 6px 0 0;
+    }
+
+    .phase-status-pill {
+      padding: 8px 11px;
+      border-radius: 10px;
+      background: rgba(47, 111, 237, 0.1);
+      color: var(--accent-strong);
+      font-size: 0.76rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .phase-bar-track {
+      width: 100%;
+      height: 12px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(22, 32, 47, 0.08);
+      margin: 14px 0 12px;
+    }
+
+    .phase-bar-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #2f6fed 0%, #60a5fa 100%);
+      transition: width 240ms ease;
+    }
+
+    .phase-stage-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .phase-stage-item {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(22, 32, 47, 0.06);
+    }
+
+    .phase-stage-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(22, 32, 47, 0.18);
+      box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.72);
+    }
+
+    .phase-stage-item.active {
+      border-color: rgba(47, 111, 237, 0.2);
+      background: rgba(47, 111, 237, 0.08);
+    }
+
+    .phase-stage-item.active .phase-stage-dot {
+      background: #2f6fed;
+    }
+
+    .phase-stage-item.done .phase-stage-dot {
+      background: #1f8f61;
+    }
+
+    .phase-stage-label {
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .phase-stage-state {
+      color: var(--muted);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .phase-kpi {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .phase-mini {
+      padding: 16px;
+      border-radius: 18px;
+      background: var(--surface-strong);
+      border: 1px solid rgba(22, 32, 47, 0.06);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .phase-mini strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 1.35rem;
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .phase-plain-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .phase-plain-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(22, 32, 47, 0.08);
+    }
+
+    .phase-plain-list li:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .phase-empty {
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px dashed rgba(22, 32, 47, 0.16);
+      background: rgba(255, 255, 255, 0.52);
+      color: var(--muted);
+    }
+
+    .mono-inline {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.77rem;
+      color: var(--muted);
+      word-break: break-all;
     }
 
     .subpanel h3,
@@ -435,6 +672,9 @@
     @media (max-width: 1100px) {
       .hero-grid,
       .metric-grid,
+      .grid-3,
+      .phase-hero,
+      .phase-kpi,
       .tabs,
       .topbar {
         grid-template-columns: 1fr;
@@ -448,6 +688,10 @@
       .panel-section { padding: 16px; }
       .grid-2,
       .metric-grid { grid-template-columns: 1fr; }
+      .subtabs {
+        grid-auto-flow: row;
+        grid-auto-columns: auto;
+      }
     }
   </style>
 </head>

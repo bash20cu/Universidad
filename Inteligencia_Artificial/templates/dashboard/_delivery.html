@@ -1,0 +1,135 @@
+<section x-show="activeTab==='entrega'" class="panel">
+  <div class="panel-section">
+    <div class="section-head">
+      <div>
+        <h2>Entrega y cierre</h2>
+        <p>Esta vista reúne lo más importante para defender el proyecto, redactar el informe y comprobar que los artefactos principales ya existen.</p>
+      </div>
+      <button class="secondary" @click="refreshStats()">Refrescar datos</button>
+    </div>
+    <div class="phase-hero">
+      <article class="phase-progress-card">
+        <div class="phase-progress-head">
+          <div>
+            <div class="eyebrow">Estado global</div>
+            <h3>Preparación para entrega</h3>
+            <p class="helper" x-text="deliveryNarrative()"></p>
+          </div>
+          <span class="phase-status-pill" x-text="deliveryReadiness()"></span>
+        </div>
+        <div class="phase-stage-list">
+          <template x-for="item in buildCompletionChecklist()" :key="item.label">
+            <div class="phase-stage-item" :class="{ done: item.ready }">
+              <span class="phase-stage-dot"></span>
+              <div>
+                <div class="phase-stage-label" x-text="item.label"></div>
+                <div class="helper" x-text="item.detail"></div>
+              </div>
+              <div class="phase-stage-state" x-text="item.ready ? 'listo' : 'pendiente'"></div>
+            </div>
+          </template>
+        </div>
+      </article>
+      <article class="phase-progress-card">
+        <div class="eyebrow">Resumen ejecutivo</div>
+        <h3>Lectura corta del proyecto</h3>
+        <div class="phase-kpi" style="margin-top: 14px;">
+          <div class="phase-mini">
+            <span>Dataset total</span>
+            <strong x-text="textOrDash(stats.manifest_summary?.total ?? 0)"></strong>
+            <span class="helper">Imágenes registradas en el manifest principal.</span>
+          </div>
+          <div class="phase-mini">
+            <span>Mejor época</span>
+            <strong x-text="textOrDash(stats.training_summary?.best_epoch)"></strong>
+            <span class="helper">Checkpoint seleccionado para inferencia y evaluación.</span>
+          </div>
+          <div class="phase-mini">
+            <span>Accuracy final</span>
+            <strong x-text="textOrDash(format4(stats.phase4_metrics?.accuracy))"></strong>
+            <span class="helper">Resultado principal de la Fase 4.</span>
+          </div>
+          <div class="phase-mini">
+            <span>Macro F1</span>
+            <strong x-text="textOrDash(format4(stats.phase4_metrics?.macro_f1))"></strong>
+            <span class="helper">Balance global del clasificador en test.</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="panel-section">
+    <div class="grid-3">
+      <article class="subpanel">
+        <h3>Artefactos clave</h3>
+        <ul class="phase-plain-list">
+          <li><span>Manifest</span><strong x-text="stats.manifest_summary?.total ? 'listo' : 'pendiente'"></strong></li>
+          <li><span>Checkpoint</span><strong x-text="stats.training_summary?.best_epoch ? 'listo' : 'pendiente'"></strong></li>
+          <li><span>Métricas finales</span><strong x-text="stats.phase4_metrics?.accuracy ? 'listas' : 'pendientes'"></strong></li>
+          <li><span>Evidencia</span><strong x-text="(stats.classification_examples || []).length ? 'lista' : 'pendiente'"></strong></li>
+        </ul>
+      </article>
+      <article class="subpanel">
+        <h3>Distribución del manifest</h3>
+        <table>
+          <thead><tr><th>Segmento</th><th>Valor</th></tr></thead>
+          <tbody>
+            <tr><td>Train</td><td x-text="stats.manifest_summary?.per_split?.train ?? 0"></td></tr>
+            <tr><td>Validación</td><td x-text="stats.manifest_summary?.per_split?.val ?? 0"></td></tr>
+            <tr><td>Test</td><td x-text="stats.manifest_summary?.per_split?.test ?? 0"></td></tr>
+          </tbody>
+        </table>
+      </article>
+      <article class="subpanel">
+        <h3>Puntos para la exposición</h3>
+        <ul class="note-list">
+          <li>Proyecto de clasificación de 3 clases: gatos, perros y panda.</li>
+          <li>Pipeline dividido en preparación, entrenamiento, evaluación y pruebas.</li>
+          <li>Entrenamiento ejecutado en Windows con soporte DirectML para AMD.</li>
+          <li>Dashboard web para inspección, ejecución y evidencia del proyecto.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+
+  <div class="panel-section">
+    <div class="grid-2">
+      <article class="subpanel">
+        <h3>Lectura rápida del modelo</h3>
+        <ul class="note-list">
+          <li>Épocas entrenadas: <strong x-text="textOrDash(stats.training_summary?.epochs)"></strong></li>
+          <li>Mejor época: <strong x-text="textOrDash(stats.training_summary?.best_epoch)"></strong></li>
+          <li>Último `train_acc`: <strong x-text="textOrDash(format4(stats.training_summary?.last_train_acc))"></strong></li>
+          <li>Último `val_acc`: <strong x-text="textOrDash(format4(stats.training_summary?.last_val_acc))"></strong></li>
+          <li>Accuracy de test: <strong x-text="textOrDash(format4(stats.phase4_metrics?.accuracy))"></strong></li>
+        </ul>
+      </article>
+      <article class="subpanel">
+        <h3>Checklist sugerido de entrega</h3>
+        <ul class="note-list">
+          <li>Capturar pantallas del dashboard con métricas y evidencia.</li>
+          <li>Incluir accuracy, macro precision, macro recall y macro F1 en el informe.</li>
+          <li>Explicar el uso de DirectML y sus posibles fallbacks a CPU.</li>
+          <li>Adjuntar limitaciones técnicas y conclusiones del experimento.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+
+  <div class="panel-section">
+    <div class="section-head">
+      <div>
+        <h3>Limitaciones técnicas</h3>
+        <p>Lista base para el informe y la exposición sobre los límites reales del modelo y del pipeline actual.</p>
+      </div>
+    </div>
+    <div class="subpanel">
+      <ol class="note-list">
+        <template x-for="(item, idx) in (stats.technical_limitations || [])" :key="idx">
+          <li x-text="item"></li>
+        </template>
+      </ol>
+    </div>
+  </div>
+</section>

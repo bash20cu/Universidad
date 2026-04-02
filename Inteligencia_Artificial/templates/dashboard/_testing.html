@@ -1,0 +1,195 @@
+<section x-show="activeTab==='pruebas'" class="panel">
+  <div class="panel-section">
+    <div class="section-head">
+      <div>
+        <h2>Pruebas del sistema</h2>
+        <p>En esta etapa probamos el modelo con imágenes manuales y generamos evidencia reproducible para el informe.</p>
+      </div>
+    </div>
+    <div class="grid-2">
+      <article class="subpanel form-stack">
+        <h3>Inferencia manual</h3>
+        <p class="helper">Carga una imagen externa y revisa cómo responde el modelo con probabilidades por clase.</p>
+        <label>Checkpoint (.pt)</label>
+        <input x-model="inferForm.checkpoint_path" placeholder="phase3_artifacts/best_checkpoint.pt">
+        <p class="field-help">Checkpoint del modelo que se usará para clasificar la imagen cargada manualmente.</p>
+        <label>Tamaño de imagen</label>
+        <input type="number" x-model.number="inferForm.image_size" min="64" step="32">
+        <p class="field-help">Resolución con la que la imagen se adapta antes de hacer la predicción.</p>
+        <label>Subir imagen</label>
+        <input type="file" x-ref="imageFile" accept="image/*">
+        <p class="field-help">Selecciona una imagen nueva para demostrar cómo responde el sistema fuera del flujo de entrenamiento.</p>
+        <div class="form-actions">
+          <button @click="predictUpload()">Subir y predecir</button>
+        </div>
+        <p class="field-help">Envía la imagen al servidor, corre la inferencia y muestra la predicción con probabilidades por clase.</p>
+        <p class="error" x-show="inferError" x-text="inferError" style="margin-top: 4px;"></p>
+      </article>
+      <article class="subpanel">
+        <h3>Lectura rápida de inferencia</h3>
+        <template x-if="inferResult">
+          <div class="phase-kpi">
+            <div class="phase-mini">
+              <span>Predicción principal</span>
+              <strong x-text="textOrDash(inferResult?.pred_label)"></strong>
+              <span class="helper">Clase con mayor probabilidad.</span>
+            </div>
+            <div class="phase-mini">
+              <span>Confianza</span>
+              <strong x-text="textOrDash(format4(inferResult?.confidence))"></strong>
+              <span class="helper">Probabilidad de la clase predicha.</span>
+            </div>
+            <div class="phase-mini">
+              <span>Device</span>
+              <strong x-text="textOrDash(inferResult?.device_name)"></strong>
+              <span class="helper">Backend usado para la inferencia.</span>
+            </div>
+            <div class="phase-mini">
+              <span>Checkpoint epoch</span>
+              <strong x-text="textOrDash(inferResult?.checkpoint_epoch)"></strong>
+              <span class="helper">Época del checkpoint cargado.</span>
+            </div>
+          </div>
+        </template>
+        <template x-if="!inferResult">
+          <div class="phase-empty">
+            Aquí aparecerá la predicción principal y el resumen de inferencia una vez que cargues una imagen válida.
+          </div>
+        </template>
+      </article>
+    </div>
+  </div>
+
+  <div class="panel-section">
+    <div class="grid-2">
+      <article class="subpanel">
+        <h3>Probabilidades por clase</h3>
+        <template x-if="inferResult">
+          <table>
+            <thead><tr><th>Clase</th><th>Probabilidad</th></tr></thead>
+            <tbody>
+              <template x-for="(prob, className) in (inferResult?.probabilities || {})" :key="className">
+                <tr><td x-text="className"></td><td x-text="format4(prob)"></td></tr>
+              </template>
+            </tbody>
+          </table>
+        </template>
+        <template x-if="!inferResult">
+          <p class="helper">Aquí aparecerán las probabilidades una vez que cargues una imagen válida.</p>
+        </template>
+      </article>
+      <article class="subpanel">
+        <h3>Evidencia actual disponible</h3>
+        <div class="metric-grid">
+          <article class="metric-card">
+            <span>Muestras en evidencia</span>
+            <strong x-text="(stats.classification_examples || []).length || 0"></strong>
+            <span>Filas generadas para el split seleccionado.</span>
+          </article>
+          <article class="metric-card">
+            <span>Aciertos</span>
+            <strong x-text="evidenceCorrectCount()"></strong>
+            <span>Predicciones correctas dentro de la evidencia.</span>
+          </article>
+          <article class="metric-card">
+            <span>Confianza media</span>
+            <strong x-text="evidenceAverageConfidence()"></strong>
+            <span>Promedio simple de confianza en las muestras.</span>
+          </article>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="panel-section">
+    <div class="grid-2">
+      <article class="subpanel form-stack">
+        <h3>Evidencia automática</h3>
+        <p class="helper">Genera ejemplos por clase para documentar visualmente que el sistema clasifica `cats`, `dogs` y `panda`.</p>
+        <label>Manifest CSV</label>
+        <input x-model="forms.phase3_evidence.manifest_csv" placeholder="phase2_artifacts/dataset_split.csv">
+        <p class="field-help">Manifest desde donde se seleccionan ejemplos reales para documentar evidencia automática.</p>
+        <label>Checkpoint (.pt)</label>
+        <input x-model="forms.phase3_evidence.checkpoint_path" placeholder="phase3_artifacts/best_checkpoint.pt">
+        <p class="field-help">Modelo entrenado que generará las predicciones de respaldo para el informe.</p>
+        <label>Split</label>
+        <input x-model="forms.phase3_evidence.split" placeholder="test">
+        <p class="field-help">Conjunto del que se extraerán los ejemplos. `test` suele ser el más útil para presentar resultados finales.</p>
+        <label>Muestras por clase</label>
+        <input type="number" x-model.number="forms.phase3_evidence.samples_per_class" min="1" max="10">
+        <p class="field-help">Cantidad de ejemplos por clase que se guardarán como evidencia en JSON y CSV.</p>
+        <div class="form-actions">
+          <button @click="runTask('phase3_evidence', forms.phase3_evidence)">Generar evidencia</button>
+        </div>
+        <p class="field-help">Crea archivos de evidencia reproducible para apoyar la presentación y el informe académico.</p>
+      </article>
+      <article class="subpanel">
+        <h3>Estado de la evidencia</h3>
+        <div class="phase-shell">
+          <div class="status-row">
+            <span class="badge">Estado: <strong x-text="phaseStatusLabel(task.status)"></strong></span>
+            <span class="badge">Split: <strong x-text="textOrDash(phaseEvidenceDetails(task).split || forms.phase3_evidence.split)"></strong></span>
+            <span class="badge">Muestras/clase: <strong x-text="textOrDash(phaseEvidenceDetails(task).samples_per_class || forms.phase3_evidence.samples_per_class)"></strong></span>
+          </div>
+          <div class="phase-bar-track">
+            <div class="phase-bar-fill" :style="`width: ${safeProgress(task.progress_pct)}%`"></div>
+          </div>
+          <div class="phase-stage-list">
+            <template x-for="stage in getPhaseEvidenceStages(task)" :key="stage.key">
+              <div class="phase-stage-item" :class="stageClass(stage)">
+                <span class="phase-stage-dot"></span>
+                <div>
+                  <div class="phase-stage-label" x-text="stage.label"></div>
+                  <div class="helper" x-text="stage.description"></div>
+                </div>
+                <div class="phase-stage-state" x-text="stage.stateLabel"></div>
+              </div>
+            </template>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="panel-section">
+    <div class="grid-2">
+      <article class="subpanel">
+        <h3>Resultado disponible</h3>
+        <template x-if="(stats.classification_examples || []).length">
+          <table>
+            <thead><tr><th>Clase real</th><th>Predicción</th><th>Confianza</th><th>Correcta</th></tr></thead>
+            <tbody>
+              <template x-for="(row, idx) in (stats.classification_examples || [])" :key="idx">
+                <tr>
+                  <td x-text="row.true_label"></td>
+                  <td x-text="row.pred_label"></td>
+                  <td x-text="format4(row.confidence)"></td>
+                  <td x-text="row.is_correct ? 'sí' : 'no'"></td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </template>
+        <template x-if="!(stats.classification_examples || []).length">
+          <p class="helper">Todavía no hay evidencia generada. Ejecuta el proceso para crear el JSON y CSV de apoyo para el informe.</p>
+        </template>
+      </article>
+      <article class="subpanel">
+        <h3>Artefactos de evidencia</h3>
+        <ul class="phase-plain-list">
+          <li><span>JSON</span><strong x-text="phaseEvidenceDetails(task).json_path ? 'listo' : 'pendiente'"></strong></li>
+          <li><span>CSV</span><strong x-text="phaseEvidenceDetails(task).csv_path ? 'listo' : 'pendiente'"></strong></li>
+          <li><span>Device</span><strong x-text="textOrDash(phaseEvidenceDetails(task).device_name)"></strong></li>
+        </ul>
+        <div style="margin-top: 14px;">
+          <p class="helper">Archivo JSON</p>
+          <div class="mono-inline" x-text="phaseEvidenceDetails(task).json_path || 'Sin generar todavía'"></div>
+        </div>
+        <div style="margin-top: 14px;">
+          <p class="helper">Archivo CSV</p>
+          <div class="mono-inline" x-text="phaseEvidenceDetails(task).csv_path || 'Sin generar todavía'"></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

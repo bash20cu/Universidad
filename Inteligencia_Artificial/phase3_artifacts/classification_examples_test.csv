@@ -1,4 +1,4 @@
 true_label,pred_label,confidence,is_correct,split,image_path
-cats,cats,0.507509,True,test,D:\GitHub\Universidad\Inteligencia_Artificial\gatos_perros_pandas\animals\cats\cats_00512.jpg
-dogs,dogs,0.406609,True,test,D:\GitHub\Universidad\Inteligencia_Artificial\gatos_perros_pandas\animals\dogs\dogs_00513.jpg
-panda,panda,0.806485,True,test,D:\GitHub\Universidad\Inteligencia_Artificial\gatos_perros_pandas\animals\panda\panda_00663.jpg
+cats,cats,0.529078,True,test,D:\GitHub\Universidad\Inteligencia_Artificial\gatos_perros_pandas\animals\cats\cats_00512.jpg
+dogs,panda,0.539757,False,test,D:\GitHub\Universidad\Inteligencia_Artificial\gatos_perros_pandas\animals\dogs\dogs_00513.jpg
+panda,panda,0.952747,True,test,D:\GitHub\Universidad\Inteligencia_Artificial\gatos_perros_pandas\animals\panda\panda_00663.jpg

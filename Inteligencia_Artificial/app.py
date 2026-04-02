@@ -107,6 +107,429 @@ def parse_task_hint(task: dict[str, Any], line: str) -> tuple[str | None, float 
     return None, progress_pct
 
 
+def parse_phase1_details(logs: list[str]) -> dict[str, Any]:
+    """Convierte la salida textual de la fase 1 en datos mas faciles de visualizar."""
+
+    details: dict[str, Any] = {
+        "dataset_root": None,
+        "status_text": None,
+        "backend_text": None,
+        "backend_name": None,
+        "tensor_shape": None,
+        "total_images": None,
+        "validated_images": None,
+        "validate_max": None,
+        "processed_images": None,
+        "sample_size": None,
+        "read_errors": None,
+        "unknown_class": None,
+        "class_counts": {},
+        "stage_order": [
+            "check de dataset",
+            "validacion basica",
+            "preprocesamiento basico",
+            "prueba de backend",
+        ],
+        "completed_stages": [],
+        "show_backend_stage": False,
+    }
+
+    completed: list[str] = []
+
+    for raw_line in logs:
+        line = raw_line.strip()
+        lower = line.lower()
+        if not line:
+            continue
+
+        if "=== fase 1: check de dataset" in lower and "check de dataset" not in completed:
+            completed.append("check de dataset")
+        elif "=== validacion basica" in lower and "validacion basica" not in completed:
+            completed.append("validacion basica")
+        elif "=== preprocesamiento basico" in lower and "preprocesamiento basico" not in completed:
+            completed.append("preprocesamiento basico")
+        elif "=== prueba de backend" in lower:
+            details["show_backend_stage"] = True
+            if "prueba de backend" not in completed:
+                completed.append("prueba de backend")
+
+        if line.startswith("Dataset root:"):
+            details["dataset_root"] = line.split(":", 1)[1].strip()
+        elif line.startswith("Total imagenes encontradas:"):
+            details["total_images"] = int(line.split(":", 1)[1].strip())
+        elif line.startswith("Conteo cats:"):
+            details["class_counts"]["cats"] = int(line.split(":", 1)[1].strip())
+        elif line.startswith("Conteo dogs:"):
+            details["class_counts"]["dogs"] = int(line.split(":", 1)[1].strip())
+        elif line.startswith("Conteo panda:"):
+            details["class_counts"]["panda"] = int(line.split(":", 1)[1].strip())
+        elif line.startswith("Sin clase detectada:"):
+            details["unknown_class"] = int(line.split(":", 1)[1].strip())
+        elif line.startswith("Imagenes validadas"):
+            match = re.search(r"max\s+(\d+)\):\s*(\d+)", line)
+            if match:
+                details["validate_max"] = int(match.group(1))
+                details["validated_images"] = int(match.group(2))
+        elif line.startswith("Errores de lectura:"):
+            details["read_errors"] = int(line.split(":", 1)[1].strip())
+        elif line.startswith("Imagenes procesadas"):
+            match = re.search(r"muestra\s+(\d+)\):\s*(\d+)", line)
+            if match:
+                details["sample_size"] = int(match.group(1))
+                details["processed_images"] = int(match.group(2))
+        elif line.startswith("Ultima forma de tensor:"):
+            details["tensor_shape"] = line.split(":", 1)[1].strip()
+        elif line.startswith("Backend detectado:"):
+            details["backend_text"] = line
+            backend_name = line.split(":", 1)[1].split(".", 1)[0].strip()
+            details["backend_name"] = backend_name
+        elif line.startswith("Estado Fase 1:"):
+            details["status_text"] = line.split(":", 1)[1].strip()
+
+    details["completed_stages"] = completed
+    return details
+
+
+def parse_phase2_details(logs: list[str]) -> dict[str, Any]:
+    """Convierte la salida textual de la fase 2 en datos legibles para la UI."""
+
+    details: dict[str, Any] = {
+        "dataset_root": None,
+        "output_dir": None,
+        "status_text": None,
+        "manifest_csv": None,
+        "dedupe_mode": None,
+        "total_scanned": None,
+        "duplicates_removed": None,
+        "records_after_dedupe": None,
+        "train_count": None,
+        "val_count": None,
+        "test_count": None,
+        "batch_size": None,
+        "verify_dataloaders": None,
+        "class_counts": {},
+        "completed_stages": [],
+        "show_verify_stage": False,
+    }
+
+    completed: list[str] = []
+
+    for raw_line in logs:
+        line = raw_line.strip()
+        lower = line.lower()
+        if not line:
+            continue
+
+        if "escaneando y etiquetando imagenes" in lower and "escaneo" not in completed:
+            completed.append("escaneo")
+        elif "eliminando duplicados" in lower and "deduplicacion" not in completed:
+            completed.append("deduplicacion")
+        elif "generando split estratificado" in lower and "split" not in completed:
+            completed.append("split")
+        elif "exportando manifest csv" in lower and "manifest" not in completed:
+            completed.append("manifest")
+        elif "verificando dataloaders" in lower:
+            details["show_verify_stage"] = True
+            if "verificacion" not in completed:
+                completed.append("verificacion")
+
+        if line.startswith("Dataset root:"):
+            details["dataset_root"] = line.split(":", 1)[1].strip()
+        elif line.startswith("Output dir:"):
+            details["output_dir"] = line.split(":", 1)[1].strip()
+        elif line.startswith("Dedupe mode:"):
+            details["dedupe_mode"] = line.split(":", 1)[1].strip()
+        elif line.startswith("Batch size:"):
+            try:
+                details["batch_size"] = int(line.split(":", 1)[1].strip())
+            except ValueError:
+                pass
+        elif line.startswith("Verify dataloaders:"):
+            details["verify_dataloaders"] = line.split(":", 1)[1].strip().lower() == "true"
+        elif line.startswith("Imagenes encontradas:"):
+            details["total_scanned"] = int(line.split(":", 1)[1].strip())
+        elif line.startswith("Conteo cats:"):
+            details["class_counts"]["cats"] = int(line.split(":", 1)[1].strip())
+        elif line.startswith("Conteo dogs:"):
+            details["class_counts"]["dogs"] = int(line.split(":", 1)[1].strip())
+        elif line.startswith("Conteo panda:"):
+            details["class_counts"]["panda"] = int(line.split(":", 1)[1].strip())
+        elif line.startswith("Duplicados eliminados:"):
+            details["duplicates_removed"] = int(line.split(":", 1)[1].strip())
+        elif line.startswith("Registros finales:"):
+            details["records_after_dedupe"] = int(line.split(":", 1)[1].strip())
+        elif line.startswith("Train:"):
+            details["train_count"] = int(line.split(":", 1)[1].strip())
+        elif line.startswith("Val:"):
+            details["val_count"] = int(line.split(":", 1)[1].strip())
+        elif line.startswith("Test:"):
+            details["test_count"] = int(line.split(":", 1)[1].strip())
+        elif line.startswith("Manifest CSV:"):
+            details["manifest_csv"] = line.split(":", 1)[1].strip()
+        elif line.startswith("Estado Fase 2:"):
+            details["status_text"] = line.split(":", 1)[1].strip()
+
+    details["completed_stages"] = completed
+    return details
+
+
+def parse_phase3_details(task: dict[str, Any], logs: list[str]) -> dict[str, Any]:
+    """Convierte la salida textual de la fase 3 en datos utiles para una vista visual."""
+
+    cmd = task.get("cmd", [])
+
+    def cmd_value(flag: str) -> str | None:
+        if flag not in cmd:
+            return None
+        idx = cmd.index(flag)
+        if idx + 1 >= len(cmd):
+            return None
+        return cmd[idx + 1]
+
+    details: dict[str, Any] = {
+        "manifest_csv": cmd_value("--manifest-csv"),
+        "output_dir": cmd_value("--output-dir"),
+        "epochs": int(cmd_value("--epochs") or 0) or None,
+        "batch_size": int(cmd_value("--batch-size") or 0) or None,
+        "image_size": int(cmd_value("--image-size") or 0) or None,
+        "device_name": None,
+        "train_count": None,
+        "val_count": None,
+        "test_count": None,
+        "current_epoch": None,
+        "last_train_loss": None,
+        "last_train_acc": None,
+        "last_val_loss": None,
+        "last_val_acc": None,
+        "best_epoch": None,
+        "best_val_acc": None,
+        "best_checkpoint": None,
+        "last_checkpoint": None,
+        "metrics_history": None,
+        "status_text": None,
+        "completed_stages": [],
+    }
+
+    completed: list[str] = []
+
+    for raw_line in logs:
+        line = raw_line.strip()
+        lower = line.lower()
+        if not line:
+            continue
+
+        if "fase 3 - entrenamiento cnn" in lower and "inicio" not in completed:
+            completed.append("inicio")
+        elif "registros -> train=" in lower and "carga" not in completed:
+            completed.append("carga")
+        elif "epoch=" in lower and "entrenamiento" not in completed:
+            completed.append("entrenamiento")
+        elif "fase 3 - resultado de entrenamiento" in lower and "resumen" not in completed:
+            completed.append("resumen")
+
+        if line.startswith("Manifest:"):
+            details["manifest_csv"] = line.split(":", 1)[1].strip()
+        elif line.startswith("Output:"):
+            details["output_dir"] = line.split(":", 1)[1].strip()
+        elif line.startswith("Device:"):
+            details["device_name"] = line.split(":", 1)[1].strip()
+        elif "Registros -> train=" in line:
+            match = re.search(r"train=(\d+),\s*val=(\d+),\s*test=(\d+)", line)
+            if match:
+                details["train_count"] = int(match.group(1))
+                details["val_count"] = int(match.group(2))
+                details["test_count"] = int(match.group(3))
+        elif line.startswith("DEBUG: epoch="):
+            match = re.search(
+                r"epoch=(\d+)\s+train_loss=([0-9.]+)\s+train_acc=([0-9.]+)\s+val_loss=([0-9.]+)\s+val_acc=([0-9.]+)",
+                line,
+            )
+            if match:
+                details["current_epoch"] = int(match.group(1))
+                details["last_train_loss"] = float(match.group(2))
+                details["last_train_acc"] = float(match.group(3))
+                details["last_val_loss"] = float(match.group(4))
+                details["last_val_acc"] = float(match.group(5))
+        elif line.startswith("Best epoch"):
+            match = re.search(r"Best epoch\s*[│|]?\s*(\d+)", line)
+            if match:
+                details["best_epoch"] = int(match.group(1))
+        elif line.startswith("Best val_acc"):
+            match = re.search(r"Best val_acc\s*[│|]?\s*([0-9.]+)", line)
+            if match:
+                details["best_val_acc"] = float(match.group(1))
+        elif line.startswith("Ultimo train_acc"):
+            match = re.search(r"Ultimo train_acc\s*[│|]?\s*([0-9.]+)", line)
+            if match:
+                details["last_train_acc"] = float(match.group(1))
+        elif line.startswith("Ultimo val_acc"):
+            match = re.search(r"Ultimo val_acc\s*[│|]?\s*([0-9.]+)", line)
+            if match:
+                details["last_val_acc"] = float(match.group(1))
+        elif line.startswith("best_checkpoint"):
+            value = line.split("│")[-1].strip() if "│" in line else line.split(":", 1)[-1].strip()
+            details["best_checkpoint"] = value
+        elif line.startswith("last_checkpoint"):
+            value = line.split("│")[-1].strip() if "│" in line else line.split(":", 1)[-1].strip()
+            details["last_checkpoint"] = value
+        elif line.startswith("metrics_history"):
+            value = line.split("│")[-1].strip() if "│" in line else line.split(":", 1)[-1].strip()
+            details["metrics_history"] = value
+        elif "Estado Fase 3: OK" in line:
+            details["status_text"] = "OK"
+
+    details["completed_stages"] = completed
+    return details
+
+
+def parse_phase4_details(task: dict[str, Any], logs: list[str]) -> dict[str, Any]:
+    """Convierte la salida textual de la fase 4 en datos claros para la interfaz."""
+
+    cmd = task.get("cmd", [])
+
+    def cmd_value(flag: str) -> str | None:
+        if flag not in cmd:
+            return None
+        idx = cmd.index(flag)
+        if idx + 1 >= len(cmd):
+            return None
+        return cmd[idx + 1]
+
+    details: dict[str, Any] = {
+        "manifest_csv": cmd_value("--manifest-csv"),
+        "checkpoint_path": cmd_value("--checkpoint-path"),
+        "output_dir": cmd_value("--output-dir"),
+        "split": cmd_value("--split"),
+        "image_size": int(cmd_value("--image-size") or 0) or None,
+        "device_name": None,
+        "checkpoint_epoch": None,
+        "samples": None,
+        "artifact_dir": None,
+        "status_text": None,
+        "completed_stages": [],
+    }
+
+    completed: list[str] = []
+
+    for raw_line in logs:
+        line = raw_line.strip()
+        lower = line.lower()
+        if not line:
+            continue
+
+        if "fase 4 - evaluacion" in lower and "inicio" not in completed:
+            completed.append("inicio")
+        elif line.startswith("Split:") and "configuracion" not in completed:
+            completed.append("configuracion")
+        elif line.startswith("Samples:") and "evaluacion" not in completed:
+            completed.append("evaluacion")
+        elif "metricas globales" in lower and "metricas" not in completed:
+            completed.append("metricas")
+        elif "reporte por clase" in lower and "reporte" not in completed:
+            completed.append("reporte")
+        elif "artefactos guardados en:" in lower and "artefactos" not in completed:
+            completed.append("artefactos")
+
+        if line.startswith("Split:"):
+            details["split"] = line.split(":", 1)[1].strip()
+        elif line.startswith("Device:"):
+            details["device_name"] = line.split(":", 1)[1].strip()
+        elif line.startswith("Checkpoint epoch:"):
+            details["checkpoint_epoch"] = line.split(":", 1)[1].strip()
+        elif line.startswith("Samples:"):
+            try:
+                details["samples"] = int(line.split(":", 1)[1].strip())
+            except ValueError:
+                pass
+        elif "Artefactos guardados en:" in line:
+            details["artifact_dir"] = line.split(":", 1)[1].strip()
+            details["status_text"] = "OK"
+
+    details["completed_stages"] = completed
+    return details
+
+
+def parse_phase3_evidence_details(task: dict[str, Any], logs: list[str]) -> dict[str, Any]:
+    """Convierte la salida textual de evidencia automatica en datos legibles para la UI."""
+
+    cmd = task.get("cmd", [])
+
+    def cmd_value(flag: str) -> str | None:
+        if flag not in cmd:
+            return None
+        idx = cmd.index(flag)
+        if idx + 1 >= len(cmd):
+            return None
+        return cmd[idx + 1]
+
+    details: dict[str, Any] = {
+        "manifest_csv": cmd_value("--manifest-csv"),
+        "checkpoint_path": cmd_value("--checkpoint-path"),
+        "output_dir": cmd_value("--output-dir"),
+        "split": cmd_value("--split"),
+        "samples_per_class": int(cmd_value("--samples-per-class") or 0) or None,
+        "image_size": int(cmd_value("--image-size") or 0) or None,
+        "device_name": None,
+        "checkpoint_epoch": None,
+        "json_path": None,
+        "csv_path": None,
+        "rows_count": None,
+        "completed_stages": [],
+    }
+
+    completed: list[str] = []
+    rows_count = 0
+
+    for raw_line in logs:
+        line = raw_line.strip()
+        lower = line.lower()
+        if not line:
+            continue
+
+        if "fase 3 - evidencia de clasificacion" in lower and "inicio" not in completed:
+            completed.append("inicio")
+        elif line.startswith("Clase real") and "predicciones" not in completed:
+            completed.append("predicciones")
+        elif line.startswith("Device:") and "device" not in completed:
+            completed.append("device")
+        elif "Evidencia JSON:" in line and "artefactos" not in completed:
+            completed.append("artefactos")
+
+        if line.startswith("Clase real") or line.startswith("Prediccion") or line.startswith("Confidence") or line.startswith("Correcta"):
+            continue
+        if line.startswith("Device:"):
+            details["device_name"] = line.split(":", 1)[1].strip()
+        elif line.startswith("Checkpoint epoch:"):
+            details["checkpoint_epoch"] = line.split(":", 1)[1].strip()
+        elif "Evidencia JSON:" in line:
+            details["json_path"] = line.split(":", 1)[1].strip()
+        elif "Evidencia CSV:" in line:
+            details["csv_path"] = line.split(":", 1)[1].strip()
+        elif re.match(r"^[│\s]*[a-zA-Z]+[│\s]+[a-zA-Z]+", line) and "Fase 3 -" not in line:
+            rows_count += 1
+
+    details["rows_count"] = rows_count or None
+    details["completed_stages"] = completed
+    return details
+
+
+def extract_task_details(task: dict[str, Any]) -> dict[str, Any]:
+    """Genera detalles estructurados por tipo de tarea a partir del log acumulado."""
+
+    logs = task.get("logs", [])
+    if task.get("task_type") == "phase1":
+        return {"phase1": parse_phase1_details(logs)}
+    if task.get("task_type") == "phase2":
+        return {"phase2": parse_phase2_details(logs)}
+    if task.get("task_type") == "phase3_train":
+        return {"phase3": parse_phase3_details(task, logs)}
+    if task.get("task_type") == "phase3_evidence":
+        return {"phase3_evidence": parse_phase3_evidence_details(task, logs)}
+    if task.get("task_type") == "phase4_evaluate":
+        return {"phase4": parse_phase4_details(task, logs)}
+    return {}
+
+
 def summarize_task(task: dict[str, Any]) -> dict[str, Any]:
     """Construye la vista serializable que usa la API y el canal WebSocket."""
 
@@ -125,6 +548,7 @@ def summarize_task(task: dict[str, Any]) -> dict[str, Any]:
         "resource_usage": task.get("resource_usage", {}),
         "log_text": "\n".join(logs),
         "log_tail": logs[-18:],
+        "details": extract_task_details(task),
     }
 
 

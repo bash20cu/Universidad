@@ -2,336 +2,34 @@
 {% block shell_attrs %}x-data="runnerApp()" x-init="init()"{% endblock %}
 {% block topbar_menu %}
 <nav class="tabs">
-  <button class="tab-btn" :class="{ 'active': activeTab==='resumen' }" @click="activeTab='resumen'">Resumen</button>
-  <button class="tab-btn" :class="{ 'active': activeTab==='graficos' }" @click="activeTab='graficos'; renderCharts()">Gráficos</button>
-  <button class="tab-btn" :class="{ 'active': activeTab==='evidencia' }" @click="activeTab='evidencia'">Evidencia</button>
-  <button class="tab-btn" :class="{ 'active': activeTab==='infer' }" @click="activeTab='infer'">Inferencia</button>
-  <button class="tab-btn" :class="{ 'active': activeTab==='fases' }" @click="activeTab='fases'">Ejecución</button>
-  <button class="tab-btn" :class="{ 'active': activeTab==='limitaciones' }" @click="activeTab='limitaciones'">Limitaciones</button>
+  <button class="tab-btn" :class="{ 'active': activeTab==='preparacion' }" @click="activeTab='preparacion'">Preparación</button>
+  <button class="tab-btn" :class="{ 'active': activeTab==='entrenamiento' }" @click="activeTab='entrenamiento'; renderCharts()">Entrenamiento</button>
+  <button class="tab-btn" :class="{ 'active': activeTab==='evaluacion' }" @click="activeTab='evaluacion'; renderCharts()">Evaluación</button>
+  <button class="tab-btn" :class="{ 'active': activeTab==='pruebas' }" @click="activeTab='pruebas'">Pruebas</button>
+  <button class="tab-btn" :class="{ 'active': activeTab==='entrega' }" @click="activeTab='entrega'">Entrega</button>
 </nav>
 {% endblock %}
 {% block content %}
-  <section class="hero">
-    <div class="hero-grid">
-      <div>
-        <div class="eyebrow">Centro de control del proyecto</div>
-        <h1>Pipeline visual de inteligencia artificial aplicada.</h1>
-        <p>
-          Reúne en un solo lugar el manifest del dataset, el entrenamiento de la CNN,
-          las métricas de evaluación, la evidencia de clasificación y la inferencia
-          manual del proyecto académico.
-        </p>
-      </div>
-      <div class="hero-meta">
-        <div>
-          <span>Registros del manifest</span>
-          <strong x-text="stats.manifest_summary?.total ?? 0"></strong>
-          <span>imágenes detectadas</span>
-        </div>
-        <div>
-          <span>Mejor validación</span>
-          <strong x-text="format4(stats.training_summary?.best_val_acc)"></strong>
-          <span>best `val_acc` histórico</span>
-        </div>
-        <div>
-          <span>Accuracy en test</span>
-          <strong x-text="format4(stats.phase4_metrics?.accuracy)"></strong>
-          <span>resultado de la fase 4</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  {% include "dashboard/_hero.html" %}
   <main class="content">
-    <section x-show="activeTab==='resumen'" class="panel">
-      <div class="panel-section">
-        <div class="section-head">
-          <div>
-            <h2>Vista general del proyecto</h2>
-            <p>Una lectura rápida del estado del dataset, el entrenamiento y el desempeño actual del modelo.</p>
-          </div>
-          <button class="secondary" @click="refreshStats()">Refrescar datos</button>
-        </div>
-        <div class="metric-grid">
-          <article class="metric-card">
-            <span>Dataset total</span>
-            <strong x-text="stats.manifest_summary?.total ?? 0"></strong>
-            <span>Total de imágenes registradas en el manifest principal.</span>
-          </article>
-          <article class="metric-card">
-            <span>Épocas entrenadas</span>
-            <strong x-text="stats.training_summary?.epochs ?? 0"></strong>
-            <span>Historial de entrenamiento guardado en artefactos.</span>
-          </article>
-          <article class="metric-card">
-            <span>Macro F1</span>
-            <strong x-text="format4(stats.phase4_metrics?.macro_f1)"></strong>
-            <span>Balance global entre precisión y recall en prueba.</span>
-          </article>
-        </div>
-      </div>
-      <div class="panel-section grid-2">
-        <article class="subpanel">
-          <h3>Distribución del manifest</h3>
-          <p class="helper">Resume cómo quedó repartido el dataset entre entrenamiento, validación y prueba.</p>
-          <table>
-            <thead><tr><th>Segmento</th><th>Valor</th></tr></thead>
-            <tbody>
-              <tr><td>Train</td><td x-text="stats.manifest_summary?.per_split?.train ?? 0"></td></tr>
-              <tr><td>Validación</td><td x-text="stats.manifest_summary?.per_split?.val ?? 0"></td></tr>
-              <tr><td>Test</td><td x-text="stats.manifest_summary?.per_split?.test ?? 0"></td></tr>
-            </tbody>
-          </table>
-        </article>
-        <article class="subpanel">
-          <h3>Lectura rápida del modelo</h3>
-          <p class="helper">Referencia operativa para interpretar el estado de entrenamiento y prueba.</p>
-          <ul class="note-list">
-            <li>Mejor época: <strong x-text="stats.training_summary?.best_epoch ?? '-'"></strong></li>
-            <li>Último `train_acc`: <strong x-text="format4(stats.training_summary?.last_train_acc)"></strong></li>
-            <li>Último `val_acc`: <strong x-text="format4(stats.training_summary?.last_val_acc)"></strong></li>
-            <li>Accuracy de test: <strong x-text="format4(stats.phase4_metrics?.accuracy)"></strong></li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section x-show="activeTab==='graficos'" class="panel">
-      <div class="panel-section">
-        <div class="section-head">
-          <div>
-            <h2>Lectura visual de métricas</h2>
-            <p>Los gráficos ayudan a ver si el entrenamiento mejora, cómo se reparte el dataset y qué clases se comportan mejor.</p>
-          </div>
-        </div>
-        <div class="grid-2">
-          <article class="subpanel">
-            <h3>Train vs validation por época</h3>
-            <p class="helper">Dispersión para detectar si la validación acompaña el aprendizaje o se estanca.</p>
-            <canvas x-ref="scatterChart"></canvas>
-          </article>
-          <article class="subpanel">
-            <h3>Distribución por clase</h3>
-            <p class="helper">Visualiza el peso relativo de `cats`, `dogs` y `panda` dentro del dataset actual.</p>
-            <canvas x-ref="pieChart"></canvas>
-          </article>
-        </div>
-      </div>
-      <div class="panel-section">
-        <article class="subpanel">
-          <h3>Precisión, recall y F1 por clase</h3>
-          <p class="helper">Comparación directa del comportamiento del modelo por categoría durante la evaluación.</p>
-          <canvas x-ref="barChart"></canvas>
-        </article>
-      </div>
-    </section>
-
-    <section x-show="activeTab==='infer'" class="panel">
-      <div class="panel-section">
-        <div class="section-head">
-          <div>
-            <h2>Inferencia manual</h2>
-            <p>Sube una imagen, selecciona el checkpoint y revisa la predicción con sus probabilidades por clase.</p>
-          </div>
-        </div>
-        <div class="grid-2">
-          <article class="subpanel">
-            <h3>Entrada</h3>
-            <label>Checkpoint (.pt)</label>
-            <input x-model="inferForm.checkpoint_path" placeholder="phase3_artifacts/best_checkpoint.pt">
-            <label>Tamaño de imagen</label>
-            <input type="number" x-model.number="inferForm.image_size" min="64" step="32">
-            <label>Subir imagen</label>
-            <input type="file" x-ref="imageFile" accept="image/*">
-            <button @click="predictUpload()">Subir y predecir</button>
-            <p class="error" x-show="inferError" x-text="inferError" style="margin-top: 12px;"></p>
-          </article>
-          <article class="subpanel">
-            <h3>Salida del modelo</h3>
-            <template x-if="inferResult">
-              <div>
-                <p class="ok">Predicción principal: <strong x-text="inferResult?.pred_label"></strong> (<span x-text="format4(inferResult?.confidence)"></span>)</p>
-                <div class="status-row">
-                  <span class="badge">Device: <strong x-text="inferResult?.device_name"></strong></span>
-                  <span class="badge">Checkpoint: <strong x-text="inferResult?.checkpoint_epoch"></strong></span>
-                </div>
-                <table>
-                  <thead><tr><th>Clase</th><th>Probabilidad</th></tr></thead>
-                  <tbody>
-                    <template x-for="(prob, className) in (inferResult?.probabilities || {})" :key="className">
-                      <tr><td x-text="className"></td><td x-text="format4(prob)"></td></tr>
-                    </template>
-                  </tbody>
-                </table>
-              </div>
-            </template>
-            <template x-if="!inferResult">
-              <p class="helper">Aquí aparecerá la predicción una vez que cargues una imagen válida.</p>
-            </template>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section x-show="activeTab==='evidencia'" class="panel">
-      <div class="panel-section">
-        <div class="section-head">
-          <div>
-            <h2>Evidencia automática de clasificación</h2>
-            <p>Genera muestras del split elegido para demostrar de forma reproducible que el sistema clasifica `cats`, `dogs` y `panda`.</p>
-          </div>
-        </div>
-        <div class="grid-2">
-          <article class="subpanel">
-            <h3>Configuración</h3>
-            <label>Manifest CSV</label>
-            <input x-model="forms.phase3_evidence.manifest_csv" placeholder="phase2_artifacts/dataset_split.csv">
-            <label>Checkpoint (.pt)</label>
-            <input x-model="forms.phase3_evidence.checkpoint_path" placeholder="phase3_artifacts/best_checkpoint.pt">
-            <label>Split</label>
-            <input x-model="forms.phase3_evidence.split" placeholder="test">
-            <label>Muestras por clase</label>
-            <input type="number" x-model.number="forms.phase3_evidence.samples_per_class" min="1" max="10">
-            <button @click="runTask('phase3_evidence', forms.phase3_evidence)">Generar evidencia</button>
-          </article>
-          <article class="subpanel">
-            <h3>Resultado disponible</h3>
-            <template x-if="(stats.classification_examples || []).length">
-              <table>
-                <thead><tr><th>Clase real</th><th>Predicción</th><th>Confianza</th><th>Correcta</th></tr></thead>
-                <tbody>
-                  <template x-for="(row, idx) in (stats.classification_examples || [])" :key="idx">
-                    <tr>
-                      <td x-text="row.true_label"></td>
-                      <td x-text="row.pred_label"></td>
-                      <td x-text="format4(row.confidence)"></td>
-                      <td x-text="row.is_correct ? 'sí' : 'no'"></td>
-                    </tr>
-                  </template>
-                </tbody>
-              </table>
-            </template>
-            <template x-if="!(stats.classification_examples || []).length">
-              <p class="helper">Todavía no hay evidencia generada. Ejecuta el proceso para crear el JSON y CSV de apoyo para el informe.</p>
-            </template>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section x-show="activeTab==='fases'" class="panel">
-      <div class="panel-section">
-        <div class="section-head">
-          <div>
-            <h2>Ejecución de fases en tiempo real</h2>
-            <p>La conexión WebSocket mantiene la sesión viva y actualiza estado, logs y recursos del sistema sin refrescar la página.</p>
-          </div>
-        </div>
-        <div class="metric-grid">
-          <article class="metric-card">
-            <span>Progreso</span>
-            <strong x-text="formatPercent(task.progress_pct)"></strong>
-            <span x-text="task.current_step || 'Sin tarea activa'"></span>
-          </article>
-          <article class="metric-card">
-            <span>CPU del sistema</span>
-            <strong x-text="formatPercent(systemMetrics.cpu_percent)"></strong>
-            <span>Lectura instantánea del host.</span>
-          </article>
-          <article class="metric-card">
-            <span>Memoria del proceso</span>
-            <strong x-text="formatMemory(task.resource_usage?.memory_mb)"></strong>
-            <span>Uso del proceso Python que corre la fase.</span>
-          </article>
-        </div>
-      </div>
-      <div class="panel-section">
-        <div class="grid-2">
-          <article class="subpanel">
-            <h3>Fase 1 · Inspección</h3>
-            <label>Dataset root</label>
-            <input x-model="forms.phase1.dataset_root" placeholder="gatos_perros_pandas">
-            <label class="check-row"><input type="checkbox" x-model="forms.phase1.gpu_test"> Ejecutar prueba de backend GPU</label>
-            <button @click="runTask('phase1', forms.phase1)">Ejecutar Fase 1</button>
-          </article>
-          <article class="subpanel">
-            <h3>Fase 2 · Preparación</h3>
-            <label>Dataset root</label>
-            <input x-model="forms.phase2.dataset_root" placeholder="gatos_perros_pandas">
-            <label>Output dir</label>
-            <input x-model="forms.phase2.output_dir" placeholder="phase2_artifacts">
-            <button @click="runTask('phase2', forms.phase2)">Ejecutar Fase 2</button>
-          </article>
-        </div>
-        <div class="grid-2" style="margin-top: 14px;">
-          <article class="subpanel">
-            <h3>Fase 3 · Entrenamiento</h3>
-            <label>Manifest CSV</label>
-            <input x-model="forms.phase3_train.manifest_csv" placeholder="phase2_artifacts/dataset_split.csv">
-            <label>Épocas</label>
-            <input type="number" x-model.number="forms.phase3_train.epochs" placeholder="5">
-            <button @click="runTask('phase3_train', forms.phase3_train)">Ejecutar Fase 3</button>
-          </article>
-          <article class="subpanel">
-            <h3>Fase 4 · Evaluación</h3>
-            <label>Manifest CSV</label>
-            <input x-model="forms.phase4.manifest_csv" placeholder="phase2_artifacts/dataset_split.csv">
-            <label>Checkpoint (.pt)</label>
-            <input x-model="forms.phase4.checkpoint_path" placeholder="phase3_artifacts/best_checkpoint.pt">
-            <button @click="runTask('phase4_evaluate', forms.phase4)">Ejecutar Fase 4</button>
-          </article>
-        </div>
-      </div>
-      <div class="panel-section">
-        <div class="section-head">
-          <div>
-            <h3>Bitácora de ejecución</h3>
-            <p>Supervisa la tarea activa, el retorno, los recursos y la salida de consola en tiempo real.</p>
-          </div>
-        </div>
-        <div class="status-row">
-          <span class="badge">Task: <strong x-text="task.id || '-'"></strong></span>
-          <span class="badge">Estado: <strong x-text="task.status || 'idle'"></strong></span>
-          <span class="badge">Return code: <strong x-text="task.returncode ?? '-'"></strong></span>
-          <span class="badge">CPU tarea: <strong x-text="formatPercent(task.resource_usage?.cpu_percent)"></strong></span>
-          <span class="badge">Tiempo: <strong x-text="formatSeconds(task.elapsed_seconds)"></strong></span>
-        </div>
-        <textarea readonly x-model="task.log_text"></textarea>
-      </div>
-    </section>
-
-    <section x-show="activeTab==='limitaciones'" class="panel">
-      <div class="panel-section">
-        <div class="section-head">
-          <div>
-            <h2>Limitaciones técnicas</h2>
-            <p>Lista base para el informe y la exposición sobre los límites reales del modelo y del pipeline actual.</p>
-          </div>
-        </div>
-        <div class="subpanel">
-          <ol class="note-list">
-            <template x-for="(item, idx) in (stats.technical_limitations || [])" :key="idx">
-              <li x-text="item"></li>
-            </template>
-          </ol>
-        </div>
-      </div>
-    </section>
+    {% include "dashboard/_preparation.html" %}
+    {% include "dashboard/_training.html" %}
+    {% include "dashboard/_evaluation.html" %}
+    {% include "dashboard/_testing.html" %}
+    {% include "dashboard/_delivery.html" %}
   </main>
+  {% include "dashboard/_script.html" %}
 
 <script>
-window.__APP_INIT__ = {
-  initialStats: {{ stats|tojson }},
-  checkpointPath: {{ checkpoint_path|tojson }}
-};
-
 function runnerApp() {
   const boot = window.__APP_INIT__ || {};
   return {
-    activeTab: "resumen",
+    activeTab: "preparacion",
+    prepTab: "fase1",
     stats: boot.initialStats || {},
     task: {
       id: null,
+      task_type: null,
       status: "idle",
       returncode: null,
       log_text: "",
@@ -373,6 +71,7 @@ function runnerApp() {
       this.socket.on("task_update", (payload) => {
         if (!payload) return;
         this.task = { ...this.task, ...payload };
+        this.routeTaskView(payload.task_type);
         if (["success", "failed"].includes(payload.status)) {
           this.refreshStats();
         }
@@ -381,6 +80,21 @@ function runnerApp() {
         if (!payload) return;
         this.systemMetrics = { ...this.systemMetrics, ...payload };
       });
+    },
+    routeTaskView(taskType) {
+      if (taskType === "phase1") {
+        this.activeTab = "preparacion";
+        this.prepTab = "fase1";
+      } else if (taskType === "phase2") {
+        this.activeTab = "preparacion";
+        this.prepTab = "fase2";
+      } else if (taskType === "phase3_train") {
+        this.activeTab = "entrenamiento";
+      } else if (taskType === "phase4_evaluate") {
+        this.activeTab = "evaluacion";
+      } else if (taskType === "phase3_evidence" || taskType === "phase3_infer") {
+        this.activeTab = "pruebas";
+      }
     },
     format4(v) {
       if (v === null || v === undefined || Number.isNaN(Number(v))) return "-";
@@ -399,6 +113,256 @@ function runnerApp() {
       if (Number(v) < 60) return `${Number(v).toFixed(0)} s`;
       return `${(Number(v) / 60).toFixed(1)} min`;
     },
+    textOrDash(v) {
+      if (v === null || v === undefined || v === "") return "-";
+      return String(v);
+    },
+    safeProgress(v) {
+      if (v === null || v === undefined || Number.isNaN(Number(v))) return 0;
+      return Math.max(0, Math.min(100, Number(v)));
+    },
+    phaseStatusLabel(status) {
+      const labels = { idle: "En espera", queued: "En cola", running: "En curso", success: "Completada", failed: "Con error" };
+      return labels[status] || "Sin estado";
+    },
+    phase1Details(task = this.task) {
+      return task?.details?.phase1 || {};
+    },
+    phase2Details(task = this.task) {
+      return task?.details?.phase2 || {};
+    },
+    phase3Details(task = this.task) {
+      return task?.details?.phase3 || {};
+    },
+    phase4Details(task = this.task) {
+      return task?.details?.phase4 || {};
+    },
+    phaseEvidenceDetails(task = this.task) {
+      return task?.details?.phase3_evidence || {};
+    },
+    phase1Narrative(task = this.task) {
+      const details = this.phase1Details(task);
+      if (task?.status === "success" && details.total_images !== null) {
+        return `Se inspeccionaron ${details.total_images} imágenes y el flujo quedó validado para continuar con la preparación del dataset.`;
+      }
+      if (task?.status === "failed") {
+        return "La fase encontró un problema. Revisa la ruta del dataset o los parámetros antes de volver a ejecutar.";
+      }
+      return "La vista resume el escaneo del dataset, la validación de imágenes, el preprocesamiento básico y la prueba del backend.";
+    },
+    phase1ValidationLabel(task = this.task) {
+      const details = this.phase1Details(task);
+      if (details.validated_images === null) return "-";
+      if (details.validate_max === null) return `${details.validated_images}`;
+      return `${details.validated_images}/${details.validate_max}`;
+    },
+    phase1ProcessedLabel(task = this.task) {
+      const details = this.phase1Details(task);
+      if (details.processed_images === null) return "-";
+      if (details.sample_size === null) return `${details.processed_images}`;
+      return `${details.processed_images}/${details.sample_size}`;
+    },
+    phase2CurrentStep(task = this.task) {
+      return task?.current_step || "Preparando fase 2";
+    },
+    phase2Narrative(task = this.task) {
+      const details = this.phase2Details(task);
+      if (task?.status === "success" && details.records_after_dedupe !== null) {
+        return `La preparación terminó con ${details.records_after_dedupe} registros finales y el manifest quedó listo para entrenar.`;
+      }
+      if (task?.status === "failed") {
+        return "La fase encontró un problema. Revisa la raíz del dataset, la carpeta de salida o los parámetros elegidos.";
+      }
+      return "La vista resume el escaneo, la deduplicación, la creación del split y la exportación del manifest.";
+    },
+    phase3CurrentStep(task = this.task) {
+      return task?.current_step || "Preparando fase 3";
+    },
+    phase3Narrative(task = this.task) {
+      const details = this.phase3Details(task);
+      if (task?.status === "success" && (details.best_epoch !== null || this.stats?.training_summary?.best_epoch !== undefined)) {
+        const bestEpoch = details.best_epoch ?? this.stats?.training_summary?.best_epoch;
+        const bestVal = details.best_val_acc ?? this.stats?.training_summary?.best_val_acc;
+        return `El entrenamiento terminó. La mejor época fue ${bestEpoch ?? '-'} con val_acc ${this.format4(bestVal)}.`;
+      }
+      if (task?.status === "failed") {
+        return "El entrenamiento encontró un problema. Revisa el manifest, los tamaños de lote o la disponibilidad del dispositivo.";
+      }
+      return "La vista resume la carga del manifest, el avance por épocas, el mejor checkpoint y las métricas recientes.";
+    },
+    phase3EpochLabel(task = this.task) {
+      const details = this.phase3Details(task);
+      if (details.current_epoch === null || details.current_epoch === undefined) return "-";
+      if (details.epochs === null || details.epochs === undefined) return `${details.current_epoch}`;
+      return `${details.current_epoch}/${details.epochs}`;
+    },
+    phase3BestEpoch(task = this.task) {
+      const details = this.phase3Details(task);
+      return details.best_epoch ?? this.stats?.training_summary?.best_epoch ?? "-";
+    },
+    phase3BestValAcc(task = this.task) {
+      const details = this.phase3Details(task);
+      return details.best_val_acc ?? this.stats?.training_summary?.best_val_acc ?? null;
+    },
+    phase4CurrentStep(task = this.task) {
+      return task?.current_step || "Preparando fase 4";
+    },
+    phase4Narrative(task = this.task) {
+      const details = this.phase4Details(task);
+      if (task?.status === "success") {
+        return `La evaluación terminó para el split ${details.split || this.forms.phase4.split}. Ya tienes accuracy, métricas macro y reporte por clase listos para el informe.`;
+      }
+      if (task?.status === "failed") {
+        return "La evaluación encontró un problema. Revisa el checkpoint, el manifest y el split seleccionado.";
+      }
+      return "La vista resume la configuración de evaluación, las métricas finales y los artefactos exportados.";
+    },
+    phase4Samples(task = this.task) {
+      const details = this.phase4Details(task);
+      return details.samples ?? this.stats?.phase4_metrics?.n_samples ?? "-";
+    },
+    evidenceCorrectCount() {
+      const rows = this.stats?.classification_examples || [];
+      return rows.filter((row) => Boolean(row.is_correct)).length;
+    },
+    evidenceAverageConfidence() {
+      const rows = this.stats?.classification_examples || [];
+      if (!rows.length) return "-";
+      const total = rows.reduce((acc, row) => acc + Number(row.confidence || 0), 0);
+      return this.format4(total / rows.length);
+    },
+    buildCompletionChecklist() {
+      const items = [];
+      const manifestTotal = Number(this.stats?.manifest_summary?.total || 0);
+      const epochs = Number(this.stats?.training_summary?.epochs || 0);
+      const accuracy = this.stats?.phase4_metrics?.accuracy;
+      const evidenceCount = (this.stats?.classification_examples || []).length;
+
+      items.push({
+        label: "Dataset preparado",
+        ready: manifestTotal > 0,
+        detail: manifestTotal > 0 ? `${manifestTotal} imágenes registradas en el manifest.` : "Todavía no hay manifest listo."
+      });
+      items.push({
+        label: "Entrenamiento completado",
+        ready: epochs > 0,
+        detail: epochs > 0 ? `${epochs} épocas registradas en el historial.` : "No hay historial de entrenamiento."
+      });
+      items.push({
+        label: "Evaluación final disponible",
+        ready: accuracy !== null && accuracy !== undefined,
+        detail: accuracy !== null && accuracy !== undefined ? `Accuracy final: ${this.format4(accuracy)}.` : "Todavía no hay métricas de Fase 4."
+      });
+      items.push({
+        label: "Evidencia automática generada",
+        ready: evidenceCount > 0,
+        detail: evidenceCount > 0 ? `${evidenceCount} ejemplos listos para el informe.` : "Todavía no hay evidencia exportada."
+      });
+      return items;
+    },
+    deliveryReadiness() {
+      const checklist = this.buildCompletionChecklist();
+      const ready = checklist.filter((item) => item.ready).length;
+      return `${ready}/${checklist.length}`;
+    },
+    deliveryNarrative() {
+      const accuracy = this.stats?.phase4_metrics?.accuracy;
+      const bestEpoch = this.stats?.training_summary?.best_epoch;
+      if (accuracy === null || accuracy === undefined) {
+        return "El proyecto ya tiene estructura y flujo, pero aún falta cerrar por completo la evaluación final para la entrega.";
+      }
+      return `El pipeline ya produce resultados reproducibles. El mejor checkpoint viene de la época ${bestEpoch ?? '-'} y la accuracy final registrada es ${this.format4(accuracy)}.`;
+    },
+    getPhase1Stages(task = this.task) {
+      const details = this.phase1Details(task);
+      const completed = details.completed_stages || [];
+      const activeStep = (task?.current_step || "").toLowerCase();
+      const definitions = [
+        { key: "check de dataset", label: "Chequeo del dataset", description: "Cuenta las imágenes disponibles y clasifica gatos, perros y panda." },
+        { key: "validacion basica", label: "Validación básica", description: "Abre una muestra para detectar archivos corruptos o ilegibles." },
+        { key: "preprocesamiento basico", label: "Preprocesamiento", description: "Simula resize y conversión RGB para revisar la forma de entrada." },
+        { key: "prueba de backend", label: "Prueba de backend", description: "Comprueba si DirectML o CPU responderán al entrenamiento." }
+      ];
+      return definitions
+        .filter((stage) => stage.key !== "prueba de backend" || details.show_backend_stage)
+        .map((stage) => {
+          const done = completed.includes(stage.key) || task?.status === "success";
+          const active = !done && activeStep.includes(stage.key);
+          return { ...stage, done, active, stateLabel: done ? "listo" : (active ? "actual" : "pendiente") };
+        });
+    },
+    getPhase2Stages(task = this.task) {
+      const details = this.phase2Details(task);
+      const completed = details.completed_stages || [];
+      const activeStep = (task?.current_step || "").toLowerCase();
+      const definitions = [
+        { key: "escaneo", label: "Escaneo y etiquetado", description: "Descubre las imágenes y detecta su clase." },
+        { key: "deduplicacion", label: "Deduplicación", description: "Elimina archivos repetidos antes de dividir el dataset." },
+        { key: "split", label: "Split estratificado", description: "Separa train, validación y test conservando proporciones." },
+        { key: "manifest", label: "Exportación del manifest", description: "Escribe el CSV final para las siguientes fases." },
+        { key: "verificacion", label: "Verificación de dataloaders", description: "Prueba opcional del flujo de lectura con lotes." }
+      ];
+      return definitions
+        .filter((stage) => stage.key !== "verificacion" || details.show_verify_stage || this.forms?.phase2?.verify_dataloaders)
+        .map((stage) => {
+          const done = completed.includes(stage.key) || task?.status === "success";
+          const active = !done && activeStep.includes(stage.key);
+          return { ...stage, done, active, stateLabel: done ? "listo" : (active ? "actual" : "pendiente") };
+        });
+    },
+    getPhase3Stages(task = this.task) {
+      const details = this.phase3Details(task);
+      const completed = details.completed_stages || [];
+      const activeStep = (task?.current_step || "").toLowerCase();
+      const definitions = [
+        { key: "inicio", label: "Inicio del entrenamiento", description: "Carga la configuración base y selecciona el dispositivo." },
+        { key: "carga", label: "Carga del manifest", description: "Verifica que train y validación tengan registros válidos." },
+        { key: "entrenamiento", label: "Épocas de entrenamiento", description: "Entrena la CNN y mide train_acc y val_acc." },
+        { key: "resumen", label: "Guardado y resumen final", description: "Exporta checkpoints y métricas históricas." }
+      ];
+      return definitions.map((stage) => {
+        const done = completed.includes(stage.key) || task?.status === "success";
+        const active = !done && activeStep.includes(stage.key);
+        return { ...stage, done, active, stateLabel: done ? "listo" : (active ? "actual" : "pendiente") };
+      });
+    },
+    getPhase4Stages(task = this.task) {
+      const details = this.phase4Details(task);
+      const completed = details.completed_stages || [];
+      const activeStep = (task?.current_step || "").toLowerCase();
+      const definitions = [
+        { key: "inicio", label: "Inicio de la evaluación", description: "Carga el checkpoint y prepara el split seleccionado." },
+        { key: "configuracion", label: "Configuración del split", description: "Verifica split, samples y dispositivo de ejecución." },
+        { key: "evaluacion", label: "Predicción del split", description: "Corre inferencia sobre las muestras del split." },
+        { key: "metricas", label: "Cálculo de métricas", description: "Genera accuracy, métricas macro y weighted." },
+        { key: "reporte", label: "Reporte por clase", description: "Construye precisión, recall y F1 por categoría." },
+        { key: "artefactos", label: "Exportación de artefactos", description: "Guarda JSON, CSV y matriz de confusión." }
+      ];
+      return definitions.map((stage) => {
+        const done = completed.includes(stage.key) || task?.status === "success";
+        const active = !done && activeStep.includes(stage.key);
+        return { ...stage, done, active, stateLabel: done ? "listo" : (active ? "actual" : "pendiente") };
+      });
+    },
+    getPhaseEvidenceStages(task = this.task) {
+      const details = this.phaseEvidenceDetails(task);
+      const activeStep = (task?.current_step || "").toLowerCase();
+      const completed = details.completed_stages || [];
+      const definitions = [
+        { key: "inicio", label: "Inicio de evidencia", description: "Carga manifest y checkpoint para seleccionar ejemplos." },
+        { key: "predicciones", label: "Predicciones por clase", description: "Genera inferencias para las muestras elegidas." },
+        { key: "device", label: "Resumen técnico", description: "Registra device y checkpoint usados." },
+        { key: "artefactos", label: "Exportación de archivos", description: "Guarda JSON y CSV con la evidencia." }
+      ];
+      return definitions.map((stage) => {
+        const done = completed.includes(stage.key) || task?.status === "success";
+        const active = !done && activeStep.includes(stage.key);
+        return { ...stage, done, active, stateLabel: done ? "listo" : (active ? "actual" : "pendiente") };
+      });
+    },
+    stageClass(stage) {
+      return { done: stage.done, active: stage.active };
+    },
     async refreshStats() {
       const res = await fetch("/api/stats");
       this.stats = await res.json();
@@ -409,7 +373,7 @@ function runnerApp() {
       this.systemMetrics = await res.json();
     },
     renderCharts() {
-      if (typeof Chart === "undefined") return;
+      if (typeof Chart === "undefined" || !this.$refs.scatterChart || !this.$refs.pieChart || !this.$refs.barChart) return;
       const history = this.stats.metrics_history || [];
       const scatterData = history.map(row => ({ x: Number(row.train_acc || 0), y: Number(row.val_acc || 0) }));
       const scatterLabels = history.map(row => `e${row.epoch}`);
@@ -423,16 +387,7 @@ function runnerApp() {
             x: { title: { display: true, text: "train_acc" }, min: 0, max: 1 },
             y: { title: { display: true, text: "val_acc" }, min: 0, max: 1 }
           },
-          plugins: {
-            tooltip: {
-              callbacks: {
-                label: (ctx) => {
-                  const i = ctx.dataIndex;
-                  return `${scatterLabels[i]}: (${ctx.raw.x.toFixed(3)}, ${ctx.raw.y.toFixed(3)})`;
-                }
-              }
-            }
-          }
+          plugins: { tooltip: { callbacks: { label: (ctx) => `${scatterLabels[ctx.dataIndex]}: (${ctx.raw.x.toFixed(3)}, ${ctx.raw.y.toFixed(3)})` } } }
         }
       });
 
@@ -440,10 +395,7 @@ function runnerApp() {
       if (this.chartPie) this.chartPie.destroy();
       this.chartPie = new Chart(this.$refs.pieChart, {
         type: "pie",
-        data: {
-          labels: Object.keys(perLabel),
-          datasets: [{ data: Object.values(perLabel), backgroundColor: ["#2f6fed", "#60a5fa", "#93c5fd"] }]
-        }
+        data: { labels: Object.keys(perLabel), datasets: [{ data: Object.values(perLabel), backgroundColor: ["#2f6fed", "#60a5fa", "#93c5fd"] }] }
       });
 
       const perClass = this.stats.phase4_metrics?.per_class || {};
@@ -486,6 +438,7 @@ function runnerApp() {
       this.inferResult = data.result;
     },
     async runTask(taskType, payload) {
+      this.routeTaskView(taskType);
       const res = await fetch("/api/run", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -498,6 +451,7 @@ function runnerApp() {
         return;
       }
       this.task.id = data.task_id;
+      this.task.task_type = taskType;
       this.task.status = "queued";
       this.task.current_step = "Tarea en cola";
       this.task.log_text = "";

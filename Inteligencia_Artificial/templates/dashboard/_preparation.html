@@ -1,0 +1,275 @@
+<section x-show="activeTab==='preparacion'" class="panel">
+  <div class="panel-section">
+    <div class="section-head">
+      <div>
+        <h2>Preparación del dataset</h2>
+        <p>Primero validamos el dataset y luego lo dejamos listo con limpieza, deduplicación y split estratificado.</p>
+      </div>
+      <div class="subtabs">
+        <button class="subtab-btn" :class="{ 'active': prepTab==='fase1' }" @click="prepTab='fase1'">Fase 1 · Inspección</button>
+        <button class="subtab-btn" :class="{ 'active': prepTab==='fase2' }" @click="prepTab='fase2'">Fase 2 · Preparación</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-section" x-show="prepTab==='fase1'">
+    <div class="grid-2">
+      <article class="subpanel form-stack">
+        <h3>Configurar Fase 1</h3>
+        <p class="helper">Valida el dataset, hace una muestra de preprocesamiento y comprueba el backend disponible.</p>
+        <label>Dataset root</label>
+        <input x-model="forms.phase1.dataset_root" placeholder="gatos_perros_pandas">
+        <p class="field-help">Carpeta base del dataset. Desde aquí la fase busca imágenes de gatos, perros y panda.</p>
+        <label>Validar máximo</label>
+        <input type="number" x-model.number="forms.phase1.validate_max" min="1" step="1">
+        <p class="field-help">Cantidad máxima de imágenes a revisar para detectar archivos corruptos o ilegibles sin tardar demasiado.</p>
+        <label>Muestra de preprocesamiento</label>
+        <input type="number" x-model.number="forms.phase1.sample_size" min="1" step="1">
+        <p class="field-help">Número de imágenes que se usan para probar resize, conversión RGB y forma de entrada del modelo.</p>
+        <label class="check-row"><input type="checkbox" x-model="forms.phase1.gpu_test"> Ejecutar prueba de backend GPU</label>
+        <p class="field-help">Activa una prueba rápida de cómputo para confirmar si DirectML o CPU será el backend usado en Windows.</p>
+        <label>Tamaño de MatMul</label>
+        <input type="number" x-model.number="forms.phase1.matmul_size" min="64" step="64">
+        <p class="field-help">Tamaño de la multiplicación de matrices usada en la prueba del backend. Más grande implica una prueba más exigente.</p>
+        <div class="form-actions">
+          <button @click="runTask('phase1', forms.phase1)">Ejecutar Fase 1</button>
+        </div>
+        <p class="field-help">Lanza la inspección inicial del dataset y actualiza el panel visual con progreso, conteos y backend detectado.</p>
+      </article>
+      <article class="subpanel">
+        <h3>Siguiente paso recomendado</h3>
+        <p class="helper">Usa esta fase para confirmar dataset, clases y backend antes de pasar a la limpieza y al split.</p>
+        <ul class="note-list">
+          <li>Revisa que el total de imágenes sea coherente.</li>
+          <li>Confirma que no haya errores de lectura.</li>
+          <li>Verifica el backend detectado si vas a entrenar en Windows.</li>
+          <li>Cuando termine bien, continúa con Fase 2.</li>
+        </ul>
+      </article>
+    </div>
+    <div class="phase-shell" style="margin-top: 14px;">
+      <div class="phase-hero">
+        <article class="phase-progress-card">
+          <div class="phase-progress-head">
+            <div>
+              <div class="eyebrow">Estado actual</div>
+              <h3 x-text="task.current_step || 'Preparando fase 1'"></h3>
+              <p class="helper" x-text="phase1Narrative(task)"></p>
+            </div>
+            <span class="phase-status-pill" x-text="phaseStatusLabel(task.status)"></span>
+          </div>
+          <div class="phase-bar-track">
+            <div class="phase-bar-fill" :style="`width: ${safeProgress(task.progress_pct)}%`"></div>
+          </div>
+          <div class="status-row">
+            <span class="badge">Progreso: <strong x-text="formatPercent(task.progress_pct)"></strong></span>
+            <span class="badge">Tiempo: <strong x-text="formatSeconds(task.elapsed_seconds)"></strong></span>
+            <span class="badge">CPU tarea: <strong x-text="formatPercent(task.resource_usage?.cpu_percent)"></strong></span>
+            <span class="badge">RAM tarea: <strong x-text="formatMemory(task.resource_usage?.memory_mb)"></strong></span>
+          </div>
+          <div class="phase-stage-list">
+            <template x-for="stage in getPhase1Stages(task)" :key="stage.key">
+              <div class="phase-stage-item" :class="stageClass(stage)">
+                <span class="phase-stage-dot"></span>
+                <div>
+                  <div class="phase-stage-label" x-text="stage.label"></div>
+                  <div class="helper" x-text="stage.description"></div>
+                </div>
+                <div class="phase-stage-state" x-text="stage.stateLabel"></div>
+              </div>
+            </template>
+          </div>
+        </article>
+        <article class="phase-progress-card">
+          <div class="eyebrow">Lectura rápida</div>
+          <h3>Resumen de inspección</h3>
+          <div class="phase-kpi" style="margin-top: 14px;">
+            <div class="phase-mini">
+              <span>Imágenes encontradas</span>
+              <strong x-text="phase1Details(task).total_images ?? '-'"></strong>
+              <span class="helper">Total de archivos reconocidos como imagen.</span>
+            </div>
+            <div class="phase-mini">
+              <span>Imágenes validadas</span>
+              <strong x-text="phase1ValidationLabel(task)"></strong>
+              <span class="helper">Chequeo rápido de lectura sin corrupción.</span>
+            </div>
+            <div class="phase-mini">
+              <span>Preprocesadas</span>
+              <strong x-text="phase1ProcessedLabel(task)"></strong>
+              <span class="helper">Muestra usada para simular el flujo de entrada.</span>
+            </div>
+            <div class="phase-mini">
+              <span>Backend</span>
+              <strong x-text="phase1Details(task).backend_name || (phase1Details(task).show_backend_stage ? 'Pendiente' : 'No solicitado')"></strong>
+              <span class="helper">Motor de cómputo detectado en Windows.</span>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="grid-3">
+        <article class="subpanel">
+          <h4>Distribución por clase</h4>
+          <ul class="phase-plain-list">
+            <li><span>Gatos</span><strong x-text="phase1Details(task).class_counts?.cats ?? 0"></strong></li>
+            <li><span>Perros</span><strong x-text="phase1Details(task).class_counts?.dogs ?? 0"></strong></li>
+            <li><span>Panda</span><strong x-text="phase1Details(task).class_counts?.panda ?? 0"></strong></li>
+            <li><span>Sin clase</span><strong x-text="phase1Details(task).unknown_class ?? 0"></strong></li>
+          </ul>
+        </article>
+        <article class="subpanel">
+          <h4>Detalles técnicos</h4>
+          <ul class="phase-plain-list">
+            <li><span>Tensor final</span><strong x-text="phase1Details(task).tensor_shape || '-'"></strong></li>
+            <li><span>Errores de lectura</span><strong x-text="phase1Details(task).read_errors ?? '-'"></strong></li>
+            <li><span>Estado final</span><strong x-text="phase1Details(task).status_text || '-'"></strong></li>
+          </ul>
+        </article>
+        <article class="subpanel">
+          <h4>Ruta inspeccionada</h4>
+          <p class="helper">Se muestra la carpeta exacta usada para el escaneo actual.</p>
+          <div class="mono-inline" x-text="phase1Details(task).dataset_root || forms.phase1.dataset_root"></div>
+          <template x-if="phase1Details(task).backend_text">
+            <div style="margin-top: 14px;">
+              <h4>Backend detectado</h4>
+              <p class="helper" x-text="phase1Details(task).backend_text"></p>
+            </div>
+          </template>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-section" x-show="prepTab==='fase2'">
+    <div class="grid-2">
+      <article class="subpanel form-stack">
+        <h3>Configurar Fase 2</h3>
+        <p class="helper">Limpia duplicados, arma splits y genera el manifest que consumen las fases posteriores.</p>
+        <label>Dataset root</label>
+        <input x-model="forms.phase2.dataset_root" placeholder="gatos_perros_pandas">
+        <p class="field-help">Raíz del dataset original que se limpiará y dividirá en train, validación y test.</p>
+        <label>Directorio de salida</label>
+        <input x-model="forms.phase2.output_dir" placeholder="phase2_artifacts">
+        <p class="field-help">Carpeta donde se guardan el manifest final y los artefactos preparados de esta fase.</p>
+        <label>Modo de deduplicación</label>
+        <input x-model="forms.phase2.dedupe_mode" placeholder="sha1">
+        <p class="field-help">Método usado para detectar duplicados. `sha1` compara contenido real del archivo y es la opción más confiable.</p>
+        <label>Batch size</label>
+        <input type="number" x-model.number="forms.phase2.batch_size" min="1" step="1">
+        <p class="field-help">Tamaño de lote para las comprobaciones internas del flujo de lectura de imágenes.</p>
+        <label class="check-row"><input type="checkbox" x-model="forms.phase2.verify_dataloaders"> Verificar dataloaders</label>
+        <p class="field-help">Hace una validación extra del pipeline para confirmar que el dataset ya puede alimentar entrenamiento y evaluación.</p>
+        <label class="check-row"><input type="checkbox" x-model="forms.phase2.debug"> Modo debug</label>
+        <p class="field-help">Muestra más detalles de ejecución para entender mejor qué está pasando en la preparación.</p>
+        <div class="form-actions">
+          <button @click="runTask('phase2', forms.phase2)">Ejecutar Fase 2</button>
+        </div>
+        <p class="field-help">Ejecuta la limpieza, la deduplicación y la creación del split estratificado que usará todo el proyecto.</p>
+      </article>
+      <article class="subpanel">
+        <h3>Qué debería producir</h3>
+        <ul class="note-list">
+          <li>`dataset_split.csv` con `train`, `val` y `test`.</li>
+          <li>Dataset más confiable para evitar fugas entre splits.</li>
+          <li>Base lista para comenzar el entrenamiento.</li>
+        </ul>
+        <div class="status-row" style="margin-top: 14px;">
+          <span class="badge">Tarea activa: <strong x-text="task.task_type || 'sin tarea'"></strong></span>
+          <span class="badge">Estado: <strong x-text="phaseStatusLabel(task.status)"></strong></span>
+        </div>
+        <p class="helper">La Fase 2 ya puede empezar a leerse como flujo visual, con progreso, resumen y salida útil sin depender de la consola.</p>
+      </article>
+    </div>
+    <div class="phase-shell" style="margin-top: 14px;">
+      <div class="phase-hero">
+        <article class="phase-progress-card">
+          <div class="phase-progress-head">
+            <div>
+              <div class="eyebrow">Estado actual</div>
+              <h3 x-text="phase2CurrentStep(task)"></h3>
+              <p class="helper" x-text="phase2Narrative(task)"></p>
+            </div>
+            <span class="phase-status-pill" x-text="phaseStatusLabel(task.status)"></span>
+          </div>
+          <div class="phase-bar-track">
+            <div class="phase-bar-fill" :style="`width: ${safeProgress(task.progress_pct)}%`"></div>
+          </div>
+          <div class="status-row">
+            <span class="badge">Progreso: <strong x-text="formatPercent(task.progress_pct)"></strong></span>
+            <span class="badge">Tiempo: <strong x-text="formatSeconds(task.elapsed_seconds)"></strong></span>
+            <span class="badge">CPU tarea: <strong x-text="formatPercent(task.resource_usage?.cpu_percent)"></strong></span>
+            <span class="badge">RAM tarea: <strong x-text="formatMemory(task.resource_usage?.memory_mb)"></strong></span>
+          </div>
+          <div class="phase-stage-list">
+            <template x-for="stage in getPhase2Stages(task)" :key="stage.key">
+              <div class="phase-stage-item" :class="stageClass(stage)">
+                <span class="phase-stage-dot"></span>
+                <div>
+                  <div class="phase-stage-label" x-text="stage.label"></div>
+                  <div class="helper" x-text="stage.description"></div>
+                </div>
+                <div class="phase-stage-state" x-text="stage.stateLabel"></div>
+              </div>
+            </template>
+          </div>
+        </article>
+        <article class="phase-progress-card">
+          <div class="eyebrow">Lectura rápida</div>
+          <h3>Resumen de preparación</h3>
+          <div class="phase-kpi" style="margin-top: 14px;">
+            <div class="phase-mini">
+              <span>Imágenes escaneadas</span>
+              <strong x-text="textOrDash(phase2Details(task).total_scanned)"></strong>
+              <span class="helper">Archivos detectados antes del split.</span>
+            </div>
+            <div class="phase-mini">
+              <span>Duplicados removidos</span>
+              <strong x-text="textOrDash(phase2Details(task).duplicates_removed)"></strong>
+              <span class="helper">Limpieza aplicada antes de exportar el manifest.</span>
+            </div>
+            <div class="phase-mini">
+              <span>Registros finales</span>
+              <strong x-text="textOrDash(phase2Details(task).records_after_dedupe)"></strong>
+              <span class="helper">Base final lista para entrenamiento.</span>
+            </div>
+            <div class="phase-mini">
+              <span>Manifest</span>
+              <strong x-text="phase2Details(task).manifest_csv ? 'generado' : 'pendiente'"></strong>
+              <span class="helper">CSV que consumen las fases 3 y 4.</span>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="grid-3">
+        <article class="subpanel">
+          <h4>Split resultante</h4>
+          <ul class="phase-plain-list">
+            <li><span>Train</span><strong x-text="textOrDash(phase2Details(task).train_count)"></strong></li>
+            <li><span>Validación</span><strong x-text="textOrDash(phase2Details(task).val_count)"></strong></li>
+            <li><span>Test</span><strong x-text="textOrDash(phase2Details(task).test_count)"></strong></li>
+          </ul>
+        </article>
+        <article class="subpanel">
+          <h4>Distribución por clase</h4>
+          <ul class="phase-plain-list">
+            <li><span>Gatos</span><strong x-text="textOrDash(phase2Details(task).class_counts?.cats)"></strong></li>
+            <li><span>Perros</span><strong x-text="textOrDash(phase2Details(task).class_counts?.dogs)"></strong></li>
+            <li><span>Panda</span><strong x-text="textOrDash(phase2Details(task).class_counts?.panda)"></strong></li>
+          </ul>
+        </article>
+        <article class="subpanel">
+          <h4>Artefactos y parámetros</h4>
+          <ul class="phase-plain-list">
+            <li><span>Dedupe</span><strong x-text="textOrDash(phase2Details(task).dedupe_mode || forms.phase2.dedupe_mode)"></strong></li>
+            <li><span>Batch size</span><strong x-text="textOrDash(phase2Details(task).batch_size || forms.phase2.batch_size)"></strong></li>
+            <li><span>Manifest CSV</span><strong x-text="phase2Details(task).manifest_csv ? 'listo' : 'pendiente'"></strong></li>
+          </ul>
+          <div style="margin-top: 14px;">
+            <p class="helper">Ruta del manifest</p>
+            <div class="mono-inline" x-text="phase2Details(task).manifest_csv || 'Sin generar todavía'"></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
