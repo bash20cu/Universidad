@@ -15,6 +15,7 @@ def select_device(torch_module) -> tuple[object, str]:
     """Selecciona el backend disponible con prioridad CUDA, MPS, DirectML y CPU."""
 
     torch = torch_module
+    # Se prioriza el backend mas potente disponible segun el entorno actual.
     if torch.cuda.is_available():
         return torch.device("cuda"), "cuda"
     mps_backend = getattr(torch.backends, "mps", None)
@@ -83,6 +84,8 @@ def build_simple_cnn(nn_module):
             )
 
         def forward(self, x):
+            # El flujo se mantiene simple para que sea facil de explicar:
+            # extraer rasgos y luego clasificar.
             x = self.features(x)
             return self.classifier(x)
 
@@ -143,6 +146,8 @@ def predict_image(
         logits = model(x)
         probs = torch.softmax(logits, dim=1)[0].detach().cpu().numpy()
 
+    # Se devuelve tambien el vector de probabilidades para que la UI pueda
+    # explicar por que la clase ganadora fue elegida.
     pred_id = int(np.argmax(probs))
     confidence = float(probs[pred_id])
     return {

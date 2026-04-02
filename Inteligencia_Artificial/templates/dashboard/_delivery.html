@@ -96,6 +96,21 @@
   <div class="panel-section">
     <div class="grid-2">
       <article class="subpanel">
+        <h3>Visual del dataset</h3>
+        <p class="helper">Resumen visual del reparto entre train, validación y test para explicar rápidamente la preparación del dataset.</p>
+        <canvas x-ref="deliverySplitChart"></canvas>
+      </article>
+      <article class="subpanel">
+        <h3>Visual del rendimiento</h3>
+        <p class="helper">Comparación de accuracy, macro precision, macro recall y macro F1 como cierre visual del proyecto.</p>
+        <canvas x-ref="deliveryPerformanceChart"></canvas>
+      </article>
+    </div>
+  </div>
+
+  <div class="panel-section">
+    <div class="grid-2">
+      <article class="subpanel">
         <h3>Lectura rápida del modelo</h3>
         <ul class="note-list">
           <li>Épocas entrenadas: <strong x-text="textOrDash(stats.training_summary?.epochs)"></strong></li>

@@ -38,6 +38,7 @@ def load_image_tensor(torch_module, image_path: Path, image_size: int):
 
     with Image.open(image_path) as img:
         arr = np.asarray(img.convert("RGB").resize((image_size, image_size)), dtype=np.float32) / 255.0
+    # Se agrega la dimension batch porque el modelo espera BCHW.
     return torch_module.from_numpy(arr).permute(2, 0, 1).contiguous().unsqueeze(0)
 
 
@@ -53,6 +54,7 @@ def compute_metrics(y_true: list[int], y_pred: list[int], num_classes: int) -> d
     y_true_arr = np.asarray(y_true, dtype=np.int64)
     y_pred_arr = np.asarray(y_pred, dtype=np.int64)
 
+    # La matriz de confusion es la base para derivar todas las metricas restantes.
     cm = np.zeros((num_classes, num_classes), dtype=np.int64)
     for t, p in zip(y_true_arr, y_pred_arr):
         cm[t, p] += 1
@@ -112,6 +114,7 @@ def save_outputs(output_dir: Path, metrics: dict[str, object], split: str) -> No
     with metrics_json.open("w", encoding="utf-8") as f:
         json.dump(metrics, f, indent=2)
 
+    # La confusion se exporta a CSV para reutilizarla facilmente en informe o Excel.
     cm_csv = output_dir / f"confusion_matrix_{split}.csv"
     cm = metrics["confusion_matrix"]
     with cm_csv.open("w", encoding="utf-8", newline="") as f:
@@ -218,6 +221,7 @@ def main() -> int:
             y_true.append(int(item.label_id))
             y_pred.append(pred_id)
         except (OSError, UnidentifiedImageError, RuntimeError):
+            # Las imagenes problematicas se omiten para no abortar toda la evaluacion.
             skipped += 1
             continue
 

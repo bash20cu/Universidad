@@ -39,6 +39,7 @@ def list_image_files(root: Path) -> list[Path]:
 def scan_dataset(dataset_root: Path) -> tuple[ScanSummary, list[Path]]:
     """Escanea el dataset completo y devuelve resumen mas listado de imagenes validas."""
 
+    # Aqui tomamos una fotografia general del dataset antes de entrenar nada.
     image_files = list_image_files(dataset_root)
     per_class: Counter[str] = Counter(detect_label(path) for path in image_files)
     unknown_class = per_class.pop("unknown", 0)
@@ -76,6 +77,7 @@ def preprocess_sample(paths: Iterable[Path], sample_size: int) -> tuple[int, tup
     for image_path in list(paths)[:sample_size]:
         try:
             with Image.open(image_path) as img:
+                # Este paso imita el preprocesamiento usado luego por las demas fases.
                 rgb = img.convert("RGB").resize((224, 224))
                 image_array = np.asarray(rgb, dtype=np.float32) / 255.0
             last_shape = image_array.shape

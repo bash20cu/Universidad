@@ -480,10 +480,17 @@ def parse_phase3_evidence_details(task: dict[str, Any], logs: list[str]) -> dict
     completed: list[str] = []
     rows_count = 0
 
+    pending_key: str | None = None
+
     for raw_line in logs:
         line = raw_line.strip()
         lower = line.lower()
         if not line:
+            continue
+
+        if pending_key and (":" in line or line.startswith(str(BASE_DIR.drive)) or "\\" in line or "/" in line):
+            details[pending_key] = line
+            pending_key = None
             continue
 
         if "fase 3 - evidencia de clasificacion" in lower and "inicio" not in completed:
@@ -502,9 +509,17 @@ def parse_phase3_evidence_details(task: dict[str, Any], logs: list[str]) -> dict
         elif line.startswith("Checkpoint epoch:"):
             details["checkpoint_epoch"] = line.split(":", 1)[1].strip()
         elif "Evidencia JSON:" in line:
-            details["json_path"] = line.split(":", 1)[1].strip()
+            value = line.split(":", 1)[1].strip()
+            if value:
+                details["json_path"] = value
+            else:
+                pending_key = "json_path"
         elif "Evidencia CSV:" in line:
-            details["csv_path"] = line.split(":", 1)[1].strip()
+            value = line.split(":", 1)[1].strip()
+            if value:
+                details["csv_path"] = value
+            else:
+                pending_key = "csv_path"
         elif re.match(r"^[│\s]*[a-zA-Z]+[│\s]+[a-zA-Z]+", line) and "Fase 3 -" not in line:
             rows_count += 1
 

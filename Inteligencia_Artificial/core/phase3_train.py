@@ -31,6 +31,12 @@ class Item:
 
 
 def parse_args() -> argparse.Namespace:
+    """Define los parametros CLI del entrenamiento.
+
+    Aqui se concentran los hiperparametros mas visibles para poder ajustar el
+    experimento sin tocar el codigo fuente.
+    """
+
     parser = argparse.ArgumentParser(
         description="Fase 3 - Entrenamiento de CNN basica (cats, dogs, panda)."
     )
@@ -69,6 +75,7 @@ def set_seed(seed: int) -> None:
 def load_manifest(path: Path) -> list[Item]:
     """Adapta el manifest comun del proyecto a la estructura usada por entrenamiento."""
 
+    # Se reaprovecha el manifest comun para no duplicar logica de lectura.
     manifest_items = load_manifest_items(path)
     return [
         Item(path=item.path, label_id=item.label_id, split=item.split)
@@ -115,6 +122,8 @@ def build_components():
     SimpleCNN = build_simple_cnn(nn)
 
     def run_epoch(model, loader, criterion, optimizer, device, train: bool):
+        """Ejecuta una epoca completa de entrenamiento o validacion."""
+
         if train:
             model.train()
         else:
@@ -133,6 +142,7 @@ def build_components():
                 loss = criterion(logits, y)
 
                 if train:
+                    # Solo en entrenamiento se actualizan gradientes y pesos.
                     optimizer.zero_grad()
                     loss.backward()
                     optimizer.step()
@@ -152,6 +162,7 @@ def build_components():
 def cpu_state_dict(torch_module, model) -> dict[str, object]:
     """Convierte el estado del modelo a CPU para que el checkpoint sea portable."""
 
+    # Guardar en CPU evita checkpoints atados a backends no portables.
     return {key: value.detach().to("cpu") for key, value in model.state_dict().items()}
 
 
@@ -173,6 +184,8 @@ def cpu_optimizer_state(torch_module, optimizer) -> dict[str, object]:
 
 
 def main() -> int:
+    """Orquesta el flujo completo de entrenamiento y persistencia de artefactos."""
+
     args = parse_args()
     set_seed(args.seed)
     start = time.perf_counter()
@@ -209,6 +222,7 @@ def main() -> int:
 
     train_ds = SplitDataset(items, "train", args.image_size)
     val_ds = SplitDataset(items, "val", args.image_size)
+    # Se usa shuffle solo en train para mejorar aprendizaje sin contaminar validacion.
     train_loader = DataLoader(train_ds, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers)
     val_loader = DataLoader(val_ds, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers)
 
@@ -242,6 +256,7 @@ def main() -> int:
         if val_acc > best_val_acc:
             best_val_acc = val_acc
             best_epoch = epoch
+            # El mejor checkpoint se decide por validacion y no por la ultima epoca.
             torch.save(
                 {
                     "epoch": epoch,
@@ -252,6 +267,7 @@ def main() -> int:
                 output_dir / "best_checkpoint.pt",
             )
 
+    # Tambien se guarda el ultimo estado por si se quiere reanudar o comparar.
     torch.save(
         {
             "epoch": args.epochs,

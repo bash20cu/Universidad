@@ -1,4 +1,8 @@
-"""Estadisticas para dashboard y scripts."""
+"""Estadisticas y agregaciones reutilizables para dashboard y scripts.
+
+La idea de este modulo es centralizar la lectura de artefactos para que la UI
+no tenga que conocer detalles de archivos JSON o manifests.
+"""
 
 from __future__ import annotations
 
@@ -41,6 +45,8 @@ def summarize_training(metrics_history: list[dict[str, Any]]) -> dict[str, Any]:
             "last_val_acc": None,
         }
 
+    # La mejor epoca se decide por validacion porque es el criterio usado
+    # tambien al guardar el best checkpoint.
     best = max(metrics_history, key=lambda r: float(r.get("val_acc", 0.0)))
     last = metrics_history[-1]
     return {
@@ -80,6 +86,8 @@ def build_dashboard_stats(
 ) -> dict[str, Any]:
     """Construye el paquete de datos que consume el dashboard Flask."""
 
+    # Este punto centraliza todo lo que la app necesita para evitar duplicar
+    # logica de lectura y resumen en distintas rutas o plantillas.
     manifest_items = load_manifest(manifest_csv) if manifest_csv.exists() else []
     manifest_summary = summarize_manifest(manifest_items) if manifest_items else {}
     metrics_history = load_metrics_history(metrics_history_json)

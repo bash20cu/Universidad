@@ -50,6 +50,7 @@ def select_examples(items, split: str, samples_per_class: int):
 
     selected = []
     for class_name in KNOWN_CLASSES:
+        # La evidencia busca representar todas las clases, no solo ejemplos al azar.
         class_items = [item for item in items if item.split == split and item.label == class_name]
         selected.extend(class_items[:samples_per_class])
     return selected
@@ -120,6 +121,7 @@ def main() -> int:
     rows: list[dict[str, object]] = []
 
     for item in selected:
+        # Cada fila guarda suficiente detalle para reutilizarse en dashboard e informe.
         prediction = predict_image(
             model=model,
             device=device,

@@ -45,6 +45,8 @@ function runnerApp() {
     chartScatter: null,
     chartPie: null,
     chartBar: null,
+    chartDeliverySplit: null,
+    chartDeliveryPerformance: null,
     inferForm: { checkpoint_path: boot.checkpointPath || "phase3_artifacts/best_checkpoint.pt", image_size: 128 },
     forms: {
       phase1: { dataset_root: "gatos_perros_pandas", gpu_test: true, matmul_size: 512, validate_max: 300, sample_size: 64 },
@@ -373,49 +375,105 @@ function runnerApp() {
       this.systemMetrics = await res.json();
     },
     renderCharts() {
-      if (typeof Chart === "undefined" || !this.$refs.scatterChart || !this.$refs.pieChart || !this.$refs.barChart) return;
+      if (typeof Chart === "undefined") return;
       const history = this.stats.metrics_history || [];
       const scatterData = history.map(row => ({ x: Number(row.train_acc || 0), y: Number(row.val_acc || 0) }));
       const scatterLabels = history.map(row => `e${row.epoch}`);
 
-      if (this.chartScatter) this.chartScatter.destroy();
-      this.chartScatter = new Chart(this.$refs.scatterChart, {
-        type: "scatter",
-        data: { datasets: [{ label: "train_acc vs val_acc", data: scatterData, pointRadius: 5, backgroundColor: "#2f6fed" }] },
-        options: {
-          scales: {
-            x: { title: { display: true, text: "train_acc" }, min: 0, max: 1 },
-            y: { title: { display: true, text: "val_acc" }, min: 0, max: 1 }
-          },
-          plugins: { tooltip: { callbacks: { label: (ctx) => `${scatterLabels[ctx.dataIndex]}: (${ctx.raw.x.toFixed(3)}, ${ctx.raw.y.toFixed(3)})` } } }
-        }
-      });
+      if (this.$refs.scatterChart) {
+        if (this.chartScatter) this.chartScatter.destroy();
+        this.chartScatter = new Chart(this.$refs.scatterChart, {
+          type: "scatter",
+          data: { datasets: [{ label: "train_acc vs val_acc", data: scatterData, pointRadius: 5, backgroundColor: "#2f6fed" }] },
+          options: {
+            scales: {
+              x: { title: { display: true, text: "train_acc" }, min: 0, max: 1 },
+              y: { title: { display: true, text: "val_acc" }, min: 0, max: 1 }
+            },
+            plugins: { tooltip: { callbacks: { label: (ctx) => `${scatterLabels[ctx.dataIndex]}: (${ctx.raw.x.toFixed(3)}, ${ctx.raw.y.toFixed(3)})` } } }
+          }
+        });
+      }
 
       const perLabel = this.stats.manifest_summary?.per_label || {};
-      if (this.chartPie) this.chartPie.destroy();
-      this.chartPie = new Chart(this.$refs.pieChart, {
-        type: "pie",
-        data: { labels: Object.keys(perLabel), datasets: [{ data: Object.values(perLabel), backgroundColor: ["#2f6fed", "#60a5fa", "#93c5fd"] }] }
-      });
+      if (this.$refs.pieChart) {
+        if (this.chartPie) this.chartPie.destroy();
+        this.chartPie = new Chart(this.$refs.pieChart, {
+          type: "pie",
+          data: { labels: Object.keys(perLabel), datasets: [{ data: Object.values(perLabel), backgroundColor: ["#2f6fed", "#60a5fa", "#93c5fd"] }] }
+        });
+      }
 
       const perClass = this.stats.phase4_metrics?.per_class || {};
       const classLabels = Object.keys(perClass);
       const precision = classLabels.map(k => Number(perClass[k].precision || 0));
       const recall = classLabels.map(k => Number(perClass[k].recall || 0));
       const f1 = classLabels.map(k => Number(perClass[k].f1 || 0));
-      if (this.chartBar) this.chartBar.destroy();
-      this.chartBar = new Chart(this.$refs.barChart, {
-        type: "bar",
-        data: {
-          labels: classLabels,
-          datasets: [
-            { label: "precision", data: precision, backgroundColor: "#2f6fed" },
-            { label: "recall", data: recall, backgroundColor: "#1f8f61" },
-            { label: "f1", data: f1, backgroundColor: "#c57a18" }
-          ]
-        },
-        options: { scales: { y: { min: 0, max: 1 } } }
-      });
+      if (this.$refs.barChart) {
+        if (this.chartBar) this.chartBar.destroy();
+        this.chartBar = new Chart(this.$refs.barChart, {
+          type: "bar",
+          data: {
+            labels: classLabels,
+            datasets: [
+              { label: "precision", data: precision, backgroundColor: "#2f6fed" },
+              { label: "recall", data: recall, backgroundColor: "#1f8f61" },
+              { label: "f1", data: f1, backgroundColor: "#c57a18" }
+            ]
+          },
+          options: { scales: { y: { min: 0, max: 1 } } }
+        });
+      }
+
+      const splitCounts = this.stats.manifest_summary?.per_split || {};
+      if (this.$refs.deliverySplitChart) {
+        if (this.chartDeliverySplit) this.chartDeliverySplit.destroy();
+        this.chartDeliverySplit = new Chart(this.$refs.deliverySplitChart, {
+          type: "doughnut",
+          data: {
+            labels: ["Train", "Validación", "Test"],
+            datasets: [{
+              data: [
+                Number(splitCounts.train || 0),
+                Number(splitCounts.val || 0),
+                Number(splitCounts.test || 0),
+              ],
+              backgroundColor: ["#2f6fed", "#60a5fa", "#93c5fd"],
+              borderWidth: 0,
+            }]
+          },
+          options: {
+            plugins: { legend: { position: "bottom" } },
+            cutout: "64%"
+          }
+        });
+      }
+
+      const phase4 = this.stats.phase4_metrics || {};
+      if (this.$refs.deliveryPerformanceChart) {
+        if (this.chartDeliveryPerformance) this.chartDeliveryPerformance.destroy();
+        this.chartDeliveryPerformance = new Chart(this.$refs.deliveryPerformanceChart, {
+          type: "bar",
+          data: {
+            labels: ["Accuracy", "Macro Precision", "Macro Recall", "Macro F1"],
+            datasets: [{
+              label: "Resultado",
+              data: [
+                Number(phase4.accuracy || 0),
+                Number(phase4.macro_precision || 0),
+                Number(phase4.macro_recall || 0),
+                Number(phase4.macro_f1 || 0),
+              ],
+              backgroundColor: ["#2f6fed", "#4d86f1", "#77abfa", "#9bc5ff"],
+              borderRadius: 8,
+            }]
+          },
+          options: {
+            plugins: { legend: { display: false } },
+            scales: { y: { min: 0, max: 1 } }
+          }
+        });
+      }
     },
     async predictUpload() {
       this.inferError = "";

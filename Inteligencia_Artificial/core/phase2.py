@@ -50,6 +50,7 @@ def list_labeled_images(dataset_root: Path, debug: bool = False) -> tuple[list[t
     for path in track(all_paths, description="Escaneando imagenes..."):
         if not path.is_file() or path.suffix.lower() not in IMAGE_EXTENSIONS:
             continue
+        # La etiqueta se intenta recuperar por carpeta o por nombre de archivo.
         label = detect_label(path)
         if label == "unknown":
             unknown += 1
@@ -91,8 +92,10 @@ def dedupe_records(
     for path, label in track(items_list, description=f"Deduplicando ({mode})..."):
         stat = path.stat()
         if mode == "name_size":
+            # Modo rapido pero menos robusto: compara nombre y tamano.
             key = (label, path.name.lower(), stat.st_size)
         elif mode == "sha1":
+            # Modo mas confiable: compara el contenido real del archivo.
             key = (label, stat.st_size, compute_sha1(path))
         else:
             raise ValueError(f"Modo de deduplicacion no soportado: {mode}")
@@ -136,6 +139,7 @@ def split_stratified(
         n_test = n - n_train - n_val
 
         if n >= 3:
+            # Este ajuste evita clases vacias en val/test cuando el dataset es pequeno.
             if n_train == 0:
                 n_train = 1
                 n_test -= 1
@@ -169,6 +173,7 @@ def export_manifest(records: list[Record], dataset_root: Path, output_csv: Path)
         writer = csv.writer(f)
         writer.writerow(["path", "path_relative", "label", "label_id", "split"])
         for rec in records:
+            # Guardamos ruta absoluta y relativa para mantener portabilidad entre entornos.
             writer.writerow(
                 [
                     str(rec.path.resolve()),
@@ -250,6 +255,7 @@ def verify_dataloaders(
             except (OSError, UnidentifiedImageError) as exc:
                 raise RuntimeError(f"Error leyendo imagen {rec.path}") from exc
 
+            # Se replica la forma BCHW que espera el modelo en fases posteriores.
             tensor = torch.from_numpy(arr).permute(2, 0, 1).contiguous()
             label_id = CLASS_TO_ID[rec.label]
             return tensor, label_id

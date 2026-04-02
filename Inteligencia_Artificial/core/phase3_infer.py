@@ -14,7 +14,11 @@ console = Console()
 
 
 def parse_args() -> argparse.Namespace:
-    """Define los parametros CLI para inferencia individual."""
+    """Define los parametros CLI para inferencia individual.
+
+    Esta fase sirve para demostrar el comportamiento del modelo con una sola
+    imagen externa, fuera del flujo de evaluacion automatica.
+    """
 
     parser = argparse.ArgumentParser(
         description="Fase 3 - Inferencia de una imagen (cats/dogs/panda)."
@@ -44,6 +48,7 @@ def main() -> int:
         console.print(f"[red]ERROR:[/red] checkpoint no encontrado: {checkpoint_path}")
         return 1
 
+    # Primero se reconstruye el modelo y luego se ejecuta una sola prediccion.
     model, device, device_name, checkpoint = load_model_from_checkpoint(checkpoint_path)
     result = predict_image(model=model, device=device, image_path=image_path, image_size=args.image_size)
 
@@ -54,6 +59,7 @@ def main() -> int:
     console.print(f"[bold]Epoch checkpoint:[/bold] {checkpoint.get('epoch', 'n/a')}")
     console.print(f"[green]Prediccion:[/green] {result['pred_label']} ({result['confidence']:.4f})")
 
+    # La tabla resume todas las probabilidades para explicar mejor la decision.
     table = Table(title="Probabilidades por clase")
     table.add_column("Clase", style="bold")
     table.add_column("Probabilidad")
