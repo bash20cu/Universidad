@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 // Rebuild trigger: Added Services_Control README
 import { getCourses, getCourseContent, getReadmeContent } from '../../utils/content';
-import { marked } from 'marked';
+import { renderSafeMarkdown } from '../../utils/markdown.mjs';
 import path from 'node:path';
 
 export function getStaticPaths() {
@@ -30,10 +30,10 @@ const readmeContent = getReadmeContent(path.join(course.path, project.name));
 let readmeHtml = '';
 
 if (readmeContent) {
-    readmeHtml = await marked.parse(readmeContent);
+    readmeHtml = await renderSafeMarkdown(readmeContent);
 }
 
-const githubUrl = `https://github.com/bash20cu/Universidad/tree/master/${course.path}/${project.name}`;
+const githubUrl = `https://github.com/bash20cu/Universidad/tree/main/${encodeURIComponent(course.path)}/${encodeURIComponent(project.name)}`;
 ---
 
 <Layout title={`${project.name} - ${course.name}`}>
@@ -41,7 +41,7 @@ const githubUrl = `https://github.com/bash20cu/Universidad/tree/master/${course.
         <div class="flex items-center gap-2 text-sm text-gray-500 mb-4">
             <a href="/" class="hover:text-blue-400 transition-colors">Inicio</a>
             <span>/</span>
-            <a href={`/${course.path}`} class="hover:text-blue-400 transition-colors">{course.name}</a>
+            <a href={`/${encodeURIComponent(course.path)}`} class="hover:text-blue-400 transition-colors">{course.name}</a>
             <span>/</span>
             <span class="text-white">{project.name}</span>
         </div>
@@ -54,7 +54,7 @@ const githubUrl = `https://github.com/bash20cu/Universidad/tree/master/${course.
                      <h1 class="text-3xl md:text-4xl font-bold text-white mb-2">{project.name}</h1>
                      <p class="text-gray-400">Proyecto de {course.name}</p>
                 </div>
-                <a href={githubUrl} target="_blank" class="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors text-sm font-medium border border-white/10">
+                <a href={githubUrl} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors text-sm font-medium border border-white/10">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.337-3.369-1.337-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.597 1.028 2.688 0 3.848-2.339 4.685-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
                     </svg>

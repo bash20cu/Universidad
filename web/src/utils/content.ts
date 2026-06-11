@@ -3,6 +3,50 @@ import path from 'node:path';
 
 const IGNORED_DIRS = ['.git', '.vscode', 'node_modules', 'web', 'config', '.gemini', '.agent'];
 const IGNORED_FILES = ['LICENSE', '.gitattributes', '.gitignore'];
+const ROOT_DIR = path.resolve(process.cwd(), '..');
+const ROOT_REAL_PATH = fs.realpathSync(ROOT_DIR);
+
+function isWithinRoot(candidatePath: string): boolean {
+    const relative = path.relative(ROOT_REAL_PATH, candidatePath);
+    return relative === '' || (!relative.startsWith(`..${path.sep}`) && relative !== '..' && !path.isAbsolute(relative));
+}
+
+function resolveExistingWithinRoot(...segments: string[]): string {
+    const candidate = path.resolve(ROOT_DIR, ...segments);
+    const lexicalRelative = path.relative(ROOT_DIR, candidate);
+
+    if (lexicalRelative === '..' || lexicalRelative.startsWith(`..${path.sep}`) || path.isAbsolute(lexicalRelative)) {
+        throw new Error('Path escapes the repository root.');
+    }
+
+    const realPath = fs.realpathSync(candidate);
+    if (!isWithinRoot(realPath)) {
+        throw new Error('Resolved path escapes the repository root.');
+    }
+
+    return realPath;
+}
+
+function isSafeRouteSegment(segment: string): boolean {
+    return segment !== '' &&
+        segment !== '.' &&
+        segment !== '..' &&
+        !segment.includes('/') &&
+        !segment.includes('\\');
+}
+
+function toGitHubRawUrl(relativePath: string, imagePath: string): string | null {
+    const normalizedBase = relativePath.split(path.sep).join('/');
+    const normalizedImage = imagePath.replaceAll('\\', '/').replace(/^\.?\//, '');
+    const combined = path.posix.normalize(path.posix.join(normalizedBase, normalizedImage));
+
+    if (combined === '..' || combined.startsWith('../') || path.posix.isAbsolute(combined)) {
+        return null;
+    }
+
+    const encodedPath = combined.split('/').map(encodeURIComponent).join('/');
+    return `https://raw.githubusercontent.com/bash20cu/Universidad/main/${encodedPath}`;
+}
 
 export interface Course {
     name: string;
@@ -29,25 +73,27 @@ export interface ReadmeData {
 }
 
 export function getCourses(): Course[] {
-    const rootDir = path.resolve('../');
-
     try {
-        const items = fs.readdirSync(rootDir);
+        const items = fs.readdirSync(ROOT_REAL_PATH, { withFileTypes: true });
 
         const courses = items
             .filter(item => {
-                const fullPath = path.join(rootDir, item);
-                return fs.statSync(fullPath).isDirectory() &&
-                    !IGNORED_DIRS.includes(item) &&
-                    !item.startsWith('.');
+                return item.isDirectory() &&
+                    !item.isSymbolicLink() &&
+                    isSafeRouteSegment(item.name) &&
+                    !IGNORED_DIRS.includes(item.name) &&
+                    !item.name.startsWith('.');
             })
-            .map(dirName => {
-                const fullPath = path.join(rootDir, dirName);
-                const contents = fs.readdirSync(fullPath);
+            .map(item => {
+                const dirName = item.name;
+                const fullPath = resolveExistingWithinRoot(dirName);
+                const contents = fs.readdirSync(fullPath, { withFileTypes: true });
 
                 const count = contents.filter(c => {
-                    const cPath = path.join(fullPath, c);
-                    return fs.statSync(cPath).isDirectory() && !c.startsWith('.');
+                    return c.isDirectory() &&
+                        !c.isSymbolicLink() &&
+                        isSafeRouteSegment(c.name) &&
+                        !c.name.startsWith('.');
                 }).length;
 
                 return {
@@ -65,24 +111,35 @@ export function getCourses(): Course[] {
 }
 
 export function getCourseContent(coursePath: string): Project[] {
-    const rootDir = path.resolve('../');
-    const fullPath = path.join(rootDir, coursePath);
-
     try {
-        const items = fs.readdirSync(fullPath);
+        if (!isSafeRouteSegment(coursePath)) {
+            return [];
+        }
+
+        const fullPath = resolveExistingWithinRoot(coursePath);
+        const items = fs.readdirSync(fullPath, { withFileTypes: true });
+
         return items
-            .filter(item => !IGNORED_FILES.includes(item) && !item.startsWith('.') && item !== 'README.md')
+            .filter(item =>
+                !item.isSymbolicLink() &&
+                isSafeRouteSegment(item.name) &&
+                !IGNORED_FILES.includes(item.name) &&
+                !item.name.startsWith('.') &&
+                item.name !== 'README.md'
+            )
             .map(item => {
-                const itemPath = path.join(fullPath, item);
-                const stats = fs.statSync(itemPath);
-                const isDirectory = stats.isDirectory();
+                const itemName = item.name;
+                const itemPath = resolveExistingWithinRoot(coursePath, itemName);
+                const isDirectory = item.isDirectory();
                 let hasReadme = false;
                 let description = undefined;
                 let technologies: string[] = [];
 
                 if (isDirectory) {
                     const readmePath = path.join(itemPath, 'README.md');
-                    hasReadme = fs.existsSync(readmePath);
+                    hasReadme = fs.existsSync(readmePath) &&
+                        !fs.lstatSync(readmePath).isSymbolicLink() &&
+                        isWithinRoot(fs.realpathSync(readmePath));
 
                     if (hasReadme) {
                         try {
@@ -116,8 +173,8 @@ export function getCourseContent(coursePath: string): Project[] {
                 }
 
                 return {
-                    name: item,
-                    path: path.join(coursePath, item),
+                    name: itemName,
+                    path: path.join(coursePath, itemName),
                     type: isDirectory ? 'directory' : 'file',
                     hasReadme,
                     description,
@@ -132,25 +189,27 @@ export function getCourseContent(coursePath: string): Project[] {
 
 export function getReadmeContent(relativePath: string): string | null {
     try {
-        const rootDir = path.resolve('../');
-        const fullPath = path.join(rootDir, relativePath, 'README.md');
+        const segments = relativePath.split(path.sep);
+        if (segments.some(segment => !isSafeRouteSegment(segment))) {
+            return null;
+        }
 
-        if (fs.existsSync(fullPath)) {
+        const fullPath = resolveExistingWithinRoot(...segments, 'README.md');
+
+        if (!fs.lstatSync(fullPath).isSymbolicLink()) {
             let content = fs.readFileSync(fullPath, 'utf-8');
 
             // Rewrite relative image paths to absolute GitHub raw URLs
             // Matches ![alt](path) where path does not start with http or https
             content = content.replace(/!\[(.*?)\]\((?!http)(.*?)\)/g, (match, alt, imgPath) => {
-                const cleanPath = imgPath.replace(/^\.?\//, '');
-                const absoluteUrl = `https://raw.githubusercontent.com/bash20cu/Universidad/main/${relativePath}/${cleanPath}`;
-                return `![${alt}](${absoluteUrl})`;
+                const absoluteUrl = toGitHubRawUrl(relativePath, imgPath);
+                return absoluteUrl ? `![${alt}](${absoluteUrl})` : '';
             });
 
             // Rewrite HTML img tags with relative paths
             content = content.replace(/<img(.*?)src=["'](?!http)(.*?)["'](.*?)>/g, (match, before, imgPath, after) => {
-                const cleanPath = imgPath.replace(/^\.?\//, '');
-                const absoluteUrl = `https://raw.githubusercontent.com/bash20cu/Universidad/main/${relativePath}/${cleanPath}`;
-                return `<img${before}src="${absoluteUrl}"${after}>`;
+                const absoluteUrl = toGitHubRawUrl(relativePath, imgPath);
+                return absoluteUrl ? `<img${before}src="${absoluteUrl}"${after}>` : '';
             });
 
             return content;
@@ -163,8 +222,7 @@ export function getReadmeContent(relativePath: string): string | null {
 }
 
 export function getParsedRootReadme(): ReadmeData {
-    const rootDir = path.resolve('../');
-    const fullPath = path.join(rootDir, 'README.md');
+    const fullPath = resolveExistingWithinRoot('README.md');
     let raw = '';
 
     if (fs.existsSync(fullPath)) {

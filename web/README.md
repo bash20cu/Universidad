@@ -10,7 +10,8 @@ Este es un sitio web estático construido con [Astro](https://astro.build) dise�
 
 ## 🛠️ Instalación y Uso Local
 
-Para correr el proyecto localmente (necesitas Node.js instalado):
+Para correr el proyecto localmente necesitas Node.js 22.12 o superior y
+`pnpm` 11.5.3:
 
 1. Entra a la carpeta web:
    ```bash
@@ -19,14 +20,26 @@ Para correr el proyecto localmente (necesitas Node.js instalado):
 
 2. Instala las dependencias:
    ```bash
-   npm install
+   pnpm install --frozen-lockfile
    ```
 
 3. Inicia el servidor de desarrollo:
    ```bash
-   npm run dev
+   pnpm dev
    ```
-   El sitio estará disponible en `http://localhost:4321`.
+El sitio estará disponible en `http://localhost:4321`.
+
+Para verificar el proyecto:
+
+```bash
+pnpm test:security
+pnpm audit
+pnpm build
+```
+
+El repositorio usa exclusivamente `pnpm`. Los scripts de instalación de
+dependencias están bloqueados salvo la lista mínima declarada en
+`pnpm-workspace.yaml`.
 
 ## 📦 Estructura del Proyecto
 
@@ -49,5 +62,6 @@ El proyecto ya incluye un archivo `netlify.toml` configurado.
 
 1. Sube tus cambios a GitHub.
 2. Crea un nuevo sitio en Netlify importando este repositorio.
-3. Netlify detectará la configuración automáticamente (Directorio base: `web`, Comando: `npm run build`).
+3. Configura el directorio base como `web` y el comando de build como
+   `pnpm build`.
 4. ¡Listo! Tu portafolio se actualizará cada vez que hagas push.

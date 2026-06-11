@@ -80,7 +80,7 @@ export const curriculum: Term[] = [
         courses: [
             { code: "SOF-26", name: "DISEÑO DE LA INTERACCIÓN HUMANO-COMPUTADORA", credits: 4, req: "SOF-24", grade: "100.00", passed: true },
             { code: "SOF-28", name: "INVESTIGACIÓN DE OPERACIONES", credits: 4, req: "SOF-09, SOF-11", grade: "96.00", passed: true },
-            { code: "SOF-29", name: "PROCESOS DE INGENIERÍA DE SOFTWARE", credits: 4, req: "SOF-24", passed: false },
+            { code: "SOF-29", name: "PROCESOS DE INGENIERÍA DE SOFTWARE", credits: 4, req: "SOF-24", grade: "95.00", passed: true },
             { code: "SOF-27", name: "TÓPICOS AVANZADOS DE PROGRAMACIÓN", credits: 4, req: "SOF-23", grade: "99.00", passed: true },
         ]
     },
@@ -89,9 +89,9 @@ export const curriculum: Term[] = [
         name: "8vo Cuatrimestre",
         courses: [
             { code: "SOF-33", name: "ADMINISTRACIÓN DE PROYECTOS INFORMÁTICOS", credits: 4, req: "SOF-29", grade: "92.00", passed: true },
-            { code: "SOF-30", name: "ARQUITECTURA DE SOFTWARE", credits: 4, req: "SOF-29", passed: false },
+            { code: "SOF-30", name: "ARQUITECTURA DE SOFTWARE", credits: 4, req: "SOF-29", grade: "100.00", passed: true },
             { code: "SOF-32", name: "ELECTIVA 1", credits: 4, req: "SOF-27", passed: false },
-            { code: "SOF-31", name: "INTELIGENCIA ARTIFICIAL APLICADA", credits: 4, req: "SOF-29", passed: false },
+            { code: "SOF-31", name: "INTELIGENCIA ARTIFICIAL APLICADA", credits: 4, req: "SOF-29", grade: "97.00", passed: true },
             { code: "TGINF1-N", name: "TALLER INT. GRADUACIÓN", credits: 0, passed: false },
         ]
     },
@@ -101,7 +101,7 @@ export const curriculum: Term[] = [
         courses: [
             { code: "SOF-34", name: "COMPUTACIÓN Y SOCIEDAD", credits: 4, req: "SOF-33", grade: "REC", passed: true },
             { code: "SOF-35", name: "ELECTIVA 2", credits: 4, req: "SOF-30", passed: false },
-            { code: "SOF-36", name: "IMPLEMENTACIÓN Y MANTENIMIENTO DE SOFTWARE", credits: 4, req: "SOF-25, SOF-30", passed: false },
+            { code: "SOF-36", name: "IMPLEMENTACIÓN Y MANTENIMIENTO DE SOFTWARE", credits: 4, req: "SOF-25, SOF-30", grade: "97.00", passed: true },
             { code: "PROYSOF01-N", name: "PROYECTO DE GRADUACIÓN", credits: 0, passed: false },
             { code: "SOF-37", name: "SEGURIDAD INFORMÁTICA", credits: 4, req: "SOF-29", passed: false },
         ]
