@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}Verificación | TutorIA{% endblock %}
+{% block content %}<div class="row justify-content-center py-5"><div class="col-md-6 col-lg-4"><h1 class="h3 mb-2">Segundo factor</h1>
+<p class="text-secondary">El código expira en 10 minutos y admite 3 intentos.</p><form method="post" class="bg-white border rounded p-4">{{ form.hidden_tag() }}
+<div class="mb-3">{{ form.code.label(class="form-label") }}{{ form.code(class="form-control form-control-lg", inputmode="numeric", autocomplete="one-time-code", maxlength="6") }}</div>
+{{ form.submit(class="btn btn-primary w-100") }}</form></div></div>{% endblock %}

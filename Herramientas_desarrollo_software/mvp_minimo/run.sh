@@ -35,7 +35,7 @@ if [[ "$VENV_VALID" -eq 0 ]]; then
   "$PYTHON_BIN" -m venv "$VENV_DIR"
 fi
 
-if ! "$VENV_DIR/bin/python" -c "import flask" >/dev/null 2>&1; then
+if ! "$VENV_DIR/bin/python" -c "import flask_login, flask_sqlalchemy, flask_wtf" >/dev/null 2>&1; then
   echo "Instalando dependencias..."
   "$VENV_DIR/bin/python" -m pip install -r requirements.txt
 fi
@@ -59,7 +59,7 @@ echo "Usa Ctrl+C para detener ambos servicios."
 if [[ "$AUTO_OPEN_BROWSER" == "1" ]]; then
   (
     for _ in {1..80}; do
-      if /usr/bin/curl -fsS --max-time 1 "${APP_URL}/api/status" >/dev/null 2>&1; then
+      if /usr/bin/curl -fsS --max-time 1 "${APP_URL}/chat/api/status" >/dev/null 2>&1; then
         /usr/bin/open "$APP_URL"
         exit 0
       fi
@@ -69,4 +69,4 @@ if [[ "$AUTO_OPEN_BROWSER" == "1" ]]; then
   ) &
 fi
 
-exec "$VENV_DIR/bin/python" app.py
+exec "$VENV_DIR/bin/python" run.py

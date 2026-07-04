@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}Panel | TutorIA{% endblock %}
+{% block content %}<h1 class="h2 mb-1">Panel general</h1><p class="text-secondary mb-4">Resumen operativo del MVP</p><div class="row g-3">
+{% for label, value in [('Usuarios', metrics.users), ('Estudiantes', metrics.students), ('Contenidos', metrics.contents), ('Evaluaciones', metrics.evaluations)] %}
+<div class="col-6 col-lg-3"><div class="bg-white border rounded p-4"><div class="text-secondary">{{ label }}</div><div class="display-6 fw-semibold">{{ value }}</div></div></div>{% endfor %}
+</div><div class="mt-4"><a class="btn btn-primary" href="{{ url_for('chat.page') }}">Abrir tutor IA</a></div>{% endblock %}

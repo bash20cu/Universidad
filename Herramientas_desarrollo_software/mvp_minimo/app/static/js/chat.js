@@ -5,6 +5,7 @@ const sendButton = document.querySelector("#send-button");
 const characterCount = document.querySelector("#character-count");
 const headerStatus = document.querySelector("#header-status");
 const refreshButton = document.querySelector("#refresh-status");
+const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
 const conversation = [];
 let streaming = false;
@@ -43,9 +44,9 @@ form.addEventListener("submit", async (event) => {
   setStreaming(true);
 
   try {
-    const response = await fetch("/api/chat", {
+    const response = await fetch("/chat/api/chat", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "X-CSRFToken": csrfToken },
       body: JSON.stringify({ messages: conversation }),
     });
 
@@ -148,11 +149,14 @@ function appendMessage(role, content) {
 async function refreshStatus() {
   refreshButton.classList.add("spinning");
   try {
-    let response = await fetch("/api/status");
+    let response = await fetch("/chat/api/status");
     let payload = await response.json();
 
     if (!payload.available) {
-      response = await fetch("/api/provider/wake", { method: "POST" });
+      response = await fetch("/chat/api/provider/wake", {
+        method: "POST",
+        headers: { "X-CSRFToken": csrfToken },
+      });
       payload = await response.json();
       if (!response.ok) throw new Error(payload.error);
       payload = payload.status;
