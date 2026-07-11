@@ -60,10 +60,14 @@ def create_app(config: dict[str, Any] | None = None, provider: ChatProvider | No
 
     from app.routes.auth import bp as auth_bp
     from app.routes.chat import bp as chat_bp
+    from app.routes.contents import bp as contents_bp
+    from app.routes.diagnostics import bp as diagnostics_bp
     from app.routes.main import bp as main_bp
     from app.routes.students import bp as students_bp
     app.register_blueprint(auth_bp)
     app.register_blueprint(chat_bp)
+    app.register_blueprint(contents_bp)
+    app.register_blueprint(diagnostics_bp)
     app.register_blueprint(main_bp)
     app.register_blueprint(students_bp)
 

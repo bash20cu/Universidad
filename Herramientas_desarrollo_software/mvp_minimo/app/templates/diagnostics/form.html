@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Nueva evaluación | TutorIA{% endblock %}
+{% block styles %}<link href="{{ url_for('static', filename='css/diagnostics.css') }}" rel="stylesheet">{% endblock %}
+{% block content %}<div class="form-shell"><header class="form-heading"><a href="{{ url_for('diagnostics.index') }}">Volver a diagnósticos</a><p class="eyebrow">Evaluación adaptativa</p><h1>Nueva evaluación diagnóstica</h1><p>Registra respuestas para que luego puedan clasificarse mediante IA.</p></header>
+<form method="post" class="diagnostic-form" novalidate>{{ form.hidden_tag() }}
+<section><h2>Estudiante evaluado</h2>{{ form.student_id.label(class="form-label") }}{{ form.student_id(class="form-select") }}{% for error in form.student_id.errors %}<div class="field-error">{{ error }}</div>{% endfor %}</section>
+<section><h2>Preguntas diagnósticas</h2><div class="question-list">{% for question in questions %}<article class="question-card"><div><span>{{ question.topic }}</span><h3>{{ loop.index }}. {{ question.prompt }}</h3><p>Competencia esperada: {{ question.expected_competency }}</p></div><label class="form-label" for="answer_{{ question.id }}">Respuesta del estudiante</label><textarea class="form-control" id="answer_{{ question.id }}" name="answer_{{ question.id }}" rows="4" maxlength="1200" required>{{ request.form.get('answer_' ~ question.id, '') }}</textarea></article>{% endfor %}</div></section>
+<footer><a class="btn btn-outline-secondary" href="{{ url_for('diagnostics.index') }}">Cancelar</a>{{ form.submit(class="btn btn-primary") }}</footer></form></div>{% endblock %}

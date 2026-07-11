@@ -116,6 +116,13 @@ En desarrollo, el código 2FA aparece en la consola. Para correo real, configura
 - `GET|POST /students/new`: registro de estudiantes.
 - `GET|POST /students/<id>/edit`: actualización de estudiantes.
 - `POST /students/<id>/delete`: eliminación exclusiva del administrador.
+- `GET /contents`: listado de contenidos para administrador y docente.
+- `GET|POST /contents/new`: registro de contenidos educativos.
+- `GET|POST /contents/<id>/edit`: actualización de contenidos.
+- `POST /contents/<id>/delete`: eliminación exclusiva del administrador.
+- `GET /diagnostics`: listado de evaluaciones diagnósticas.
+- `GET|POST /diagnostics/new`: registro de evaluación y respuestas.
+- `GET /diagnostics/<id>`: detalle de evaluación registrada.
 - `GET /chat`: interfaz del tutor protegida.
 - `GET /chat/api/status`: disponibilidad del modelo.
 - `POST /chat/api/provider/wake`: prepara el proveedor.
@@ -128,8 +135,8 @@ pytest
 ```
 
 Las pruebas utilizan un servidor FM simulado y no consumen el modelo real.
-También validan autenticación, 2FA, autorización por roles, CRUD de estudiantes
-y registros de bitácora.
+También validan autenticación, 2FA, autorización por roles, CRUD de estudiantes,
+CRUD de contenidos educativos, evaluación diagnóstica inicial y registros de bitácora.
 
 ## Solución de problemas
 

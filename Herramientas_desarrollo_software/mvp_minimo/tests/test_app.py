@@ -9,7 +9,7 @@ import pytest
 from ai_provider import ProviderStatus
 from app import create_app, seed_database
 from app.extensions import db
-from app.models import AuditLog, Student, TwoFactorCode, User
+from app.models import AuditLog, DiagnosticAnswer, DiagnosticEvaluation, EducationalContent, Student, TwoFactorCode, User
 from app.services.chat import normalize_messages
 from app.services.two_factor import TwoFactorError, issue_code, verify_code
 
@@ -288,3 +288,128 @@ def test_only_admin_can_delete_student(fake_fm_server):
     with app.app_context():
         assert db.session.get(Student, student_id) is None
         assert AuditLog.query.filter_by(action="student_deleted").count() == 1
+
+
+def test_student_role_cannot_access_content_management(fake_fm_server):
+    app = build_database_app(fake_fm_server)
+    client = app.test_client()
+    authenticate(client, app, "estudiante")
+
+    response = client.get("/contents")
+
+    assert response.status_code == 403
+
+
+def test_teacher_can_create_and_edit_content_with_audit_log(fake_fm_server):
+    app = build_database_app(fake_fm_server)
+    client = app.test_client()
+    authenticate(client, app, "docente")
+    payload = {
+        "title": "Pensamiento computacional inicial",
+        "topic": "Programación",
+        "level": "basico",
+        "competency": "Reconocer secuencias lógicas",
+        "description": "Contenido introductorio para resolver problemas paso a paso.",
+    }
+
+    created = client.post("/contents/new", data=payload)
+    with app.app_context():
+        content = EducationalContent.query.filter_by(title=payload["title"]).one()
+        content_id = content.id
+        assert AuditLog.query.filter_by(action="content_created").count() == 1
+
+    payload["level"] = "intermedio"
+    updated = client.post(f"/contents/{content_id}/edit", data=payload)
+
+    assert created.status_code == 302
+    assert updated.status_code == 302
+    with app.app_context():
+        assert db.session.get(EducationalContent, content_id).level == "intermedio"
+        assert AuditLog.query.filter_by(action="content_updated").count() == 1
+
+
+def test_only_admin_can_delete_content(fake_fm_server):
+    app = build_database_app(fake_fm_server)
+    teacher = app.test_client()
+    authenticate(teacher, app, "docente")
+    teacher.post("/contents/new", data={"title": "Lectura crítica", "topic": "Comunicación", "level": "basico", "competency": "Identificar ideas principales", "description": "Actividad breve de lectura guiada."})
+    with app.app_context():
+        content_id = EducationalContent.query.filter_by(title="Lectura crítica").one().id
+
+    assert teacher.post(f"/contents/{content_id}/delete").status_code == 403
+
+    admin = app.test_client()
+    authenticate(admin, app, "admin")
+    assert admin.post(f"/contents/{content_id}/delete").status_code == 302
+    with app.app_context():
+        assert db.session.get(EducationalContent, content_id) is None
+        assert AuditLog.query.filter_by(action="content_deleted").count() == 1
+
+
+def test_student_role_cannot_access_diagnostic_management(fake_fm_server):
+    app = build_database_app(fake_fm_server)
+    client = app.test_client()
+    authenticate(client, app, "estudiante")
+
+    response = client.get("/diagnostics")
+
+    assert response.status_code == 403
+
+
+def test_teacher_can_create_diagnostic_evaluation_with_answers(fake_fm_server):
+    app = build_database_app(fake_fm_server)
+    client = app.test_client()
+    authenticate(client, app, "docente")
+
+    client.post("/students/new", data={
+        "name": "María Rojas",
+        "age": 16,
+        "school": "Colegio Central",
+        "interest_area": "Bases de datos",
+        "assigned_level": "basico",
+    })
+    with app.app_context():
+        student_id = Student.query.filter_by(name="María Rojas").one().id
+
+    response = client.post("/diagnostics/new", data={
+        "student_id": student_id,
+        "answer_1": "La clave primaria identifica un registro único.",
+        "answer_2": "Normalizar evita repetir datos innecesarios.",
+        "answer_3": "Un índice acelera búsquedas, pero tiene costo de escritura.",
+    })
+
+    assert response.status_code == 302
+    with app.app_context():
+        evaluation = DiagnosticEvaluation.query.one()
+        assert evaluation.student_id == student_id
+        assert evaluation.status == "pendiente_ia"
+        assert DiagnosticAnswer.query.count() == 3
+        assert AuditLog.query.filter_by(action="diagnostic_created").count() == 1
+
+
+def test_diagnostic_requires_all_answers(fake_fm_server):
+    app = build_database_app(fake_fm_server)
+    client = app.test_client()
+    authenticate(client, app, "docente")
+
+    client.post("/students/new", data={
+        "name": "Carlos Méndez",
+        "age": 17,
+        "school": "Liceo Sur",
+        "interest_area": "Bases de datos",
+        "assigned_level": "basico",
+    })
+    with app.app_context():
+        student_id = Student.query.filter_by(name="Carlos Méndez").one().id
+
+    response = client.post("/diagnostics/new", data={
+        "student_id": student_id,
+        "answer_1": "Respuesta completa.",
+        "answer_2": "",
+        "answer_3": "Respuesta completa.",
+    })
+
+    assert response.status_code == 400
+    with app.app_context():
+        assert DiagnosticEvaluation.query.count() == 0
+        assert DiagnosticAnswer.query.count() == 0

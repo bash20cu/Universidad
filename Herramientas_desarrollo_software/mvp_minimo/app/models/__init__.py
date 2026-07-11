@@ -130,4 +130,6 @@ class DiagnosticAnswer(db.Model):
     )
     answer = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), default=utcnow, nullable=False)
+    evaluation = db.relationship("DiagnosticEvaluation", backref=db.backref("answers", lazy=True))
+    question = db.relationship("DiagnosticQuestion")
 

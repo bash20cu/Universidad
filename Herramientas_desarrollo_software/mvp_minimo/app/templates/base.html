@@ -13,7 +13,7 @@
       {% if current_user.is_authenticated %}<div class="d-flex align-items-center gap-3">
         <a class="text-decoration-none" href="{{ url_for('main.dashboard') }}">Panel</a>
         <a class="text-decoration-none" href="{{ url_for('chat.page') }}">Tutor IA</a>
-        {% if current_user.role in ['administrador', 'docente'] %}<a class="text-decoration-none" href="{{ url_for('students.index') }}">Estudiantes</a>{% endif %}
+        {% if current_user.role in ['administrador', 'docente'] %}<a class="text-decoration-none" href="{{ url_for('students.index') }}">Estudiantes</a><a class="text-decoration-none" href="{{ url_for('contents.index') }}">Contenidos</a><a class="text-decoration-none" href="{{ url_for('diagnostics.index') }}">Diagnósticos</a>{% endif %}
         <span class="badge text-bg-secondary">{{ current_user.role }}</span>
         <form method="post" action="{{ url_for('auth.logout') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn btn-outline-secondary btn-sm" type="submit">Salir</button></form>
       </div>{% endif %}

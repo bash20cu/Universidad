@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, PasswordField, SelectField, StringField, SubmitField
+from wtforms import IntegerField, PasswordField, SelectField, StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email, Length, NumberRange, Regexp
 
 
@@ -32,3 +32,21 @@ class StudentForm(FlaskForm):
         validators=[DataRequired()],
     )
     submit = SubmitField("Guardar estudiante")
+
+
+class EducationalContentForm(FlaskForm):
+    title = StringField("Título", validators=[DataRequired(), Length(max=180)])
+    topic = StringField("Tema", validators=[DataRequired(), Length(max=120)])
+    level = SelectField(
+        "Nivel",
+        choices=[("basico", "Básico"), ("intermedio", "Intermedio"), ("avanzado", "Avanzado")],
+        validators=[DataRequired()],
+    )
+    competency = StringField("Competencia", validators=[DataRequired(), Length(max=180)])
+    description = TextAreaField("Descripción", validators=[DataRequired(), Length(max=1200)])
+    submit = SubmitField("Guardar contenido")
+
+
+class DiagnosticEvaluationForm(FlaskForm):
+    student_id = SelectField("Estudiante", coerce=int, validators=[DataRequired()])
+    submit = SubmitField("Guardar evaluación")
