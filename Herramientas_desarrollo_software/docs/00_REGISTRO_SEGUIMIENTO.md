@@ -21,6 +21,7 @@ Bitácora viva para registrar avances, decisiones, evidencia y próximos pasos d
 | 2026-07-11 | Miguel / Codex | Validación | Se confirma que el MVP actual tiene autenticación, roles, 2FA preparado, bitácora, CRUD de estudiantes, chat IA y pruebas iniciales. | `mvp_minimo`, README y pruebas existentes. | Completar módulos pendientes del alcance MVP. |
 | 2026-07-11 | Miguel / Codex | Implementación | Se implementa CRUD de contenidos educativos con permisos, filtros, formularios, bitácora y pruebas. | Rutas `/contents`, templates `contents`, CSS/JS y pytest. | Implementar evaluación diagnóstica. |
 | 2026-07-11 | Miguel / Codex | Implementación | Se implementa evaluación diagnóstica inicial sin IA: selección de estudiante, preguntas activas, guardado de respuestas, detalle y bitácora. | Rutas `/diagnostics`, templates `diagnostics`, CSS y pytest. | Implementar clasificación con IA estructurada. |
+| 2026-07-11 | Miguel / Codex | Implementación | Se implementa clasificación IA estructurada para evaluaciones diagnósticas: contrato JSON, validación, persistencia de nivel y actualización del estudiante. | `app/services/diagnostic.py`, botón `Clasificar con IA` y pytest. | Implementar recomendaciones por nivel. |
 
 ## Decisiones Vigentes
 
@@ -37,8 +38,8 @@ Bitácora viva para registrar avances, decisiones, evidencia y próximos pasos d
 |---|---|---|---|
 | Alta | CRUD de contenidos educativos | Miguel | Completado |
 | Alta | Evaluación diagnóstica | Miguel / Roberto | Completado inicial |
-| Alta | Clasificación IA estructurada | Miguel | Próximo |
-| Media | Recomendaciones de contenidos | Miguel / Roberto | Pendiente |
+| Alta | Clasificación IA estructurada | Miguel | Completado |
+| Media | Recomendaciones de contenidos | Miguel / Roberto | Próximo |
 | Media | Reportes básicos | Roberto | Pendiente |
 | Media | Gestión simple de usuarios | Miguel | Pendiente |
 | Media | Prueba real con Resend | Miguel | Pendiente |

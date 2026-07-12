@@ -40,6 +40,9 @@ class ChatProvider(Protocol):
     def stream_chat(self, messages: list[dict[str, str]]) -> Iterable[bytes]:
         ...
 
+    def complete_chat(self, messages: list[dict[str, str]]) -> str:
+        ...
+
     def shutdown(self) -> None:
         ...
 
@@ -110,6 +113,37 @@ class FoundationModelsProvider:
             raise AIProviderError(
                 f"Se perdió la conexión con Foundation Models: {error}."
             ) from error
+
+    def complete_chat(self, messages: list[dict[str, str]]) -> str:
+        self.ensure_ready()
+        payload = {
+            "model": self.model,
+            "stream": False,
+            "messages": messages,
+        }
+        upstream_request = Request(
+            f"{self.manager.base_url}/v1/chat/completions",
+            data=json.dumps(payload).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+
+        try:
+            with urlopen(upstream_request, timeout=self.request_timeout) as upstream:
+                body = json.load(upstream)
+        except HTTPError as error:
+            raise AIProviderError(
+                f"Foundation Models respondió HTTP {error.code}."
+            ) from error
+        except (URLError, TimeoutError, json.JSONDecodeError) as error:
+            raise AIProviderError(
+                f"No se pudo obtener una respuesta completa de Foundation Models: {error}."
+            ) from error
+
+        try:
+            return body["choices"][0]["message"]["content"]
+        except (KeyError, IndexError, TypeError) as error:
+            raise AIProviderError("Foundation Models devolvió una respuesta sin contenido utilizable.") from error
 
     def shutdown(self) -> None:
         self.manager.stop()

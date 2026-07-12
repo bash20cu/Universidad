@@ -8,7 +8,7 @@
 | R-002 | Resend no envía correos por falta de API key, dominio o remitente verificado. | Técnico | Media | Medio | Mantener modo consola para desarrollo y probar Resend con anticipación. | Abierto |
 | R-003 | Alcance demasiado grande para dos integrantes. | Proyecto | Alta | Alto | Priorizar MVP, evitar funciones fuera de alcance y registrar pendientes. | Abierto |
 | R-004 | Se programa sin actualizar documentación. | Académico | Media | Alto | Actualizar `00_REGISTRO_SEGUIMIENTO.md` después de cada bloque. | Abierto |
-| R-005 | La IA devuelve respuestas no estructuradas o ambiguas. | Técnico | Alta | Alto | Validar salida, usar contrato común y fallback manual si falla. | Abierto |
+| R-005 | La IA devuelve respuestas no estructuradas o ambiguas. | Técnico | Alta | Alto | Implementado contrato JSON con validación; falta probar modelo real. | Mitigado parcial |
 | R-006 | SQLite se interpreta como insuficiente para producción. | Académico | Media | Medio | Justificar SQLite como decisión de desarrollo/MVP y documentar migración futura. | Abierto |
 | R-007 | Falta de pruebas en módulos nuevos. | Calidad | Media | Alto | Crear pruebas pytest junto con cada ruta/servicio nuevo. | Abierto |
 | R-008 | Comentarios excesivos reducen legibilidad. | Calidad | Media | Medio | Comentar lógica importante, no líneas obvias. | Abierto |

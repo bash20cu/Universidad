@@ -28,12 +28,14 @@ Completar el alcance MVP sin expandir funcionalidades fuera de lo solicitado. Ca
 
 ## Sprint 3 - Clasificación Con IA
 
+**Estado:** Implementado con proveedor simulado y contrato JSON el 2026-07-11.
+
 | Campo | Detalle |
 |---|---|
 | Objetivo | Enviar respuestas a proveedor IA y recibir nivel estructurado. |
 | Entregables | `diagnostic_service`, contrato de salida, validación y pruebas con proveedor simulado. |
 | Roles | Servicio interno, sin dependencia directa en rutas. |
-| Criterio de cierre | Resultado clasifica básico, intermedio o avanzado y se persiste. |
+| Criterio de cierre | Cumplido: resultado clasifica básico, intermedio o avanzado y se persiste. |
 
 ## Sprint 4 - Recomendaciones
 

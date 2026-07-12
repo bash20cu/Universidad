@@ -16,8 +16,8 @@ El MVP ya tiene una base técnica funcional: aplicación Flask modular, autentic
 | MVP-06 | Gestión de estudiantes | Hecho | CRUD visual de estudiantes. | Añadir relaciones con evaluaciones reales. |
 | MVP-07 | Gestión de contenidos educativos | Hecho | Modelo, seed, CRUD visual, permisos y bitácora. | Integrar contenidos con recomendaciones después de evaluación. |
 | MVP-08 | Evaluación diagnóstica | Hecho inicial | Flujo `/diagnostics` registra estudiante, preguntas y respuestas. | Conectar clasificación con IA y recomendaciones. |
-| MVP-09 | Envío de respuestas a IA | Parcial | Chat IA funcional. | Servicio específico para diagnóstico. |
-| MVP-10 | Clasificación básico/intermedio/avanzado | Pendiente | No implementado como flujo educativo. | Crear salida estructurada y validación. |
+| MVP-09 | Envío de respuestas a IA | Hecho inicial | Servicio de diagnóstico usa proveedor IA abstracto. | Validar con Foundation Models real en demo. |
+| MVP-10 | Clasificación básico/intermedio/avanzado | Hecho inicial | Contrato JSON validado y persistido en evaluación/estudiante. | Probar con modelo real y ajustar prompt si hace falta. |
 | MVP-11 | Recomendación de contenidos | Pendiente | Contenidos tienen nivel. | Crear servicio de recomendación. |
 | MVP-12 | Reportes básicos | Parcial | Dashboard con conteos. | Reportes por estudiante, evaluaciones y contenidos recomendados. |
 | MVP-13 | README | Hecho | `mvp_minimo/README.md`. | Actualizar conforme avancen módulos. |
@@ -37,4 +37,4 @@ El MVP ya tiene una base técnica funcional: aplicación Flask modular, autentic
 
 ## Brecha Principal
 
-El MVP ya registra datos educativos y respuestas diagnósticas. La brecha principal ahora es conectar esas respuestas con una clasificación IA estructurada y usar el resultado para recomendar contenidos.
+El MVP ya registra datos educativos, respuestas diagnósticas y clasificación IA estructurada. La brecha principal ahora es usar el nivel clasificado para recomendar contenidos y reportar progreso.

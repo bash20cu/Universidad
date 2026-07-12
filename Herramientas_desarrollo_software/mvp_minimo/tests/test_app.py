@@ -136,8 +136,24 @@ class FakeProvider:
         yield b'data: {"choices":[{"delta":{"content":"Respuesta remota"}}]}\n\n'
         yield b"data: [DONE]\n\n"
 
+    def complete_chat(self, _messages):
+        return '{"level":"basico","explanation":"Respuesta base","strengths":["Identifica conceptos"],"improvement_areas":["Profundizar"]}'
+
     def shutdown(self):
         self.shutdown_calls += 1
+
+
+class ClassifierProvider(FakeProvider):
+    name = "fake_classifier"
+
+    def __init__(self, response):
+        super().__init__()
+        self.response = response
+        self.complete_calls = 0
+
+    def complete_chat(self, _messages):
+        self.complete_calls += 1
+        return self.response
 
 
 def test_app_accepts_provider_without_local_fm_assumptions():
@@ -413,3 +429,78 @@ def test_diagnostic_requires_all_answers(fake_fm_server):
     with app.app_context():
         assert DiagnosticEvaluation.query.count() == 0
         assert DiagnosticAnswer.query.count() == 0
+
+
+def create_diagnostic_for_classification(client, app):
+    client.post("/students/new", data={
+        "name": "Daniela Castro",
+        "age": 16,
+        "school": "Colegio Técnico",
+        "interest_area": "Bases de datos",
+        "assigned_level": "basico",
+    })
+    with app.app_context():
+        student_id = Student.query.filter_by(name="Daniela Castro").one().id
+    client.post("/diagnostics/new", data={
+        "student_id": student_id,
+        "answer_1": "Una clave primaria identifica una fila única.",
+        "answer_2": "Normalizar reduce repetición y anomalías.",
+        "answer_3": "Usaría índices para acelerar consultas frecuentes.",
+    })
+    with app.app_context():
+        return DiagnosticEvaluation.query.one().id
+
+
+def test_teacher_can_classify_diagnostic_with_fake_provider(fake_fm_server):
+    provider = ClassifierProvider(
+        '{"level":"intermedio","explanation":"Comprende conceptos relacionales esenciales.","strengths":["Distingue claves","Reconoce normalización"],"improvement_areas":["Profundizar costos de índices"]}'
+    )
+    app = create_app({
+        "TESTING": True,
+        "WTF_CSRF_ENABLED": False,
+        "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",
+        "FM_PORT": fake_fm_server,
+    }, provider=provider)
+    with app.app_context():
+        db.create_all()
+        seed_database()
+    client = app.test_client()
+    authenticate(client, app, "docente")
+    evaluation_id = create_diagnostic_for_classification(client, app)
+
+    response = client.post(f"/diagnostics/{evaluation_id}/classify")
+
+    assert response.status_code == 302
+    assert provider.complete_calls == 1
+    with app.app_context():
+        evaluation = db.session.get(DiagnosticEvaluation, evaluation_id)
+        assert evaluation.status == "clasificada"
+        assert evaluation.classified_level == "intermedio"
+        assert "Fortalezas" in evaluation.explanation
+        assert evaluation.student.assigned_level == "intermedio"
+        assert AuditLog.query.filter_by(action="diagnostic_classified").count() == 1
+
+
+def test_invalid_ai_classification_does_not_update_evaluation(fake_fm_server):
+    provider = ClassifierProvider("No soy JSON")
+    app = create_app({
+        "TESTING": True,
+        "WTF_CSRF_ENABLED": False,
+        "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",
+        "FM_PORT": fake_fm_server,
+    }, provider=provider)
+    with app.app_context():
+        db.create_all()
+        seed_database()
+    client = app.test_client()
+    authenticate(client, app, "docente")
+    evaluation_id = create_diagnostic_for_classification(client, app)
+
+    response = client.post(f"/diagnostics/{evaluation_id}/classify")
+
+    assert response.status_code == 302
+    with app.app_context():
+        evaluation = db.session.get(DiagnosticEvaluation, evaluation_id)
+        assert evaluation.status == "pendiente_ia"
+        assert evaluation.classified_level is None
+        assert AuditLog.query.filter_by(action="diagnostic_classification_failed").count() == 1
