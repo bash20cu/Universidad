@@ -22,6 +22,8 @@ Bitácora viva para registrar avances, decisiones, evidencia y próximos pasos d
 | 2026-07-11 | Miguel / Codex | Implementación | Se implementa CRUD de contenidos educativos con permisos, filtros, formularios, bitácora y pruebas. | Rutas `/contents`, templates `contents`, CSS/JS y pytest. | Implementar evaluación diagnóstica. |
 | 2026-07-11 | Miguel / Codex | Implementación | Se implementa evaluación diagnóstica inicial sin IA: selección de estudiante, preguntas activas, guardado de respuestas, detalle y bitácora. | Rutas `/diagnostics`, templates `diagnostics`, CSS y pytest. | Implementar clasificación con IA estructurada. |
 | 2026-07-11 | Miguel / Codex | Implementación | Se implementa clasificación IA estructurada para evaluaciones diagnósticas: contrato JSON, validación, persistencia de nivel y actualización del estudiante. | `app/services/diagnostic.py`, botón `Clasificar con IA` y pytest. | Implementar recomendaciones por nivel. |
+| 2026-07-11 | Miguel / Codex | Mejora UI | Se implementa renderer Markdown seguro en el chat para títulos, negritas, listas, código inline y bloques de código con HTML escapado. | `app/static/js/chat.js`, `app/static/css/chat.css`, `chat.html` versionado. | Validar con respuesta real del modelo FM. |
+| 2026-07-11 | Miguel / Codex | Mejora UI | Se agrega tarjeta visible de ejecución local en el chat: App Flask, endpoint del modelo, invocación `fm serve` y estado del proceso. | Chat `/chat`, rail técnico y QA visual. | Validar con Foundation Models disponible en demo. |
 
 ## Decisiones Vigentes
 

@@ -13,10 +13,16 @@ bp = Blueprint("chat", __name__, url_prefix="/chat")
 def page():
     provider = current_app.extensions["ai_provider"]
     status = provider.status()
+    local_runtime = {
+        "app_url": request.host_url.rstrip("/"),
+        "fm_url": f"http://{current_app.config['FM_HOST']}:{current_app.config['FM_PORT']}",
+        "fm_command": f"{current_app.config['FM_COMMAND']} serve --host {current_app.config['FM_HOST']} --port {current_app.config['FM_PORT']}",
+    }
     return render_template(
         "main/chat.html",
         provider_status=status,
         processing_description=processing_description(status.processing_location),
+        local_runtime=local_runtime,
     )
 
 

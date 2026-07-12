@@ -39,7 +39,7 @@ form.addEventListener("submit", async (event) => {
   updateComposer();
 
   const assistant = appendMessage("assistant", "");
-  const textElement = assistant.querySelector("p");
+  const textElement = assistant.querySelector(".markdown-body");
   textElement.classList.add("stream-cursor");
   setStreaming(true);
 
@@ -75,7 +75,7 @@ form.addEventListener("submit", async (event) => {
         if (parsed.error) throw new Error(parsed.error);
         if (parsed.content) {
           completeText += parsed.content;
-          textElement.textContent = completeText;
+          renderMessageContent(textElement, completeText, "assistant");
           scrollToBottom();
         }
       }
@@ -87,7 +87,7 @@ form.addEventListener("submit", async (event) => {
     conversation.push({ role: "assistant", content: completeText });
   } catch (error) {
     assistant.classList.add("error-message");
-    textElement.textContent = error.message;
+    renderMessageContent(textElement, error.message, "error");
   } finally {
     textElement.classList.remove("stream-cursor");
     setStreaming(false);
@@ -136,15 +136,112 @@ function appendMessage(role, content) {
   meta.className = "message-meta";
   meta.textContent = `${role === "assistant" ? "TutorIA" : "Tú"} · ahora`;
 
-  const paragraph = document.createElement("p");
-  paragraph.textContent = content;
+  const body = document.createElement("div");
+  body.className = role === "assistant" ? "markdown-body" : "plain-body";
+  renderMessageContent(body, content, role);
 
-  messageContent.append(meta, paragraph);
+  messageContent.append(meta, body);
   article.append(avatar, messageContent);
   messagesElement.append(article);
   scrollToBottom();
   return article;
 }
+
+function renderMessageContent(element, content, role) {
+  if (role === "assistant") {
+    element.innerHTML = renderMarkdown(content);
+    return;
+  }
+
+  element.textContent = content;
+}
+
+function renderMarkdown(markdown) {
+  const codeBlocks = [];
+  let safeText = escapeHtml(markdown);
+
+  // Los bloques de código se extraen primero para que el resto del parser no altere su contenido.
+  safeText = safeText.replace(/```([\w+-]*)\n?([\s\S]*?)```/g, (_match, language, code) => {
+    const index = codeBlocks.length;
+    const label = language ? `<span>${language}</span>` : "";
+    codeBlocks.push(`<pre><code data-language="${language || "texto"}">${code.trim()}</code>${label}</pre>`);
+    return `\n@@CODE_BLOCK_${index}@@\n`;
+  });
+
+  const lines = safeText.split("\n");
+  const html = [];
+  let paragraph = [];
+  let listItems = [];
+
+  const flushParagraph = () => {
+    if (!paragraph.length) return;
+    html.push(`<p>${renderInline(paragraph.join(" ").trim())}</p>`);
+    paragraph = [];
+  };
+
+  const flushList = () => {
+    if (!listItems.length) return;
+    html.push(`<ul>${listItems.map((item) => `<li>${renderInline(item)}</li>`).join("")}</ul>`);
+    listItems = [];
+  };
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) {
+      flushParagraph();
+      flushList();
+      continue;
+    }
+
+    const codeMatch = trimmed.match(/^@@CODE_BLOCK_(\d+)@@$/);
+    if (codeMatch) {
+      flushParagraph();
+      flushList();
+      html.push(codeBlocks[Number(codeMatch[1])]);
+      continue;
+    }
+
+    const heading = trimmed.match(/^(#{1,3})\s+(.+)$/);
+    if (heading) {
+      flushParagraph();
+      flushList();
+      const level = heading[1].length + 1;
+      html.push(`<h${level}>${renderInline(heading[2])}</h${level}>`);
+      continue;
+    }
+
+    const bullet = trimmed.match(/^[-*]\s+(.+)$/);
+    if (bullet) {
+      flushParagraph();
+      listItems.push(bullet[1]);
+      continue;
+    }
+
+    paragraph.push(trimmed);
+  }
+
+  flushParagraph();
+  flushList();
+  return html.join("");
+}
+
+function renderInline(text) {
+  return text
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/\*([^*]+)\*/g, "<em>$1</em>");
+}
+
+function escapeHtml(value) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+window.TutorIAMarkdown = { render: renderMarkdown };
 
 async function refreshStatus() {
   refreshButton.classList.add("spinning");
@@ -201,6 +298,13 @@ function setHealthUI(status) {
     document.querySelector("#access-mode").textContent =
       `Acceso ${formatLocation(status.access_mode)}`;
   }
+  const runtimeOwner = document.querySelector("#runtime-owner");
+  if (runtimeOwner && typeof status.managed_by_app === "boolean") {
+    runtimeOwner.textContent = status.managed_by_app
+      ? "Administrado por TutorIA"
+      : "Detectado localmente";
+  }
+
   const privacyCopy = document.querySelector("#privacy-copy");
   if (status.processing_location === "device") {
     privacyCopy.textContent =

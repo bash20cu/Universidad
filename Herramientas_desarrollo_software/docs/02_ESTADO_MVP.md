@@ -33,6 +33,8 @@ El MVP ya tiene una base técnica funcional: aplicación Flask modular, autentic
 - El dashboard muestra métricas generales.
 - El administrador y docente pueden gestionar contenidos educativos.
 - El administrador y docente pueden registrar evaluaciones diagnósticas con respuestas.
+- El chat renderiza Markdown básico de forma segura para mejorar legibilidad de respuestas IA.
+- El chat muestra evidencia visible de ejecución local: Flask, endpoint del modelo e invocación `fm serve`.
 - La base de datos se inicializa con usuarios, contenidos y preguntas semilla.
 
 ## Brecha Principal

@@ -237,6 +237,96 @@ button {
   line-height: 1.55;
 }
 
+.local-runtime {
+  margin-top: 24px;
+  padding: 15px;
+  border: 1px solid #cfe8d5;
+  border-radius: 8px;
+  background: #f4fbf6;
+}
+
+.local-runtime-header {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  margin-bottom: 12px;
+  color: #187531;
+}
+
+.local-runtime-header svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.local-runtime-header strong,
+.local-runtime-header span {
+  display: block;
+}
+
+.local-runtime-header strong {
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.local-runtime-header span {
+  color: #187531;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.local-runtime dl {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.local-runtime dt {
+  color: #187531;
+  font-size: 11px;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.local-runtime dd {
+  margin: 2px 0 0;
+  color: #344054;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.local-runtime code {
+  padding: 2px 5px;
+  border-radius: 4px;
+  color: #153776;
+  background: #edf4ff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.92em;
+}
+
+.local-runtime details {
+  margin-top: 12px;
+  color: #344054;
+  font-size: 12px;
+}
+
+.local-runtime summary {
+  cursor: pointer;
+  color: #187531;
+  font-weight: 700;
+}
+
+.local-runtime details > code {
+  display: block;
+  margin-top: 8px;
+  overflow-wrap: anywhere;
+}
+
 .chat-panel {
   min-width: 0;
   min-height: 0;
@@ -297,14 +387,99 @@ button {
   font-size: 12px;
 }
 
-.message-content p {
-  margin: 0 0 10px;
+.plain-body,
+.markdown-body {
   font-size: 16px;
   line-height: 1.62;
+}
+
+.plain-body {
   white-space: pre-wrap;
 }
 
-.user-message .message-content p {
+.markdown-body > *:first-child {
+  margin-top: 0;
+}
+
+.markdown-body > *:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body p {
+  margin: 0 0 12px;
+}
+
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4 {
+  margin: 20px 0 9px;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.markdown-body h2 {
+  font-size: 22px;
+}
+
+.markdown-body h3 {
+  font-size: 18px;
+}
+
+.markdown-body h4 {
+  font-size: 16px;
+}
+
+.markdown-body ul {
+  margin: 0 0 14px;
+  padding-left: 22px;
+}
+
+.markdown-body li {
+  margin: 4px 0;
+}
+
+.markdown-body strong {
+  font-weight: 750;
+}
+
+.markdown-body code,
+.plain-body code {
+  padding: 2px 5px;
+  border-radius: 4px;
+  color: #153776;
+  background: #edf4ff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.92em;
+}
+
+.markdown-body pre {
+  position: relative;
+  margin: 14px 0 16px;
+  overflow-x: auto;
+  border: 1px solid #d5dce8;
+  border-radius: 8px;
+  background: #101828;
+}
+
+.markdown-body pre code {
+  display: block;
+  padding: 18px 16px;
+  color: #f8fafc;
+  background: transparent;
+  white-space: pre;
+}
+
+.markdown-body pre span {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  color: #98a2b3;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.user-message .plain-body {
   display: inline-block;
   padding: 11px 14px;
   border-radius: 8px;
@@ -361,7 +536,7 @@ button {
   background: var(--coral);
 }
 
-.error-message .message-content p {
+.error-message .message-content .markdown-body {
   color: var(--danger);
 }
 
