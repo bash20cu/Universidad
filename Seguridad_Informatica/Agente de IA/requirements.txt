@@ -1,0 +1,6 @@
+# Dependencias del agente de IA de laboratorio
+# Versiones fijadas por compatibilidad. Confirme en la documentacion
+# oficial antes de actualizar.
+
+requests==2.32.3        # Cliente HTTP para API remota y Ollama
+python-dotenv==1.0.1    # Carga de variables de entorno desde .env
