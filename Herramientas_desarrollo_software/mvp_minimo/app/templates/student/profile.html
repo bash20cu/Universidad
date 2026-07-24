@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Mi perfil | TutorIA{% endblock %}
+{% block content %}
+<div class="form-shell">
+  <header class="form-heading"><a href="{{ url_for('student_portal.dashboard') }}">Volver a mi aula</a><p class="eyebrow">Perfil académico</p><h1>{{ 'Editar mi perfil' if student else 'Completa tu perfil' }}</h1><p>Estos datos ayudan a personalizar tus recomendaciones. El nivel se determina mediante el diagnóstico.</p></header>
+  <form method="post" class="bg-white border rounded-4 shadow-sm p-4" novalidate>{{ form.hidden_tag() }}
+    <div class="row g-3"><div class="col-md-8">{{ form.name.label(class="form-label") }}{{ form.name(class="form-control") }}{% for error in form.name.errors %}<div class="field-error">{{ error }}</div>{% endfor %}</div><div class="col-md-4">{{ form.age.label(class="form-label") }}{{ form.age(class="form-control") }}{% for error in form.age.errors %}<div class="field-error">{{ error }}</div>{% endfor %}</div><div class="col-md-6">{{ form.school.label(class="form-label") }}{{ form.school(class="form-control") }}{% for error in form.school.errors %}<div class="field-error">{{ error }}</div>{% endfor %}</div><div class="col-md-6">{{ form.interest_area.label(class="form-label") }}{{ form.interest_area(class="form-control") }}{% for error in form.interest_area.errors %}<div class="field-error">{{ error }}</div>{% endfor %}</div></div>
+    <div class="d-flex justify-content-end mt-4">{{ form.submit(class="btn btn-primary") }}</div>
+  </form>
+</div>
+{% endblock %}

@@ -18,7 +18,7 @@
       <div class="mb-3">
         {{ form.email.label(class="form-label") }}
         {{ form.email(class="form-control", autocomplete="email", placeholder="tu-correo@ejemplo.com") }}
-        <div class="form-text">Usaremos este correo para enviarte el código 2FA.</div>
+        <div class="form-text">Se utiliza como dato de contacto de la cuenta; el segundo factor será TOTP.</div>
         {% for error in form.email.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
       </div>
       <div class="mb-3">

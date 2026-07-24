@@ -1,16 +1,22 @@
+"""Punto de entrada para inicializar la base y ejecutar Flask."""
+
 from __future__ import annotations
 
 import atexit
 import os
 import signal
 
-from app import create_app, seed_database
+from app import create_app, ensure_schema_compatibility, seed_database
 from ai_provider import AIProviderError, ChatProvider
 from app.extensions import db
 
 
 def install_shutdown_handlers(provider: ChatProvider) -> None:
+    """Registra cierre ordenado del proveedor ante Ctrl+C o SIGTERM."""
+
     def shutdown_handler(signum, _frame):
+        """Libera procesos IA antes de terminar el proceso web."""
+
         provider.shutdown()
         raise SystemExit(128 + signum)
 
@@ -25,6 +31,7 @@ if __name__ == "__main__":
     ai_provider: ChatProvider = app.extensions["ai_provider"]
     with app.app_context():
         db.create_all()
+        ensure_schema_compatibility()
         seed_database()
     atexit.register(ai_provider.shutdown)
     install_shutdown_handlers(ai_provider)

@@ -1,3 +1,5 @@
+"""Interfaz web y API SSE del chat con el proveedor IA abstracto."""
+
 import json
 import time
 
@@ -52,6 +54,8 @@ def _content_from_chunk(chunk: bytes) -> str:
 @bp.get("")
 @login_required
 def page():
+    """Renderiza el chat con el estado técnico inicial del proveedor."""
+
     provider = current_app.extensions["ai_provider"]
     status = provider.status()
     local_runtime = {
@@ -69,11 +73,15 @@ def page():
 
 @bp.get("/api/status")
 def status():
+    """Devuelve al navegador el estado actual del proveedor IA."""
+
     return jsonify(current_app.extensions["ai_provider"].status().as_dict())
 
 
 @bp.post("/api/provider/wake")
 def wake_provider():
+    """Intenta iniciar o despertar el proveedor antes de una conversación."""
+
     try:
         status = current_app.extensions["ai_provider"].ensure_ready()
         return jsonify({"ok": True, "status": status.as_dict()})
@@ -84,6 +92,8 @@ def wake_provider():
 @bp.post("/api/chat")
 @login_required
 def chat():
+    """Valida mensajes y retransmite la respuesta como Server-Sent Events."""
+
     provider = current_app.extensions["ai_provider"]
     try:
         messages = normalize_messages((request.get_json(silent=True) or {}).get("messages"))
@@ -92,6 +102,8 @@ def chat():
         return jsonify({"error": str(error)}), 400 if isinstance(error, ValueError) else 503
 
     def generate():
+        """Emite metadatos, contenido SSE y métricas de la respuesta."""
+
         started = time.perf_counter()
         prompt_chars = sum(len(message["content"]) for message in messages)
         usage = None

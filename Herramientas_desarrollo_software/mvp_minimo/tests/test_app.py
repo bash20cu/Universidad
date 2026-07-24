@@ -5,6 +5,7 @@ import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 import pytest
+import pyotp
 
 from ai_provider import ProviderStatus
 from app import create_app, seed_database
@@ -214,6 +215,57 @@ def test_login_requires_second_factor(fake_fm_server):
         assert TwoFactorCode.query.count() == 1
 
 
+def test_user_can_activate_totp_with_qr_and_code(fake_fm_server):
+    """Comprueba que el usuario puede vincular y confirmar un autenticador TOTP."""
+
+    app = build_database_app(fake_fm_server)
+    client = app.test_client()
+    authenticate(client, app, "admin")
+
+    setup_page = client.get("/auth/totp/setup")
+
+    assert setup_page.status_code == 200
+    assert b"data:image/png;base64," in setup_page.data
+
+    with app.app_context():
+        user = User.query.filter_by(username="admin").one()
+        code = pyotp.TOTP(user.totp_secret).now()
+
+    response = client.post("/auth/totp/setup", data={"code": code})
+
+    assert response.status_code == 302
+    with app.app_context():
+        assert User.query.filter_by(username="admin").one().totp_enabled is True
+
+
+def test_login_uses_totp_when_it_is_enabled(fake_fm_server):
+    """Comprueba que TOTP reemplaza el desafío por correo para una cuenta configurada."""
+
+    app = build_database_app(fake_fm_server)
+    client = app.test_client()
+    with app.app_context():
+        user = User.query.filter_by(username="admin").one()
+        user.totp_secret = pyotp.random_base32()
+        user.totp_enabled = True
+        db.session.commit()
+        secret = user.totp_secret
+
+    login_response = client.post(
+        "/auth/login",
+        data={"username": "admin", "password": "Administrador123!"},
+    )
+
+    assert login_response.status_code == 302
+    assert login_response.location.endswith("/auth/verify-totp")
+    verify_response = client.post(
+        "/auth/verify-totp",
+        data={"code": pyotp.TOTP(secret).now()},
+    )
+
+    assert verify_response.status_code == 302
+    assert verify_response.location.endswith("/dashboard")
+
+
 def test_public_registration_creates_student_account_and_audit_log(fake_fm_server):
     app = create_app({
         "TESTING": True,
@@ -237,12 +289,88 @@ def test_public_registration_creates_student_account_and_audit_log(fake_fm_serve
     )
 
     assert response.status_code == 302
+    assert response.location.endswith("/auth/register/2fa")
     with app.app_context():
         user = User.query.filter_by(username="nueva_estudiante").one()
         assert user.role == "estudiante"
         assert user.check_password("Estudiante123!")
         assert user.password_hash != "Estudiante123!"
         assert AuditLog.query.filter_by(action="user_registered", user_id=user.id).count() == 1
+
+
+def test_registration_requires_totp_confirmation_before_entering_dashboard(fake_fm_server):
+    """Comprueba que el registro muestra el QR y exige confirmar TOTP."""
+
+    app = create_app({
+        "TESTING": True,
+        "WTF_CSRF_ENABLED": False,
+        "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",
+        "FM_PORT": fake_fm_server,
+    })
+    client = app.test_client()
+    with app.app_context():
+        db.create_all()
+        seed_database()
+
+    registration = client.post(
+        "/auth/register",
+        data={
+            "username": "registro_totp",
+            "email": "registro_totp@example.com",
+            "password": "Estudiante123!",
+            "confirm_password": "Estudiante123!",
+        },
+    )
+
+    assert registration.status_code == 302
+    setup_page = client.get(registration.location)
+    assert setup_page.status_code == 200
+    assert b"data:image/png;base64," in setup_page.data
+    with app.app_context():
+        user = User.query.filter_by(username="registro_totp").one()
+        code = pyotp.TOTP(user.totp_secret).now()
+
+    activation = client.post("/auth/register/2fa", data={"code": code})
+
+    assert activation.status_code == 302
+    assert activation.location.endswith("/dashboard")
+    with app.app_context():
+        assert User.query.filter_by(username="registro_totp").one().totp_enabled is True
+
+
+def test_student_can_complete_profile_and_access_private_progress(fake_fm_server):
+    app = build_database_app(fake_fm_server)
+    client = app.test_client()
+    authenticate(client, app, "estudiante")
+
+    assert client.get("/dashboard").status_code == 302
+    profile = client.post(
+        "/student/profile",
+        data={
+            "name": "Estudiante Demo",
+            "age": 19,
+            "school": "Universidad Demo",
+            "interest_area": "Bases de datos",
+        },
+    )
+
+    assert profile.status_code == 302
+    assert client.get("/student/dashboard").status_code == 200
+    assert client.get("/student/progress").status_code == 200
+    with app.app_context():
+        student = Student.query.filter_by(name="Estudiante Demo").one()
+        assert student.user_id == User.query.filter_by(username="estudiante").one().id
+
+
+def test_only_admin_can_view_audit_log(fake_fm_server):
+    app = build_database_app(fake_fm_server)
+    admin = app.test_client()
+    teacher = app.test_client()
+    authenticate(admin, app, "admin")
+    authenticate(teacher, app, "docente")
+
+    assert admin.get("/users/audit").status_code == 200
+    assert teacher.get("/users/audit").status_code == 403
 
 
 def test_two_factor_code_is_hashed_and_single_use(fake_fm_server):

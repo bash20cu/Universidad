@@ -5,7 +5,7 @@
 | ID | Riesgo | Categoría | Probabilidad | Impacto | Mitigación | Estado |
 |---|---|---|---|---|---|---|
 | R-001 | Foundation Models no disponible en la máquina de demostración. | Técnico | Media | Alto | Mantener Ollama como respaldo documentado y validar estado antes de demo. | Abierto |
-| R-002 | Resend no envía correos por falta de API key, dominio o remitente verificado. | Técnico | Media | Medio | Mantener modo consola para desarrollo y probar Resend con anticipación. | Abierto |
+| R-002 | El canal de correo 2FA no está disponible o requiere configuración externa. | Técnico | Baja | Bajo | Se elimina del MVP; se utiliza TOTP local con código QR y aplicación autenticadora. | Cerrado |
 | R-003 | Alcance demasiado grande para dos integrantes. | Proyecto | Alta | Alto | Priorizar MVP, evitar funciones fuera de alcance y registrar pendientes. | Abierto |
 | R-004 | Se programa sin actualizar documentación. | Académico | Media | Alto | Actualizar `00_REGISTRO_SEGUIMIENTO.md` después de cada bloque. | Abierto |
 | R-005 | La IA devuelve respuestas no estructuradas o ambiguas. | Técnico | Alta | Alto | Implementado contrato JSON con validación; falta probar modelo real. | Mitigado parcial |

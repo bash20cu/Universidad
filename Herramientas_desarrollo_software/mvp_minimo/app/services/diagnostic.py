@@ -1,3 +1,5 @@
+"""Reglas de evaluación, validación y clasificación académica con IA."""
+
 from __future__ import annotations
 
 import json
@@ -20,6 +22,8 @@ MINIMUM_EVIDENCE_LENGTH = 20
 
 @dataclass(frozen=True)
 class DiagnosticClassification:
+    """Resultado estructurado que la IA debe devolver para un diagnóstico."""
+
     level: str
     explanation: str
     strengths: list[str]
@@ -27,6 +31,8 @@ class DiagnosticClassification:
 
 
 def build_diagnostic_prompt(evaluation: DiagnosticEvaluation) -> str:
+    """Construye el prompt JSON con el contexto y respuestas del estudiante."""
+
     answers = []
     for answer in evaluation.answers:
         answers.append(
@@ -67,6 +73,8 @@ def build_diagnostic_prompt(evaluation: DiagnosticEvaluation) -> str:
 
 
 def parse_classification(raw_content: str) -> DiagnosticClassification:
+    """Valida el JSON de la IA antes de permitir que llegue a la base de datos."""
+
     try:
         payload: Any = json.loads(raw_content)
     except json.JSONDecodeError as error:
@@ -98,6 +106,8 @@ def parse_classification(raw_content: str) -> DiagnosticClassification:
 
 
 def classify_evaluation(evaluation: DiagnosticEvaluation, provider: ChatProvider) -> DiagnosticClassification:
+    """Solicita clasificación al proveedor y aplica reglas de evidencia mínima."""
+
     if not evaluation.answers:
         raise ValueError("La evaluación no tiene respuestas para clasificar.")
 
@@ -130,6 +140,8 @@ def classify_evaluation(evaluation: DiagnosticEvaluation, provider: ChatProvider
 
 
 def format_classification_explanation(classification: DiagnosticClassification) -> str:
+    """Convierte el resultado estructurado en explicación para docentes."""
+
     strengths = "; ".join(classification.strengths)
     opportunities = "; ".join(classification.improvement_areas)
     return (

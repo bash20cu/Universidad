@@ -122,14 +122,17 @@ Al iniciar, SQLite se crea en `instance/tutoria.db` con usuarios de demostració
 - `docente` / `Docente123!`
 - `estudiante` / `Estudiante123!`
 
-En desarrollo, el código 2FA aparece en la consola. Para correo real, configura
-`TWO_FACTOR_DELIVERY=resend`, `RESEND_API_KEY` y `RESEND_FROM_EMAIL`.
+Durante el registro se muestra directamente el QR para activar TOTP. También se
+puede activar TOTP desde el enlace **2FA** del menú, escaneando el QR con
+Google Authenticator, Microsoft Authenticator, Authy u otra aplicación compatible.
+No se requiere Resend ni ningún servicio de correo. Las cuentas con TOTP activo
+usan ese código como segundo factor principal.
 
 ## Estructura
 
 - `app/models`: persistencia SQLAlchemy.
 - `app/routes`: autenticación, panel y chat.
-- `app/services`: 2FA, correo, bitácora, diagnóstico y recomendaciones.
+- `app/services`: 2FA TOTP, bitácora, diagnóstico y recomendaciones.
 - `app/forms`: formularios validados y protegidos con CSRF.
 - `app/templates` y `app/static`: interfaz Jinja2, chat y Bootstrap 5.3.8
   versionado localmente en `app/static/vendor/bootstrap/5.3.8`.
@@ -141,6 +144,9 @@ En desarrollo, el código 2FA aparece en la consola. Para correo real, configura
 - `GET /`: inicio.
 - `GET|POST /auth/login`: primer factor.
 - `GET|POST /auth/verify`: segundo factor.
+- `GET|POST /auth/verify-totp`: validación del segundo factor TOTP.
+- `GET|POST /auth/register/2fa`: activación TOTP obligatoria durante el registro.
+- `GET|POST /auth/totp/setup`: configuración del autenticador TOTP mediante QR.
 - `GET /dashboard`: panel protegido.
 - `GET /students`: listado para administrador y docente.
 - `GET|POST /students/new`: registro de estudiantes.
@@ -154,6 +160,9 @@ En desarrollo, el código 2FA aparece en la consola. Para correo real, configura
 - `GET|POST /diagnostics/new`: registro de evaluación y respuestas.
 - `GET /diagnostics/<id>`: detalle de evaluación registrada.
 - `GET /chat`: interfaz del tutor protegida.
+- `GET/POST /auth/register`: autorregistro de cuentas estudiantiles con contraseña cifrada y correo como dato de contacto.
+- `/student/*`: panel, perfil y progreso privado de la cuenta estudiantil.
+- `GET /users/audit`: visor de bitácora protegido para administradores.
 - `GET /chat/api/status`: disponibilidad del modelo.
 - `POST /chat/api/provider/wake`: prepara el proveedor.
 - `POST /chat/api/chat`: proxy SSE protegido hacia el proveedor.

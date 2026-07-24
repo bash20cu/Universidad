@@ -48,6 +48,8 @@ class RuntimeManager:
         app_port: int = 5050,
         on_log: LogCallback | None = None,
     ) -> None:
+        """Configura rutas, puertos, procesos y callback de logs."""
+
         self.project_dir = project_dir
         self.python_bin = python_bin or str(project_dir / ".venv" / "bin" / "python")
         self.fm_command = fm_command
@@ -110,6 +112,8 @@ class RuntimeManager:
                 self._log(f"[{service}] {line}")
 
     def _watch_output(self, process: subprocess.Popen[str], service: str) -> None:
+        """Inicia un hilo daemon para leer la salida sin bloquear PySide6."""
+
         thread = threading.Thread(target=self._read_output, args=(process, service), daemon=True)
         thread.start()
         self._reader_threads.append(thread)

@@ -1,3 +1,5 @@
+"""Servicio centralizado para registrar acciones de auditoría."""
+
 from flask import request
 
 from app.extensions import db
@@ -12,6 +14,8 @@ def record_event(
     entity_id: str | None = None,
     detail: str | None = None,
 ) -> None:
+    """Guarda una acción con usuario, entidad, detalle y dirección IP."""
+
     forwarded = request.headers.get("X-Forwarded-For", "")
     ip_address = forwarded.split(",", 1)[0].strip() or request.remote_addr
     db.session.add(
@@ -25,4 +29,3 @@ def record_event(
         )
     )
     db.session.commit()
-

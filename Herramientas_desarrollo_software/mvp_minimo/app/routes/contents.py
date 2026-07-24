@@ -1,3 +1,5 @@
+"""CRUD del repositorio de recursos educativos del tutor."""
+
 from flask import Blueprint, abort, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 
@@ -15,6 +17,8 @@ bp = Blueprint("contents", __name__, url_prefix="/contents")
 @login_required
 @roles_required("administrador", "docente")
 def index():
+    """Lista contenidos ordenados por nivel, tema y título."""
+
     contents = EducationalContent.query.order_by(
         EducationalContent.level.asc(), EducationalContent.topic.asc(), EducationalContent.title.asc()
     ).all()
@@ -35,6 +39,8 @@ def index():
 @login_required
 @roles_required("administrador", "docente")
 def create():
+    """Registra un recurso educativo validado por el formulario."""
+
     form = EducationalContentForm()
     if form.validate_on_submit():
         content = EducationalContent(
@@ -43,6 +49,9 @@ def create():
             level=form.level.data,
             competency=form.competency.data.strip(),
             description=form.description.data.strip(),
+            material_type=form.material_type.data or "lectura",
+            resource_url=(form.resource_url.data or "").strip() or None,
+            status=form.status.data or "activo",
         )
         db.session.add(content)
         db.session.commit()
@@ -62,6 +71,8 @@ def create():
 @login_required
 @roles_required("administrador", "docente")
 def edit(content_id: int):
+    """Edita un recurso sin perder su clasificación académica."""
+
     content = db.get_or_404(EducationalContent, content_id)
     form = EducationalContentForm(obj=content)
     if form.validate_on_submit():
@@ -71,6 +82,7 @@ def edit(content_id: int):
         content.topic = content.topic.strip()
         content.competency = content.competency.strip()
         content.description = content.description.strip()
+        content.resource_url = (content.resource_url or "").strip() or None
         db.session.commit()
         record_event(
             "content_updated",
@@ -88,6 +100,8 @@ def edit(content_id: int):
 @login_required
 @roles_required("administrador")
 def delete(content_id: int):
+    """Elimina un recurso solo cuando no tiene recomendaciones asociadas."""
+
     content = db.get_or_404(EducationalContent, content_id)
     # Conserva la trazabilidad académica: un recurso ya recomendado no se elimina
     # mientras exista evidencia que lo vincule a una ruta de aprendizaje.

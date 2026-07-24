@@ -13,8 +13,10 @@
       {% if current_user.is_authenticated %}<div class="d-flex align-items-center justify-content-end flex-wrap gap-2 gap-xl-3">
         <a class="text-decoration-none" href="{{ url_for('main.dashboard') }}">Inicio</a>
         <a class="text-decoration-none" href="{{ url_for('chat.page') }}">Tutor IA</a>
+        <a class="text-decoration-none" href="{{ url_for('auth.setup_totp') }}">2FA</a>
+        {% if current_user.role == 'estudiante' %}<a class="text-decoration-none" href="{{ url_for('student_portal.progress') }}">Mi progreso</a><a class="text-decoration-none" href="{{ url_for('student_portal.profile') }}">Mi perfil</a>{% endif %}
         {% if current_user.role in ['administrador', 'docente'] %}<a class="text-decoration-none" href="{{ url_for('students.index') }}">Estudiantes</a><a class="text-decoration-none" href="{{ url_for('contents.index') }}">Biblioteca</a><a class="text-decoration-none" href="{{ url_for('diagnostics.index') }}">Diagnósticos</a><a class="text-decoration-none" href="{{ url_for('recommendations.index') }}">Recomendaciones</a><a class="text-decoration-none" href="{{ url_for('reports.index') }}">Reportes</a>{% endif %}
-        {% if current_user.role == 'administrador' %}<a class="text-decoration-none" href="{{ url_for('users.index') }}">Usuarios</a>{% endif %}
+        {% if current_user.role == 'administrador' %}<a class="text-decoration-none" href="{{ url_for('users.index') }}">Usuarios</a><a class="text-decoration-none" href="{{ url_for('users.audit') }}">Bitácora</a>{% endif %}
         <span class="badge text-bg-secondary">{{ current_user.role }}</span>
         <form method="post" action="{{ url_for('auth.logout') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn btn-outline-secondary btn-sm" type="submit">Salir</button></form>
       </div>{% endif %}

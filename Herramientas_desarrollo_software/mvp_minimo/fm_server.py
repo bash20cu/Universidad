@@ -1,3 +1,5 @@
+"""Cliente y ciclo de vida del servidor local ``fm serve``."""
+
 from __future__ import annotations
 
 import json
@@ -9,17 +11,23 @@ from urllib.request import urlopen
 
 
 class FMServerError(RuntimeError):
+    """Error de arranque, salud o cierre del servidor Foundation Models."""
+
     pass
 
 
 @dataclass(frozen=True)
 class FMHealth:
+    """Respuesta normalizada del endpoint de salud de Foundation Models."""
+
     available: bool
     status: str
     models: list[dict]
     error: str | None = None
 
     def as_dict(self) -> dict:
+        """Convierte el estado en un diccionario para Flask y la UI."""
+
         return {
             "available": self.available,
             "status": self.status,
@@ -29,6 +37,8 @@ class FMHealth:
 
 
 class FMServerManager:
+    """Inicia FM bajo demanda y evita cerrar procesos que no administra."""
+
     def __init__(
         self,
         command: str = "/usr/bin/fm",
@@ -36,6 +46,8 @@ class FMServerManager:
         port: int = 1976,
         start_timeout: float = 20,
     ) -> None:
+        """Configura comando, dirección y límite de espera para FM."""
+
         self.command = command
         self.host = host
         self.port = port
@@ -44,13 +56,19 @@ class FMServerManager:
 
     @property
     def base_url(self) -> str:
+        """Devuelve la URL base del servicio local."""
+
         return f"http://{self.host}:{self.port}"
 
     @property
     def owns_process(self) -> bool:
+        """Indica si esta instancia mantiene un proceso FM activo."""
+
         return self.process is not None and self.process.poll() is None
 
     def health(self) -> dict:
+        """Consulta salud y modelos disponibles sin propagar fallos de red."""
+
         try:
             with urlopen(f"{self.base_url}/health", timeout=1) as response:
                 payload = json.load(response)
@@ -68,6 +86,8 @@ class FMServerManager:
             ).as_dict()
 
     def ensure_started(self) -> dict:
+        """Reutiliza FM si está activo o lo inicia y espera su disponibilidad."""
+
         current_health = self.health()
         if current_health["available"]:
             return current_health
@@ -97,6 +117,8 @@ class FMServerManager:
         return self._wait_until_healthy()
 
     def _wait_until_healthy(self) -> dict:
+        """Espera con límite de tiempo hasta que FM responda correctamente."""
+
         deadline = time.monotonic() + self.start_timeout
 
         while time.monotonic() < deadline:
@@ -119,6 +141,8 @@ class FMServerManager:
         )
 
     def stop(self) -> None:
+        """Detiene solo el proceso FM iniciado por este administrador."""
+
         if not self.owns_process:
             return
 

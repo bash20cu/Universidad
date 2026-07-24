@@ -1,9 +1,11 @@
+"""Administración de cuentas reservada al rol administrador."""
+
 from flask import Blueprint, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 
 from app.extensions import db
 from app.forms import UserForm
-from app.models import User
+from app.models import AuditLog, User
 from app.routes import roles_required
 from app.services.audit import record_event
 
@@ -19,6 +21,16 @@ def index():
 
     users = User.query.order_by(User.username.asc()).all()
     return render_template("users/index.html", users=users)
+
+
+@bp.get("/audit")
+@login_required
+@roles_required("administrador")
+def audit():
+    """Muestra al administrador las acciones registradas por el sistema."""
+
+    entries = AuditLog.query.order_by(AuditLog.created_at.desc()).limit(200).all()
+    return render_template("users/audit.html", entries=entries)
 
 
 @bp.route("/new", methods=["GET", "POST"])

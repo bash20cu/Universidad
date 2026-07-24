@@ -1,17 +1,48 @@
+"""Emisión y verificación segura de códigos de segundo factor."""
+
 from __future__ import annotations
 
 import secrets
 from datetime import timedelta, timezone
+
+import pyotp
 
 from app.extensions import db
 from app.models import TwoFactorCode, User, utcnow
 
 
 class TwoFactorError(ValueError):
+    """Error controlado para códigos usados, vencidos o incorrectos."""
+
+
+def generate_totp_secret() -> str:
+    """Genera el secreto base32 que se vincula a una app autenticadora."""
+
+    return pyotp.random_base32()
+
+
+def totp_provisioning_uri(user: User, secret: str) -> str:
+    """Construye la URI estándar que será convertida en código QR."""
+
+    return pyotp.TOTP(secret).provisioning_uri(
+        name=user.email,
+        issuer_name="TutorIA",
+    )
+
+
+def verify_totp_code(user: User, code: str) -> bool:
+    """Comprueba el código actual con una tolerancia de una ventana temporal."""
+
+    if not user.totp_secret:
+        return False
+    return pyotp.TOTP(user.totp_secret).verify(code, valid_window=1)
+
     pass
 
 
 def issue_code(user: User, lifetime_minutes: int = 10) -> tuple[TwoFactorCode, str]:
+    """Genera un código aleatorio, lo guarda como hash y define su vencimiento."""
+
     code = f"{secrets.randbelow(1_000_000):06d}"
     challenge = TwoFactorCode(
         user_id=user.id,
@@ -24,6 +55,8 @@ def issue_code(user: User, lifetime_minutes: int = 10) -> tuple[TwoFactorCode, s
 
 
 def verify_code(challenge: TwoFactorCode, code: str, max_attempts: int = 3) -> None:
+    """Valida un desafío y lo marca como usado al primer acierto."""
+
     now = utcnow()
     expires_at = challenge.expires_at
     if expires_at.tzinfo is None:

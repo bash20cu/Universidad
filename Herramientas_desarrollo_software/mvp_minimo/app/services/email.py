@@ -1,3 +1,5 @@
+"""Entrega de códigos 2FA mediante consola, Resend o ambos canales."""
+
 from __future__ import annotations
 
 import json
@@ -8,6 +10,8 @@ from flask import current_app
 
 
 class EmailDeliveryError(RuntimeError):
+    """Error controlado de configuración o comunicación con Resend."""
+
     pass
 
 

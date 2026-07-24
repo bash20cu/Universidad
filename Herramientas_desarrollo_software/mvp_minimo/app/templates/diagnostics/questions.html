@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Preguntas diagnósticas | TutorIA{% endblock %}
+{% block content %}
+<header class="page-heading"><div><p class="eyebrow">Banco de preguntas</p><h1>Preguntas diagnósticas</h1><p>Administra las preguntas que alimentan las evaluaciones de los estudiantes.</p></div><a class="btn btn-primary" href="{{ url_for('diagnostics.create_question') }}">Nueva pregunta</a></header>
+<section class="table-responsive card-surface"><table class="table"><thead><tr><th>Tema</th><th>Pregunta</th><th>Competencia</th><th>Estado</th><th></th></tr></thead><tbody>{% for question in questions %}<tr><td>{{ question.topic }}</td><td><strong>{{ question.prompt }}</strong></td><td>{{ question.expected_competency }}</td><td>{{ 'Activa' if question.active else 'Inactiva' }}</td><td><a class="btn btn-outline-secondary btn-sm" href="{{ url_for('diagnostics.edit_question', question_id=question.id) }}">Editar</a></td></tr>{% else %}<tr><td colspan="5" class="empty-state">No hay preguntas configuradas.</td></tr>{% endfor %}</tbody></table></section>
+{% endblock %}

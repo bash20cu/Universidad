@@ -1,3 +1,5 @@
+"""Factoría y configuración central de la aplicación Flask TutorIA."""
+
 from __future__ import annotations
 
 import os
@@ -7,6 +9,7 @@ from typing import Any
 from flask import Flask
 
 from dotenv import load_dotenv
+from sqlalchemy import inspect, text
 
 from ai_provider import ChatProvider, FallbackChatProvider, FoundationModelsProvider, NVIDIAProvider
 from fm_server import FMServerManager
@@ -16,6 +19,8 @@ from app.models import DiagnosticQuestion, EducationalContent, User
 
 
 def create_app(config: dict[str, Any] | None = None, provider: ChatProvider | None = None) -> Flask:
+    """Construye la app, registra extensiones, proveedores y blueprints."""
+
     app = Flask(__name__)
     instance_path = Path(app.instance_path)
     instance_path.mkdir(parents=True, exist_ok=True)
@@ -87,6 +92,7 @@ def create_app(config: dict[str, Any] | None = None, provider: ChatProvider | No
     from app.routes.recommendations import bp as recommendations_bp
     from app.routes.reports import bp as reports_bp
     from app.routes.students import bp as students_bp
+    from app.routes.student_portal import bp as student_portal_bp
     from app.routes.users import bp as users_bp
     app.register_blueprint(auth_bp)
     app.register_blueprint(chat_bp)
@@ -96,22 +102,63 @@ def create_app(config: dict[str, Any] | None = None, provider: ChatProvider | No
     app.register_blueprint(recommendations_bp)
     app.register_blueprint(reports_bp)
     app.register_blueprint(students_bp)
+    app.register_blueprint(student_portal_bp)
     app.register_blueprint(users_bp)
 
     @login_manager.user_loader
     def load_user(user_id: str):
+        """Recupera una cuenta desde la sesión de Flask-Login."""
+
         return db.session.get(User, int(user_id))
 
     @app.cli.command("init-db")
     def init_db_command():
+        """Crea tablas y datos mínimos para una instalación nueva."""
+
         db.create_all()
+        ensure_schema_compatibility()
         seed_database()
         print("Base de datos inicializada.")
 
     return app
 
 
+def ensure_schema_compatibility() -> None:
+    """Agrega columnas nuevas a una base SQLite creada por versiones anteriores.
+
+    El MVP no utiliza Alembic todavía; por eso esta migración pequeña y explícita
+    permite que una instalación existente adopte TOTP sin perder sus usuarios.
+    """
+
+    inspector = inspect(db.engine)
+    if not inspector.has_table("users"):
+        return
+    columns = {column["name"] for column in inspector.get_columns("users")}
+    if "totp_secret" not in columns:
+        db.session.execute(text("ALTER TABLE users ADD COLUMN totp_secret VARCHAR(64)"))
+    if "totp_enabled" not in columns:
+        db.session.execute(text("ALTER TABLE users ADD COLUMN totp_enabled BOOLEAN NOT NULL DEFAULT 0"))
+    content_columns = {column["name"] for column in inspector.get_columns("educational_contents")}
+    if "material_type" not in content_columns:
+        db.session.execute(text("ALTER TABLE educational_contents ADD COLUMN material_type VARCHAR(40) NOT NULL DEFAULT 'lectura'"))
+    if "resource_url" not in content_columns:
+        db.session.execute(text("ALTER TABLE educational_contents ADD COLUMN resource_url VARCHAR(500)"))
+    if "status" not in content_columns:
+        db.session.execute(text("ALTER TABLE educational_contents ADD COLUMN status VARCHAR(20) NOT NULL DEFAULT 'activo'"))
+    evaluation_columns = {column["name"] for column in inspector.get_columns("diagnostic_evaluations")}
+    if "ai_provider" not in evaluation_columns:
+        db.session.execute(text("ALTER TABLE diagnostic_evaluations ADD COLUMN ai_provider VARCHAR(80)"))
+    if "ai_model" not in evaluation_columns:
+        db.session.execute(text("ALTER TABLE diagnostic_evaluations ADD COLUMN ai_model VARCHAR(160)"))
+    if "classified_at" not in evaluation_columns:
+        db.session.execute(text("ALTER TABLE diagnostic_evaluations ADD COLUMN classified_at DATETIME"))
+    db.session.commit()
+
+
 def seed_database() -> None:
+    """Inserta usuarios, contenidos y preguntas demo solo si faltan."""
+
+    ensure_schema_compatibility()
     if User.query.count() == 0:
         users = [
             ("admin", "admin@tutoria.local", "Administrador123!", "administrador"),
@@ -124,9 +171,9 @@ def seed_database() -> None:
             db.session.add(user)
     if EducationalContent.query.count() == 0:
         db.session.add_all([
-            EducationalContent(title="Introducción a bases de datos", topic="Bases de datos", level="basico", competency="Reconocer tablas, claves y relaciones", description="Conceptos esenciales del modelo relacional."),
-            EducationalContent(title="Normalización práctica", topic="Bases de datos", level="intermedio", competency="Aplicar formas normales", description="Ejercicios de primera, segunda y tercera forma normal."),
-            EducationalContent(title="Optimización de consultas", topic="Bases de datos", level="avanzado", competency="Analizar planes de ejecución", description="Índices, planes y estrategias de optimización."),
+            EducationalContent(title="Introducción a bases de datos", topic="Bases de datos", level="basico", competency="Reconocer tablas, claves y relaciones", description="Conceptos esenciales del modelo relacional.", material_type="lectura", status="activo"),
+            EducationalContent(title="Normalización práctica", topic="Bases de datos", level="intermedio", competency="Aplicar formas normales", description="Ejercicios de primera, segunda y tercera forma normal.", material_type="ejercicio", status="activo"),
+            EducationalContent(title="Optimización de consultas", topic="Bases de datos", level="avanzado", competency="Analizar planes de ejecución", description="Índices, planes y estrategias de optimización.", material_type="video", status="activo"),
         ])
     if DiagnosticQuestion.query.count() == 0:
         db.session.add_all([

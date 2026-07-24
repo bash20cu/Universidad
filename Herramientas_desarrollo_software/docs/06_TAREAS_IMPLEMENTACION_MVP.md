@@ -13,13 +13,14 @@ Este tablero delimita el trabajo de programación y documentación de TutorIA. `
 - [x] Vista de recomendaciones por estudiante.
 - [x] Reporte general y reporte individual de progreso.
 - [x] Administración básica de usuarios para el administrador.
-- [ ] Validación con Foundation Models real en equipo compatible.
-- [ ] Validación de entrega 2FA con Resend real.
+- [x] Autorregistro público de usuarios con rol estudiante y auditoría.
+- [x] Validación con Foundation Models real en equipo compatible.
+- [x] Validación con NVIDIA real usando el proveedor principal configurado.
 
 ## Calidad y seguridad
 
 - [x] Eventos de auditoría para usuarios, recomendaciones y reportes.
-- [x] Pruebas automatizadas de usuarios, recomendaciones y reportes (`21 passed`).
+- [x] Pruebas automatizadas de usuarios, registro, recomendaciones y reportes (`22 passed`).
 - [ ] Pruebas funcionales con evidencia de cada flujo.
 - [ ] Revisar mensajes de error y estados vacíos.
 - [ ] Confirmar que cada ruta protegida conserva CSRF y permisos por rol.
@@ -41,6 +42,6 @@ Este tablero delimita el trabajo de programación y documentación de TutorIA. `
 - [x] Documento técnico de arquitectura y explicación del programa.
 - [x] Documentación del centro de control PySide6.
 - [x] Actualizar endpoints y alcance en README.
-- [ ] Completar UML de casos de uso, clases y secuencia.
-- [ ] Completar informe APA 7, resultados, conclusiones y bibliografía.
-- [ ] Preparar presentación, guion y demo.
+- [x] Crear UML de casos de uso, clases y secuencia.
+- [x] Crear borrador del informe APA 7 con resultados, conclusiones y bibliografía.
+- [x] Preparar presentación, guion y demo.

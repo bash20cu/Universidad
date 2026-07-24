@@ -61,4 +61,8 @@ a { color: #155eef; }
 .answer-card span, .question-card span { color: #155eef; font-size: .78rem; font-weight: 750; text-transform: uppercase; }
 .answer-card h3, .question-card h3 { margin: .45rem 0 .35rem; font-size: 1rem; }
 .answer-card p, .question-card p { margin: 0; color: #475467; }
+.progress { height: 1.25rem; overflow: hidden; border-radius: 999px; background: #eaecf0; }
+.progress-bar { display: flex; align-items: center; justify-content: center; min-width: 2.5rem; color: #fff; font-size: .75rem; font-weight: 700; transition: width .3s ease; }
+.progress-stacked { display: flex; min-height: 2rem; overflow: hidden; border-radius: 999px; background: #eaecf0; }
+.progress-stacked .progress-bar { min-width: 0; padding-inline: .35rem; }
 @media (max-width: 767.98px) { .page-heading, .content-toolbar, .student-toolbar { display: block; } .page-heading .btn { margin-top: 1rem; } .content-toolbar > div, .student-toolbar > div { margin-bottom: .75rem; } .form-grid, .summary-panel { grid-template-columns: 1fr; } .table .actions { text-align: left; } }

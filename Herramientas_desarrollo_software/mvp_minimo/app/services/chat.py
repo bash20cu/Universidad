@@ -1,3 +1,5 @@
+"""Reglas compartidas para validar y presentar conversaciones del chat."""
+
 from __future__ import annotations
 
 import json
@@ -13,6 +15,8 @@ SYSTEM_INSTRUCTIONS = (
 
 
 def normalize_messages(raw_messages: Any) -> list[dict[str, str]]:
+    """Limita tamaño, roles y longitud del historial antes de enviarlo a IA."""
+
     if not isinstance(raw_messages, list) or not raw_messages:
         raise ValueError("Debes enviar al menos un mensaje.")
     normalized = []
@@ -29,14 +33,17 @@ def normalize_messages(raw_messages: Any) -> list[dict[str, str]]:
 
 
 def sse_error(message: str) -> bytes:
+    """Construye un evento SSE de error compatible con el cliente web."""
+
     payload = json.dumps({"error": message}, ensure_ascii=False)
     return f"event: error\ndata: {payload}\n\n".encode()
 
 
 def processing_description(location: str) -> str:
+    """Traduce la ubicación técnica del procesamiento a lenguaje de interfaz."""
+
     return {
         "device": "en el dispositivo que ejecuta el modelo",
         "private_cloud": "en una nube privada administrada por el proveedor",
         "remote": "en una infraestructura remota configurada",
     }.get(location, "según la configuración del proveedor activo")
-

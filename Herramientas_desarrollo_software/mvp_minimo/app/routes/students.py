@@ -1,3 +1,5 @@
+"""CRUD de perfiles académicos con permisos de administración y docencia."""
+
 from flask import Blueprint, abort, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 
@@ -15,6 +17,8 @@ bp = Blueprint("students", __name__, url_prefix="/students")
 @login_required
 @roles_required("administrador", "docente")
 def index():
+    """Lista estudiantes y resume sus niveles asignados."""
+
     students = Student.query.order_by(Student.name.asc()).all()
     level_totals = {
         level: sum(student.assigned_level == level for student in students)
@@ -27,6 +31,8 @@ def index():
 @login_required
 @roles_required("administrador", "docente")
 def create():
+    """Crea un perfil académico y registra la acción en la bitácora."""
+
     form = StudentForm()
     if form.validate_on_submit():
         student = Student(
@@ -46,6 +52,8 @@ def create():
 @login_required
 @roles_required("administrador", "docente")
 def edit(student_id: int):
+    """Actualiza los datos académicos de un estudiante existente."""
+
     student = db.get_or_404(Student, student_id)
     form = StudentForm(obj=student)
     if form.validate_on_submit():
@@ -64,6 +72,8 @@ def edit(student_id: int):
 @login_required
 @roles_required("administrador")
 def delete(student_id: int):
+    """Elimina un estudiante solo si no tiene evaluaciones dependientes."""
+
     student = db.get_or_404(Student, student_id)
     if student.evaluations:
         abort(409, description="No se puede eliminar un estudiante con evaluaciones.")

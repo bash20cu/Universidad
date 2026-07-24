@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Bitácora | TutorIA{% endblock %}
+{% block content %}
+<header class="page-heading"><div><p class="eyebrow">Control y trazabilidad</p><h1>Bitácora del sistema</h1><p>Consulta las últimas acciones realizadas dentro de TutorIA.</p></div><a class="btn btn-outline-primary" href="{{ url_for('users.index') }}">Volver a usuarios</a></header>
+<section class="card-surface p-0 overflow-hidden"><div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead><tr><th>Fecha</th><th>Usuario</th><th>Acción</th><th>Entidad</th><th>Detalle</th><th>IP</th></tr></thead><tbody>{% for entry in entries %}<tr><td>{{ entry.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td><td>{{ entry.user.username if entry.user else 'Sistema/visitante' }}</td><td><span class="badge text-bg-light">{{ entry.action }}</span></td><td>{{ entry.entity_type or '—' }}{% if entry.entity_id %} #{{ entry.entity_id }}{% endif %}</td><td>{{ entry.detail or '—' }}</td><td><code>{{ entry.ip_address or '—' }}</code></td></tr>{% else %}<tr><td colspan="6" class="text-center text-secondary py-5">Todavía no hay eventos registrados.</td></tr>{% endfor %}</tbody></table></div></section>
+{% endblock %}

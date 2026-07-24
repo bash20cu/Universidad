@@ -1,4 +1,4 @@
-"""Panel de control PySide6 para la ejecución local de TutorIA en macOS."""
+"""Interfaz PySide6 para controlar la demo local de TutorIA."""
 
 from __future__ import annotations
 
@@ -29,15 +29,21 @@ except ImportError as error:  # pragma: no cover - se ejecuta solo si falta la d
 
 
 class LogBridge(QWidget):
+    """Puente visual que muestra los mensajes del RuntimeManager."""
+
     """Puente de señales para llevar logs de hilos de procesos al hilo gráfico."""
 
     message = Signal(str)
 
 
 class TutorIALauncher(QMainWindow):
+    """Ventana principal para iniciar, observar y detener los servicios."""
+
     """Ventana principal para operar los servicios locales de TutorIA."""
 
     def __init__(self, project_dir: Path) -> None:
+        """Inicializa el controlador, tarjetas de estado y consola de logs."""
+
         super().__init__()
         self.setWindowTitle("TutorIA · Centro de control")
         self.setMinimumSize(760, 560)
@@ -51,6 +57,8 @@ class TutorIALauncher(QMainWindow):
         self.refresh_status()
 
     def _build_ui(self) -> None:
+        """Construye widgets, botones y distribución de la ventana."""
+
         """Construye una interfaz compacta y legible para una demo académica."""
 
         root = QWidget()
@@ -112,6 +120,8 @@ class TutorIALauncher(QMainWindow):
         )
 
     def append_log(self, message: str) -> None:
+        """Agrega una línea al registro y actualiza el código 2FA demo."""
+
         """Añade mensajes de procesos sin interrumpir la operación del usuario."""
 
         self.logs.append(message)
@@ -125,6 +135,8 @@ class TutorIALauncher(QMainWindow):
             )
 
     def refresh_status(self) -> None:
+        """Sincroniza las tarjetas con el estado real de los procesos."""
+
         """Actualiza indicadores, PID y estado del proveedor cada pocos segundos."""
 
         fm, app = self.manager.statuses()
@@ -136,6 +148,8 @@ class TutorIALauncher(QMainWindow):
         self.info.setText(f"FM: {self.manager.fm_host}:{self.manager.fm_port}   ·   Web: {self.manager.app_url}")
 
     def start_services(self) -> None:
+        """Solicita al administrador iniciar Foundation Models y Flask."""
+
         """Inicia FM y Flask en orden, mostrando cualquier error de arranque."""
 
         try:
@@ -147,6 +161,8 @@ class TutorIALauncher(QMainWindow):
             self.refresh_status()
 
     def stop_services(self) -> None:
+        """Detiene los servicios controlados por la ventana."""
+
         """Apaga los procesos iniciados por el panel."""
 
         self.manager.stop_all()
@@ -154,6 +170,8 @@ class TutorIALauncher(QMainWindow):
         self.refresh_status()
 
     def closeEvent(self, event) -> None:  # noqa: N802 - nombre exigido por Qt.
+        """Cierra servicios propios antes de cerrar la aplicación gráfica."""
+
         """Garantiza la limpieza al cerrar la ventana con la X o Cmd+Q."""
 
         self.manager.stop_all()
@@ -161,6 +179,8 @@ class TutorIALauncher(QMainWindow):
 
 
 def main() -> int:
+    """Crea la aplicación Qt y ejecuta su bucle de eventos."""
+
     """Inicia la aplicación de escritorio desde el directorio del MVP."""
 
     application = QApplication(sys.argv)

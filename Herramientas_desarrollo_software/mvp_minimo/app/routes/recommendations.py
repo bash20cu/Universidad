@@ -1,3 +1,5 @@
+"""Rutas para generar y consultar rutas de aprendizaje explicables."""
+
 from flask import Blueprint, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 

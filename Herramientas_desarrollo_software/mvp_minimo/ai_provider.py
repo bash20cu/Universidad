@@ -1,3 +1,5 @@
+"""Abstracción de proveedores IA para chat y clasificación académica."""
+
 from __future__ import annotations
 
 import json
@@ -10,11 +12,15 @@ from fm_server import FMServerError, FMServerManager
 
 
 class AIProviderError(RuntimeError):
+    """Error común para que las rutas no dependan de un proveedor concreto."""
+
     pass
 
 
 @dataclass(frozen=True)
 class ProviderStatus:
+    """Estado técnico seguro para mostrar disponibilidad sin credenciales."""
+
     provider: str
     available: bool
     model: str
@@ -25,29 +31,45 @@ class ProviderStatus:
     error: str | None = None
 
     def as_dict(self) -> dict:
+        """Serializa el estado para las respuestas JSON del panel web."""
+
         return asdict(self)
 
 
 class ChatProvider(Protocol):
+    """Contrato mínimo requerido por cualquier proveedor de conversación."""
+
     name: str
 
     def ensure_ready(self) -> ProviderStatus:
+        """Prepara el proveedor y devuelve su estado de disponibilidad."""
+
         ...
 
     def status(self) -> ProviderStatus:
+        """Devuelve información técnica segura para la interfaz."""
+
         ...
 
     def stream_chat(self, messages: list[dict[str, str]]) -> Iterable[bytes]:
+        """Produce fragmentos SSE de una respuesta conversacional."""
+
         ...
 
     def complete_chat(self, messages: list[dict[str, str]]) -> str:
+        """Obtiene una respuesta completa para procesos no interactivos."""
+
         ...
 
     def shutdown(self) -> None:
+        """Libera recursos locales o finaliza conexiones mantenidas."""
+
         ...
 
 
 class FoundationModelsProvider:
+    """Implementa chat local mediante el endpoint compatible de ``fm serve``."""
+
     name = "foundation_models"
 
     def __init__(
@@ -58,6 +80,8 @@ class FoundationModelsProvider:
         access_mode: str = "local",
         request_timeout: float = 180,
     ) -> None:
+        """Configura el administrador local y los parámetros del modelo."""
+
         self.manager = manager
         self.model = model
         self.processing_location = processing_location
@@ -65,6 +89,8 @@ class FoundationModelsProvider:
         self.request_timeout = request_timeout
 
     def ensure_ready(self) -> ProviderStatus:
+        """Inicia FM si hace falta y devuelve su estado listo para usar."""
+
         try:
             self.manager.ensure_started()
         except FMServerError as error:
@@ -72,6 +98,8 @@ class FoundationModelsProvider:
         return self.status()
 
     def status(self) -> ProviderStatus:
+        """Consulta la salud local y la transforma al contrato común."""
+
         health = self.manager.health()
         return ProviderStatus(
             provider=self.name,
@@ -85,6 +113,8 @@ class FoundationModelsProvider:
         )
 
     def stream_chat(self, messages: list[dict[str, str]]) -> Iterable[bytes]:
+        """Envía mensajes y retransmite fragmentos SSE de Foundation Models."""
+
         self.ensure_ready()
         payload = {
             "model": self.model,
@@ -115,6 +145,8 @@ class FoundationModelsProvider:
             ) from error
 
     def complete_chat(self, messages: list[dict[str, str]]) -> str:
+        """Solicita una respuesta completa para clasificación diagnóstica."""
+
         self.ensure_ready()
         payload = {
             "model": self.model,
@@ -146,6 +178,8 @@ class FoundationModelsProvider:
             raise AIProviderError("Foundation Models devolvió una respuesta sin contenido utilizable.") from error
 
     def shutdown(self) -> None:
+        """Detiene el servidor local si fue iniciado por el proveedor."""
+
         self.manager.stop()
 
 
@@ -161,6 +195,8 @@ class NVIDIAProvider:
         base_url: str = "https://integrate.api.nvidia.com/v1",
         request_timeout: float = 180,
     ) -> None:
+        """Configura credencial, modelo y endpoint remoto de NVIDIA."""
+
         self.api_key = api_key
         self.model = model
         self.base_url = base_url.rstrip("/")
@@ -246,6 +282,8 @@ class FallbackChatProvider:
     name = "nvidia_with_foundation_fallback"
 
     def __init__(self, primary: ChatProvider, fallback: ChatProvider) -> None:
+        """Recibe proveedor principal remoto y proveedor local de respaldo."""
+
         self.primary = primary
         self.fallback = fallback
         self.active_provider = primary

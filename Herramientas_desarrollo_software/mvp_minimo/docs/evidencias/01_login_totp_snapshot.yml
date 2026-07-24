@@ -1,0 +1,17 @@
+- generic [ref=f2e1]:
+  - navigation [ref=f2e2]:
+    - link "T TutorIA tu aula digital" [ref=f2e4] [cursor=pointer]:
+      - /url: /
+      - generic [ref=f2e5]: T
+      - text: TutorIA tu aula digital
+  - main [ref=f2e6]:
+    - alert [ref=f2e7]: Abre tu aplicación autenticadora e ingresa el código de 6 dígitos.
+    - generic [ref=f2e9]:
+      - paragraph [ref=f2e10]: Segundo factor
+      - heading "Confirma tu acceso" [level=1] [ref=f2e11]
+      - paragraph [ref=f2e12]: Escribe el código de 6 dígitos que aparece en tu aplicación autenticadora.
+      - generic [ref=f2e13]:
+        - generic [ref=f2e14]:
+          - generic [ref=f2e15]: Código de autenticación
+          - textbox "Código de autenticación" [active] [ref=f2e16]
+        - button "Verificar código" [ref=f2e17] [cursor=pointer]

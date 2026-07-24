@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Mi aula | TutorIA{% endblock %}
+{% block content %}
+<section class="welcome-panel">
+  <p class="eyebrow">Mi espacio de aprendizaje</p>
+  <h1 class="h2 mb-1">Hola, {{ current_user.username }}</h1>
+  {% if student %}<p class="text-secondary mb-0">Aquí puedes revisar tu avance y continuar aprendiendo a tu ritmo.</p>{% else %}<p class="text-secondary mb-0">Completa tu perfil para personalizar tu acompañamiento.</p>{% endif %}
+</section>
+{% if student %}
+<div class="row g-3 mb-4">
+  <div class="col-6 col-lg-4"><div class="bg-white border rounded p-4"><div class="text-secondary">Evaluaciones</div><div class="display-6 fw-semibold">{{ metrics.evaluations }}</div></div></div>
+  <div class="col-6 col-lg-4"><div class="bg-white border rounded p-4"><div class="text-secondary">Clasificadas</div><div class="display-6 fw-semibold">{{ metrics.classified }}</div></div></div>
+  <div class="col-6 col-lg-4"><div class="bg-white border rounded p-4"><div class="text-secondary">Recomendaciones</div><div class="display-6 fw-semibold">{{ metrics.recommendations }}</div></div></div>
+</div>
+<div class="card-surface p-4 mb-4"><div class="d-flex justify-content-between align-items-center gap-3 flex-wrap"><div><p class="eyebrow mb-1">Nivel actual</p><h2 class="h4 mb-1">{{ {'basico':'Básico','intermedio':'Intermedio','avanzado':'Avanzado'}[student.assigned_level] }}</h2><p class="text-secondary mb-0">Área de interés: {{ student.interest_area }}</p></div><span class="badge text-bg-primary fs-6">Tu progreso</span></div></div>
+{% else %}
+<div class="alert alert-info">Aún no tienes un perfil académico. Completa tus datos para que TutorIA pueda acompañarte mejor.</div>
+{% endif %}
+<div class="d-flex flex-wrap gap-2"><a class="btn btn-primary" href="{{ url_for('chat.page') }}">Conversar con TutorIA</a><a class="btn btn-outline-primary" href="{{ url_for('student_portal.profile') }}">{{ 'Editar mi perfil' if student else 'Completar mi perfil' }}</a>{% if student %}<a class="btn btn-outline-secondary" href="{{ url_for('student_portal.progress') }}">Ver mi progreso</a>{% endif %}</div>
+{% endblock %}

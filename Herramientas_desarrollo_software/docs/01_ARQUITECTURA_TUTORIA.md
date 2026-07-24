@@ -23,7 +23,7 @@ TutorIA es una aplicación web local para apoyar evaluaciones diagnósticas, cla
 | Contenidos | `app/models/EducationalContent` | Catálogo de recursos por tema, nivel y competencia. |
 | Evaluación diagnóstica | `app/models/DiagnosticEvaluation`, `DiagnosticAnswer` | Registro de respuestas y resultado de clasificación. |
 | IA | `ai_provider.py`, `fm_server.py`, `app/services/chat.py` | Abstracción, estado, streaming y proveedor Foundation Models. |
-| Correo 2FA | `app/services/email.py` | Envío de código por consola o Resend. |
+| TOTP 2FA | `app/services/two_factor.py` | Generación de secretos, QR y validación de códigos mediante una aplicación autenticadora. |
 | Bitácora | `app/services/audit.py`, `app/models/AuditLog` | Registro de eventos importantes. |
 | Interfaz | `app/templates`, `app/static` | Pantallas Jinja2 con Bootstrap local. |
 

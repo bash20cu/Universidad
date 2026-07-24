@@ -28,6 +28,11 @@ Bitácora viva para registrar avances, decisiones, evidencia y próximos pasos d
 | 2026-07-23 | Miguel / Codex | Calidad y documentación | Se amplía la suite a 21 pruebas aprobadas, se refresca la interfaz con tono colegial y se crea la arquitectura explicativa en español. | `pytest: 21 passed`, `mvp_minimo/ARQUITECTURA_TUTORIA.md`, `docs/06_TAREAS_IMPLEMENTACION_MVP.md`. | Validar Foundation Models/Resend reales y completar informe académico. |
 | 2026-07-23 | Miguel / Codex | Herramienta de ejecución | Se agrega centro de control PySide6 para encender, observar y apagar Foundation Models y Flask, con estados, PID, puertos y logs. | `desktop_launcher.py`, `runtime_manager.py`, `Iniciar_TutorIA_Desktop.command`. Prueba real: ambos servicios encendidos y apagados correctamente. | Revisar visualmente el panel y preparar captura para la demo. |
 | 2026-07-23 | Miguel / Codex | Integración IA | Se agrega NVIDIA NIM como proveedor principal mediante `NVIDIA_API_KEY`, con fallback automático a Foundation Models y carga segura desde `.env`. | `NVIDIAProvider`, `FallbackChatProvider`, `.env.example` sin secretos y `python-dotenv`. | Revocar claves expuestas, generar nuevas y validar una llamada NVIDIA real. |
+| 2026-07-23 | Miguel / Codex | Usuarios y calidad | Se agrega autorregistro público de cuentas estudiantiles con contraseña cifrada, correo único, rol seguro y evento de bitácora. La suite queda en 22 pruebas. | `/auth/register`, `RegistrationForm`, `auth/register.html`, `pytest: 22 passed`. | Validar registro y 2FA con correo real durante la demo. |
+| 2026-07-23 | Miguel / Codex | Calidad de código | Se documentan clases, funciones y métodos de producción con docstrings y comentarios académicos en español; la revisión AST confirma cobertura completa. | Módulos Python de `mvp_minimo`; `22 passed`. | Mantener la documentación al agregar nuevas clases o funciones. |
+| 2026-07-23 | Miguel / Codex | Expansión funcional | Se implementa portal privado del estudiante, vínculo `User`-`Student`, edición de perfil, consulta de progreso y visor administrativo de bitácora. | Blueprint `student_portal`, `/users/audit`, templates `student` y `audit`; `pytest: 24 passed`. | Administrar preguntas, enriquecer contenidos y preparar migración de esquema. |
+| 2026-07-23 | Miguel / Codex | Seguridad | Se integra segundo factor TOTP gratuito con secreto por usuario, QR de aprovisionamiento, activación desde el perfil, validación en login y migración compatible para bases SQLite existentes. Se elimina el envío de códigos por correo del flujo de autenticación. | `/auth/totp/setup`, `/auth/verify-totp`, `pyotp`, `qrcode[pil]`; `pytest: 26 passed`. | Agregar códigos de recuperación. |
+| 2026-07-23 | Miguel / Codex | Registro y seguridad | El autorregistro ahora crea el secreto TOTP y muestra el QR inmediatamente; la cuenta no entra al panel hasta confirmar el código de Google Authenticator. | `/auth/register/2fa`; `pytest: 27 passed`. | Agregar códigos de recuperación. |
 
 ## Decisiones Vigentes
 
@@ -47,6 +52,8 @@ Bitácora viva para registrar avances, decisiones, evidencia y próximos pasos d
 | Alta | Clasificación IA estructurada | Miguel | Completado |
 | Media | Recomendaciones de contenidos | Miguel / Roberto | Completado inicial |
 | Media | Reportes básicos | Roberto | Completado inicial |
-| Media | Gestión simple de usuarios | Miguel | Completado inicial |
+| Media | Gestión de usuarios y autorregistro | Miguel | Completado inicial |
+| Alta | Portal privado del estudiante y bitácora visible | Miguel | Completado |
 | Media | Prueba real con Resend | Miguel | Pendiente |
+| Media | Códigos de recuperación para TOTP | Miguel | Pendiente |
 | Alta | Actualizar informe Word con arquitectura y pruebas | Miguel / Roberto | Pendiente |

@@ -1,3 +1,5 @@
+"""Reportes académicos calculados desde evaluaciones y recomendaciones."""
+
 from flask import Blueprint, render_template
 from flask_login import current_user, login_required
 
@@ -25,9 +27,21 @@ def index():
             "evaluations": evaluations,
             "classified": sum(evaluation.status == "clasificada" for evaluation in evaluations),
             "recommendations": ContentRecommendation.query.filter_by(student_id=student.id).count(),
+            "progress": round((sum(evaluation.status == "clasificada" for evaluation in evaluations) / len(evaluations)) * 100) if evaluations else 0,
         })
+    level_totals = {
+        level: sum(student.assigned_level == level for student in students)
+        for level in ("basico", "intermedio", "avanzado")
+    }
+    report_metrics = {
+        "students": len(students),
+        "evaluations": sum(len(summary["evaluations"]) for summary in summaries),
+        "classified": sum(summary["classified"] for summary in summaries),
+        "recommendations": sum(summary["recommendations"] for summary in summaries),
+        "levels": level_totals,
+    }
     record_event("report_viewed", user_id=current_user.id, entity_type="report", detail="Reporte general consultado")
-    return render_template("reports/index.html", summaries=summaries)
+    return render_template("reports/index.html", summaries=summaries, report_metrics=report_metrics)
 
 
 @bp.get("/<int:student_id>")
@@ -39,5 +53,6 @@ def detail(student_id: int):
     student = db.get_or_404(Student, student_id)
     evaluations = DiagnosticEvaluation.query.filter_by(student_id=student.id).order_by(DiagnosticEvaluation.created_at.desc()).all()
     recommendations = ContentRecommendation.query.filter_by(student_id=student.id).order_by(ContentRecommendation.created_at.desc()).all()
+    progress = round((sum(evaluation.status == "clasificada" for evaluation in evaluations) / len(evaluations)) * 100) if evaluations else 0
     record_event("report_viewed", user_id=current_user.id, entity_type="student_report", entity_id=str(student.id), detail=student.name)
-    return render_template("reports/detail.html", student=student, evaluations=evaluations, recommendations=recommendations)
+    return render_template("reports/detail.html", student=student, evaluations=evaluations, recommendations=recommendations, progress=progress)
