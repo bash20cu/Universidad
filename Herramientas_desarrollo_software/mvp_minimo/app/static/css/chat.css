@@ -387,6 +387,15 @@ button {
   font-size: 12px;
 }
 
+.response-meta {
+  display: block;
+  margin-top: 13px;
+  color: #7c8799;
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: .01em;
+}
+
 .plain-body,
 .markdown-body {
   font-size: 16px;

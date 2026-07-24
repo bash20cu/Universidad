@@ -6,7 +6,9 @@ from typing import Any
 
 from flask import Flask
 
-from ai_provider import ChatProvider, FoundationModelsProvider
+from dotenv import load_dotenv
+
+from ai_provider import ChatProvider, FallbackChatProvider, FoundationModelsProvider, NVIDIAProvider
 from fm_server import FMServerManager
 
 from app.extensions import csrf, db, login_manager
@@ -17,6 +19,10 @@ def create_app(config: dict[str, Any] | None = None, provider: ChatProvider | No
     app = Flask(__name__)
     instance_path = Path(app.instance_path)
     instance_path.mkdir(parents=True, exist_ok=True)
+    # Las claves viven en `.env`, nunca en el código ni en `.env.example`.
+    # Las pruebas no deben leer credenciales reales ni llamar proveedores externos.
+    if not (config and config.get("TESTING")):
+        load_dotenv(Path(app.root_path).parent / ".env")
     app.config.from_mapping(
         SECRET_KEY=os.getenv("SECRET_KEY", "dev-change-this-secret"),
         SQLALCHEMY_DATABASE_URI=os.getenv("DATABASE_URL", f"sqlite:///{instance_path / 'tutoria.db'}"),
@@ -35,6 +41,10 @@ def create_app(config: dict[str, Any] | None = None, provider: ChatProvider | No
         FM_START_TIMEOUT=float(os.getenv("FM_START_TIMEOUT", "20")),
         AI_PROCESSING_LOCATION=os.getenv("AI_PROCESSING_LOCATION", "device"),
         APP_ACCESS_MODE=os.getenv("APP_ACCESS_MODE", "local"),
+        AI_PRIMARY_PROVIDER=os.getenv("AI_PRIMARY_PROVIDER", "nvidia"),
+        NVIDIA_API_KEY=os.getenv("NVIDIA_API_KEY") or os.getenv("API_KEY"),
+        NVIDIA_MODEL=os.getenv("NVIDIA_MODEL", "meta/llama-3.1-8b-instruct"),
+        NVIDIA_BASE_URL=os.getenv("NVIDIA_BASE_URL", "https://integrate.api.nvidia.com/v1"),
     )
     if config:
         app.config.update(config)
@@ -51,11 +61,22 @@ def create_app(config: dict[str, Any] | None = None, provider: ChatProvider | No
             command=app.config["FM_COMMAND"], host=app.config["FM_HOST"],
             port=app.config["FM_PORT"], start_timeout=app.config["FM_START_TIMEOUT"],
         )
-        provider = FoundationModelsProvider(
+        foundation_provider = FoundationModelsProvider(
             manager=manager, model=app.config["FM_MODEL"],
             processing_location=app.config["AI_PROCESSING_LOCATION"],
             access_mode=app.config["APP_ACCESS_MODE"],
         )
+        if app.config["AI_PRIMARY_PROVIDER"] == "nvidia" and app.config["NVIDIA_API_KEY"]:
+            provider = FallbackChatProvider(
+                primary=NVIDIAProvider(
+                    api_key=app.config["NVIDIA_API_KEY"],
+                    model=app.config["NVIDIA_MODEL"],
+                    base_url=app.config["NVIDIA_BASE_URL"],
+                ),
+                fallback=foundation_provider,
+            )
+        else:
+            provider = foundation_provider
     app.extensions["ai_provider"] = provider
 
     from app.routes.auth import bp as auth_bp
@@ -63,13 +84,19 @@ def create_app(config: dict[str, Any] | None = None, provider: ChatProvider | No
     from app.routes.contents import bp as contents_bp
     from app.routes.diagnostics import bp as diagnostics_bp
     from app.routes.main import bp as main_bp
+    from app.routes.recommendations import bp as recommendations_bp
+    from app.routes.reports import bp as reports_bp
     from app.routes.students import bp as students_bp
+    from app.routes.users import bp as users_bp
     app.register_blueprint(auth_bp)
     app.register_blueprint(chat_bp)
     app.register_blueprint(contents_bp)
     app.register_blueprint(diagnostics_bp)
     app.register_blueprint(main_bp)
+    app.register_blueprint(recommendations_bp)
+    app.register_blueprint(reports_bp)
     app.register_blueprint(students_bp)
+    app.register_blueprint(users_bp)
 
     @login_manager.user_loader
     def load_user(user_id: str):

@@ -24,6 +24,17 @@ Después inicia Flask; `run.py` comprueba `fm serve`, lo despierta si está
 detenido, abre el navegador automáticamente y lo cierra al recibir `Ctrl+C`.
 
 También se puede abrir `Iniciar_TutorIA.command` con doble clic desde Finder.
+
+Para operar la aplicación y Foundation Models desde una ventana de escritorio,
+usa el nuevo centro de control PySide6:
+
+```bash
+./Iniciar_TutorIA_Desktop.command
+```
+
+El panel permite encender y apagar Flask y `fm serve`, mostrar sus estados,
+puertos, PID y logs de ejecución. Si detecta un `fm serve` iniciado previamente,
+verifica que sea el proceso correcto antes de adoptarlo para poder cerrarlo.
 La aplicación utilizará `http://127.0.0.1:5050` para evitar el puerto 5000, que
 macOS puede reservar para AirPlay Receiver.
 
@@ -56,6 +67,23 @@ servidor saludable en ese puerto, lo reutiliza. Si lo inicia ella misma, intenta
 cerrarlo cuando termina el proceso Flask. El cierre está cubierto por `Ctrl+C`,
 `SIGTERM`, un bloque `finally` y `atexit`. Un cierre forzado con `SIGKILL` o una
 pérdida de energía no permite ejecutar limpieza en ningún programa.
+
+## NVIDIA como proveedor principal
+
+TutorIA usa NVIDIA NIM como proveedor principal cuando existe `NVIDIA_API_KEY`.
+Foundation Models permanece como fallback local si la solicitud remota falla.
+La API de NVIDIA usa el endpoint compatible con OpenAI
+`https://integrate.api.nvidia.com/v1/chat/completions` y el modelo se configura
+con `NVIDIA_MODEL`.
+
+Configura las claves únicamente en un archivo `.env` local:
+
+```bash
+cp .env.example .env
+```
+
+Después completa `RESEND_API_KEY` y `NVIDIA_API_KEY` en `.env`. No guardes esas
+claves en `.env.example`, Git ni capturas del informe.
 
 ## Arquitectura abstracta
 
@@ -101,10 +129,12 @@ En desarrollo, el código 2FA aparece en la consola. Para correo real, configura
 
 - `app/models`: persistencia SQLAlchemy.
 - `app/routes`: autenticación, panel y chat.
-- `app/services`: 2FA, correo, bitácora y conversación.
+- `app/services`: 2FA, correo, bitácora, diagnóstico y recomendaciones.
 - `app/forms`: formularios validados y protegidos con CSRF.
 - `app/templates` y `app/static`: interfaz Jinja2, chat y Bootstrap 5.3.8
   versionado localmente en `app/static/vendor/bootstrap/5.3.8`.
+- `runtime_manager.py` y `desktop_launcher.py`: control local de procesos y UI
+  PySide6 para la demo en macOS.
 
 ## Endpoints
 
@@ -127,6 +157,13 @@ En desarrollo, el código 2FA aparece en la consola. Para correo real, configura
 - `GET /chat/api/status`: disponibilidad del modelo.
 - `POST /chat/api/provider/wake`: prepara el proveedor.
 - `POST /chat/api/chat`: proxy SSE protegido hacia el proveedor.
+- `GET /recommendations`: estudiantes con ruta de aprendizaje.
+- `GET /recommendations/<id>`: recomendaciones de un estudiante.
+- `GET /reports`: reporte general de progreso.
+- `GET /reports/<id>`: reporte individual.
+- `GET /users`: administración de usuarios para el administrador.
+- `GET|POST /users/new`: creación de usuarios.
+- `GET|POST /users/<id>/edit`: edición de usuarios.
 
 ## Pruebas
 
@@ -136,7 +173,8 @@ pytest
 
 Las pruebas utilizan un servidor FM simulado y no consumen el modelo real.
 También validan autenticación, 2FA, autorización por roles, CRUD de estudiantes,
-CRUD de contenidos educativos, evaluación diagnóstica inicial y registros de bitácora.
+CRUD de contenidos educativos, evaluación diagnóstica, clasificación, recomendaciones,
+reportes, usuarios y registros de bitácora.
 
 ## Solución de problemas
 

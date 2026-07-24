@@ -4,9 +4,10 @@ from datetime import datetime, timezone
 
 from flask import Blueprint, current_app, flash, redirect, render_template, session, url_for
 from flask_login import current_user, login_user, logout_user
+from sqlalchemy.exc import IntegrityError
 
 from app.extensions import db
-from app.forms import LoginForm, TwoFactorForm
+from app.forms import LoginForm, RegistrationForm, TwoFactorForm
 from app.models import TwoFactorCode, User
 from app.services.audit import record_event
 from app.services.email import EmailDeliveryError, send_two_factor_code
@@ -14,6 +15,45 @@ from app.services.two_factor import TwoFactorError, issue_code, verify_code
 
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
+
+
+@bp.route("/register", methods=["GET", "POST"])
+def register():
+    """Crea una cuenta estudiantil sin permitir elevación de privilegios."""
+
+    if current_user.is_authenticated:
+        return redirect(url_for("main.dashboard"))
+
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        username = form.username.data.strip()
+        email = form.email.data.strip().lower()
+        if User.query.filter((User.username == username) | (User.email == email)).first():
+            flash("El usuario o correo ya están registrados.", "warning")
+            return render_template("auth/register.html", form=form), 409
+
+        user = User(username=username, email=email, role="estudiante", active=True)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        try:
+            db.session.flush()
+            record_event(
+                "user_registered",
+                user_id=user.id,
+                entity_type="User",
+                entity_id=str(user.id),
+                detail="Autorregistro de cuenta estudiantil",
+            )
+        except IntegrityError:
+            db.session.rollback()
+            flash("No se pudo crear la cuenta porque el usuario o correo ya existe.", "warning")
+            return render_template("auth/register.html", form=form), 409
+
+        db.session.commit()
+        flash("Cuenta creada. Ya puedes iniciar sesión y confirmar tu correo con 2FA.", "success")
+        return redirect(url_for("auth.login"))
+
+    return render_template("auth/register.html", form=form)
 
 
 @bp.route("/login", methods=["GET", "POST"])
@@ -79,4 +119,3 @@ def logout():
     if user_id:
         record_event("logout", user_id=user_id)
     return redirect(url_for("auth.login"))
-

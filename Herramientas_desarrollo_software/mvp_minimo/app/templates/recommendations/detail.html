@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Ruta sugerida | TutorIA{% endblock %}
+{% block content %}
+<header class="page-heading"><div><a href="{{ url_for('recommendations.index') }}">Volver a recomendaciones</a><p class="eyebrow">Ruta de aprendizaje</p><h1>{{ student.name }}</h1><p>Basada en el diagnóstico más reciente y su interés en {{ student.interest_area }}.</p></div><span class="level-badge level-{{ student.assigned_level }}">Nivel {{ {'basico':'básico','intermedio':'intermedio','avanzado':'avanzado'}[student.assigned_level] }}</span></header>
+<section class="card-grid">{% for recommendation in recommendations %}<article class="recommendation-card"><span class="eyebrow">{{ recommendation.content.topic }}</span><h2>{{ recommendation.content.title }}</h2><p>{{ recommendation.content.description }}</p><p class="recommendation-reason">{{ recommendation.reason }}</p><strong>Competencia: {{ recommendation.content.competency }}</strong></article>{% else %}<p class="empty-state">No encontramos contenidos del nivel actual. Agrega recursos a la biblioteca.</p>{% endfor %}</section>
+{% endblock %}

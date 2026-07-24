@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Reportes | TutorIA{% endblock %}
+{% block content %}
+<header class="page-heading"><div><p class="eyebrow">Seguimiento académico</p><h1>Reportes de progreso</h1><p>Una vista rápida para conversar con cada estudiante sobre sus próximos pasos.</p></div></header>
+<section class="table-responsive card-surface"><table class="table"><thead><tr><th>Estudiante</th><th>Nivel</th><th>Evaluaciones</th><th>Clasificadas</th><th>Recomendaciones</th><th></th></tr></thead><tbody>{% for summary in summaries %}<tr><td><strong>{{ summary.student.name }}</strong><small>{{ summary.student.interest_area }}</small></td><td><span class="level-badge level-{{ summary.student.assigned_level }}">{{ {'basico':'Básico','intermedio':'Intermedio','avanzado':'Avanzado'}[summary.student.assigned_level] }}</span></td><td>{{ summary.evaluations|length }}</td><td>{{ summary.classified }}</td><td>{{ summary.recommendations }}</td><td><a class="btn btn-outline-secondary btn-sm" href="{{ url_for('reports.detail', student_id=summary.student.id) }}">Ver reporte</a></td></tr>{% else %}<tr><td colspan="6" class="empty-state">Aún no hay información para reportar.</td></tr>{% endfor %}</tbody></table></section>
+{% endblock %}

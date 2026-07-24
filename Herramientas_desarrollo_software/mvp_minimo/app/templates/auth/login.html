@@ -3,4 +3,4 @@
 <form method="post" class="bg-white border rounded p-4">{{ form.hidden_tag() }}
 <div class="mb-3">{{ form.username.label(class="form-label") }}{{ form.username(class="form-control", autocomplete="username") }}</div>
 <div class="mb-3">{{ form.password.label(class="form-label") }}{{ form.password(class="form-control", autocomplete="current-password") }}</div>
-{{ form.submit(class="btn btn-primary w-100") }}</form></div></div>{% endblock %}
+{{ form.submit(class="btn btn-primary w-100") }}<p class="text-center text-secondary small mt-3 mb-0">¿Primera vez aquí? <a href="{{ url_for('auth.register') }}">Crea tu cuenta</a></p></form></div></div>{% endblock %}

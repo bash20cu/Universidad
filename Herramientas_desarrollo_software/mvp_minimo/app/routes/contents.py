@@ -89,6 +89,10 @@ def edit(content_id: int):
 @roles_required("administrador")
 def delete(content_id: int):
     content = db.get_or_404(EducationalContent, content_id)
+    # Conserva la trazabilidad académica: un recurso ya recomendado no se elimina
+    # mientras exista evidencia que lo vincule a una ruta de aprendizaje.
+    if content.recommendations:
+        abort(409, description="No se puede eliminar un contenido que ya fue recomendado.")
     content_title = content.title
     db.session.delete(content)
     db.session.commit()

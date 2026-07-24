@@ -40,6 +40,7 @@ form.addEventListener("submit", async (event) => {
 
   const assistant = appendMessage("assistant", "");
   const textElement = assistant.querySelector(".markdown-body");
+  const responseMeta = assistant.querySelector("[data-response-meta]");
   textElement.classList.add("stream-cursor");
   setStreaming(true);
 
@@ -71,8 +72,12 @@ form.addEventListener("submit", async (event) => {
       for (const eventBlock of events) {
         const parsed = parseSSE(eventBlock);
         if (!parsed) continue;
-        if (parsed.done) break;
+        if (parsed.done) continue;
         if (parsed.error) throw new Error(parsed.error);
+        if (parsed.meta) {
+          updateResponseMeta(responseMeta, parsed.meta);
+          continue;
+        }
         if (parsed.content) {
           completeText += parsed.content;
           renderMessageContent(textElement, completeText, "assistant");
@@ -116,6 +121,7 @@ function parseSSE(block) {
   }
 
   return {
+    meta: eventName === "meta" ? payload : null,
     content: payload.choices?.[0]?.delta?.content || "",
   };
 }
@@ -141,10 +147,27 @@ function appendMessage(role, content) {
   renderMessageContent(body, content, role);
 
   messageContent.append(meta, body);
+  if (role === "assistant") {
+    const responseMeta = document.createElement("div");
+    responseMeta.dataset.responseMeta = "true";
+    responseMeta.textContent = "Preparando ficha técnica…";
+    messageContent.append(responseMeta);
+  }
   article.append(avatar, messageContent);
   messagesElement.append(article);
   scrollToBottom();
   return article;
+}
+
+function updateResponseMeta(element, metadata) {
+  if (!element) return;
+  const tokens = metadata.tokens;
+  const tokenCopy = tokens
+    ? `${tokens.total ?? "?"} tokens ${tokens.source}`
+    : "calculando tokens";
+  const timeCopy = metadata.elapsed_ms ? `${metadata.elapsed_ms} ms` : "en curso";
+  element.textContent = `${metadata.model || "modelo desconocido"} · ${tokenCopy} · ${timeCopy} · ${metadata.network || "red no disponible"}`;
+  element.title = `Proveedor: ${metadata.provider || "desconocido"} | Acceso: ${metadata.access_mode || "desconocido"}`;
 }
 
 function renderMessageContent(element, content, role) {

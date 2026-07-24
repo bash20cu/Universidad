@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block title %}{{ title }} | TutorIA{% endblock %}
-{% block styles %}<link href="{{ url_for('static', filename='css/students.css') }}" rel="stylesheet">{% endblock %}
 {% block content %}<div class="form-shell"><header class="form-heading"><a href="{{ url_for('students.index') }}">Volver a estudiantes</a><p class="eyebrow">Gestión académica</p><h1>{{ title }}</h1><p>Completa la información necesaria para personalizar su experiencia educativa.</p></header>
 <form method="post" class="student-form" novalidate>{{ form.hidden_tag() }}
 <section><h2>Información personal</h2><div class="form-grid"><div>{{ form.name.label(class="form-label") }}{{ form.name(class="form-control", placeholder="Nombre y apellidos", autocomplete="name") }}{% for error in form.name.errors %}<div class="field-error">{{ error }}</div>{% endfor %}</div><div>{{ form.age.label(class="form-label") }}{{ form.age(class="form-control", min="5", max="120", inputmode="numeric") }}{% for error in form.age.errors %}<div class="field-error">{{ error }}</div>{% endfor %}</div></div></section>

@@ -46,7 +46,7 @@ TutorIA es una aplicación web local para apoyar evaluaciones diagnósticas, cla
 4. La respuesta se transmite por Server-Sent Events para la pantalla de chat.
 5. Para diagnóstico, el siguiente paso será pedir una salida estructurada y validarla antes de persistir.
 
-## Arquitectura Del Diagnóstico Pendiente
+## Arquitectura Del Flujo Académico
 
 ```mermaid
 flowchart TD
@@ -67,10 +67,12 @@ flowchart TD
 | `two_factor_codes` | Implementada | Códigos 2FA hasheados. |
 | `audit_logs` | Implementada | Bitácora de acciones. |
 | `students` | Implementada | Perfiles de estudiantes. |
-| `educational_contents` | Modelo y seed | Pendiente CRUD visual. |
-| `diagnostic_questions` | Modelo y seed | Pendiente pantalla de evaluación. |
-| `diagnostic_evaluations` | Modelo | Pendiente flujo funcional. |
-| `diagnostic_answers` | Modelo | Pendiente captura funcional. |
+| `educational_contents` | Modelo, seed y CRUD | Biblioteca clasificada por tema, nivel y competencia. |
+| `diagnostic_questions` | Modelo, seed y formulario | Preguntas activas para diagnóstico. |
+| `diagnostic_evaluations` | Modelo y flujo | Guarda estado, nivel y explicación de IA. |
+| `diagnostic_answers` | Modelo y flujo | Conserva respuestas asociadas a cada pregunta. |
+| `content_recommendations` | Modelo y servicio | Relaciona estudiante, evaluación y contenido sugerido. |
+| `audit_logs` | Modelo y servicio | Trazabilidad de operaciones importantes. |
 
 ## Despliegue Local
 
@@ -82,7 +84,6 @@ flowchart TD
 
 ## Decisiones Pendientes
 
-- Definir formato final de salida estructurada para clasificación IA.
-- Definir si el docente puede editar usuarios o solo el administrador.
-- Definir el nivel de detalle de reportes para el MVP.
+- Confirmar prueba real de Foundation Models antes de documentarlo como completado.
 - Confirmar prueba real de Resend antes de documentarlo como completado.
+- Preparar UML, evidencias y el informe final.

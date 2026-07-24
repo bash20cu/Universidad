@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Crear cuenta | TutorIA{% endblock %}
+{% block content %}
+<div class="row justify-content-center py-4 py-md-5">
+  <div class="col-md-8 col-lg-5">
+    <div class="text-center mb-4">
+      <p class="eyebrow">Tu aula digital</p>
+      <h1 class="h3 mb-2">Crea tu cuenta</h1>
+      <p class="text-secondary mb-0">Regístrate como estudiante y empieza a trabajar con TutorIA.</p>
+    </div>
+    <form method="post" class="bg-white border rounded-4 shadow-sm p-4" novalidate>
+      {{ form.hidden_tag() }}
+      <div class="mb-3">
+        {{ form.username.label(class="form-label") }}
+        {{ form.username(class="form-control", autocomplete="username", placeholder="Ej. migue9009") }}
+        {% for error in form.username.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+      </div>
+      <div class="mb-3">
+        {{ form.email.label(class="form-label") }}
+        {{ form.email(class="form-control", autocomplete="email", placeholder="tu-correo@ejemplo.com") }}
+        <div class="form-text">Usaremos este correo para enviarte el código 2FA.</div>
+        {% for error in form.email.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+      </div>
+      <div class="mb-3">
+        {{ form.password.label(class="form-label") }}
+        {{ form.password(class="form-control", autocomplete="new-password") }}
+        {% for error in form.password.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+      </div>
+      <div class="mb-4">
+        {{ form.confirm_password.label(class="form-label") }}
+        {{ form.confirm_password(class="form-control", autocomplete="new-password") }}
+        {% for error in form.confirm_password.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+      </div>
+      {{ form.submit(class="btn btn-primary w-100") }}
+      <p class="text-center text-secondary small mt-3 mb-0">¿Ya tienes cuenta? <a href="{{ url_for('auth.login') }}">Inicia sesión</a></p>
+    </form>
+  </div>
+</div>
+{% endblock %}

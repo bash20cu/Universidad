@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block title %}Diagnósticos | TutorIA{% endblock %}
-{% block styles %}<link href="{{ url_for('static', filename='css/diagnostics.css') }}" rel="stylesheet">{% endblock %}
 {% block content %}
 <header class="page-heading"><div><p class="eyebrow">Evaluación adaptativa</p><h1>Evaluaciones diagnósticas</h1><p>Consulta las evaluaciones registradas y su estado de clasificación.</p></div><a class="btn btn-primary" href="{{ url_for('diagnostics.create') }}">Nueva evaluación</a></header>
 <section class="metric-grid" aria-label="Resumen de evaluaciones"><div class="metric"><span>Total</span><strong>{{ evaluations|length }}</strong></div><div class="metric level-medium"><span>Pendientes IA</span><strong>{{ status_totals.pendiente_ia }}</strong></div><div class="metric level-advanced"><span>Clasificadas</span><strong>{{ status_totals.clasificada }}</strong></div></section>

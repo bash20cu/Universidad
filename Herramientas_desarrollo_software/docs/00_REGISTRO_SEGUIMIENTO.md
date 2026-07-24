@@ -24,6 +24,10 @@ Bitácora viva para registrar avances, decisiones, evidencia y próximos pasos d
 | 2026-07-11 | Miguel / Codex | Implementación | Se implementa clasificación IA estructurada para evaluaciones diagnósticas: contrato JSON, validación, persistencia de nivel y actualización del estudiante. | `app/services/diagnostic.py`, botón `Clasificar con IA` y pytest. | Implementar recomendaciones por nivel. |
 | 2026-07-11 | Miguel / Codex | Mejora UI | Se implementa renderer Markdown seguro en el chat para títulos, negritas, listas, código inline y bloques de código con HTML escapado. | `app/static/js/chat.js`, `app/static/css/chat.css`, `chat.html` versionado. | Validar con respuesta real del modelo FM. |
 | 2026-07-11 | Miguel / Codex | Mejora UI | Se agrega tarjeta visible de ejecución local en el chat: App Flask, endpoint del modelo, invocación `fm serve` y estado del proceso. | Chat `/chat`, rail técnico y QA visual. | Validar con Foundation Models disponible en demo. |
+| 2026-07-23 | Miguel / Codex | Implementación | Se integran recomendaciones trazables por nivel y área de interés, reportes generales/individuales y administración básica de usuarios. | Rutas `/recommendations`, `/reports`, `/users`, modelo `ContentRecommendation` y plantillas nuevas. | Ejecutar validación funcional y preparar evidencias. |
+| 2026-07-23 | Miguel / Codex | Calidad y documentación | Se amplía la suite a 21 pruebas aprobadas, se refresca la interfaz con tono colegial y se crea la arquitectura explicativa en español. | `pytest: 21 passed`, `mvp_minimo/ARQUITECTURA_TUTORIA.md`, `docs/06_TAREAS_IMPLEMENTACION_MVP.md`. | Validar Foundation Models/Resend reales y completar informe académico. |
+| 2026-07-23 | Miguel / Codex | Herramienta de ejecución | Se agrega centro de control PySide6 para encender, observar y apagar Foundation Models y Flask, con estados, PID, puertos y logs. | `desktop_launcher.py`, `runtime_manager.py`, `Iniciar_TutorIA_Desktop.command`. Prueba real: ambos servicios encendidos y apagados correctamente. | Revisar visualmente el panel y preparar captura para la demo. |
+| 2026-07-23 | Miguel / Codex | Integración IA | Se agrega NVIDIA NIM como proveedor principal mediante `NVIDIA_API_KEY`, con fallback automático a Foundation Models y carga segura desde `.env`. | `NVIDIAProvider`, `FallbackChatProvider`, `.env.example` sin secretos y `python-dotenv`. | Revocar claves expuestas, generar nuevas y validar una llamada NVIDIA real. |
 
 ## Decisiones Vigentes
 
@@ -41,8 +45,8 @@ Bitácora viva para registrar avances, decisiones, evidencia y próximos pasos d
 | Alta | CRUD de contenidos educativos | Miguel | Completado |
 | Alta | Evaluación diagnóstica | Miguel / Roberto | Completado inicial |
 | Alta | Clasificación IA estructurada | Miguel | Completado |
-| Media | Recomendaciones de contenidos | Miguel / Roberto | Próximo |
-| Media | Reportes básicos | Roberto | Pendiente |
-| Media | Gestión simple de usuarios | Miguel | Pendiente |
+| Media | Recomendaciones de contenidos | Miguel / Roberto | Completado inicial |
+| Media | Reportes básicos | Roberto | Completado inicial |
+| Media | Gestión simple de usuarios | Miguel | Completado inicial |
 | Media | Prueba real con Resend | Miguel | Pendiente |
 | Alta | Actualizar informe Word con arquitectura y pruebas | Miguel / Roberto | Pendiente |

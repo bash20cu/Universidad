@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block title %}Nueva evaluación | TutorIA{% endblock %}
-{% block styles %}<link href="{{ url_for('static', filename='css/diagnostics.css') }}" rel="stylesheet">{% endblock %}
 {% block content %}<div class="form-shell"><header class="form-heading"><a href="{{ url_for('diagnostics.index') }}">Volver a diagnósticos</a><p class="eyebrow">Evaluación adaptativa</p><h1>Nueva evaluación diagnóstica</h1><p>Registra respuestas para que luego puedan clasificarse mediante IA.</p></header>
 <form method="post" class="diagnostic-form" novalidate>{{ form.hidden_tag() }}
 <section><h2>Estudiante evaluado</h2>{{ form.student_id.label(class="form-label") }}{{ form.student_id(class="form-select") }}{% for error in form.student_id.errors %}<div class="field-error">{{ error }}</div>{% endfor %}</section>

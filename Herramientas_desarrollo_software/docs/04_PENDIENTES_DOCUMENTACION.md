@@ -39,8 +39,8 @@ Este archivo controla lo que falta preparar para el informe universitario y anex
 - Captura de CRUD de estudiantes.
 - Captura de CRUD de contenidos cuando exista.
 - Captura de evaluación diagnóstica registrada.
-- Captura de recomendación de contenidos cuando exista.
-- Resultado de `python -m pytest -q`.
+- Captura de recomendación de contenidos por estudiante.
+- Resultado de `python -m pytest -q` (`21 passed` en la última ejecución).
 - Prueba de envío Resend real si se configura.
 
 ## Fuentes Técnicas A Citar En APA 7

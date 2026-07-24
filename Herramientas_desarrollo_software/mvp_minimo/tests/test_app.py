@@ -9,7 +9,7 @@ import pytest
 from ai_provider import ProviderStatus
 from app import create_app, seed_database
 from app.extensions import db
-from app.models import AuditLog, DiagnosticAnswer, DiagnosticEvaluation, EducationalContent, Student, TwoFactorCode, User
+from app.models import AuditLog, ContentRecommendation, DiagnosticAnswer, DiagnosticEvaluation, EducationalContent, Student, TwoFactorCode, User
 from app.services.chat import normalize_messages
 from app.services.two_factor import TwoFactorError, issue_code, verify_code
 
@@ -110,6 +110,8 @@ def test_chat_proxies_stream(fake_fm_server):
     assert response.content_type.startswith("text/event-stream")
     assert b'"content":"Hola"' in response.data
     assert b"data: [DONE]" in response.data
+    assert b"event: meta" in response.data
+    assert b'"source": "estimados"' in response.data
 
 
 class FakeProvider:
@@ -210,6 +212,37 @@ def test_login_requires_second_factor(fake_fm_server):
     assert response.location.endswith("/auth/verify")
     with app.app_context():
         assert TwoFactorCode.query.count() == 1
+
+
+def test_public_registration_creates_student_account_and_audit_log(fake_fm_server):
+    app = create_app({
+        "TESTING": True,
+        "WTF_CSRF_ENABLED": False,
+        "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",
+        "FM_PORT": fake_fm_server,
+    })
+    client = app.test_client()
+    with app.app_context():
+        db.create_all()
+        seed_database()
+
+    response = client.post(
+        "/auth/register",
+        data={
+            "username": "nueva_estudiante",
+            "email": "nueva@example.com",
+            "password": "Estudiante123!",
+            "confirm_password": "Estudiante123!",
+        },
+    )
+
+    assert response.status_code == 302
+    with app.app_context():
+        user = User.query.filter_by(username="nueva_estudiante").one()
+        assert user.role == "estudiante"
+        assert user.check_password("Estudiante123!")
+        assert user.password_hash != "Estudiante123!"
+        assert AuditLog.query.filter_by(action="user_registered", user_id=user.id).count() == 1
 
 
 def test_two_factor_code_is_hashed_and_single_use(fake_fm_server):
@@ -504,3 +537,72 @@ def test_invalid_ai_classification_does_not_update_evaluation(fake_fm_server):
         assert evaluation.status == "pendiente_ia"
         assert evaluation.classified_level is None
         assert AuditLog.query.filter_by(action="diagnostic_classification_failed").count() == 1
+
+
+def test_classified_student_receives_traceable_recommendations_and_report(fake_fm_server):
+    """Comprueba el flujo completo que conecta diagnóstico, contenidos y reporte."""
+
+    provider = ClassifierProvider(
+        '{"level":"basico","explanation":"Tiene una base inicial.","strengths":["Reconoce conceptos"],"improvement_areas":["Practicar relaciones"]}'
+    )
+    app = create_app({
+        "TESTING": True,
+        "WTF_CSRF_ENABLED": False,
+        "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",
+        "FM_PORT": fake_fm_server,
+    }, provider=provider)
+    with app.app_context():
+        db.create_all()
+        seed_database()
+    client = app.test_client()
+    authenticate(client, app, "docente")
+    evaluation_id = create_diagnostic_for_classification(client, app)
+    assert client.post(f"/diagnostics/{evaluation_id}/classify").status_code == 302
+
+    with app.app_context():
+        student_id = DiagnosticEvaluation.query.one().student_id
+
+    recommendations = client.get(f"/recommendations/{student_id}")
+    report = client.get(f"/reports/{student_id}")
+
+    assert recommendations.status_code == 200
+    assert report.status_code == 200
+    with app.app_context():
+        assert ContentRecommendation.query.filter_by(student_id=student_id).count() > 0
+        assert AuditLog.query.filter_by(action="recommendations_generated").count() == 1
+        assert AuditLog.query.filter_by(action="report_viewed").count() == 1
+
+
+def test_student_cannot_access_users_recommendations_or_reports(fake_fm_server):
+    """Los reportes y la administración académica pertenecen a personal autorizado."""
+
+    app = build_database_app(fake_fm_server)
+    client = app.test_client()
+    authenticate(client, app, "estudiante")
+
+    assert client.get("/users").status_code == 403
+    assert client.get("/recommendations").status_code == 403
+    assert client.get("/reports").status_code == 403
+
+
+def test_admin_can_create_user_with_hashed_password_and_audit_log(fake_fm_server):
+    """Verifica que el alta de usuario no guarde la contraseña en texto plano."""
+
+    app = build_database_app(fake_fm_server)
+    client = app.test_client()
+    authenticate(client, app, "admin")
+
+    response = client.post("/users/new", data={
+        "username": "orientadora",
+        "email": "orientadora@example.com",
+        "password": "Orientadora123!",
+        "role": "docente",
+        "active": "1",
+    })
+
+    assert response.status_code == 302
+    with app.app_context():
+        user = User.query.filter_by(username="orientadora").one()
+        assert user.password_hash != "Orientadora123!"
+        assert user.check_password("Orientadora123!")
+        assert AuditLog.query.filter_by(action="user_created").count() == 1

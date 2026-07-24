@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Any
 
 from ai_provider import AIProviderError, ChatProvider
@@ -11,8 +11,11 @@ from app.models import DiagnosticEvaluation
 VALID_LEVELS = {"basico", "intermedio", "avanzado"}
 SYSTEM_PROMPT = (
     "Eres TutorIA, un evaluador académico. Analiza respuestas diagnósticas "
-    "y responde únicamente JSON válido en español, sin Markdown."
+    "y responde únicamente JSON válido en español, sin Markdown. "
+    "No supongas conocimientos que no estén demostrados en las respuestas. "
+    "Respuestas cortas, incoherentes o que expresen desconocimiento deben ser nivel basico."
 )
+MINIMUM_EVIDENCE_LENGTH = 20
 
 
 @dataclass(frozen=True)
@@ -40,7 +43,9 @@ def build_diagnostic_prompt(evaluation: DiagnosticEvaluation) -> str:
         {
             "instrucciones": (
                 "Clasifica el nivel del estudiante como basico, intermedio o avanzado. "
-                "Usa explicación breve y listas concretas. No incluyas campos adicionales."
+                "Usa explicación breve y listas concretas. No incluyas campos adicionales. "
+                "No seas generoso: no infieras respuestas correctas que el estudiante no escribió. "
+                "Para intermedio o avanzado exige evidencia clara en la mayoría de respuestas."
             ),
             "formato_respuesta": {
                 "level": "basico|intermedio|avanzado",
@@ -107,7 +112,21 @@ def classify_evaluation(evaluation: DiagnosticEvaluation, provider: ChatProvider
     except AIProviderError:
         raise
 
-    return parse_classification(raw_content)
+    classification = parse_classification(raw_content)
+    # Regla de seguridad académica: la IA no puede compensar respuestas sin evidencia.
+    insufficient_evidence = any(
+        len(answer.answer.strip()) < MINIMUM_EVIDENCE_LENGTH for answer in evaluation.answers
+    )
+    if insufficient_evidence and classification.level != "basico":
+        return replace(
+            classification,
+            level="basico",
+            explanation=(
+                "La evidencia escrita es insuficiente para asignar un nivel superior. "
+                + classification.explanation
+            ),
+        )
+    return classification
 
 
 def format_classification_explanation(classification: DiagnosticClassification) -> str:

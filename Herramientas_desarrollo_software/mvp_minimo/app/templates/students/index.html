@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block title %}Estudiantes | TutorIA{% endblock %}
-{% block styles %}<link href="{{ url_for('static', filename='css/students.css') }}" rel="stylesheet">{% endblock %}
 {% block content %}
 <header class="page-heading"><div><p class="eyebrow">Gestión académica</p><h1>Estudiantes</h1><p>Administra los perfiles que participan en evaluaciones diagnósticas.</p></div><a class="btn btn-primary" href="{{ url_for('students.create') }}">Nuevo estudiante</a></header>
 <section class="metric-grid" aria-label="Resumen de estudiantes"><div class="metric"><span>Total</span><strong>{{ students|length }}</strong></div><div class="metric level-basic"><span>Nivel básico</span><strong>{{ level_totals.basico }}</strong></div><div class="metric level-medium"><span>Intermedio</span><strong>{{ level_totals.intermedio }}</strong></div><div class="metric level-advanced"><span>Avanzado</span><strong>{{ level_totals.avanzado }}</strong></div></section>

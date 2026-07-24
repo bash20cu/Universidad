@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Recomendaciones | TutorIA{% endblock %}
+{% block content %}
+<header class="page-heading"><div><p class="eyebrow">Acompañamiento personalizado</p><h1>Recomendaciones</h1><p>Selecciona un estudiante para revisar recursos alineados con su nivel y área de interés.</p></div></header>
+<section class="card-grid">{% for student in students %}<article class="student-card"><span class="level-badge level-{{ student.assigned_level }}">{{ {'basico':'Básico','intermedio':'Intermedio','avanzado':'Avanzado'}[student.assigned_level] }}</span><h2>{{ student.name }}</h2><p>{{ student.interest_area }} · {{ student.school }}</p>{% if student.evaluations %}<a class="btn btn-primary btn-sm" href="{{ url_for('recommendations.detail', student_id=student.id) }}">Ver ruta sugerida</a>{% else %}<span class="text-secondary small">Pendiente de diagnóstico</span>{% endif %}</article>{% else %}<p class="empty-state">Todavía no hay estudiantes registrados.</p>{% endfor %}</section>
+{% endblock %}

@@ -133,3 +133,18 @@ class DiagnosticAnswer(db.Model):
     evaluation = db.relationship("DiagnosticEvaluation", backref=db.backref("answers", lazy=True))
     question = db.relationship("DiagnosticQuestion")
 
+
+class ContentRecommendation(db.Model):
+    """Relaciona un contenido educativo con una recomendación para un estudiante."""
+
+    __tablename__ = "content_recommendations"
+
+    id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.Integer, db.ForeignKey("students.id"), nullable=False, index=True)
+    content_id = db.Column(db.Integer, db.ForeignKey("educational_contents.id"), nullable=False, index=True)
+    evaluation_id = db.Column(db.Integer, db.ForeignKey("diagnostic_evaluations.id"), index=True)
+    reason = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime(timezone=True), default=utcnow, nullable=False)
+    student = db.relationship("Student", backref=db.backref("recommendations", lazy=True))
+    content = db.relationship("EducationalContent", backref=db.backref("recommendations", lazy=True))
+    evaluation = db.relationship("DiagnosticEvaluation", backref=db.backref("recommendations", lazy=True))

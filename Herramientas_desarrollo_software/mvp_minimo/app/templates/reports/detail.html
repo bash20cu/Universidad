@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Reporte de {{ student.name }} | TutorIA{% endblock %}
+{% block content %}
+<header class="page-heading"><div><a href="{{ url_for('reports.index') }}">Volver a reportes</a><p class="eyebrow">Reporte individual</p><h1>{{ student.name }}</h1><p>{{ student.school }} · {{ student.interest_area }}</p></div><span class="level-badge level-{{ student.assigned_level }}">Nivel {{ {'basico':'Básico','intermedio':'Intermedio','avanzado':'Avanzado'}[student.assigned_level] }}</span></header>
+<div class="report-columns"><section class="card-surface"><h2>Evaluaciones</h2>{% for evaluation in evaluations %}<article class="report-item"><strong>{{ evaluation.created_at.strftime('%Y-%m-%d %H:%M') }}</strong><span>{{ evaluation.status }} · {{ evaluation.classified_level or 'Sin clasificar' }}</span><p>{{ evaluation.explanation }}</p></article>{% else %}<p class="empty-state">No hay evaluaciones registradas.</p>{% endfor %}</section><section class="card-surface"><h2>Ruta recomendada</h2>{% for recommendation in recommendations %}<article class="report-item"><strong>{{ recommendation.content.title }}</strong><span>{{ recommendation.content.topic }}</span><p>{{ recommendation.reason }}</p></article>{% else %}<p class="empty-state">Aún no hay recomendaciones.</p>{% endfor %}</section></div>
+{% endblock %}

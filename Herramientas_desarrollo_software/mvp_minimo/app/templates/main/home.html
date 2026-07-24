@@ -1,6 +1,6 @@
 {% extends "base.html" %}{% block title %}TutorIA | Inicio{% endblock %}
 {% block content %}<section class="row align-items-center py-5"><div class="col-lg-7">
-  <p class="text-primary fw-semibold">Tutor inteligente adaptativo</p><h1 class="display-4 fw-bold">Aprendizaje guiado según tu nivel</h1>
-  <p class="lead text-secondary">Evaluación diagnóstica, contenidos por competencia e inteligencia artificial local.</p>
-  <a class="btn btn-primary btn-lg" href="{{ url_for('auth.login') }}">Ingresar</a>
+  <p class="text-primary fw-semibold">Tu aula digital de acompañamiento</p><h1 class="display-4 fw-bold">Aprender también puede sentirse como conversar</h1>
+  <p class="lead text-secondary">TutorIA ayuda a conocer tu nivel, encontrar recursos adecuados y avanzar paso a paso con apoyo de inteligencia artificial.</p>
+  <div class="d-flex flex-wrap gap-2"><a class="btn btn-primary btn-lg" href="{{ url_for('auth.login') }}">Entrar al aula</a><a class="btn btn-outline-primary btn-lg" href="{{ url_for('auth.register') }}">Crear una cuenta</a></div>
 </div></section>{% endblock %}

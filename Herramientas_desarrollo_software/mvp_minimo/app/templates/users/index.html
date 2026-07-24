@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Usuarios | TutorIA{% endblock %}
+{% block content %}
+<header class="page-heading"><div><p class="eyebrow">Cuidado del aula</p><h1>Usuarios y permisos</h1><p>Administra quién puede entrar y qué responsabilidades tiene dentro de TutorIA.</p></div><a class="btn btn-primary" href="{{ url_for('users.create') }}">Nuevo usuario</a></header>
+<section class="table-responsive card-surface"><table class="table"><thead><tr><th>Usuario</th><th>Correo</th><th>Rol</th><th>Estado</th><th></th></tr></thead><tbody>{% for user in users %}<tr><td><strong>{{ user.username }}</strong></td><td>{{ user.email }}</td><td>{{ user.role }}</td><td><span class="status-badge {{ 'status-active' if user.active else 'status-inactive' }}">{{ 'Activo' if user.active else 'Inactivo' }}</span></td><td><a class="btn btn-outline-secondary btn-sm" href="{{ url_for('users.edit', user_id=user.id) }}">Editar</a></td></tr>{% endfor %}</tbody></table></section>
+{% endblock %}

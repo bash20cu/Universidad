@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block title %}Contenidos | TutorIA{% endblock %}
-{% block styles %}<link href="{{ url_for('static', filename='css/contents.css') }}" rel="stylesheet">{% endblock %}
 {% block content %}
 <header class="page-heading"><div><p class="eyebrow">Biblioteca académica</p><h1>Contenidos educativos</h1><p>Administra recursos por tema, nivel y competencia para alimentar las recomendaciones.</p></div><a class="btn btn-primary" href="{{ url_for('contents.create') }}">Nuevo contenido</a></header>
 <section class="metric-grid" aria-label="Resumen de contenidos"><div class="metric"><span>Total</span><strong>{{ contents|length }}</strong></div><div class="metric level-basic"><span>Nivel básico</span><strong>{{ level_totals.basico }}</strong></div><div class="metric level-medium"><span>Intermedio</span><strong>{{ level_totals.intermedio }}</strong></div><div class="metric level-advanced"><span>Avanzado</span><strong>{{ level_totals.avanzado }}</strong></div></section>

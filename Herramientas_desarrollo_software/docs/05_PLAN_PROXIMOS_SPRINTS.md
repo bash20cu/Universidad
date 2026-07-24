@@ -39,6 +39,8 @@ Completar el alcance MVP sin expandir funcionalidades fuera de lo solicitado. Ca
 
 ## Sprint 4 - Recomendaciones
 
+**Estado:** Implementado el 2026-07-23.
+
 | Campo | Detalle |
 |---|---|
 | Objetivo | Recomendar contenidos según nivel y tema. |
@@ -47,6 +49,8 @@ Completar el alcance MVP sin expandir funcionalidades fuera de lo solicitado. Ca
 | Criterio de cierre | Se muestran contenidos recomendados después de evaluación. |
 
 ## Sprint 5 - Reportes Básicos
+
+**Estado:** Implementado el 2026-07-23.
 
 | Campo | Detalle |
 |---|---|
@@ -57,6 +61,8 @@ Completar el alcance MVP sin expandir funcionalidades fuera de lo solicitado. Ca
 
 ## Sprint 6 - Usuarios Y Resend Real
 
+**Estado:** Administración básica implementada el 2026-07-23; Resend real pendiente.
+
 | Campo | Detalle |
 |---|---|
 | Objetivo | Completar administración básica de usuarios y validar envío real 2FA. |
@@ -66,15 +72,10 @@ Completar el alcance MVP sin expandir funcionalidades fuera de lo solicitado. Ca
 
 ## Orden De Trabajo Recomendado
 
-1. CRUD de contenidos.
-2. Evaluación diagnóstica sin IA.
-3. Clasificación IA con proveedor simulado.
-4. Integración con Foundation Models para diagnóstico.
-5. Recomendaciones.
-6. Reportes.
-7. Usuarios.
-8. Resend real.
-9. Documentación final del informe.
+1. Validación real de Foundation Models y Resend.
+2. Pruebas funcionales y evidencias.
+3. UML e informe académico.
+4. Presentación y demo.
 
 ## Regla De Cierre Por Sprint
 
