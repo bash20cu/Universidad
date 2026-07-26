@@ -1,0 +1,19 @@
+# Secretos: nunca versionar el archivo .env real
+.env
+
+# Entorno virtual
+venv/
+.venv/
+
+# Logs de auditoria (conservar localmente, no en el repo)
+logs/
+
+# Cache de Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Contenido del area de trabajo del laboratorio
+workspace/*
+!workspace/.gitkeep

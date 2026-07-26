@@ -138,6 +138,8 @@ usan ese código como segundo factor principal.
   versionado localmente en `app/static/vendor/bootstrap/5.3.8`.
 - `runtime_manager.py` y `desktop_launcher.py`: control local de procesos y UI
   PySide6 para la demo en macOS.
+- `Iniciar_TutorIA_Windows.bat` y `README_WINDOWS.md`: ejecución web en Windows
+  con NVIDIA como proveedor principal.
 
 ## Endpoints
 

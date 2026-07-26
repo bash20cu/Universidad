@@ -1,7 +1,9 @@
 # UML de TutorIA
 
-Documento de apoyo para el informe académico. Los diagramas están expresados en
-Mermaid para poder versionarlos junto con el código y exportarlos a imagen o PDF.
+Documento de apoyo para el informe académico. La versión fuente se conserva en
+Mermaid para versionarla junto con el código. La versión lista para entregar,
+con diagramas maquetados y revisados visualmente, está en
+`docs/08_UML_TUTOR_IA.pdf`.
 
 ## Diagrama de casos de uso
 
@@ -120,4 +122,3 @@ sequenceDiagram
     Web->>DB: Guarda nivel, proveedor, modelo y fecha
     Web-->>Docente: Muestra resultado y recomendaciones
 ```
-
