@@ -124,6 +124,12 @@ class DiagnosticEvaluationForm(FlaskForm):
     submit = SubmitField("Guardar evaluación")
 
 
+class StudentDiagnosticForm(FlaskForm):
+    """Protege el envío de respuestas del estudiante autenticado."""
+
+    submit = SubmitField("Enviar evaluación")
+
+
 class UserForm(FlaskForm):
     """Valida los datos mínimos para crear o editar una cuenta del sistema."""
 

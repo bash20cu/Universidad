@@ -16,6 +16,13 @@ def index():
     return render_template("main/home.html")
 
 
+@bp.get("/help")
+def help_page():
+    """Explica el uso de TutorIA según el rol de la persona usuaria."""
+
+    return render_template("main/help.html")
+
+
 @bp.get("/dashboard")
 @login_required
 def dashboard():

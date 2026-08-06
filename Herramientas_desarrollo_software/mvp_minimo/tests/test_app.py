@@ -77,6 +77,18 @@ def test_normalize_messages_rejects_empty_history():
         normalize_messages([])
 
 
+def test_help_page_is_public_and_explains_roles():
+    app = create_app({"TESTING": True, "WTF_CSRF_ENABLED": False})
+    response = app.test_client().get("/help")
+
+    assert response.status_code == 200
+    assert b"Aprende a usar TutorIA" in response.data
+    assert b"Estudiante" in response.data
+    assert b"Docente" in response.data
+    assert b"Administrador" in response.data
+    assert b"NVIDIA NIM" in response.data
+
+
 def test_status_reports_fake_server(fake_fm_server):
     app = create_app({"TESTING": True, "WTF_CSRF_ENABLED": False, "FM_PORT": fake_fm_server})
     client = app.test_client()
@@ -360,6 +372,63 @@ def test_student_can_complete_profile_and_access_private_progress(fake_fm_server
     with app.app_context():
         student = Student.query.filter_by(name="Estudiante Demo").one()
         assert student.user_id == User.query.filter_by(username="estudiante").one().id
+
+
+def test_student_can_answer_own_diagnostic(fake_fm_server):
+    app = build_database_app(fake_fm_server)
+    client = app.test_client()
+    authenticate(client, app, "estudiante")
+    client.post(
+        "/student/profile",
+        data={
+            "name": "Estudiante Evaluador",
+            "age": 20,
+            "school": "Universidad Demo",
+            "interest_area": "Bases de datos",
+        },
+    )
+
+    page = client.get("/student/diagnostic/new")
+    assert page.status_code == 200
+    assert b"Responde tu evaluaci\xc3\xb3n diagn\xc3\xb3stica" in page.data
+
+    response = client.post(
+        "/student/diagnostic/new",
+        data={
+            "answer_1": "Una clave primaria identifica de forma unica una fila.",
+            "answer_2": "Normalizar reduce la repeticion de datos.",
+            "answer_3": "Un indice acelera consultas frecuentes.",
+        },
+    )
+
+    assert response.status_code == 302
+    assert response.location.endswith("/student/progress")
+    with app.app_context():
+        evaluation = DiagnosticEvaluation.query.one()
+        assert evaluation.student.name == "Estudiante Evaluador"
+        assert evaluation.status == "pendiente_ia"
+        assert DiagnosticAnswer.query.count() == 3
+        assert AuditLog.query.filter_by(action="student_diagnostic_created").count() == 1
+
+
+def test_student_diagnostic_requires_all_answers(fake_fm_server):
+    app = build_database_app(fake_fm_server)
+    client = app.test_client()
+    authenticate(client, app, "estudiante")
+    client.post(
+        "/student/profile",
+        data={"name": "Estudiante Incompleto", "age": 20, "school": "Universidad Demo", "interest_area": "Bases de datos"},
+    )
+
+    response = client.post(
+        "/student/diagnostic/new",
+        data={"answer_1": "Solo una respuesta.", "answer_2": "", "answer_3": "Otra respuesta."},
+    )
+
+    assert response.status_code == 400
+    with app.app_context():
+        assert DiagnosticEvaluation.query.count() == 0
+        assert DiagnosticAnswer.query.count() == 0
 
 
 def test_only_admin_can_view_audit_log(fake_fm_server):

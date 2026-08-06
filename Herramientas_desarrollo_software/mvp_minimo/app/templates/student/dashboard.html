@@ -16,5 +16,5 @@
 {% else %}
 <div class="alert alert-info">Aún no tienes un perfil académico. Completa tus datos para que TutorIA pueda acompañarte mejor.</div>
 {% endif %}
-<div class="d-flex flex-wrap gap-2"><a class="btn btn-primary" href="{{ url_for('chat.page') }}">Conversar con TutorIA</a><a class="btn btn-outline-primary" href="{{ url_for('student_portal.profile') }}">{{ 'Editar mi perfil' if student else 'Completar mi perfil' }}</a>{% if student %}<a class="btn btn-outline-secondary" href="{{ url_for('student_portal.progress') }}">Ver mi progreso</a>{% endif %}</div>
+<div class="d-flex flex-wrap gap-2"><a class="btn btn-primary" href="{{ url_for('chat.page') }}">Conversar con TutorIA</a><a class="btn btn-outline-primary" href="{{ url_for('student_portal.profile') }}">{{ 'Editar mi perfil' if student else 'Completar mi perfil' }}</a>{% if student %}<a class="btn btn-outline-secondary" href="{{ url_for('student_portal.create_diagnostic') }}">Responder evaluación</a><a class="btn btn-outline-secondary" href="{{ url_for('student_portal.progress') }}">Ver mi progreso</a>{% endif %}</div>
 {% endblock %}

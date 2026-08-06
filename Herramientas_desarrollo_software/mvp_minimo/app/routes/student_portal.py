@@ -1,11 +1,11 @@
 """Portal privado para que cada estudiante consulte su propio progreso."""
 
-from flask import Blueprint, flash, redirect, render_template, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 
 from app.extensions import db
-from app.forms import StudentProfileForm
-from app.models import ContentRecommendation, DiagnosticEvaluation, Student
+from app.forms import StudentDiagnosticForm, StudentProfileForm
+from app.models import ContentRecommendation, DiagnosticAnswer, DiagnosticEvaluation, DiagnosticQuestion, Student
 from app.services.audit import record_event
 
 
@@ -83,3 +83,66 @@ def progress():
     recommendations = ContentRecommendation.query.filter_by(student_id=student.id).order_by(ContentRecommendation.created_at.desc()).all()
     record_event("student_progress_viewed", user_id=current_user.id, entity_type="student", entity_id=str(student.id))
     return render_template("student/progress.html", student=student, evaluations=evaluations, recommendations=recommendations)
+
+
+@bp.route("/diagnostic/new", methods=["GET", "POST"])
+@login_required
+def create_diagnostic():
+    """Permite al estudiante responder su propia evaluación diagnóstica."""
+
+    if current_user.role != "estudiante":
+        return redirect(url_for("main.dashboard"))
+
+    student = _require_student()
+    if student is None:
+        flash("Completa tu perfil antes de responder una evaluación.", "warning")
+        return redirect(url_for("student_portal.profile"))
+
+    questions = DiagnosticQuestion.query.filter_by(active=True).order_by(
+        DiagnosticQuestion.topic.asc(), DiagnosticQuestion.id.asc()
+    ).all()
+    if not questions:
+        flash("Todavía no hay preguntas diagnósticas activas.", "warning")
+        return redirect(url_for("student_portal.dashboard"))
+
+    form = StudentDiagnosticForm()
+    if form.validate_on_submit():
+        answers_by_question = {}
+        missing_questions = []
+        for question in questions:
+            value = request.form.get(f"answer_{question.id}", "").strip()
+            if not value:
+                missing_questions.append(question.id)
+            answers_by_question[question.id] = value
+
+        if missing_questions:
+            flash("Responde todas las preguntas antes de enviar la evaluación.", "danger")
+            return render_template("student/diagnostic_form.html", form=form, questions=questions), 400
+
+        evaluation = DiagnosticEvaluation(
+            student_id=student.id,
+            status="pendiente_ia",
+            explanation="Evaluación enviada por el estudiante. Pendiente de clasificación por IA.",
+        )
+        db.session.add(evaluation)
+        db.session.flush()
+        for question in questions:
+            db.session.add(
+                DiagnosticAnswer(
+                    evaluation_id=evaluation.id,
+                    question_id=question.id,
+                    answer=answers_by_question[question.id],
+                )
+            )
+        db.session.commit()
+        record_event(
+            "student_diagnostic_created",
+            user_id=current_user.id,
+            entity_type="diagnostic_evaluation",
+            entity_id=str(evaluation.id),
+            detail=f"Estudiante {student.name}",
+        )
+        flash("Tu evaluación fue enviada. El docente podrá solicitar su clasificación con IA.", "success")
+        return redirect(url_for("student_portal.progress"))
+
+    return render_template("student/diagnostic_form.html", form=form, questions=questions)

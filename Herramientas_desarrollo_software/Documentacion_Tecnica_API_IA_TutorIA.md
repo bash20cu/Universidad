@@ -1,14 +1,15 @@
 # Documentación técnica de integración de IA para TutorIA
 
-**Alternativas:** Apple Foundation Models y Ollama  
-**Arquitectura propuesta:** Foundation Models principal, Ollama de respaldo  
+**Alternativas evaluadas:** NVIDIA NIM y Apple Foundation Models  
+**Arquitectura aprobada para el MVP:** NVIDIA NIM principal, Foundation Models de respaldo local  
 **Proyecto:** TutorIA, Equipo 1  
 **Fecha:** 10 de junio de 2026  
 **Propósito:** material técnico para revisión con el profesor
 
-> Este documento contiene ejemplos de diseño y código para validar la
-> factibilidad técnica. No representa todavía un cambio aprobado en el stack
-> oficial del proyecto.
+> Estado actualizado: la arquitectura NVIDIA + Foundation Models está aprobada
+> para el MVP. Las secciones que mencionen Ollama se conservan únicamente como
+> alternativa futura de comparación técnica; Ollama no forma parte del flujo
+> implementado ni del respaldo activo de esta entrega.
 
 ## 1. Objetivo técnico
 

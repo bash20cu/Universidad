@@ -1,22 +1,23 @@
-# Minuta técnica: Foundation Models vs. Ollama para TutorIA
+# Minuta técnica: NVIDIA + Foundation Models para TutorIA
 
 **Proyecto:** TutorIA, tutor inteligente adaptativo mediante inteligencia artificial local  
 **Equipo:** Equipo 1  
 **Curso:** Herramientas para el Desarrollo de Sistemas de Información  
-**Fecha de discusión:** 10 de junio de 2026  
-**Estado:** Propuesta para revisión y aprobación del profesor
+**Fecha de discusión:** 10 de junio de 2026; actualización 5 de agosto de 2026  
+**Estado:** Decisión adoptada para el MVP
 
 ## 1. Propósito de la discusión
 
-El diseño inicial de TutorIA contempla Ollama como motor local de inteligencia
-artificial. Después de las novedades presentadas por Apple en WWDC26, se propone
-evaluar Foundation Models como motor principal, manteniendo Ollama como respaldo.
+El diseño inicial de TutorIA contemplaba Ollama como motor local. Para el MVP se
+adopta una combinación más directa con NVIDIA NIM como proveedor principal y
+Foundation Models como respaldo local en macOS. Ollama queda como alternativa
+futura, no como parte del flujo activo de esta entrega.
 
 La decisión debe preservar el alcance del MVP:
 
 - Aplicación web desarrollada con Python, Flask, Jinja2 y Bootstrap 5.
 - Gestión de usuarios, roles, estudiantes y contenidos.
-- Autenticación con contraseña y segundo factor mediante Resend.
+- Autenticación con contraseña y segundo factor TOTP mediante una aplicación autenticadora.
 - Evaluación diagnóstica y clasificación en nivel básico, intermedio o avanzado.
 - Recomendación de contenidos según el nivel obtenido.
 - Bitácora de transacciones y reportes básicos.
@@ -62,42 +63,41 @@ la nueva generación corresponden a macOS 27. Para el MVP no se deben prometer
 esas funciones mientras no se confirme el sistema operativo de la computadora
 de demostración.
 
-### 3.2. Ollama
+### 3.2. NVIDIA NIM
 
-Ollama ejecuta modelos descargables y expone, por defecto, una API local en
-`http://localhost:11434/api`. Tiene bibliotecas oficiales para Python y
-JavaScript, admite respuestas estructuradas mediante esquemas JSON y funciona
-en macOS, Windows y Linux.
+NVIDIA NIM expone una API compatible con OpenAI y se utiliza como proveedor
+remoto configurable mediante `NVIDIA_API_KEY`, `NVIDIA_MODEL` y
+`NVIDIA_BASE_URL`. Permite que el mismo MVP funcione en Windows y macOS cuando
+existe conectividad y una credencial válida.
 
-Requiere instalar Ollama, descargar y seleccionar un modelo, controlar su
-consumo de memoria y asegurar que el servicio esté activo durante la
-demostración.
+Su uso requiere controlar conectividad, credenciales, privacidad y límites del
+servicio. Las claves no se guardan en el repositorio ni en las evidencias.
 
 ## 4. Comparación para el MVP
 
-| Criterio | Foundation Models | Ollama |
+| Criterio | Foundation Models | NVIDIA NIM |
 |---|---|---|
-| Integración con Python | SDK oficial `apple-fm-sdk` | API HTTP y biblioteca oficial |
-| Procesamiento local | Sí, con `SystemLanguageModel` | Sí, usando modelos locales |
-| Salida estructurada | Generación guiada y tipos Python | Esquema JSON y validación con Pydantic |
-| Instalación del modelo | Administrada por el sistema | Descarga y gestión manual |
-| API key para uso local | No | No |
+| Integración con Python | Cliente HTTP hacia `fm serve` | API HTTP compatible con OpenAI |
+| Procesamiento local | Sí, con Foundation Models | No; servicio remoto |
+| Salida estructurada | Prompt JSON y validación propia | Respuesta JSON y validación propia |
+| Instalación del modelo | Administrada por el sistema | Administrada por NVIDIA NIM |
+| API key | No | Sí, por variable de entorno |
 | Plataformas | Mac compatible con Apple Intelligence | macOS, Windows y Linux |
-| Control del modelo | Limitado al modelo y políticas del sistema | Elección de modelo, tamaño y parámetros |
-| Consumo de recursos | Gestionado por macOS | Depende del modelo seleccionado |
-| Riesgo principal | Dependencia de hardware, sistema y disponibilidad | Servicio caído, descarga y consumo elevado |
-| Ajuste al MVP | Integración local sencilla en una Mac compatible | Mayor portabilidad y control técnico |
+| Control del modelo | Limitado al modelo y políticas del sistema | Modelo configurable mediante entorno |
+| Consumo de recursos | Gestionado por macOS | Depende del servicio remoto |
+| Riesgo principal | Dependencia de hardware, sistema y disponibilidad | Conectividad, credencial y disponibilidad remota |
+| Ajuste al MVP | Fallback local y privacidad en macOS | Proveedor principal multiplataforma |
 
-**Conclusión comparativa:** Foundation Models reduce la configuración técnica de
-la demostración y se integra directamente con Python, pero crea una dependencia
-fuerte de Apple. Ollama requiere más preparación, aunque evita que el dominio de
-TutorIA dependa de un único sistema operativo.
+**Conclusión comparativa:** NVIDIA NIM facilita una demostración multiplataforma
+como proveedor principal, mientras Foundation Models aporta un fallback local
+en macOS sin API key. La abstracción común permite cambiar esta decisión sin
+reescribir el dominio de TutorIA.
 
 ## 5. Arquitectura propuesta
 
-La recomendación es usar Foundation Models como proveedor principal y mantener
-Ollama como proveedor de contingencia. La aplicación no invocará ninguno de los
-dos directamente desde las rutas Flask.
+La decisión es usar NVIDIA NIM como proveedor principal y Foundation Models como
+proveedor de contingencia local. La aplicación no invoca ninguno directamente
+desde las rutas Flask.
 
 ```mermaid
 flowchart LR
@@ -105,10 +105,10 @@ flowchart LR
     W --> A["Autenticación, roles y 2FA"]
     W --> E["EvaluationService"]
     E --> P["AIProvider"]
-    P --> F["FoundationModelsProvider<br/>principal"]
-    P --> O["OllamaProvider<br/>respaldo"]
+    P --> N["NVIDIAProvider<br/>principal"]
+    P --> F["FoundationModelsProvider<br/>fallback local"]
+    N --> NM["NVIDIA NIM remoto"]
     F --> M["Modelo local de Apple Intelligence"]
-    O --> L["Modelo local administrado por Ollama"]
     E --> V["Validación del resultado"]
     V --> D["SQLAlchemy + SQLite"]
     D --> R["RecommendationService"]
@@ -121,7 +121,7 @@ flowchart LR
 - **Rutas Flask:** reciben solicitudes, aplican autorización y presentan vistas.
 - **`EvaluationService`:** prepara el contexto pedagógico, solicita la
   clasificación y controla el flujo de negocio.
-- **`AIProvider`:** contrato independiente de Apple u Ollama.
+- **`AIProvider`:** contrato independiente de NVIDIA y Foundation Models.
 - **Proveedores:** traducen el contrato común a cada SDK o API.
 - **Validador:** rechaza respuestas incompletas o niveles fuera del catálogo.
 - **SQLAlchemy:** persiste respuestas, resultado validado, proveedor utilizado y
@@ -197,10 +197,10 @@ Reglas de validación:
 
 Orden propuesto:
 
-1. Comprobar la disponibilidad de Foundation Models al iniciar la evaluación.
-2. Si está disponible, utilizar `FoundationModelsProvider`.
-3. Si no está disponible o falla, comprobar Ollama y utilizar
-   `OllamaProvider`.
+1. Comprobar NVIDIA cuando está configurado como proveedor principal.
+2. Si NVIDIA está disponible, utilizar `NVIDIAProvider`.
+3. Si NVIDIA no está disponible o falla, comprobar Foundation Models y utilizar
+   `FoundationModelsProvider`.
 4. Si ambos fallan, conservar las respuestas como evaluación pendiente,
    informar al usuario y registrar un evento técnico.
 5. No asignar un nivel ficticio ni ocultar el error.
@@ -210,8 +210,9 @@ fallback no debe ocurrir silenciosamente en modo de desarrollo.
 
 ## 9. Privacidad y Private Cloud Compute
 
-Para sostener que TutorIA funciona con IA local, la demostración utilizará el
-modelo en el dispositivo de Foundation Models o un modelo local de Ollama.
+Foundation Models se considera procesamiento local en el dispositivo. NVIDIA
+NIM se considera procesamiento remoto y la interfaz debe mostrar esa diferencia
+mediante `processing_location` y `access_mode`.
 
 Private Cloud Compute es un servicio remoto de Apple con garantías específicas
 de privacidad. No debe describirse como procesamiento local ni formar parte del
@@ -220,17 +221,15 @@ conectividad, disponibilidad, límites y aprobación académica.
 
 ## 10. Impacto en el stack y la documentación
 
-Si el profesor aprueba la propuesta, los cambios posteriores serían:
+La implementación aprobada contiene:
 
-- Agregar `apple-fm-sdk` y el proveedor de Foundation Models.
-- Mantener la integración HTTP o biblioteca Python de Ollama como respaldo.
-- Reemplazar la dependencia directa de Ollama por el contrato `AIProvider`.
+- `NVIDIAProvider` como proveedor principal.
+- `FoundationModelsProvider` como fallback local.
+- `FallbackChatProvider` fuera de las rutas Flask.
 - Documentar los requisitos de Mac, macOS, Xcode y Apple Intelligence.
-- Actualizar el diagrama de arquitectura, casos de prueba y manual de ejecución.
-- Cambiar el riesgo “Ollama no responde” por un riesgo más general:
-  “Proveedor local de IA no disponible o incompatible”.
-- Probar las mismas entradas contra ambos proveedores y comparar validez,
-  consistencia, latencia y clasificación.
+- Mantener el contrato común y los metadatos de proveedor.
+
+Ollama queda fuera del MVP y podrá evaluarse como proveedor futuro.
 
 Hasta recibir aprobación, no se modificarán el planner, el informe ni el stack
 oficial del proyecto.
@@ -239,10 +238,9 @@ oficial del proyecto.
 
 | Riesgo | Efecto | Mitigación |
 |---|---|---|
-| Mac incompatible o Apple Intelligence desactivado | FM no está disponible | Verificación previa y fallback a Ollama |
+| Mac incompatible o Apple Intelligence desactivado | FM no está disponible | Verificación previa y fallback a NVIDIA |
 | Uso de una capacidad exclusiva de macOS 27 | Demo no reproducible en macOS 26 | Limitar el MVP a funciones confirmadas y registrar versiones |
-| Ollama no está activo | Falla el respaldo | Prueba de salud y guía de inicio antes de la demo |
-| Modelo de Ollama demasiado pesado | Latencia o falta de memoria | Elegir un modelo liviano y fijar el modelo de pruebas |
+| NVIDIA no responde | Falla el proveedor principal | Verificar clave, conectividad y usar Foundation Models en macOS |
 | Respuesta no válida | Nivel incorrecto o error de persistencia | Esquema cerrado, validación y reintento controlado |
 | Resultados diferentes entre proveedores | Difícil reproducibilidad | Casos diagnósticos fijos y registro del proveedor |
 | Confusión entre IA local y PCC | Incumplimiento del objetivo | Excluir PCC del flujo principal y explicarlo con precisión |
@@ -254,8 +252,8 @@ Se recomienda aprobar la siguiente decisión:
 
 > TutorIA mantendrá su aplicación web en Python y Flask. La integración de IA
 > se realizará mediante una interfaz propia denominada `AIProvider`.
-> Foundation Models será el proveedor principal en una Mac compatible y Ollama
-> será el proveedor de respaldo. La lógica de evaluación, validación,
+> NVIDIA NIM será el proveedor principal y Foundation Models será el proveedor
+> de respaldo local en una Mac compatible. La lógica de evaluación, validación,
 > persistencia y recomendación permanecerá independiente del proveedor.
 
 Esta solución aprovecha la integración directa de Apple sin perder la

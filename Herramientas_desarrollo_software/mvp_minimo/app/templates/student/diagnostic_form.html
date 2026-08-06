@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Mi evaluación | TutorIA{% endblock %}
+{% block content %}
+<div class="form-shell">
+  <header class="form-heading"><a href="{{ url_for('student_portal.dashboard') }}">Volver a mi aula</a><p class="eyebrow">Evaluación adaptativa</p><h1>Responde tu evaluación diagnóstica</h1><p>Contesta con tus propias palabras. Tus respuestas quedarán guardadas para que el docente pueda revisarlas y solicitar la clasificación con IA.</p></header>
+  <form method="post" class="diagnostic-form">
+    {{ form.hidden_tag() }}
+    <section><h2>Preguntas activas</h2><p class="field-help">Todas las preguntas son obligatorias. No compartas contraseñas ni códigos de autenticación.</p>{% for question in questions %}<div class="question-card"><span>{{ question.topic }}</span><h3>{{ loop.index }}. {{ question.prompt }}</h3><p class="field-help">Competencia: {{ question.expected_competency }}</p><label class="form-label" for="answer-{{ question.id }}">Tu respuesta</label><textarea class="form-control" id="answer-{{ question.id }}" name="answer_{{ question.id }}" rows="5" required>{{ request.form.get('answer_' ~ question.id, '') }}</textarea></div>{% endfor %}</section>
+    <footer><a class="btn btn-outline-secondary" href="{{ url_for('student_portal.dashboard') }}">Cancelar</a>{{ form.submit(class="btn btn-primary") }}</footer>
+  </form>
+</div>
+{% endblock %}
