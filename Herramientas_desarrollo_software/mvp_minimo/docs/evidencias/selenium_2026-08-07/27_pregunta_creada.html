@@ -1,0 +1,34 @@
+<html lang="es"><head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Preguntas diagnósticas | TutorIA</title>
+    <link href="/static/vendor/bootstrap/5.3.8/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/base.css" rel="stylesheet">
+    
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-xl bg-white border-bottom shadow-sm"><div class="container">
+      <a class="navbar-brand fw-bold" href="/"><span class="brand-mark">T</span> TutorIA <small>tu aula digital</small></a>
+      <div class="d-flex align-items-center justify-content-end flex-wrap gap-2 gap-xl-3">
+        <a class="text-decoration-none" href="/help">Ayuda</a>
+      
+        <a class="text-decoration-none" href="/dashboard">Inicio</a>
+        <a class="text-decoration-none" href="/chat">Tutor IA</a>
+        <a class="text-decoration-none" href="/auth/totp/setup">2FA</a>
+        
+        <a class="text-decoration-none" href="/students">Estudiantes</a><a class="text-decoration-none" href="/contents">Biblioteca</a><a class="text-decoration-none" href="/diagnostics">Diagnósticos</a><a class="text-decoration-none" href="/recommendations">Recomendaciones</a><a class="text-decoration-none" href="/reports">Reportes</a>
+        
+        <span class="badge text-bg-secondary">docente</span>
+        <form method="post" action="/auth/logout"><input type="hidden" name="csrf_token" value="Ijc1ZGI5MmE2YWFhNGIyNzVjN2ExMjAwODY4MjRkYmYwNmQ2MGUzZjIi.andVsw.gkNp7q_ZoDWmTQxXIJ--C7T4vnI"><button class="btn btn-outline-secondary btn-sm" type="submit">Salir</button></form>
+      </div>
+    </div></nav>
+    <main class="container py-4">
+      <div class="alert alert-success" role="alert">Pregunta diagnóstica creada.</div>
+      
+<header class="page-heading"><div><p class="eyebrow">Banco de preguntas</p><h1>Preguntas diagnósticas</h1><p>Administra las preguntas que alimentan las evaluaciones de los estudiantes.</p></div><a class="btn btn-primary" href="/diagnostics/questions/new">Nueva pregunta</a></header>
+<section class="table-responsive card-surface"><table class="table"><thead><tr><th>Tema</th><th>Pregunta</th><th>Competencia</th><th>Estado</th><th></th></tr></thead><tbody><tr><td>Bases de datos</td><td><strong>¿Qué diferencia existe entre una clave primaria y una foránea?</strong></td><td>Distinguir claves y relaciones</td><td>Activa</td><td><a class="btn btn-outline-secondary btn-sm" href="/diagnostics/questions/1/edit">Editar</a></td></tr><tr><td>Bases de datos</td><td><strong>Explica por qué normalizarías una tabla con datos repetidos.</strong></td><td>Comprender normalización</td><td>Activa</td><td><a class="btn btn-outline-secondary btn-sm" href="/diagnostics/questions/2/edit">Editar</a></td></tr><tr><td>Bases de datos</td><td><strong>¿Cuándo utilizarías un índice y qué costo puede tener?</strong></td><td>Evaluar optimización</td><td>Activa</td><td><a class="btn btn-outline-secondary btn-sm" href="/diagnostics/questions/3/edit">Editar</a></td></tr><tr><td>SQL</td><td><strong>¿Qué ventaja ofrece un índice en una consulta?</strong></td><td>Relacionar índices y rendimiento</td><td>Activa</td><td><a class="btn btn-outline-secondary btn-sm" href="/diagnostics/questions/4/edit">Editar</a></td></tr></tbody></table></section>
+
+    </main>
+    <script src="/static/vendor/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
+    
+  
+</body></html>

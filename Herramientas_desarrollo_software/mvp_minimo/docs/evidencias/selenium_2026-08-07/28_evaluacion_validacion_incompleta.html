@@ -1,0 +1,35 @@
+<html lang="es"><head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nueva evaluación | TutorIA</title>
+    <link href="/static/vendor/bootstrap/5.3.8/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/base.css" rel="stylesheet">
+    
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-xl bg-white border-bottom shadow-sm"><div class="container">
+      <a class="navbar-brand fw-bold" href="/"><span class="brand-mark">T</span> TutorIA <small>tu aula digital</small></a>
+      <div class="d-flex align-items-center justify-content-end flex-wrap gap-2 gap-xl-3">
+        <a class="text-decoration-none" href="/help">Ayuda</a>
+      
+        <a class="text-decoration-none" href="/dashboard">Inicio</a>
+        <a class="text-decoration-none" href="/chat">Tutor IA</a>
+        <a class="text-decoration-none" href="/auth/totp/setup">2FA</a>
+        
+        <a class="text-decoration-none" href="/students">Estudiantes</a><a class="text-decoration-none" href="/contents">Biblioteca</a><a class="text-decoration-none" href="/diagnostics">Diagnósticos</a><a class="text-decoration-none" href="/recommendations">Recomendaciones</a><a class="text-decoration-none" href="/reports">Reportes</a>
+        
+        <span class="badge text-bg-secondary">docente</span>
+        <form method="post" action="/auth/logout"><input type="hidden" name="csrf_token" value="Ijc1ZGI5MmE2YWFhNGIyNzVjN2ExMjAwODY4MjRkYmYwNmQ2MGUzZjIi.andVsw.gkNp7q_ZoDWmTQxXIJ--C7T4vnI"><button class="btn btn-outline-secondary btn-sm" type="submit">Salir</button></form>
+      </div>
+    </div></nav>
+    <main class="container py-4">
+      <div class="alert alert-danger" role="alert">Responde todas las preguntas antes de guardar la evaluación.</div>
+      <div class="form-shell"><header class="form-heading"><a href="/diagnostics">Volver a diagnósticos</a><p class="eyebrow">Evaluación adaptativa</p><h1>Nueva evaluación diagnóstica</h1><p>Registra respuestas para que luego puedan clasificarse mediante IA.</p></header>
+<form method="post" class="diagnostic-form" novalidate=""><input id="csrf_token" name="csrf_token" type="hidden" value="Ijc1ZGI5MmE2YWFhNGIyNzVjN2ExMjAwODY4MjRkYmYwNmQ2MGUzZjIi.andVsw.gkNp7q_ZoDWmTQxXIJ--C7T4vnI">
+<section><h2>Estudiante evaluado</h2><label class="form-label" for="student_id">Estudiante</label><select class="form-select" id="student_id" name="student_id" required=""><option selected="" value="1">Estudiante Selenium - Bases de datos</option></select></section>
+<section><h2>Preguntas diagnósticas</h2><div class="question-list"><article class="question-card"><div><span>Bases de datos</span><h3>1. ¿Qué diferencia existe entre una clave primaria y una foránea?</h3><p>Competencia esperada: Distinguir claves y relaciones</p></div><label class="form-label" for="answer_1">Respuesta del estudiante</label><textarea class="form-control" id="answer_1" name="answer_1" rows="4" maxlength="1200" required=""></textarea></article><article class="question-card"><div><span>Bases de datos</span><h3>2. Explica por qué normalizarías una tabla con datos repetidos.</h3><p>Competencia esperada: Comprender normalización</p></div><label class="form-label" for="answer_2">Respuesta del estudiante</label><textarea class="form-control" id="answer_2" name="answer_2" rows="4" maxlength="1200" required=""></textarea></article><article class="question-card"><div><span>Bases de datos</span><h3>3. ¿Cuándo utilizarías un índice y qué costo puede tener?</h3><p>Competencia esperada: Evaluar optimización</p></div><label class="form-label" for="answer_3">Respuesta del estudiante</label><textarea class="form-control" id="answer_3" name="answer_3" rows="4" maxlength="1200" required=""></textarea></article><article class="question-card"><div><span>SQL</span><h3>4. ¿Qué ventaja ofrece un índice en una consulta?</h3><p>Competencia esperada: Relacionar índices y rendimiento</p></div><label class="form-label" for="answer_4">Respuesta del estudiante</label><textarea class="form-control" id="answer_4" name="answer_4" rows="4" maxlength="1200" required=""></textarea></article></div></section>
+<footer><a class="btn btn-outline-secondary" href="/diagnostics">Cancelar</a><input class="btn btn-primary" id="submit" name="submit" type="submit" value="Guardar evaluación"></footer></form></div>
+    </main>
+    <script src="/static/vendor/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
+    
+  
+</body></html>

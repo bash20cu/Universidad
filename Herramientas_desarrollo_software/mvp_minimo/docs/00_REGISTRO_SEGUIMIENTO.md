@@ -95,3 +95,41 @@ Un pendiente se marcará como cerrado cuando exista código verificable, prueba 
 - Se agregó la línea de copyright académico 2026 con los nombres disponibles en el informe final.
 - No se inventaron autores ni fechas de creación; se mantuvo únicamente el año académico disponible.
 - No se duplicaron cabeceras ni se alteró la lógica del sistema.
+
+## 2026-08-08 - Clasificación de tipos de prueba
+
+- Se marcaron en `tests/test_app.py` las pruebas unitarias, de integración y funcionales.
+- Se marcó `tests/test_selenium_ui.py` como suite funcional end-to-end.
+- Se agregó la matriz de clasificación a `docs/04_PRUEBAS_UI_SELENIUM.md` para facilitar la exposición y evaluación docente.
+
+## 2026-08-08 - Guía operativa para la exposición
+
+- Se agregó `tests/README.md` con comandos de Selenium, TutorIA, pruebas backend y suite completa.
+- La guía incluye recorrido recomendado, clasificación de pruebas y solución de problemas frecuentes.
+- Se documentaron el panel Grid `:4444/ui` y la visualización noVNC `:7900` para observar el navegador durante Selenium.
+
+## 2026-08-08 - Ampliación de pruebas Selenium
+
+- Se amplió `tests/test_selenium_ui.py` de 3 a 9 escenarios funcionales end-to-end.
+- Se agregaron validaciones de formularios, CRUD y filtros de contenidos, banco de preguntas, evaluación incompleta, permisos por rol, auditoría, interacción/error del chat, TOTP inválido, registros duplicados y viewport móvil.
+- La ejecución contra Selenium Grid terminó con **9 passed**.
+- Se generaron 46 capturas PNG y 46 HTML sanitizados en `docs/evidencias/selenium_2026-08-07/`.
+
+## 2026-08-08 - Segunda ronda backend de seguridad y resiliencia
+
+- Se agregaron pruebas del fallback entre NVIDIA y Foundation Models mediante proveedores controlados.
+- Se validaron roles de chat inválidos, mensajes vacíos, duplicidad de usuarios y escape de contenido con patrón XSS.
+- Se comprobó que un contenido con recomendaciones asociadas no puede eliminarse.
+- La suite backend pasó de 30 a **34 pruebas aprobadas**.
+
+## 2026-08-08 - Estabilización de ejecución completa
+
+- Se revisó una ejecución combinada donde Selenium reportaba 1 fallo intermitente en el flujo docente.
+- La causa era que el helper TOTP esperaba cualquier encabezado `h1` y podía continuar desde la pantalla de verificación sin confirmar el acceso.
+- Se ajustó el helper para generar el código después de la captura y esperar explícitamente la URL `/dashboard`.
+- La ejecución completa con nombres visibles terminó con **43 passed**.
+
+## 2026-08-08 - Guía breve para exposición
+
+- Se agregó `docs/06_GUIA_EXPOSICION_ARQUITECTURA_Y_PRUEBAS.md`.
+- El documento resume arquitectura, componentes, roles, seguridad, estrategia de pruebas, resultados, comandos de ejecución y respuestas para preguntas frecuentes del profesor.

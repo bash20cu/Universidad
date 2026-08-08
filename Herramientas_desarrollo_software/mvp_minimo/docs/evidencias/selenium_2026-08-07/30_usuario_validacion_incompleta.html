@@ -1,0 +1,33 @@
+<html lang="es"><head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nuevo usuario | TutorIA</title>
+    <link href="/static/vendor/bootstrap/5.3.8/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/base.css" rel="stylesheet">
+    
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-xl bg-white border-bottom shadow-sm"><div class="container">
+      <a class="navbar-brand fw-bold" href="/"><span class="brand-mark">T</span> TutorIA <small>tu aula digital</small></a>
+      <div class="d-flex align-items-center justify-content-end flex-wrap gap-2 gap-xl-3">
+        <a class="text-decoration-none" href="/help">Ayuda</a>
+      
+        <a class="text-decoration-none" href="/dashboard">Inicio</a>
+        <a class="text-decoration-none" href="/chat">Tutor IA</a>
+        <a class="text-decoration-none" href="/auth/totp/setup">2FA</a>
+        
+        <a class="text-decoration-none" href="/students">Estudiantes</a><a class="text-decoration-none" href="/contents">Biblioteca</a><a class="text-decoration-none" href="/diagnostics">Diagnósticos</a><a class="text-decoration-none" href="/recommendations">Recomendaciones</a><a class="text-decoration-none" href="/reports">Reportes</a>
+        <a class="text-decoration-none" href="/users">Usuarios</a><a class="text-decoration-none" href="/users/audit">Bitácora</a>
+        <span class="badge text-bg-secondary">administrador</span>
+        <form method="post" action="/auth/logout"><input type="hidden" name="csrf_token" value="IjYxMjJhMDAxZTM3NjEzMGViZjdmNjY4ZWI4NTBmYmQxNWE0YmViNTQi.andVtQ.y0bO5wFJvMIwbnQv8F8HIOKHFsc"><button class="btn btn-outline-secondary btn-sm" type="submit">Salir</button></form>
+      </div>
+    </div></nav>
+    <main class="container py-4">
+      
+      
+<div class="form-shell"><header class="form-heading"><a href="/users">Volver a usuarios</a><p class="eyebrow">Administración responsable</p><h1>Nuevo usuario</h1><p>Los datos se validan antes de guardarse y la contraseña nunca se almacena en texto plano.</p></header><form method="post" class="card-surface user-form"><input id="csrf_token" name="csrf_token" type="hidden" value="IjYxMjJhMDAxZTM3NjEzMGViZjdmNjY4ZWI4NTBmYmQxNWE0YmViNTQi.andVtQ.y0bO5wFJvMIwbnQv8F8HIOKHFsc"><div class="form-grid"><div><label class="form-label" for="username">Usuario</label><input class="form-control" id="username" maxlength="80" minlength="3" name="username" required="" type="text" value=""><div class="field-error">This field is required.</div></div><div><label class="form-label" for="email">Correo institucional</label><input class="form-control" id="email" maxlength="255" name="email" required="" type="text" value=""><div class="field-error">This field is required.</div></div><div><label class="form-label" for="password">Contraseña</label><input autocomplete="new-password" class="form-control" id="password" maxlength="128" minlength="8" name="password" type="password" value=""><small class="field-help">Mínimo de 8 caracteres. En edición es opcional.</small></div><div><label class="form-label" for="role">Rol</label><select class="form-select" id="role" name="role" required=""><option selected="" value="administrador">Administrador</option><option value="docente">Docente</option><option value="estudiante">Estudiante</option></select></div><div><label class="form-label" for="active">Estado</label><select class="form-select" id="active" name="active" required=""><option selected="" value="1">Activo</option><option value="0">Inactivo</option></select></div></div><footer><a class="btn btn-outline-secondary" href="/users">Cancelar</a><input class="btn btn-primary" id="submit" name="submit" type="submit" value="Guardar usuario"></footer></form></div>
+
+    </main>
+    <script src="/static/vendor/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
+    
+  
+</body></html>

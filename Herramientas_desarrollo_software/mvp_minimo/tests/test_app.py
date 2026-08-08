@@ -22,7 +22,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import pytest
 import pyotp
 
-from ai_provider import ProviderStatus
+from ai_provider import AIProviderError, FallbackChatProvider, ProviderStatus
 from app import create_app, seed_database
 from app.extensions import db
 from app.models import AuditLog, ContentRecommendation, DiagnosticAnswer, DiagnosticEvaluation, EducationalContent, Student, TwoFactorCode, User
@@ -30,6 +30,8 @@ from app.services.chat import normalize_messages
 from app.services.two_factor import TwoFactorError, issue_code, verify_code
 
 
+# PRUEBAS UNITARIAS: validan reglas pequeñas sin recorrer una ruta HTTP completa.
+# En esta suite se comprueba la normalización del historial de mensajes.
 class FakeFMHandler(BaseHTTPRequestHandler):
     """Servidor HTTP mínimo que simula el contrato compatible con ``fm serve``."""
 
@@ -104,6 +106,8 @@ def test_normalize_messages_rejects_empty_history():
         normalize_messages([])
 
 
+# PRUEBAS DE INTEGRACIÓN: conectan Flask con proveedores simulados, streaming,
+# base de datos y ciclo de vida de los servicios sin utilizar credenciales reales.
 def test_help_page_is_public_and_explains_roles():
     app = create_app({"TESTING": True, "WTF_CSRF_ENABLED": False})
     response = app.test_client().get("/help")
@@ -218,6 +222,27 @@ class ClassifierProvider(FakeProvider):
         return self.response
 
 
+class FailingProvider(FakeProvider):
+    """Proveedor que falla de forma controlada para verificar el fallback."""
+
+    name = "failing_primary"
+
+    def ensure_ready(self):
+        """Simula una indisponibilidad antes de iniciar una conversación."""
+
+        raise AIProviderError("Proveedor principal no disponible")
+
+    def stream_chat(self, _messages):
+        """Simula un fallo durante el streaming del proveedor principal."""
+
+        raise AIProviderError("Fallo de streaming del proveedor principal")
+
+    def complete_chat(self, _messages):
+        """Simula un fallo durante una clasificación completa."""
+
+        raise AIProviderError("Fallo de clasificación del proveedor principal")
+
+
 def test_app_accepts_provider_without_local_fm_assumptions():
     provider = FakeProvider()
     app = create_app({"TESTING": True, "WTF_CSRF_ENABLED": False}, provider=provider)
@@ -253,6 +278,121 @@ def test_provider_shutdown_is_idempotent_for_external_server(fake_fm_server):
     assert provider.status().available is True
 
 
+def test_fallback_uses_secondary_provider_when_primary_fails():
+    """Verifica que el proveedor secundario atiende chat y clasificación."""
+
+    primary = FailingProvider()
+    fallback = FakeProvider()
+    provider = FallbackChatProvider(primary=primary, fallback=fallback)
+
+    ready = provider.ensure_ready()
+    streamed = b"".join(provider.stream_chat([{"role": "user", "content": "Hola"}]))
+    completed = provider.complete_chat([{"role": "user", "content": "Clasifica"}])
+
+    assert ready.provider == "fake_remote"
+    assert b"Respuesta remota" in streamed
+    assert "level" in completed
+    assert provider.active_provider is fallback
+
+
+def test_chat_rejects_invalid_history_before_calling_provider():
+    """Comprueba que roles inválidos y mensajes vacíos no llegan al proveedor."""
+
+    provider = FakeProvider()
+    app = create_app({"TESTING": True, "WTF_CSRF_ENABLED": False}, provider=provider)
+    client = app.test_client()
+
+    with app.app_context():
+        db.create_all()
+        seed_database()
+        user_id = User.query.filter_by(username="admin").one().id
+    with client.session_transaction() as session:
+        session["_user_id"] = str(user_id)
+        session["_fresh"] = True
+
+    invalid_role = client.post(
+        "/chat/api/chat",
+        json={"messages": [{"role": "system", "content": "No permitido"}]},
+    )
+    empty_content = client.post(
+        "/chat/api/chat",
+        json={"messages": [{"role": "user", "content": "   "}]},
+    )
+
+    assert invalid_role.status_code == 400
+    assert empty_content.status_code == 400
+    assert b"Solo se permiten" in invalid_role.data
+    assert "no pueden estar vacíos" in empty_content.json["error"]
+
+
+def test_duplicate_user_and_xss_content_are_rejected_or_escaped(fake_fm_server):
+    """Comprueba duplicados y que el contenido enviado por usuario no se interpreta como HTML."""
+
+    app = build_database_app(fake_fm_server)
+    client = app.test_client()
+    authenticate(client, app, "admin")
+
+    duplicate = client.post(
+        "/users/new",
+        data={
+            "username": "admin",
+            "email": "otro@example.com",
+            "password": "OtraClave123!",
+            "role": "docente",
+            "active": "1",
+        },
+    )
+    assert duplicate.status_code == 409
+    with app.app_context():
+        assert User.query.filter_by(username="admin").count() == 1
+
+    payload = {
+        "title": "<script>alert('xss')</script>",
+        "topic": "Seguridad",
+        "level": "basico",
+        "competency": "Reconocer riesgos",
+        "description": "Contenido controlado",
+    }
+    created = client.post("/contents/new", data=payload)
+    page = client.get("/contents")
+
+    assert created.status_code == 302
+    assert b"&lt;script&gt;" in page.data
+    assert b"<script>alert('xss')</script>" not in page.data
+
+
+def test_admin_cannot_delete_content_with_recommendation(fake_fm_server):
+    """Comprueba que la trazabilidad impide eliminar contenido ya recomendado."""
+
+    app = build_database_app(fake_fm_server)
+    client = app.test_client()
+    authenticate(client, app, "admin")
+    with app.app_context():
+        content = EducationalContent.query.first()
+        student = Student(name="Estudiante vinculado", age=18, school="Demo", interest_area="Bases de datos")
+        db.session.add(student)
+        db.session.flush()
+        evaluation = DiagnosticEvaluation(
+            student_id=student.id,
+            status="clasificada",
+            classified_level="basico",
+            explanation="Clasificación controlada",
+        )
+        db.session.add(evaluation)
+        db.session.flush()
+        db.session.add(ContentRecommendation(student_id=student.id, content_id=content.id, evaluation_id=evaluation.id, reason="Recomendado para reforzar"))
+        db.session.commit()
+        content_id = content.id
+
+    response = client.post(f"/contents/{content_id}/delete")
+
+    assert response.status_code == 409
+    with app.app_context():
+        assert db.session.get(EducationalContent, content_id) is not None
+
+
+# PRUEBAS FUNCIONALES: recorren casos de uso completos mediante el cliente de
+# Flask, incluyendo autenticación, roles, evaluaciones, IA, recomendaciones y reportes.
 def test_login_requires_second_factor(fake_fm_server):
     app = create_app({
         "TESTING": True,
