@@ -1,0 +1,41 @@
+<html lang="es"><head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mi aula | TutorIA</title>
+    <link href="/static/vendor/bootstrap/5.3.8/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/base.css" rel="stylesheet">
+    
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-xl bg-white border-bottom shadow-sm"><div class="container">
+      <a class="navbar-brand fw-bold" href="/"><span class="brand-mark">T</span> TutorIA <small>tu aula digital</small></a>
+      <div class="d-flex align-items-center justify-content-end flex-wrap gap-2 gap-xl-3">
+        <a class="text-decoration-none" href="/help">Ayuda</a>
+      
+        <a class="text-decoration-none" href="/dashboard">Inicio</a>
+        <a class="text-decoration-none" href="/chat">Tutor IA</a>
+        <a class="text-decoration-none" href="/auth/totp/setup">2FA</a>
+        <a class="text-decoration-none" href="/student/diagnostic/new">Mi evaluación</a><a class="text-decoration-none" href="/student/progress">Mi progreso</a><a class="text-decoration-none" href="/student/profile">Mi perfil</a>
+        
+        
+        <span class="badge text-bg-secondary">estudiante</span>
+        <form method="post" action="/auth/logout"><input type="hidden" name="csrf_token" value="ImYzMjBjNmJjYTZhNmM5ZDMxM2FmZjIxMDFkODI1YWJhYWY4ZmY5MmMi.anZ3BA.gLqUvREBSpP8jYu6XtUAa45ADlw"><button class="btn btn-outline-secondary btn-sm" type="submit">Salir</button></form>
+      </div>
+    </div></nav>
+    <main class="container py-4">
+      <div class="alert alert-success" role="alert">TOTP activado. ¡Bienvenido a TutorIA!</div>
+      
+<section class="welcome-panel">
+  <p class="eyebrow">Mi espacio de aprendizaje</p>
+  <h1 class="h2 mb-1">Hola, selenium_student</h1>
+  <p class="text-secondary mb-0">Completa tu perfil para personalizar tu acompañamiento.</p>
+</section>
+
+<div class="alert alert-info">Aún no tienes un perfil académico. Completa tus datos para que TutorIA pueda acompañarte mejor.</div>
+
+<div class="d-flex flex-wrap gap-2"><a class="btn btn-primary" href="/chat">Conversar con TutorIA</a><a class="btn btn-outline-primary" href="/student/profile">Completar mi perfil</a></div>
+
+    </main>
+    <script src="/static/vendor/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
+    
+  
+</body></html>

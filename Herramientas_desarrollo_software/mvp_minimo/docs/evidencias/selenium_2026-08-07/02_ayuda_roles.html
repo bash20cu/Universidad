@@ -1,0 +1,77 @@
+<html lang="es"><head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ayuda | TutorIA</title>
+    <link href="/static/vendor/bootstrap/5.3.8/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/base.css" rel="stylesheet">
+    
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-xl bg-white border-bottom shadow-sm"><div class="container">
+      <a class="navbar-brand fw-bold" href="/"><span class="brand-mark">T</span> TutorIA <small>tu aula digital</small></a>
+      <div class="d-flex align-items-center justify-content-end flex-wrap gap-2 gap-xl-3">
+        <a class="text-decoration-none" href="/help">Ayuda</a>
+      </div>
+    </div></nav>
+    <main class="container py-4">
+      
+      
+<section class="help-hero">
+  <div>
+    <p class="eyebrow">Centro de ayuda</p>
+    <h1>Aprende a usar TutorIA</h1>
+    <p>Consulta una guía rápida para estudiantes, docentes y administradores. Si estás empezando, sigue primero los pasos de tu rol y luego explora el Tutor IA.</p>
+  </div>
+  <a class="btn btn-primary" href="/auth/login">Ingresar al sitio</a>
+</section>
+
+<section class="help-section" aria-labelledby="start-title">
+  <div class="section-heading"><div><p class="eyebrow">Para comenzar</p><h2 id="start-title">Tres pasos para entrar</h2></div><span class="help-number">01</span></div>
+  <div class="help-steps">
+    <article class="help-step"><span>1</span><div><h3>Crea o usa tu cuenta</h3><p>Regístrate como estudiante desde la pantalla de inicio. Docentes y administradores reciben sus credenciales por el responsable del sistema.</p></div></article>
+    <article class="help-step"><span>2</span><div><h3>Confirma el segundo factor</h3><p>Activa TOTP escaneando el QR con Google Authenticator, Microsoft Authenticator, Authy u otra aplicación compatible.</p></div></article>
+    <article class="help-step"><span>3</span><div><h3>Completa tu perfil</h3><p>El estudiante registra nombre, edad, institución y área de interés para que TutorIA pueda organizar su ruta de aprendizaje.</p></div></article>
+  </div>
+</section>
+
+<section class="help-section" aria-labelledby="roles-title">
+  <div class="section-heading"><div><p class="eyebrow">Según tu rol</p><h2 id="roles-title">Qué puedes hacer en TutorIA</h2></div><span class="help-number">02</span></div>
+  <div class="role-grid">
+    <article class="role-card role-student"><span class="role-icon">E</span><h3>Estudiante</h3><p>Usa TutorIA para conocer tu progreso y recibir acompañamiento.</p><ul><li>Completa y actualiza tu perfil.</li><li>Responde tu evaluación diagnóstica.</li><li>Consulta tu nivel y tu historial.</li><li>Revisa las recomendaciones de contenidos.</li><li>Conversa con Tutor IA para resolver dudas.</li></ul></article>
+    <article class="role-card role-teacher"><span class="role-icon">D</span><h3>Docente</h3><p>Usa TutorIA para organizar la evaluación y el acompañamiento académico.</p><ul><li>Registra y actualiza estudiantes.</li><li>Administra contenidos y preguntas diagnósticas.</li><li>Aplica evaluaciones y solicita su clasificación.</li><li>Consulta recomendaciones y reportes.</li></ul></article>
+    <article class="role-card role-admin"><span class="role-icon">A</span><h3>Administrador</h3><p>Usa TutorIA para mantener el sistema y supervisar su trazabilidad.</p><ul><li>Administra usuarios y roles.</li><li>Puede eliminar estudiantes y contenidos.</li><li>Consulta la bitácora de acciones importantes.</li><li>Supervisa el estado del proveedor IA.</li></ul></article>
+  </div>
+</section>
+
+<section class="help-section" aria-labelledby="academic-title">
+  <div class="section-heading"><div><p class="eyebrow">Flujo académico</p><h2 id="academic-title">Del diagnóstico a la recomendación</h2></div><span class="help-number">03</span></div>
+  <div class="timeline">
+    <div class="timeline-item"><strong>01</strong><div><h3>El docente prepara</h3><p>Registra el estudiante, revisa las preguntas activas y confirma que existan contenidos en la biblioteca.</p></div></div>
+    <div class="timeline-item"><strong>02</strong><div><h3>El estudiante responde</h3><p>El docente aplica la evaluación y guarda una respuesta para cada pregunta activa.</p></div></div>
+    <div class="timeline-item"><strong>03</strong><div><h3>TutorIA clasifica</h3><p>El proveedor IA analiza las respuestas y devuelve un nivel básico, intermedio o avanzado. La aplicación valida el resultado antes de guardarlo.</p></div></div>
+    <div class="timeline-item"><strong>04</strong><div><h3>El sistema recomienda</h3><p>La aplicación selecciona contenidos existentes según nivel y área de interés; la IA no inventa materiales ni identificadores.</p></div></div>
+  </div>
+</section>
+
+<section class="help-section help-ia" aria-labelledby="ia-title">
+  <div class="section-heading"><div><p class="eyebrow">Tutor IA</p><h2 id="ia-title">Cómo conversar con el tutor</h2></div><span class="help-number">04</span></div>
+  <div class="help-ia-grid">
+    <div><p>Escribe una pregunta concreta sobre el tema que estás estudiando. Puedes usar las sugerencias rápidas de la pantalla de chat y continuar la conversación con preguntas de seguimiento.</p><p class="help-note"><strong>Importante:</strong> Tutor IA es un apoyo educativo. Verifica las respuestas con tu docente y evita escribir contraseñas, códigos TOTP o información personal innecesaria.</p></div>
+    <dl class="help-facts"><div><dt>Proveedor principal</dt><dd>NVIDIA NIM, cuando está configurado.</dd></div><div><dt>Respaldo local</dt><dd>Apple Foundation Models, mediante `fm serve`.</dd></div><div><dt>Estado técnico</dt><dd>La pantalla de chat muestra disponibilidad, modelo y ubicación de procesamiento.</dd></div></dl>
+  </div>
+</section>
+
+<section class="help-section" aria-labelledby="trouble-title">
+  <div class="section-heading"><div><p class="eyebrow">Solución de problemas</p><h2 id="trouble-title">Si algo no funciona</h2></div><span class="help-number">05</span></div>
+  <div class="trouble-list">
+    <details><summary>No puedo iniciar sesión</summary><p>Confirma usuario y contraseña. Si la cuenta tiene TOTP activo, abre la aplicación autenticadora y escribe el código vigente de seis dígitos.</p></details>
+    <details><summary>El código TOTP fue rechazado</summary><p>Usa el código más reciente y revisa que la hora del dispositivo esté sincronizada. Los códigos expiran y los desafíos tienen un límite de intentos.</p></details>
+    <details><summary>Tutor IA aparece no disponible</summary><p>Revisa el estado del proveedor en la pantalla de chat. En macOS confirma que Foundation Models esté disponible; si se usa NVIDIA, confirma conectividad y configuración de la clave fuera del repositorio.</p></details>
+    <details><summary>No aparecen recomendaciones</summary><p>Debe existir una evaluación clasificada y contenidos activos que coincidan con el nivel del estudiante. Solicita al docente revisar la biblioteca.</p></details>
+  </div>
+</section>
+
+    </main>
+    <script src="/static/vendor/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
+    
+  
+</body></html>

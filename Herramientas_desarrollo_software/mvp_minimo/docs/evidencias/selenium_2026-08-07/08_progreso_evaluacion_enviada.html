@@ -1,0 +1,34 @@
+<html lang="es"><head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mi progreso | TutorIA</title>
+    <link href="/static/vendor/bootstrap/5.3.8/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/base.css" rel="stylesheet">
+    
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-xl bg-white border-bottom shadow-sm"><div class="container">
+      <a class="navbar-brand fw-bold" href="/"><span class="brand-mark">T</span> TutorIA <small>tu aula digital</small></a>
+      <div class="d-flex align-items-center justify-content-end flex-wrap gap-2 gap-xl-3">
+        <a class="text-decoration-none" href="/help">Ayuda</a>
+      
+        <a class="text-decoration-none" href="/dashboard">Inicio</a>
+        <a class="text-decoration-none" href="/chat">Tutor IA</a>
+        <a class="text-decoration-none" href="/auth/totp/setup">2FA</a>
+        <a class="text-decoration-none" href="/student/diagnostic/new">Mi evaluación</a><a class="text-decoration-none" href="/student/progress">Mi progreso</a><a class="text-decoration-none" href="/student/profile">Mi perfil</a>
+        
+        
+        <span class="badge text-bg-secondary">estudiante</span>
+        <form method="post" action="/auth/logout"><input type="hidden" name="csrf_token" value="ImYzMjBjNmJjYTZhNmM5ZDMxM2FmZjIxMDFkODI1YWJhYWY4ZmY5MmMi.anZ3BQ.sbngD4NjO4PzGOCIT_fdUsmpRiE"><button class="btn btn-outline-secondary btn-sm" type="submit">Salir</button></form>
+      </div>
+    </div></nav>
+    <main class="container py-4">
+      <div class="alert alert-success" role="alert">Tu evaluación fue enviada. El docente podrá solicitar su clasificación con IA.</div>
+      
+<header class="page-heading"><div><p class="eyebrow">Seguimiento personal</p><h1>Mi progreso</h1><p>Consulta tus evaluaciones y la ruta de aprendizaje recomendada.</p></div><div class="d-flex gap-2"><a class="btn btn-outline-primary" href="/student/diagnostic/new">Responder evaluación</a><a class="btn btn-outline-secondary" href="/student/dashboard">Volver a mi aula</a></div></header>
+<div class="row g-4"><section class="col-lg-6"><div class="card-surface p-4 h-100"><h2 class="h5">Evaluaciones</h2><article class="border-bottom py-3"><div class="d-flex justify-content-between gap-2"><strong>2026-08-08</strong><span class="badge text-bg-warning">Pendiente</span></div><p class="mb-0 mt-2 text-secondary">Nivel: Sin clasificar</p></article></div></section><section class="col-lg-6"><div class="card-surface p-4 h-100"><h2 class="h5">Recomendaciones</h2><p class="text-secondary mb-0">Cuando completes un diagnóstico aparecerán aquí.</p></div></section></div>
+
+    </main>
+    <script src="/static/vendor/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
+    
+  
+</body></html>

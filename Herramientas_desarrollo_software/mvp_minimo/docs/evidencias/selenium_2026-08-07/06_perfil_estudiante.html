@@ -1,0 +1,39 @@
+<html lang="es"><head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mi perfil | TutorIA</title>
+    <link href="/static/vendor/bootstrap/5.3.8/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/base.css" rel="stylesheet">
+    
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-xl bg-white border-bottom shadow-sm"><div class="container">
+      <a class="navbar-brand fw-bold" href="/"><span class="brand-mark">T</span> TutorIA <small>tu aula digital</small></a>
+      <div class="d-flex align-items-center justify-content-end flex-wrap gap-2 gap-xl-3">
+        <a class="text-decoration-none" href="/help">Ayuda</a>
+      
+        <a class="text-decoration-none" href="/dashboard">Inicio</a>
+        <a class="text-decoration-none" href="/chat">Tutor IA</a>
+        <a class="text-decoration-none" href="/auth/totp/setup">2FA</a>
+        <a class="text-decoration-none" href="/student/diagnostic/new">Mi evaluación</a><a class="text-decoration-none" href="/student/progress">Mi progreso</a><a class="text-decoration-none" href="/student/profile">Mi perfil</a>
+        
+        
+        <span class="badge text-bg-secondary">estudiante</span>
+        <form method="post" action="/auth/logout"><input type="hidden" name="csrf_token" value="ImYzMjBjNmJjYTZhNmM5ZDMxM2FmZjIxMDFkODI1YWJhYWY4ZmY5MmMi.anZ3BA.gLqUvREBSpP8jYu6XtUAa45ADlw"><button class="btn btn-outline-secondary btn-sm" type="submit">Salir</button></form>
+      </div>
+    </div></nav>
+    <main class="container py-4">
+      
+      
+<div class="form-shell">
+  <header class="form-heading"><a href="/student/dashboard">Volver a mi aula</a><p class="eyebrow">Perfil académico</p><h1>Completa tu perfil</h1><p>Estos datos ayudan a personalizar tus recomendaciones. El nivel se determina mediante el diagnóstico.</p></header>
+  <form method="post" class="bg-white border rounded-4 shadow-sm p-4" novalidate=""><input id="csrf_token" name="csrf_token" type="hidden" value="ImYzMjBjNmJjYTZhNmM5ZDMxM2FmZjIxMDFkODI1YWJhYWY4ZmY5MmMi.anZ3BA.gLqUvREBSpP8jYu6XtUAa45ADlw">
+    <div class="row g-3"><div class="col-md-8"><label class="form-label" for="name">Nombre completo</label><input class="form-control" id="name" maxlength="150" name="name" required="" type="text" value=""></div><div class="col-md-4"><label class="form-label" for="age">Edad</label><input class="form-control" id="age" max="120" min="5" name="age" required="" type="number" value=""></div><div class="col-md-6"><label class="form-label" for="school">Centro educativo</label><input class="form-control" id="school" maxlength="180" name="school" required="" type="text" value=""></div><div class="col-md-6"><label class="form-label" for="interest_area">Área de interés</label><input class="form-control" id="interest_area" maxlength="120" name="interest_area" required="" type="text" value=""></div></div>
+    <div class="d-flex justify-content-end mt-4"><input class="btn btn-primary" id="submit" name="submit" type="submit" value="Guardar perfil"></div>
+  </form>
+</div>
+
+    </main>
+    <script src="/static/vendor/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
+    
+  
+</body></html>

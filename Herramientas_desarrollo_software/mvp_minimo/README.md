@@ -187,6 +187,12 @@ También validan autenticación, 2FA, autorización por roles, CRUD de estudiant
 CRUD de contenidos educativos, evaluación diagnóstica, clasificación, recomendaciones,
 reportes, usuarios y registros de bitácora.
 
+### Pruebas UI con Selenium Grid
+
+El MVP incluye `tests/test_selenium_ui.py` para ejecutar pruebas de navegador real
+contra el contenedor Chrome remoto. La guía completa, la matriz de escenarios y
+las evidencias se encuentran en `docs/04_PRUEBAS_UI_SELENIUM.md`.
+
 ## Solución de problemas
 
 - **Doble clic bloqueado por macOS:** clic derecho sobre

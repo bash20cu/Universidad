@@ -1,0 +1,42 @@
+<html lang="es"><head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Estudiantes | TutorIA</title>
+    <link href="/static/vendor/bootstrap/5.3.8/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/base.css" rel="stylesheet">
+    
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-xl bg-white border-bottom shadow-sm"><div class="container">
+      <a class="navbar-brand fw-bold" href="/"><span class="brand-mark">T</span> TutorIA <small>tu aula digital</small></a>
+      <div class="d-flex align-items-center justify-content-end flex-wrap gap-2 gap-xl-3">
+        <a class="text-decoration-none" href="/help">Ayuda</a>
+      
+        <a class="text-decoration-none" href="/dashboard">Inicio</a>
+        <a class="text-decoration-none" href="/chat">Tutor IA</a>
+        <a class="text-decoration-none" href="/auth/totp/setup">2FA</a>
+        
+        <a class="text-decoration-none" href="/students">Estudiantes</a><a class="text-decoration-none" href="/contents">Biblioteca</a><a class="text-decoration-none" href="/diagnostics">Diagnósticos</a><a class="text-decoration-none" href="/recommendations">Recomendaciones</a><a class="text-decoration-none" href="/reports">Reportes</a>
+        
+        <span class="badge text-bg-secondary">docente</span>
+        <form method="post" action="/auth/logout"><input type="hidden" name="csrf_token" value="Ijk2N2I0NDZiYmQ4NDkxZGYzM2EwMTlhZDBlNDdiYjMwMDM1Yjk5MDAi.anZ3Bg.TsvGDB9kwHUthuMCtOpgFJdOHuM"><button class="btn btn-outline-secondary btn-sm" type="submit">Salir</button></form>
+      </div>
+    </div></nav>
+    <main class="container py-4">
+      
+      
+<header class="page-heading"><div><p class="eyebrow">Gestión académica</p><h1>Estudiantes</h1><p>Administra los perfiles que participan en evaluaciones diagnósticas.</p></div><a class="btn btn-primary" href="/students/new">Nuevo estudiante</a></header>
+<section class="metric-grid" aria-label="Resumen de estudiantes"><div class="metric"><span>Total</span><strong>1</strong></div><div class="metric level-basic"><span>Nivel básico</span><strong>1</strong></div><div class="metric level-medium"><span>Intermedio</span><strong>0</strong></div><div class="metric level-advanced"><span>Avanzado</span><strong>0</strong></div></section>
+<section class="student-workspace">
+  <div class="student-toolbar"><div><label for="student-search">Buscar</label><input id="student-search" class="form-control" type="search" placeholder="Nombre, centro o área de interés" autocomplete="off"></div><div><label for="level-filter">Nivel</label><select id="level-filter" class="form-select"><option value="">Todos</option><option value="basico">Básico</option><option value="intermedio">Intermedio</option><option value="avanzado">Avanzado</option></select></div><p id="result-count" class="result-count" aria-live="polite">1 estudiantes</p></div>
+  <div class="table-responsive"><table class="table student-table mb-0"><thead><tr><th>Estudiante</th><th>Centro educativo</th><th>Área de interés</th><th>Nivel</th><th><span class="visually-hidden">Acciones</span></th></tr></thead><tbody>
+  <tr data-student-row="" data-search="estudiante selenium universidad demo bases de datos" data-level="basico"><td data-label="Estudiante"><strong>Estudiante Selenium</strong><small>20 años</small></td><td data-label="Centro educativo">Universidad Demo</td><td data-label="Área de interés">Bases de datos</td><td data-label="Nivel"><span class="level-badge level-basico">Básico</span></td><td class="actions"><a class="btn btn-outline-secondary btn-sm" href="/students/1/edit">Editar</a></td></tr>
+  </tbody></table></div>
+  <div id="filtered-empty" class="filtered-empty" hidden=""><strong>Sin coincidencias</strong><span>Prueba con otro término o nivel.</span></div>
+</section>
+
+
+    </main>
+    <script src="/static/vendor/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/students.js"></script>
+  
+</body></html>

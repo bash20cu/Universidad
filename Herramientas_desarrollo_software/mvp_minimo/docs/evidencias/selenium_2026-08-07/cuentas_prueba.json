@@ -1,0 +1,8 @@
+{
+  "usuarios": [
+    "admin",
+    "docente",
+    "estudiante"
+  ],
+  "base_url": "http://host.docker.internal:5050"
+}

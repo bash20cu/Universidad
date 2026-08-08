@@ -1,0 +1,44 @@
+<html lang="es"><head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contenidos | TutorIA</title>
+    <link href="/static/vendor/bootstrap/5.3.8/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/base.css" rel="stylesheet">
+    
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-xl bg-white border-bottom shadow-sm"><div class="container">
+      <a class="navbar-brand fw-bold" href="/"><span class="brand-mark">T</span> TutorIA <small>tu aula digital</small></a>
+      <div class="d-flex align-items-center justify-content-end flex-wrap gap-2 gap-xl-3">
+        <a class="text-decoration-none" href="/help">Ayuda</a>
+      
+        <a class="text-decoration-none" href="/dashboard">Inicio</a>
+        <a class="text-decoration-none" href="/chat">Tutor IA</a>
+        <a class="text-decoration-none" href="/auth/totp/setup">2FA</a>
+        
+        <a class="text-decoration-none" href="/students">Estudiantes</a><a class="text-decoration-none" href="/contents">Biblioteca</a><a class="text-decoration-none" href="/diagnostics">Diagnósticos</a><a class="text-decoration-none" href="/recommendations">Recomendaciones</a><a class="text-decoration-none" href="/reports">Reportes</a>
+        
+        <span class="badge text-bg-secondary">docente</span>
+        <form method="post" action="/auth/logout"><input type="hidden" name="csrf_token" value="Ijk2N2I0NDZiYmQ4NDkxZGYzM2EwMTlhZDBlNDdiYjMwMDM1Yjk5MDAi.anZ3Bw.wlxmRjykRh2w4sFQNX0pF-cY0IU"><button class="btn btn-outline-secondary btn-sm" type="submit">Salir</button></form>
+      </div>
+    </div></nav>
+    <main class="container py-4">
+      
+      
+<header class="page-heading"><div><p class="eyebrow">Biblioteca académica</p><h1>Contenidos educativos</h1><p>Administra recursos por tema, nivel y competencia para alimentar las recomendaciones.</p></div><a class="btn btn-primary" href="/contents/new">Nuevo contenido</a></header>
+<section class="metric-grid" aria-label="Resumen de contenidos"><div class="metric"><span>Total</span><strong>3</strong></div><div class="metric level-basic"><span>Nivel básico</span><strong>1</strong></div><div class="metric level-medium"><span>Intermedio</span><strong>1</strong></div><div class="metric level-advanced"><span>Avanzado</span><strong>1</strong></div></section>
+<section class="content-workspace">
+  <div class="content-toolbar"><div><label for="content-search">Buscar</label><input id="content-search" class="form-control" type="search" placeholder="Título, tema, competencia o descripción" autocomplete="off"></div><div><label for="topic-filter">Tema</label><select id="topic-filter" class="form-select"><option value="">Todos</option><option value="bases de datos">Bases de datos</option></select></div><div><label for="level-filter">Nivel</label><select id="level-filter" class="form-select"><option value="">Todos</option><option value="basico">Básico</option><option value="intermedio">Intermedio</option><option value="avanzado">Avanzado</option></select></div><p id="result-count" class="result-count" aria-live="polite">3 contenidos</p></div>
+  <div class="table-responsive"><table class="table content-table mb-0"><thead><tr><th>Contenido</th><th>Tema</th><th>Nivel</th><th>Material</th><th>Estado</th><th><span class="visually-hidden">Acciones</span></th></tr></thead><tbody>
+  <tr data-content-row="" data-search="optimización de consultas bases de datos analizar planes de ejecución índices, planes y estrategias de optimización." data-topic="bases de datos" data-level="avanzado"><td data-label="Contenido"><strong>Optimización de consultas</strong><small>Índices, planes y estrategias de optimización.</small></td><td data-label="Tema">Bases de datos</td><td data-label="Nivel"><span class="level-badge level-avanzado">Avanzado</span></td><td data-label="Material">Video</td><td data-label="Estado">Activo</td><td class="actions"><a class="btn btn-outline-secondary btn-sm" href="/contents/3/edit">Editar</a></td></tr>
+  <tr data-content-row="" data-search="introducción a bases de datos bases de datos reconocer tablas, claves y relaciones conceptos esenciales del modelo relacional." data-topic="bases de datos" data-level="basico"><td data-label="Contenido"><strong>Introducción a bases de datos</strong><small>Conceptos esenciales del modelo relacional.</small></td><td data-label="Tema">Bases de datos</td><td data-label="Nivel"><span class="level-badge level-basico">Básico</span></td><td data-label="Material">Lectura</td><td data-label="Estado">Activo</td><td class="actions"><a class="btn btn-outline-secondary btn-sm" href="/contents/1/edit">Editar</a></td></tr>
+  <tr data-content-row="" data-search="normalización práctica bases de datos aplicar formas normales ejercicios de primera, segunda y tercera forma normal." data-topic="bases de datos" data-level="intermedio"><td data-label="Contenido"><strong>Normalización práctica</strong><small>Ejercicios de primera, segunda y tercera forma normal.</small></td><td data-label="Tema">Bases de datos</td><td data-label="Nivel"><span class="level-badge level-intermedio">Intermedio</span></td><td data-label="Material">Ejercicio</td><td data-label="Estado">Activo</td><td class="actions"><a class="btn btn-outline-secondary btn-sm" href="/contents/2/edit">Editar</a></td></tr>
+  </tbody></table></div>
+  <div id="filtered-empty" class="filtered-empty" hidden=""><strong>Sin coincidencias</strong><span>Prueba con otro término, tema o nivel.</span></div>
+</section>
+
+
+    </main>
+    <script src="/static/vendor/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/contents.js"></script>
+  
+</body></html>

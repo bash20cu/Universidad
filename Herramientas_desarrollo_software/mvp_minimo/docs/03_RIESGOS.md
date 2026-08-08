@@ -14,7 +14,10 @@
 | R-08 | El flujo productivo no tiene exportación PDF, códigos de recuperación ni métricas históricas. | Bajo para MVP | Alta | **Aceptado como mejora** | Mantener fuera del alcance actual y documentarlo como evolución futura. |
 | R-09 | SQLite y el servidor de desarrollo no son la configuración de producción. | Medio | Alta | **Aceptado como mejora** | Documentar como limitación del MVP; migrar a PostgreSQL/WSGI en una versión posterior. |
 | R-10 | El banco inicial de preguntas y contenidos puede ser insuficiente para una demostración pedagógica representativa. | Medio | Media | **Abierto** | Cargar un conjunto mínimo fijo de casos y conservarlo como datos de demostración. |
-| R-11 | El flujo de evaluación estudiantil requiere perfil completado y preguntas activas; sin evidencia manual puede parecer incompleto durante la presentación. | Medio | Media | **Abierto** | Capturar una ejecución del estudiante, verificar la persistencia de respuestas y relacionarla con RF-12 y las pruebas automatizadas. |
+| R-11 | El flujo de evaluación estudiantil requiere perfil completado y preguntas activas; sin evidencia manual puede parecer incompleto durante la presentación. | Medio | Media | **Controlado** | Evidencia Selenium de registro, perfil, respuestas y progreso; mantener una captura manual adicional para la presentación final. |
+| R-12 | Las pruebas UI dependen de Docker, Selenium Grid, resolución `host.docker.internal` y una base temporal correctamente aislada. | Medio | Media | **Controlado** | Mantener variables `SELENIUM_REMOTE_URL`, `SELENIUM_BASE_URL` y `DATABASE_URL` documentadas; verificar `/status` antes de ejecutar. |
+| R-13 | La pantalla de evaluación es extensa y el botón de envío queda fuera del primer viewport. | Bajo | Media | **Mejora UX** | Añadir indicador de avance, navegación por preguntas o una acción de envío más visible en una futura iteración. |
+| R-14 | La aplicación solicita `favicon.ico` y actualmente responde 404 durante navegación real. | Bajo | Alta | **Mejora menor** | Agregar un favicon local y una prueba de ausencia de errores 404 de recursos estáticos. |
 
 ## Riesgos cerrados o controlados
 

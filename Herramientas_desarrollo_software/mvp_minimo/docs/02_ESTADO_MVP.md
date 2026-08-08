@@ -1,26 +1,26 @@
 # Estado del MVP TutorIA
 
-**Fecha de corte:** 2026-08-05  
-**Resultado general:** funcional para demostración académica controlada; la decisión NVIDIA + Foundation Models queda adoptada y resta completar validaciones, evidencias y sincronización documental.
+**Fecha de corte:** 2026-08-07  
+**Resultado general:** funcional para demostración académica controlada; la decisión NVIDIA + Foundation Models queda adoptada y la ronda UI con Selenium ya cubre los flujos principales de acceso, roles y evaluación estudiantil.
 
 ## Resumen ejecutivo
 
-El código implementa los módulos centrales descritos en el informe: usuarios y roles, autenticación con contraseña y TOTP, estudiantes, contenidos, preguntas diagnósticas, evaluaciones respondidas por docentes o estudiantes, clasificación IA, recomendaciones, reportes, portal privado, bitácora y ayuda pública. La suite actual tiene 30 pruebas y todas pasan cuando puede abrir sus servidores HTTP simulados.
+El código implementa los módulos centrales descritos en el informe: usuarios y roles, autenticación con contraseña y TOTP, estudiantes, contenidos, preguntas diagnósticas, evaluaciones respondidas por docentes o estudiantes, clasificación IA, recomendaciones, reportes, portal privado, bitácora y ayuda pública. La suite de backend tiene 30 pruebas aprobadas y la suite UI agrega 3 escenarios Selenium aprobados contra Chrome remoto.
 
-El proyecto no está listo para declararse terminado porque la documentación de `docs/` todavía debe demostrar el flujo completo y falta completar la validación manual en los equipos objetivo. Los documentos derivados ya reflejan la decisión NVIDIA + Foundation Models. Ollama queda fuera del MVP actual.
+El proyecto no está listo para declararse terminado porque aún falta validar proveedores IA reales, Windows y los módulos de recomendaciones/reportes desde navegador. La documentación de `docs/` ya incluye la ronda Selenium y los documentos derivados reflejan la decisión NVIDIA + Foundation Models. Ollama queda fuera del MVP actual.
 
 ## Matriz de estado
 
 | Área | Evidencia en código | Estado | Falta para cerrar |
 |---|---|---|---|
 | Aplicación Flask modular | `app/routes`, `app/services`, `app/models`, `app/forms`, templates y estáticos. | **Completado** | Mantener separación de responsabilidades. |
-| Usuarios y roles | Rutas de usuarios, roles administrador/docente/estudiante y pruebas de autorización. | **Completado** | Añadir evidencias manuales por rol. |
+| Usuarios y roles | Rutas de usuarios, roles administrador/docente/estudiante, pruebas de autorización y capturas Selenium. | **Completado** | Añadir validación de teclado y responsive. |
 | Contraseñas y sesiones | Hash de contraseña, Flask-Login y cierre de sesión. | **Completado** | Documentar configuración segura para producción. |
 | Segundo factor | TOTP, QR, hash de códigos de desafío, expiración, tres intentos y un solo uso. | **Completado en MVP** | Códigos de recuperación quedan como mejora futura. |
-| Estudiantes | Alta, edición, eliminación administrativa, perfil privado y progreso. | **Completado** | Añadir captura del flujo y matriz requisito-prueba. |
+| Estudiantes | Alta, edición, eliminación administrativa, perfil privado, progreso y capturas Selenium. | **Completado** | Añadir matriz requisito-prueba. |
 | Contenidos | CRUD, niveles, temas, competencias, tipo, URL y estado. | **Completado** | Ampliar banco y tipos de material como mejora futura. |
 | Preguntas diagnósticas | Alta/edición, activación y formulario de evaluación. | **Completado** | Documentar catálogo inicial y criterio pedagógico. |
-| Evaluación | Persistencia de respuestas y estados; docentes y estudiantes pueden responder según su flujo. | **Completado** | Añadir evidencia visual del flujo estudiantil. |
+| Evaluación | Persistencia de respuestas y estados; docentes y estudiantes pueden responder según su flujo, con evidencia Selenium del estudiante. | **Completado** | Añadir clasificación IA real desde navegador. |
 | Clasificación IA | Prompt, parseo JSON, niveles cerrados, regla de evidencia mínima, proveedor/modelo persistidos. | **Completado con proveedor simulado probado** | Validar una integración real reproducible y documentar límites. |
 | Recomendaciones | Selección determinista de contenidos existentes, límite de cinco y motivo trazable. | **Completado** | Añadir evidencia y más contenidos de demostración. |
 | Reportes | Reporte general e individual de progreso. | **Completado** | Exportación PDF queda fuera del MVP y está pendiente como mejora. |
@@ -31,16 +31,16 @@ El proyecto no está listo para declararse terminado porque la documentación de
 | NVIDIA NIM | Proveedor remoto configurable por `.env`, streaming, respuesta completa y fallback a Foundation Models. | **Implementado** | Confirmar autorización académica, costo, privacidad y evidencia de la clave fuera del repositorio. |
 | Ollama | Alternativa histórica mencionada en documentación técnica. | **Fuera del MVP** | No implementarlo en esta entrega; mantenerlo solo como evolución futura claramente etiquetada. |
 | Windows | Lanzador y guía con NVIDIA como proveedor remoto. | **Preparado, no validado en esta revisión** | Ejecutar una prueba real en Windows y agregar evidencia. |
-| Pruebas automatizadas | `tests/test_app.py`; 30 pruebas aprobadas. | **Completado para el alcance probado** | Agregar pruebas de errores de proveedor real. |
-| Evidencias de demostración | Inicio y pantalla TOTP. | **Insuficiente** | Completar evidencias del flujo académico y de administración. |
+| Pruebas automatizadas | `tests/test_app.py` con 30 pruebas y `tests/test_selenium_ui.py` con 3 escenarios UI aprobados. | **Completado para el alcance probado** | Agregar pruebas de errores de proveedor real y responsive. |
+| Evidencias de demostración | 15 PNG y 15 HTML de Selenium para inicio, ayuda, TOTP, estudiante, docente y administrador. | **Completado para el alcance cubierto** | Completar IA real, recomendaciones, reportes y Windows. |
 | Documentación operativa | README y arquitectura en la raíz del MVP. | **Parcial** | Sincronizar con ADR/minuta/documentación técnica y mantener `docs/` actualizado. |
 
 ## Pendientes priorizados
 
 ### P0 - Resolver antes de presentar el proyecto como cerrado
 
-- Completar evidencias del flujo de demostración y relacionarlas con requisitos y pruebas.
 - Confirmar en el equipo de demostración la disponibilidad de Foundation Models, el comando `fm`, la versión de macOS y el modelo `system`.
+- Ejecutar una demostración reproducible de clasificación IA, recomendaciones y reportes desde navegador.
 
 ### P1 - Cerrar para una entrega académica sólida
 

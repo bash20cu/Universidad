@@ -1,6 +1,6 @@
 # Inventario de documentación y evidencias
 
-**Fecha de corte:** 2026-08-05
+**Fecha de corte:** 2026-08-07
 
 ## Archivos existentes en `docs/`
 
@@ -9,15 +9,13 @@
 | `evidencias/00_inicio.png` | Vista visual de la pantalla inicial de TutorIA con acceso y creación de cuenta. | Disponible; evidencia visual revisada. |
 | `evidencias/00_inicio_snapshot.yml` | Árbol accesible de la pantalla inicial: marca, formulario de usuario/contraseña, botón de continuar y enlace de registro. | Disponible; coincide con la pantalla inicial. |
 | `evidencias/01_login_totp_snapshot.yml` | Pantalla del segundo factor TOTP con campo de código de seis dígitos y botón de verificación. | Disponible; evidencia estructural, sin captura PNG asociada. |
+| `evidencias/selenium_2026-08-07/` | Evidencias visuales y HTML de inicio, ayuda, registro, TOTP, perfil, evaluación estudiantil, TutorIA, biblioteca, diagnósticos, recomendaciones, reportes, bitácora y paneles por rol. | Disponible; 21 PNG y 21 HTML generados por Selenium Grid. QR, secretos y códigos sanitizados. |
 
 ## Lo que actualmente no está documentado en `docs/`
 
 - Instalación y ejecución reproducible en macOS.
 - Ejecución en Windows con NVIDIA.
-- Registro de usuarios y activación TOTP mediante QR.
-- Inicio de sesión completo: contraseña, TOTP y cierre de sesión.
-- Separación de permisos entre administrador, docente y estudiante.
-- CRUD de estudiantes y contenidos.
+- CRUD completo de contenidos y preguntas desde navegador.
 - Gestión del banco de preguntas.
 - Creación de una evaluación con todas sus respuestas.
 - Clasificación diagnóstica con IA y validación del resultado.
@@ -26,9 +24,9 @@
 - Consulta de bitácora por el administrador.
 - Estado del proveedor, ubicación de procesamiento, modo de acceso y fallback.
 - Evidencia de que un proceso externo de IA no se apaga por error.
-- Evidencia de pruebas automatizadas y su resultado.
-- Evidencia de la página pública de ayuda y su navegación por rol.
-- Evidencia de un estudiante respondiendo una evaluación diagnóstica.
+- Evidencia de pruebas automatizadas y su resultado. **Backend: 30 aprobadas; UI Selenium: 3 aprobadas.**
+- Evidencia de la página pública de ayuda y su navegación por rol. **Cubierto por Selenium.**
+- Evidencia de un estudiante respondiendo una evaluación diagnóstica. **Cubierto por Selenium.**
 - Comparación repetible entre proveedores.
 - Evidencia de configuración sin secretos expuestos.
 
@@ -36,13 +34,13 @@
 
 - El snapshot `00_inicio_snapshot.yml` termina sin salto de línea visible antes del separador; conviene regenerarlo con una herramienta de captura para mantenerlo legible.
 - El snapshot de TOTP demuestra la interfaz, pero no el resultado exitoso ni el rechazo de códigos inválidos, expirados o reutilizados.
-- La captura inicial no prueba el flujo posterior ni la adaptación por rol.
+- La captura inicial no prueba el flujo posterior ni la adaptación por rol; esa brecha queda cubierta por `selenium_2026-08-07/`.
 - No se encontraron documentos Markdown de seguimiento, estado o riesgos dentro de `docs/` antes de esta revisión.
 
 ## Evidencias mínimas recomendadas para cerrar la entrega
 
-1. Captura o snapshot por cada flujo principal: registro/TOTP, estudiante, docente, administrador, diagnóstico, recomendaciones y reporte.
-2. Un registro de ejecución de `pytest` con el resultado de la suite.
+1. Captura o snapshot de recomendaciones, reportes y clasificación IA real.
+2. Un registro de ejecución de `pytest` con el resultado de la suite y del navegador remoto.
 3. Un caso documentado de clasificación válida y uno de respuesta IA inválida.
 4. Un caso de fallback o indisponibilidad del proveedor, indicando proveedor y ubicación de procesamiento.
 5. Una matriz que relacione requisito, ruta/código, prueba y evidencia.

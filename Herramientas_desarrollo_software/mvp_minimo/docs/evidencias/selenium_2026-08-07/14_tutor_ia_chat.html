@@ -1,0 +1,155 @@
+<html lang="es"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="Ijk2N2I0NDZiYmQ4NDkxZGYzM2EwMTlhZDBlNDdiYjMwMDM1Yjk5MDAi.anZ3Bg.TsvGDB9kwHUthuMCtOpgFJdOHuM">
+    <meta name="color-scheme" content="light">
+    <title>TutorIA | Asistente académico</title>
+    <link rel="stylesheet" href="/static/vendor/bootstrap/5.3.8/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/chat.css">
+    <script defer="" src="/static/js/chat.js?v=markdown-20260711"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/dashboard" aria-label="TutorIA, panel">Tutor<span>IA</span></a>
+      <div class="topbar-actions">
+        <div class="status-chip" id="header-status" role="status">
+          <span class="status-dot"></span>
+          <span>Comprobando proveedor IA</span>
+        </div>
+        <button class="icon-button spinning" id="refresh-status" type="button" title="Actualizar estado" aria-label="Actualizar estado">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M20 11a8 8 0 1 0 2 5.5M20 4v7h-7"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <aside class="status-rail" aria-label="Estado técnico">
+        <h2>Estado técnico</h2>
+
+
+        <section class="local-runtime" aria-label="Ejecución local de TutorIA">
+          <div class="local-runtime-header">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+              <path d="M8 9h8M8 13h5M9 20v2M15 20v2"></path>
+            </svg>
+            <div>
+              <strong>Ejecución local</strong>
+              <span>Demo en esta máquina</span>
+            </div>
+          </div>
+          <dl>
+            <div><dt>App Flask</dt><dd>http://host.docker.internal:5050</dd></div>
+            <div><dt>Modelo local</dt><dd>http://127.0.0.1:1976</dd></div>
+            <div><dt>Invocación</dt><dd><code>fm serve</code></dd></div>
+            <div><dt>Proceso</dt><dd id="runtime-owner">Detectado localmente</dd></div>
+          </dl>
+          <details>
+            <summary>Comando usado</summary>
+            <code>/usr/bin/false serve --host 127.0.0.1 --port 1976</code>
+          </details>
+        </section>
+
+
+        <section class="status-item">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="6" rx="1"></rect>
+            <rect x="3" y="14" width="18" height="6" rx="1"></rect>
+            <path d="M7 7h.01M7 17h.01"></path>
+          </svg>
+          <div>
+            <strong>Proveedor IA</strong>
+            <span>foundation_models</span>
+            <small data-health-label="">Iniciando</small>
+          </div>
+        </section>
+
+        <section class="status-item">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <rect x="7" y="7" width="10" height="10" rx="2"></rect>
+            <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"></path>
+          </svg>
+          <div>
+            <strong>Modelo</strong>
+            <span>system</span>
+            <small data-model-label="">Verificando</small>
+          </div>
+        </section>
+
+        <section class="status-item">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <rect x="5" y="10" width="14" height="10" rx="2"></rect>
+            <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+          </svg>
+          <div>
+            <strong>Privacidad</strong>
+            <span id="processing-location">device</span>
+            <small class="healthy" id="access-mode">local</small>
+          </div>
+        </section>
+
+        <section class="status-item">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M3 12h4l2-5 4 10 2-5h6"></path>
+            <circle cx="12" cy="12" r="10"></circle>
+          </svg>
+          <div>
+            <strong>Salud</strong>
+            <span id="health-copy">Comprobando</span>
+            <small data-health-label="">Iniciando</small>
+          </div>
+        </section>
+
+        <div class="privacy-note">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path>
+            <path d="m9 12 2 2 4-4"></path>
+          </svg>
+          <p id="privacy-copy">La ubicación de procesamiento depende del proveedor activo y de la configuración del despliegue.</p>
+        </div>
+
+      </aside>
+
+      <section class="chat-panel" aria-label="Chat con TutorIA">
+        <div class="messages" id="messages" aria-live="polite">
+          <article class="message assistant-message">
+            <div class="avatar" aria-hidden="true">IA</div>
+            <div class="message-content">
+              <span class="message-meta">TutorIA · ahora</span>
+              <p>Hola. Soy TutorIA, tu asistente académico conectado al proveedor de inteligencia artificial configurado.</p>
+              <p>Las respuestas se procesan en el dispositivo que ejecuta el modelo. Puedo explicar conceptos, revisar ideas y ayudarte a estudiar paso a paso.</p>
+              <p>¿Sobre qué tema quieres trabajar?</p>
+              <div class="suggestions" aria-label="Preguntas sugeridas">
+                <button type="button" data-prompt="Explícame con un ejemplo la diferencia entre una llave primaria y una llave foránea.">
+                  Llaves primarias y foráneas
+                  <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg>
+                </button>
+                <button type="button" data-prompt="Hazme tres preguntas para diagnosticar mi nivel sobre bases de datos.">
+                  Diagnóstico de bases de datos
+                  <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <form class="composer" id="chat-form">
+          <label class="sr-only" for="prompt">Pregunta para TutorIA</label>
+          <textarea id="prompt" name="prompt" rows="1" maxlength="4000" placeholder="Escribe una pregunta para TutorIA..." required="" style="height: 66px;"></textarea>
+          <div class="composer-footer">
+            <span><kbd>Enter</kbd> enviar · <kbd>Shift</kbd> + <kbd>Enter</kbd> nueva línea</span>
+            <span id="character-count">0 / 4000</span>
+          </div>
+          <button class="send-button" id="send-button" type="submit" aria-label="Enviar pregunta" title="Enviar">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M12 19V5M5 12l7-7 7 7"></path>
+            </svg>
+          </button>
+        </form>
+      </section>
+    </main>
+    <script src="/static/vendor/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
+  
+</body></html>

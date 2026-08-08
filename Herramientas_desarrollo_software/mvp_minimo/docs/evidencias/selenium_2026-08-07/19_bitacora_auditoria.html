@@ -1,0 +1,34 @@
+<html lang="es"><head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bitácora | TutorIA</title>
+    <link href="/static/vendor/bootstrap/5.3.8/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/base.css" rel="stylesheet">
+    
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-xl bg-white border-bottom shadow-sm"><div class="container">
+      <a class="navbar-brand fw-bold" href="/"><span class="brand-mark">T</span> TutorIA <small>tu aula digital</small></a>
+      <div class="d-flex align-items-center justify-content-end flex-wrap gap-2 gap-xl-3">
+        <a class="text-decoration-none" href="/help">Ayuda</a>
+      
+        <a class="text-decoration-none" href="/dashboard">Inicio</a>
+        <a class="text-decoration-none" href="/chat">Tutor IA</a>
+        <a class="text-decoration-none" href="/auth/totp/setup">2FA</a>
+        
+        <a class="text-decoration-none" href="/students">Estudiantes</a><a class="text-decoration-none" href="/contents">Biblioteca</a><a class="text-decoration-none" href="/diagnostics">Diagnósticos</a><a class="text-decoration-none" href="/recommendations">Recomendaciones</a><a class="text-decoration-none" href="/reports">Reportes</a>
+        <a class="text-decoration-none" href="/users">Usuarios</a><a class="text-decoration-none" href="/users/audit">Bitácora</a>
+        <span class="badge text-bg-secondary">administrador</span>
+        <form method="post" action="/auth/logout"><input type="hidden" name="csrf_token" value="IjAxZGZiYmI5MzUzNzdkMjQwOTcwNTllYTU2ZGNmODQzNGFmYmEwMGEi.anZ3CA.Omq9OFoBUq7XtIKO0KNNDVhVcQ0"><button class="btn btn-outline-secondary btn-sm" type="submit">Salir</button></form>
+      </div>
+    </div></nav>
+    <main class="container py-4">
+      
+      
+<header class="page-heading"><div><p class="eyebrow">Control y trazabilidad</p><h1>Bitácora del sistema</h1><p>Consulta las últimas acciones realizadas dentro de TutorIA.</p></div><a class="btn btn-outline-primary" href="/users">Volver a usuarios</a></header>
+<section class="card-surface p-0 overflow-hidden"><div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead><tr><th>Fecha</th><th>Usuario</th><th>Acción</th><th>Entidad</th><th>Detalle</th><th>IP</th></tr></thead><tbody><tr><td>2026-08-08 00:23:35</td><td>admin</td><td><span class="badge text-bg-light">login_success</span></td><td>—</td><td>Acceso verificado con TOTP</td><td><code>127.0.0.1</code></td></tr><tr><td>2026-08-08 00:23:35</td><td>admin</td><td><span class="badge text-bg-light">password_verified</span></td><td>—</td><td>Pendiente de TOTP</td><td><code>127.0.0.1</code></td></tr><tr><td>2026-08-08 00:23:35</td><td>docente</td><td><span class="badge text-bg-light">logout</span></td><td>—</td><td>—</td><td><code>127.0.0.1</code></td></tr><tr><td>2026-08-08 00:23:35</td><td>docente</td><td><span class="badge text-bg-light">report_viewed</span></td><td>report</td><td>Reporte general consultado</td><td><code>127.0.0.1</code></td></tr><tr><td>2026-08-08 00:23:34</td><td>docente</td><td><span class="badge text-bg-light">login_success</span></td><td>—</td><td>Acceso verificado con TOTP</td><td><code>127.0.0.1</code></td></tr><tr><td>2026-08-08 00:23:34</td><td>docente</td><td><span class="badge text-bg-light">password_verified</span></td><td>—</td><td>Pendiente de TOTP</td><td><code>127.0.0.1</code></td></tr><tr><td>2026-08-08 00:23:34</td><td>Sistema/visitante</td><td><span class="badge text-bg-light">login_failed</span></td><td>—</td><td>Credenciales inválidas</td><td><code>127.0.0.1</code></td></tr><tr><td>2026-08-08 00:23:33</td><td>selenium_student</td><td><span class="badge text-bg-light">student_progress_viewed</span></td><td>student #1</td><td>—</td><td><code>127.0.0.1</code></td></tr><tr><td>2026-08-08 00:23:33</td><td>selenium_student</td><td><span class="badge text-bg-light">student_diagnostic_created</span></td><td>diagnostic_evaluation #1</td><td>Estudiante Estudiante Selenium</td><td><code>127.0.0.1</code></td></tr><tr><td>2026-08-08 00:23:32</td><td>selenium_student</td><td><span class="badge text-bg-light">student_profile_updated</span></td><td>student #1</td><td>Estudiante Selenium</td><td><code>127.0.0.1</code></td></tr><tr><td>2026-08-08 00:23:32</td><td>selenium_student</td><td><span class="badge text-bg-light">login_success</span></td><td>—</td><td>Registro confirmado con TOTP</td><td><code>127.0.0.1</code></td></tr><tr><td>2026-08-08 00:23:32</td><td>selenium_student</td><td><span class="badge text-bg-light">totp_enabled</span></td><td>user #4</td><td>Activado durante el registro</td><td><code>127.0.0.1</code></td></tr><tr><td>2026-08-08 00:23:31</td><td>selenium_student</td><td><span class="badge text-bg-light">user_registered</span></td><td>User #4</td><td>Autorregistro de cuenta estudiantil</td><td><code>127.0.0.1</code></td></tr></tbody></table></div></section>
+
+    </main>
+    <script src="/static/vendor/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
+    
+  
+</body></html>

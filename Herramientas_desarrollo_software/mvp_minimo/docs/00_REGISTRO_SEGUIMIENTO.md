@@ -61,3 +61,14 @@ Un pendiente se marcará como cerrado cuando exista código verificable, prueba 
 - La evaluación queda `pendiente_ia`; la clasificación continúa bajo responsabilidad del docente o administrador.
 - Se agregaron accesos desde la navegación, el aula del estudiante y la pantalla de progreso.
 - Se agregaron pruebas de envío completo y rechazo de respuestas incompletas.
+
+## 2026-08-07 - Ronda QA UI con Selenium Grid
+
+- Se incorporó `selenium==4.27.1` a las dependencias del MVP.
+- Se agregó `tests/test_selenium_ui.py` con tres escenarios UI remotos.
+- Se validaron inicio, ayuda, registro, activación TOTP, perfil, evaluación estudiantil, progreso, login inválido, panel docente y panel administrador.
+- Se generaron 21 capturas PNG y sus 21 HTML correspondientes en `docs/evidencias/selenium_2026-08-07/`.
+- Se sanitizaron QR, secretos manuales y códigos TOTP antes de persistir evidencias.
+- Resultado de la ejecución UI: **3 passed**.
+- Se documentaron límites de cobertura: CRUD de contenidos/preguntas, IA real, chat SSE, recomendaciones, reportes, responsive móvil y Windows quedan para una segunda ronda.
+- Regresión combinada con `RUN_SELENIUM=1`: **33 passed** (30 backend + 3 UI).

@@ -1,0 +1,36 @@
+<html lang="es"><head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reportes | TutorIA</title>
+    <link href="/static/vendor/bootstrap/5.3.8/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/base.css" rel="stylesheet">
+    
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-xl bg-white border-bottom shadow-sm"><div class="container">
+      <a class="navbar-brand fw-bold" href="/"><span class="brand-mark">T</span> TutorIA <small>tu aula digital</small></a>
+      <div class="d-flex align-items-center justify-content-end flex-wrap gap-2 gap-xl-3">
+        <a class="text-decoration-none" href="/help">Ayuda</a>
+      
+        <a class="text-decoration-none" href="/dashboard">Inicio</a>
+        <a class="text-decoration-none" href="/chat">Tutor IA</a>
+        <a class="text-decoration-none" href="/auth/totp/setup">2FA</a>
+        
+        <a class="text-decoration-none" href="/students">Estudiantes</a><a class="text-decoration-none" href="/contents">Biblioteca</a><a class="text-decoration-none" href="/diagnostics">Diagnósticos</a><a class="text-decoration-none" href="/recommendations">Recomendaciones</a><a class="text-decoration-none" href="/reports">Reportes</a>
+        
+        <span class="badge text-bg-secondary">docente</span>
+        <form method="post" action="/auth/logout"><input type="hidden" name="csrf_token" value="Ijk2N2I0NDZiYmQ4NDkxZGYzM2EwMTlhZDBlNDdiYjMwMDM1Yjk5MDAi.anZ3Bw.wlxmRjykRh2w4sFQNX0pF-cY0IU"><button class="btn btn-outline-secondary btn-sm" type="submit">Salir</button></form>
+      </div>
+    </div></nav>
+    <main class="container py-4">
+      
+      
+<header class="page-heading"><div><p class="eyebrow">Seguimiento académico</p><h1>Reportes de progreso</h1><p>Una vista rápida para conversar con cada estudiante sobre sus próximos pasos.</p></div></header>
+<section class="metric-grid" aria-label="Indicadores generales"><div class="metric"><span>Estudiantes</span><strong>1</strong></div><div class="metric"><span>Evaluaciones</span><strong>1</strong></div><div class="metric level-medium"><span>Clasificadas</span><strong>0</strong></div><div class="metric level-advanced"><span>Recomendaciones</span><strong>0</strong></div></section>
+<section class="card-surface mb-4"><h2 class="h5">Distribución por nivel</h2><div class="progress-stacked" role="img" aria-label="Distribución de estudiantes por nivel"><div class="progress-bar bg-success" style="width: 100.0%">Básico 1</div><div class="progress-bar bg-warning text-dark" style="width: 0.0%">Intermedio 0</div><div class="progress-bar bg-danger" style="width: 0.0%">Avanzado 0</div></div></section>
+<section class="table-responsive card-surface"><table class="table"><thead><tr><th>Estudiante</th><th>Nivel</th><th>Evaluaciones</th><th>Clasificadas</th><th>Progreso</th><th>Recomendaciones</th><th></th></tr></thead><tbody><tr><td><strong>Estudiante Selenium</strong><small>Bases de datos</small></td><td><span class="level-badge level-basico">Básico</span></td><td>1</td><td>0</td><td><div class="progress" role="progressbar" aria-label="Progreso de Estudiante Selenium" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><div class="progress-bar" style="width: 0%">0%</div></div></td><td>0</td><td><a class="btn btn-outline-secondary btn-sm" href="/reports/1">Ver reporte</a></td></tr></tbody></table></section>
+
+    </main>
+    <script src="/static/vendor/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
+    
+  
+</body></html>
