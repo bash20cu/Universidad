@@ -108,6 +108,19 @@ Un pendiente se marcará como cerrado cuando exista código verificable, prueba 
 - La guía incluye recorrido recomendado, clasificación de pruebas y solución de problemas frecuentes.
 - Se documentaron el panel Grid `:4444/ui` y la visualización noVNC `:7900` para observar el navegador durante Selenium.
 
+## 2026-08-08 - Fallback ante errores SSE de NVIDIA
+
+- Se detectó que NVIDIA podía devolver `Load failed` dentro de un evento SSE con HTTP 200.
+- El fallback no se activaba porque no existía una excepción HTTP/Python que lo disparara.
+- `FallbackChatProvider` ahora identifica errores SSE estructurados antes de entregar contenido y cambia a Foundation Models.
+- Se agregó una prueba específica para este caso; la suite backend quedó en **35 passed**.
+
+## 2026-08-08 - Robustez del parser de streaming
+
+- Se corrigió `_content_from_chunk()` para ignorar eventos sin elementos `choices`, como bloques de uso enviados por proveedores compatibles con OpenAI.
+- Se agregó una prueba con un evento de métricas sin `choices` seguido de contenido válido.
+- La suite backend quedó en **36 passed** y dejó de producir el `IndexError: list index out of range` observado en consola.
+
 ## 2026-08-08 - Ampliación de pruebas Selenium
 
 - Se amplió `tests/test_selenium_ui.py` de 3 a 9 escenarios funcionales end-to-end.

@@ -105,12 +105,12 @@ La solución se valida en varias capas:
 La ejecución completa más reciente terminó con:
 
 ```text
-43 passed in 31.53s
+45 passed en la última regresión; el tiempo puede variar según el equipo.
 ```
 
 La distribución corresponde a:
 
-- 34 pruebas backend.
+- 36 pruebas backend.
 - 9 pruebas Selenium end-to-end.
 - 46 capturas PNG y 46 HTML generados como evidencia.
 
@@ -185,6 +185,12 @@ La suite reproducible no depende de credenciales reales. NVIDIA queda configurad
 como proveedor principal en producción, mientras que las pruebas usan dobles
 controlados para validar el contrato y el fallback sin costos ni dependencia de
 Internet.
+
+### ¿Qué ocurre si NVIDIA devuelve `Load failed` dentro de una respuesta SSE?
+
+El adaptador inspecciona los eventos SSE estructurados. Si detecta el error antes
+de entregar contenido, descarta ese evento y reintenta automáticamente con
+Foundation Models. Este caso está cubierto por una prueba específica.
 
 ## 10. Cierre sugerido
 

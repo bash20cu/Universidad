@@ -203,6 +203,17 @@ class FakeProvider:
         self.shutdown_calls += 1
 
 
+class UsageOnlyStreamProvider(FakeProvider):
+    """Proveedor que emite un evento de uso sin ``choices`` antes del contenido."""
+
+    def stream_chat(self, _messages):
+        """Reproduce el formato que provocaba el índice vacío en el parser."""
+
+        yield b'data: {"choices":[],"usage":{"prompt_tokens":3,"completion_tokens":2,"total_tokens":5}}\n\n'
+        yield b'data: {"choices":[{"delta":{"content":"Respuesta estable"}}]}\n\n'
+        yield b"data: [DONE]\n\n"
+
+
 class ClassifierProvider(FakeProvider):
     """Variante del proveedor falso que permite inyectar respuestas de clasificación."""
 
@@ -243,6 +254,17 @@ class FailingProvider(FakeProvider):
         raise AIProviderError("Fallo de clasificación del proveedor principal")
 
 
+class SSEErrorProvider(FakeProvider):
+    """Proveedor que devuelve un error estructurado dentro de un stream HTTP 200."""
+
+    name = "sse_error_primary"
+
+    def stream_chat(self, _messages):
+        """Reproduce el formato de error que puede devolver NVIDIA durante streaming."""
+
+        yield b'event: error\ndata: {"error":{"message":"Load failed"}}\n\n'
+
+
 def test_app_accepts_provider_without_local_fm_assumptions():
     provider = FakeProvider()
     app = create_app({"TESTING": True, "WTF_CSRF_ENABLED": False}, provider=provider)
@@ -266,6 +288,27 @@ def test_app_accepts_provider_without_local_fm_assumptions():
     assert status.json["processing_location"] == "remote"
     assert status.json["access_mode"] == "remote"
     assert b"Respuesta remota" in chat.data
+
+
+def test_chat_ignores_usage_chunk_without_choices():
+    """Comprueba que un evento de métricas no rompe el streaming del chat."""
+
+    provider = UsageOnlyStreamProvider()
+    app = create_app({"TESTING": True, "WTF_CSRF_ENABLED": False}, provider=provider)
+    client = app.test_client()
+    with app.app_context():
+        db.create_all()
+        seed_database()
+        user_id = User.query.filter_by(username="admin").one().id
+    with client.session_transaction() as session:
+        session["_user_id"] = str(user_id)
+        session["_fresh"] = True
+
+    response = client.post("/chat/api/chat", json={"messages": [{"role": "user", "content": "Hola"}]})
+
+    assert response.status_code == 200
+    assert b"Respuesta estable" in response.data
+    assert b'"total": 5' in response.data
 
 
 def test_provider_shutdown_is_idempotent_for_external_server(fake_fm_server):
@@ -292,6 +335,19 @@ def test_fallback_uses_secondary_provider_when_primary_fails():
     assert ready.provider == "fake_remote"
     assert b"Respuesta remota" in streamed
     assert "level" in completed
+    assert provider.active_provider is fallback
+
+
+def test_fallback_handles_structured_sse_error_before_content():
+    """Verifica fallback cuando el proveedor remoto informa error dentro de SSE."""
+
+    fallback = FakeProvider()
+    provider = FallbackChatProvider(primary=SSEErrorProvider(), fallback=fallback)
+
+    streamed = b"".join(provider.stream_chat([{"role": "user", "content": "Hola"}]))
+
+    assert b"Load failed" not in streamed
+    assert b"Respuesta remota" in streamed
     assert provider.active_provider is fallback
 
 

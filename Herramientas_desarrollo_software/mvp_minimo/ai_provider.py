@@ -334,14 +334,17 @@ class FallbackChatProvider:
     def stream_chat(self, messages: list[dict[str, str]]) -> Iterable[bytes]:
         """Hace fallback solo si NVIDIA falla antes de entregar contenido."""
 
-        emitted = False
+        emitted_content = False
         try:
             self.active_provider = self.primary
             for chunk in self.primary.stream_chat(messages):
-                emitted = True
+                error = _stream_error_message(chunk)
+                if error:
+                    raise AIProviderError(error)
+                emitted_content = emitted_content or _chunk_has_content(chunk)
                 yield chunk
         except AIProviderError:
-            if emitted:
+            if emitted_content:
                 raise
             self.active_provider = self.fallback
             yield from self.fallback.stream_chat(messages)
@@ -361,3 +364,50 @@ class FallbackChatProvider:
 
         self.primary.shutdown()
         self.fallback.shutdown()
+
+
+def _stream_error_message(chunk: bytes) -> str | None:
+    """Extrae errores SSE de proveedores que responden HTTP 200."""
+
+    event_name = ""
+    data_lines = []
+    for line in chunk.decode("utf-8", errors="ignore").splitlines():
+        if line.startswith("event:"):
+            event_name = line[6:].strip()
+        elif line.startswith("data:"):
+            data_lines.append(line[5:].strip())
+
+    data = "\n".join(data_lines)
+    if not data or data == "[DONE]":
+        return None
+    try:
+        payload = json.loads(data)
+    except json.JSONDecodeError:
+        return None
+
+    error = payload.get("error") if isinstance(payload, dict) else None
+    if isinstance(error, dict):
+        return str(error.get("message") or error.get("detail") or "Error del proveedor IA.")
+    if isinstance(error, str):
+        return error
+    if event_name == "error" and isinstance(payload, dict):
+        return str(payload.get("message") or "Error del proveedor IA.")
+    return None
+
+
+def _chunk_has_content(chunk: bytes) -> bool:
+    """Indica si un fragmento SSE ya entregó texto al usuario."""
+
+    for line in chunk.decode("utf-8", errors="ignore").splitlines():
+        if not line.startswith("data:") or line[5:].strip() == "[DONE]":
+            continue
+        try:
+            payload = json.loads(line[5:].strip())
+        except json.JSONDecodeError:
+            continue
+        choices = payload.get("choices", []) if isinstance(payload, dict) else []
+        if choices and isinstance(choices[0], dict):
+            delta = choices[0].get("delta", {})
+            if isinstance(delta, dict) and isinstance(delta.get("content"), str) and delta["content"]:
+                return True
+    return False

@@ -52,7 +52,11 @@ def _content_from_chunk(chunk: bytes) -> str:
             payload = json.loads(line[5:].strip())
         except json.JSONDecodeError:
             continue
-        delta = payload.get("choices", [{}])[0].get("delta", {})
+        choices = payload.get("choices", [])
+        if not isinstance(choices, list) or not choices:
+            # Algunos proveedores envían eventos de uso o metadatos sin choices.
+            continue
+        delta = choices[0].get("delta", {})
         if isinstance(delta, dict) and isinstance(delta.get("content"), str):
             content.append(delta["content"])
     return "".join(content)

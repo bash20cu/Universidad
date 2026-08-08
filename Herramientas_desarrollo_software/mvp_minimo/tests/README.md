@@ -158,7 +158,7 @@ de forma breve.
 Resultado esperado de la suite completa sin Selenium:
 
 ```text
-34 passed, 1 skipped
+36 passed, 1 skipped
 ```
 
 La prueba omitida corresponde a Selenium cuando no se ejecuta con
@@ -167,7 +167,7 @@ La prueba omitida corresponde a Selenium cuando no se ejecuta con
 Con Selenium Grid activo, la regresión completa esperada es:
 
 ```text
-43 passed
+45 passed
 ```
 
 La suite UI ampliada cubre también validaciones incompletas, CRUD de contenidos,
@@ -176,7 +176,9 @@ chat, TOTP inválido, registros duplicados y viewport móvil.
 
 La segunda ronda backend agrega casos de fallback NVIDIA → Foundation Models,
 validación de historial del chat, escape XSS, duplicidad de usuarios y protección
-contra eliminación de contenidos con recomendaciones asociadas.
+contra eliminación de contenidos con recomendaciones asociadas. También verifica
+errores SSE estructurados como `Load failed` y eventos de uso sin `choices` antes
+de que lleguen al navegador.
 
 ## Recorrido recomendado durante la presentación
 
