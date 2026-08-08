@@ -1,3 +1,10 @@
+# Archivo: recommendations.py
+# Propósito: Genera y consulta rutas de aprendizaje recomendadas.
+# Responsabilidades: Selecciona contenidos para estudiantes clasificados, persiste razones y audita la generación.
+# Dependencias: Flask, Flask-Login, SQLAlchemy, modelos, servicio de recomendaciones y auditoría.
+# Entradas y salidas: Recibe el id del estudiante; devuelve vistas, redirecciones y recomendaciones persistidas.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Rutas para generar y consultar rutas de aprendizaje explicables."""
 
 from flask import Blueprint, flash, redirect, render_template, url_for

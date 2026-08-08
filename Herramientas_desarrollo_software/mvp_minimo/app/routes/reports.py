@@ -1,3 +1,10 @@
+# Archivo: reports.py
+# Propósito: Presenta reportes generales e individuales de progreso.
+# Responsabilidades: Calcula métricas de evaluaciones, niveles y recomendaciones, y registra la consulta del reporte.
+# Dependencias: Flask, Flask-Login, SQLAlchemy, modelos y auditoría.
+# Entradas y salidas: Recibe la sesión y, opcionalmente, un id de estudiante; devuelve reportes HTML.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Reportes académicos calculados desde evaluaciones y recomendaciones."""
 
 from flask import Blueprint, render_template

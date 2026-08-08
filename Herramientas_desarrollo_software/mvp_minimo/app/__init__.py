@@ -1,3 +1,10 @@
+# Archivo: __init__.py
+# Propósito: Construye y configura la aplicación Flask TutorIA.
+# Responsabilidades: Inicializa extensiones, selecciona proveedores IA, registra blueprints, mantiene el esquema SQLite y carga datos demo.
+# Dependencias: Flask, SQLAlchemy, Flask-Login, Flask-WTF y módulos propios de modelos/proveedores.
+# Entradas y salidas: Recibe configuración opcional y devuelve una instancia Flask; los comandos CLI modifican la base configurada.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Factoría y configuración central de la aplicación Flask TutorIA."""
 
 from __future__ import annotations
@@ -62,6 +69,8 @@ def create_app(config: dict[str, Any] | None = None, provider: ChatProvider | No
     login_manager.login_message_category = "warning"
 
     if provider is None:
+        # La aplicación construye los proveedores aquí para que las rutas solo
+        # dependan del contrato ChatProvider y no conozcan NVIDIA ni FM.
         manager = FMServerManager(
             command=app.config["FM_COMMAND"], host=app.config["FM_HOST"],
             port=app.config["FM_PORT"], start_timeout=app.config["FM_START_TIMEOUT"],
@@ -72,6 +81,8 @@ def create_app(config: dict[str, Any] | None = None, provider: ChatProvider | No
             access_mode=app.config["APP_ACCESS_MODE"],
         )
         if app.config["AI_PRIMARY_PROVIDER"] == "nvidia" and app.config["NVIDIA_API_KEY"]:
+            # NVIDIA es el proveedor principal; FM queda como respaldo local
+            # cuando el servicio remoto no está disponible o falla una llamada.
             provider = FallbackChatProvider(
                 primary=NVIDIAProvider(
                     api_key=app.config["NVIDIA_API_KEY"],
@@ -133,6 +144,8 @@ def ensure_schema_compatibility() -> None:
     inspector = inspect(db.engine)
     if not inspector.has_table("users"):
         return
+    # Las comprobaciones por columna hacen la actualización repetible: ejecutar
+    # la aplicación varias veces no intenta agregar dos veces el mismo campo.
     columns = {column["name"] for column in inspector.get_columns("users")}
     if "totp_secret" not in columns:
         db.session.execute(text("ALTER TABLE users ADD COLUMN totp_secret VARCHAR(64)"))
@@ -159,6 +172,8 @@ def seed_database() -> None:
     """Inserta usuarios, contenidos y preguntas demo solo si faltan."""
 
     ensure_schema_compatibility()
+    # Los datos demo permiten arrancar una instalación nueva y reproducir la
+    # demostración académica sin sobrescribir información existente.
     if User.query.count() == 0:
         users = [
             ("admin", "admin@tutoria.local", "Administrador123!", "administrador"),

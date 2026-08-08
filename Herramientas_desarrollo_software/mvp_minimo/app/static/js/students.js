@@ -1,3 +1,12 @@
+/*
+ * Archivo: students.js
+ * Propósito: Implementa búsqueda y filtro de estudiantes.
+ * Responsabilidades: Filtra perfiles por texto y nivel y mantiene actualizado el contador de resultados.
+ * Dependencias: DOM generado por students/index.html.
+ * Entradas y salidas: Lee controles de búsqueda; modifica filas y mensajes de resultados.
+ * Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+ * Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
+ */
 const searchInput = document.querySelector("#student-search");
 const levelFilter = document.querySelector("#level-filter");
 const rows = [...document.querySelectorAll("[data-student-row]")];

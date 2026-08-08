@@ -1,3 +1,10 @@
+{# Archivo: form.html #}
+{# Propósito: Renderiza el formulario docente de evaluación diagnóstica. #}
+{# Responsabilidades: Permite seleccionar estudiante y responder preguntas activas con CSRF. #}
+{# Dependencias: Jinja2, base.html, DiagnosticEvaluationForm y rutas diagnostics. #}
+{# Entradas y salidas: Recibe form y questions; produce formulario HTML. #}
+{# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García #}
+{# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García. #}
 {% extends "base.html" %}
 {% block title %}Nueva evaluación | TutorIA{% endblock %}
 {% block content %}<div class="form-shell"><header class="form-heading"><a href="{{ url_for('diagnostics.index') }}">Volver a diagnósticos</a><p class="eyebrow">Evaluación adaptativa</p><h1>Nueva evaluación diagnóstica</h1><p>Registra respuestas para que luego puedan clasificarse mediante IA.</p></header>

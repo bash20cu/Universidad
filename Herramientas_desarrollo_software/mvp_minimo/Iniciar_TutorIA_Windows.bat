@@ -1,4 +1,11 @@
 @echo off
+REM Archivo: Iniciar_TutorIA_Windows.bat
+REM Propósito: Inicia TutorIA desde Windows.
+REM Responsabilidades: Localiza Python, prepara el entorno, configura el proveedor NVIDIA y ejecuta el servidor.
+REM Dependencias: CMD, Python/venv y run.py.
+REM Entradas y salidas: Lee la ubicación del script y variables de entorno; inicia la aplicación web.
+REM Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+REM Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 setlocal
 
 REM Lanzador de TutorIA para Windows usando NVIDIA como proveedor principal.

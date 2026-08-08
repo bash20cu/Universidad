@@ -1,3 +1,10 @@
+# Archivo: student_portal.py
+# Propósito: Gestiona el portal privado del estudiante.
+# Responsabilidades: Permite completar perfil, responder evaluaciones propias y consultar progreso y recomendaciones.
+# Dependencias: Flask, Flask-Login, SQLAlchemy, formularios, modelos y auditoría.
+# Entradas y salidas: Recibe formularios del estudiante autenticado; devuelve vistas, redirecciones y evaluaciones persistidas.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Portal privado para que cada estudiante consulte su propio progreso."""
 
 from flask import Blueprint, flash, redirect, render_template, request, url_for
@@ -110,6 +117,8 @@ def create_diagnostic():
         answers_by_question = {}
         missing_questions = []
         for question in questions:
+            # Se lee cada respuesta por identificador persistente, no por
+            # posición visual, para conservar la trazabilidad académica.
             value = request.form.get(f"answer_{question.id}", "").strip()
             if not value:
                 missing_questions.append(question.id)
@@ -126,6 +135,8 @@ def create_diagnostic():
         )
         db.session.add(evaluation)
         db.session.flush()
+        # Primero se obtiene el id de la evaluación y luego se guardan sus
+        # respuestas para vincularlas al intento correcto.
         for question in questions:
             db.session.add(
                 DiagnosticAnswer(

@@ -1,0 +1,21 @@
+{
+  "include": [
+    "app",
+    "ai_provider.py",
+    "fm_server.py",
+    "runtime_manager.py",
+    "desktop_launcher.py",
+    "run.py",
+    "tests"
+  ],
+  "exclude": [
+    ".venv",
+    "docs/evidencias"
+  ],
+  "typeCheckingMode": "basic",
+  "pythonVersion": "3.12",
+  "venvPath": ".",
+  "venv": ".venv",
+  "reportMissingImports": "error",
+  "reportMissingModuleSource": "warning"
+}

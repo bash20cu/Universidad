@@ -1,3 +1,10 @@
+# Archivo: main.py
+# Propósito: Sirve las páginas públicas y el panel general de TutorIA.
+# Responsabilidades: Presenta inicio, ayuda, dashboard y métricas según el rol autenticado.
+# Dependencias: Flask, Flask-Login y modelos académicos.
+# Entradas y salidas: Recibe la sesión actual; devuelve páginas HTML y redirecciones por rol.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Rutas públicas y panel general de TutorIA."""
 
 from flask import Blueprint, redirect, render_template, url_for

@@ -1,3 +1,12 @@
+/*
+ * Archivo: chat.css
+ * Propósito: Define los estilos específicos de la pantalla de chat.
+ * Responsabilidades: Estiliza mensajes, composer, estados del proveedor, acciones, markdown y vista responsive.
+ * Dependencias: main/chat.html y base.css.
+ * Entradas y salidas: Recibe clases del DOM del chat; produce la apariencia de la conversación.
+ * Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+ * Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
+ */
 :root {
   --ink: #101828;
   --muted: #667085;

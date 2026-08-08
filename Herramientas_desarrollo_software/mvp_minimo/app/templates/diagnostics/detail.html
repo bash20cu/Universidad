@@ -1,3 +1,10 @@
+{# Archivo: detail.html #}
+{# Propósito: Renderiza el detalle de una evaluación diagnóstica. #}
+{# Responsabilidades: Muestra estado, nivel, explicación, respuestas, clasificación y enlace a recomendaciones. #}
+{# Dependencias: Jinja2, base.html, datos de DiagnosticEvaluation y rutas diagnostics/recommendations. #}
+{# Entradas y salidas: Recibe evaluation y answers; produce vista de detalle. #}
+{# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García #}
+{# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García. #}
 {% extends "base.html" %}
 {% block title %}Detalle diagnóstico | TutorIA{% endblock %}
 {% block content %}<div class="detail-shell"><header class="form-heading"><a href="{{ url_for('diagnostics.index') }}">Volver a diagnósticos</a><p class="eyebrow">Evaluación adaptativa</p><h1>Detalle de evaluación</h1><p>{{ evaluation.student.name }} · {{ evaluation.created_at.strftime('%Y-%m-%d %H:%M') }}</p></header>

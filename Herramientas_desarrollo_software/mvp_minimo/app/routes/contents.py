@@ -1,3 +1,10 @@
+# Archivo: contents.py
+# Propósito: Gestiona el CRUD del repositorio de contenidos educativos.
+# Responsabilidades: Lista, filtra, crea, edita y elimina recursos con permisos y bitácora.
+# Dependencias: Flask, Flask-Login, SQLAlchemy, formularios, modelo de contenidos y auditoría.
+# Entradas y salidas: Recibe formularios y parámetros de ruta; devuelve vistas, redirecciones y errores HTTP.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """CRUD del repositorio de recursos educativos del tutor."""
 
 from flask import Blueprint, abort, flash, redirect, render_template, url_for

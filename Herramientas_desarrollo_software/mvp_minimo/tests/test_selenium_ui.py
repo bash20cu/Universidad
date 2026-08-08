@@ -1,3 +1,10 @@
+# Archivo: test_selenium_ui.py
+# Propósito: Ejecuta pruebas visuales remotas de la interfaz con Selenium Grid.
+# Responsabilidades: Recorre páginas públicas, registro, TOTP, portal estudiantil, paneles por rol y captura evidencias sanitizadas.
+# Dependencias: pytest, Selenium, Chrome remoto, PyOTP y proveedor controlado.
+# Entradas y salidas: Lee variables de Selenium; navega el sitio y genera PNG/HTML en docs/evidencias.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Pruebas UI remotas de TutorIA usando Selenium Grid y Chrome."""
 
 from __future__ import annotations

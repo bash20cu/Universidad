@@ -1,3 +1,10 @@
+# Archivo: ai_provider.py
+# Propósito: Abstrae los proveedores de IA para chat y clasificación académica.
+# Responsabilidades: Define el contrato común, estados seguros, streaming, respuestas completas y fallback entre NVIDIA y Foundation Models.
+# Dependencias: __future__, json, dataclasses, typing, urllib, fm_server
+# Entradas y salidas: Recibe mensajes o evaluaciones; devuelve estados, fragmentos SSE, texto completo o errores controlados.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Abstracción de proveedores IA para chat y clasificación académica."""
 
 from __future__ import annotations

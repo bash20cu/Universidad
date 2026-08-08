@@ -1,3 +1,10 @@
+# Archivo: chat.py
+# Propósito: Valida y normaliza mensajes del chat.
+# Responsabilidades: Limita cantidad, roles y longitud de mensajes, traduce ubicación de procesamiento y construye errores SSE.
+# Dependencias: __future__, json, typing
+# Entradas y salidas: Recibe historial o ubicación técnica; devuelve mensajes normalizados, textos de interfaz o bytes SSE.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Reglas compartidas para validar y presentar conversaciones del chat."""
 
 from __future__ import annotations

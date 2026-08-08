@@ -1,3 +1,10 @@
+# Archivo: diagnostic.py
+# Propósito: Construye y valida la clasificación académica con IA.
+# Responsabilidades: Genera prompts JSON, valida niveles y listas, aplica evidencia mínima y formatea explicaciones.
+# Dependencias: __future__, json, dataclasses, typing, ai_provider, app
+# Entradas y salidas: Recibe una evaluación y proveedor; devuelve clasificación validada o errores controlados.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Reglas de evaluación, validación y clasificación académica con IA."""
 
 from __future__ import annotations

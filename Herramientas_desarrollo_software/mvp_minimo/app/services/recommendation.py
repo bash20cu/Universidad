@@ -1,3 +1,10 @@
+# Archivo: recommendation.py
+# Propósito: Calcula recomendaciones educativas explicables.
+# Responsabilidades: Prioriza coincidencias de tema y nivel y genera una razón legible para cada recurso.
+# Dependencias: Modelos SQLAlchemy EducationalContent y Student.
+# Entradas y salidas: Recibe un estudiante y límite opcional; devuelve contenidos ordenados y razones.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Reglas académicas para recomendar recursos sin depender directamente de la IA."""
 
 from __future__ import annotations

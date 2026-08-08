@@ -1,3 +1,10 @@
+# Archivo: __init__.py
+# Propósito: Define los formularios WTForms del sistema.
+# Responsabilidades: Valida credenciales, perfiles, usuarios, contenidos, preguntas, evaluaciones y códigos de segundo factor.
+# Dependencias: Flask-WTF y WTForms.
+# Entradas y salidas: Recibe datos de formularios HTTP; entrega campos validados y errores para las vistas.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Formularios WTForms con validaciones de entrada del sistema."""
 
 from flask_wtf import FlaskForm

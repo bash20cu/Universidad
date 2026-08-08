@@ -1,3 +1,10 @@
+# Archivo: __init__.py
+# Propósito: Proporciona decoradores de autorización compartidos por las rutas.
+# Responsabilidades: Comprueba autenticación y roles antes de permitir el acceso a una vista Flask.
+# Dependencias: Flask y Flask-Login.
+# Entradas y salidas: Recibe roles y una vista; devuelve un decorador que produce 403 cuando corresponde.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Decoradores de autorización compartidos por las rutas Flask."""
 
 from functools import wraps

@@ -1,3 +1,10 @@
+# Archivo: __init__.py
+# Propósito: Define las entidades persistentes del dominio TutorIA.
+# Responsabilidades: Modela usuarios, TOTP, auditoría, estudiantes, contenidos, preguntas, evaluaciones, respuestas y recomendaciones.
+# Dependencias: SQLAlchemy, Flask-Login y Werkzeug Security.
+# Entradas y salidas: Recibe datos de dominio; expone modelos ORM, relaciones, hashes y fechas UTC.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Modelos persistentes del MVP de TutorIA.
 
 Cada clase representa una entidad del dominio académico o de seguridad. Las

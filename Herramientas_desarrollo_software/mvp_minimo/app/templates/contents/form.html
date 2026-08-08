@@ -1,3 +1,10 @@
+{# Archivo: form.html #}
+{# Propósito: Renderiza alta y edición de contenidos educativos. #}
+{# Responsabilidades: Presenta campos de clasificación, material, URL, estado y descripción. #}
+{# Dependencias: Jinja2, base.html, EducationalContentForm y rutas contents. #}
+{# Entradas y salidas: Recibe form, title y content; produce formulario HTML. #}
+{# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García #}
+{# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García. #}
 {% extends "base.html" %}
 {% block title %}{{ title }} | TutorIA{% endblock %}
 {% block content %}<div class="form-shell"><header class="form-heading"><a href="{{ url_for('contents.index') }}">Volver a contenidos</a><p class="eyebrow">Biblioteca académica</p><h1>{{ title }}</h1><p>Define el recurso educativo que será usado por el sistema de recomendaciones.</p></header>

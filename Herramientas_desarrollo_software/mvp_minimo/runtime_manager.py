@@ -1,3 +1,10 @@
+# Archivo: runtime_manager.py
+# Propósito: Coordina los procesos locales de Foundation Models y Flask.
+# Responsabilidades: Inicia, observa, registra y detiene servicios propios o externos sin mezclar lógica con PySide6.
+# Dependencias: __future__, os, signal, subprocess, threading, time, collections, dataclasses, pathlib, urllib, json
+# Entradas y salidas: Recibe rutas, puertos y callbacks; devuelve estados de servicio y controla procesos.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Administración local de los procesos que componen TutorIA.
 
 Este módulo no conoce widgets ni detalles de PySide6. Su responsabilidad es

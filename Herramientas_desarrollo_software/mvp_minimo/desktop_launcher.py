@@ -1,3 +1,10 @@
+# Archivo: desktop_launcher.py
+# Propósito: Proporciona la interfaz PySide6 para la demo local.
+# Responsabilidades: Inicia, muestra estado, registra logs, presenta códigos de desarrollo y detiene servicios mediante RuntimeManager.
+# Dependencias: PySide6, runtime_manager.py y servicios locales del proyecto.
+# Entradas y salidas: Recibe configuración del entorno y acciones de usuario; inicia procesos y actualiza la ventana.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Interfaz PySide6 para controlar la demo local de TutorIA."""
 
 from __future__ import annotations

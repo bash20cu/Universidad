@@ -1,3 +1,10 @@
+{# Archivo: question_form.html #}
+{# Propósito: Renderiza alta y edición de preguntas diagnósticas. #}
+{# Responsabilidades: Presenta tema, pregunta, competencia esperada y estado activo. #}
+{# Dependencias: Jinja2, base.html, DiagnosticQuestionForm y rutas diagnostics. #}
+{# Entradas y salidas: Recibe form y title; produce formulario HTML. #}
+{# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García #}
+{# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García. #}
 {% extends "base.html" %}
 {% block title %}{{ title }} | TutorIA{% endblock %}
 {% block content %}<div class="form-shell"><header class="form-heading"><a href="{{ url_for('diagnostics.questions') }}">Volver al banco</a><p class="eyebrow">Banco de preguntas</p><h1>{{ title }}</h1><p>Las preguntas activas aparecerán en las próximas evaluaciones.</p></header><form method="post" class="card-surface" novalidate>{{ form.hidden_tag() }}<div class="form-grid"><div>{{ form.topic.label(class="form-label") }}{{ form.topic(class="form-control") }}{% for error in form.topic.errors %}<div class="field-error">{{ error }}</div>{% endfor %}</div><div>{{ form.expected_competency.label(class="form-label") }}{{ form.expected_competency(class="form-control") }}{% for error in form.expected_competency.errors %}<div class="field-error">{{ error }}</div>{% endfor %}</div><div>{{ form.active.label(class="form-label") }}{{ form.active(class="form-select") }}</div></div><div class="mt-3">{{ form.prompt.label(class="form-label") }}{{ form.prompt(class="form-control", rows="5") }}{% for error in form.prompt.errors %}<div class="field-error">{{ error }}</div>{% endfor %}</div><footer class="mt-4"><a class="btn btn-outline-secondary" href="{{ url_for('diagnostics.questions') }}">Cancelar</a>{{ form.submit(class="btn btn-primary") }}</footer></form></div>{% endblock %}

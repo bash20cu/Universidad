@@ -1,3 +1,10 @@
+# Archivo: run.py
+# Propósito: Es el punto de entrada del servidor Flask.
+# Responsabilidades: Inicializa esquema y datos, registra cierres ordenados, prepara IA y ejecuta la aplicación web.
+# Dependencias: Flask, SQLAlchemy, ai_provider y app.
+# Entradas y salidas: Lee variables de entorno; inicia un servidor HTTP y libera recursos al terminar.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Punto de entrada para inicializar la base y ejecutar Flask."""
 
 from __future__ import annotations

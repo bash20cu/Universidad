@@ -1,3 +1,12 @@
+/*
+ * Archivo: contents.js
+ * Propósito: Implementa búsqueda y filtros del catálogo de contenidos.
+ * Responsabilidades: Filtra filas por texto, tema y nivel y actualiza el contador y estado vacío.
+ * Dependencias: DOM generado por contents/index.html.
+ * Entradas y salidas: Lee controles de búsqueda; modifica visibilidad de filas y texto del contador.
+ * Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+ * Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
+ */
 const rows = Array.from(document.querySelectorAll("[data-content-row]"));
 const searchInput = document.querySelector("#content-search");
 const topicFilter = document.querySelector("#topic-filter");

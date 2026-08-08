@@ -1,3 +1,10 @@
+# Archivo: email.py
+# Propósito: Entrega códigos de segundo factor por consola o Resend.
+# Responsabilidades: Selecciona canales configurados, construye la solicitud remota y maneja errores de entrega.
+# Dependencias: __future__, json, urllib, flask
+# Entradas y salidas: Recibe usuario y código; produce envío, salida de desarrollo o error controlado.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Entrega de códigos 2FA mediante consola, Resend o ambos canales."""
 
 from __future__ import annotations

@@ -1,3 +1,10 @@
+# Archivo: students.py
+# Propósito: Gestiona perfiles académicos desde el panel docente/administrador.
+# Responsabilidades: Lista, crea, edita y elimina estudiantes respetando roles y dependencias de evaluaciones.
+# Dependencias: Flask, Flask-Login, SQLAlchemy, formularios, modelo Student y auditoría.
+# Entradas y salidas: Recibe formularios e ids de estudiante; devuelve vistas, redirecciones o errores HTTP.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """CRUD de perfiles académicos con permisos de administración y docencia."""
 
 from flask import Blueprint, abort, flash, redirect, render_template, url_for

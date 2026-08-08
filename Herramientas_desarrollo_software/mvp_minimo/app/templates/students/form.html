@@ -1,3 +1,10 @@
+{# Archivo: form.html #}
+{# Propósito: Renderiza alta y edición de perfiles académicos. #}
+{# Responsabilidades: Presenta información personal, contexto educativo y nivel asignado. #}
+{# Dependencias: Jinja2, base.html, StudentForm y rutas students. #}
+{# Entradas y salidas: Recibe form, title y student; produce formulario HTML. #}
+{# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García #}
+{# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García. #}
 {% extends "base.html" %}
 {% block title %}{{ title }} | TutorIA{% endblock %}
 {% block content %}<div class="form-shell"><header class="form-heading"><a href="{{ url_for('students.index') }}">Volver a estudiantes</a><p class="eyebrow">Gestión académica</p><h1>{{ title }}</h1><p>Completa la información necesaria para personalizar su experiencia educativa.</p></header>

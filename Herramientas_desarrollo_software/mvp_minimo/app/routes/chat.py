@@ -1,3 +1,10 @@
+# Archivo: chat.py
+# Propósito: Expone la pantalla y API SSE del chat TutorIA.
+# Responsabilidades: Valida mensajes, consulta disponibilidad del proveedor, transmite respuestas y publica metadatos de procesamiento.
+# Dependencias: Flask, Flask-Login, proveedor IA y servicio de normalización de chat.
+# Entradas y salidas: Recibe mensajes JSON o formulario; devuelve HTML, JSON o eventos SSE.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Interfaz web y API SSE del chat con el proveedor IA abstracto."""
 
 import json

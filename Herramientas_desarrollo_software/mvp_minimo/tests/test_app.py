@@ -1,3 +1,18 @@
+# Archivo: test_app.py
+# Propósito: Verifica funcionalidades, seguridad e integración del MVP.
+# Responsabilidades: Prueba autenticación, TOTP, roles, CRUD, evaluaciones, clasificación, recomendaciones, reportes y proveedores simulados.
+# Dependencias: pytest, PyOTP, servidor HTTP estándar y módulos de la aplicación.
+# Entradas y salidas: Crea bases y servidores temporales; produce aserciones y resultados de pytest.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
+"""Pruebas funcionales, de seguridad y de integración del MVP de TutorIA.
+
+La suite utiliza una base SQLite aislada y proveedores controlados para probar
+la aplicación sin depender de NVIDIA, Foundation Models ni credenciales reales.
+Cada prueba verifica una capacidad observable del sistema y, cuando aplica,
+confirma también la trazabilidad registrada en la bitácora.
+"""
+
 from __future__ import annotations
 
 import json
@@ -16,7 +31,11 @@ from app.services.two_factor import TwoFactorError, issue_code, verify_code
 
 
 class FakeFMHandler(BaseHTTPRequestHandler):
+    """Servidor HTTP mínimo que simula el contrato compatible con ``fm serve``."""
+
     def do_GET(self):
+        """Responde la verificación de salud usada por el proveedor local."""
+
         if self.path == "/health":
             self._json(
                 {
@@ -28,6 +47,8 @@ class FakeFMHandler(BaseHTTPRequestHandler):
         self.send_error(404)
 
     def do_POST(self):
+        """Emite una respuesta SSE pequeña para probar el streaming del chat."""
+
         if self.path != "/v1/chat/completions":
             self.send_error(404)
             return
@@ -49,9 +70,13 @@ class FakeFMHandler(BaseHTTPRequestHandler):
             self.wfile.flush()
 
     def log_message(self, *_args):
+        """Silencia el log del servidor para mantener limpia la salida de pytest."""
+
         return
 
     def _json(self, payload):
+        """Envía una respuesta JSON con los encabezados mínimos requeridos."""
+
         data = json.dumps(payload).encode()
         self.send_response(200)
         self.send_header("Content-Type", "application/json")
@@ -62,6 +87,8 @@ class FakeFMHandler(BaseHTTPRequestHandler):
 
 @pytest.fixture()
 def fake_fm_server():
+    """Levanta el servidor simulado en un puerto temporal y lo libera al terminar."""
+
     server = ThreadingHTTPServer(("127.0.0.1", 0), FakeFMHandler)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
@@ -128,15 +155,23 @@ def test_chat_proxies_stream(fake_fm_server):
 
 
 class FakeProvider:
+    """Proveedor remoto controlado para probar la abstracción sin red externa."""
+
     name = "fake_remote"
 
     def __init__(self):
+        """Inicializa el contador usado para verificar el cierre idempotente."""
+
         self.shutdown_calls = 0
 
     def ensure_ready(self):
+        """Devuelve disponibilidad inmediata porque el proveedor es simulado."""
+
         return self.status()
 
     def status(self):
+        """Expone metadatos seguros que la interfaz mostraría al usuario."""
+
         return ProviderStatus(
             provider=self.name,
             available=True,
@@ -148,25 +183,37 @@ class FakeProvider:
         )
 
     def stream_chat(self, _messages):
+        """Entrega dos eventos SSE para validar la respuesta incremental."""
+
         yield b'data: {"choices":[{"delta":{"content":"Respuesta remota"}}]}\n\n'
         yield b"data: [DONE]\n\n"
 
     def complete_chat(self, _messages):
+        """Devuelve una clasificación JSON válida para las pruebas académicas."""
+
         return '{"level":"basico","explanation":"Respuesta base","strengths":["Identifica conceptos"],"improvement_areas":["Profundizar"]}'
 
     def shutdown(self):
+        """Registra la solicitud de cierre sin terminar procesos externos."""
+
         self.shutdown_calls += 1
 
 
 class ClassifierProvider(FakeProvider):
+    """Variante del proveedor falso que permite inyectar respuestas de clasificación."""
+
     name = "fake_classifier"
 
     def __init__(self, response):
+        """Guarda la respuesta controlada y reinicia el contador de llamadas."""
+
         super().__init__()
         self.response = response
         self.complete_calls = 0
 
     def complete_chat(self, _messages):
+        """Devuelve la carga configurada y permite comprobar que se llamó una vez."""
+
         self.complete_calls += 1
         return self.response
 
@@ -460,6 +507,8 @@ def test_two_factor_code_is_hashed_and_single_use(fake_fm_server):
 
 
 def build_database_app(fake_fm_server):
+    """Crea una aplicación de prueba completa con SQLite en memoria y datos demo."""
+
     app = create_app({
         "TESTING": True,
         "WTF_CSRF_ENABLED": False,
@@ -473,6 +522,8 @@ def build_database_app(fake_fm_server):
 
 
 def authenticate(client, app, username):
+    """Autentica directamente una cuenta para enfocar cada prueba en su objetivo."""
+
     with app.app_context():
         user_id = User.query.filter_by(username=username).one().id
     with client.session_transaction() as session:
@@ -662,6 +713,8 @@ def test_diagnostic_requires_all_answers(fake_fm_server):
 
 
 def create_diagnostic_for_classification(client, app):
+    """Crea un estudiante y una evaluación completa lista para clasificar."""
+
     client.post("/students/new", data={
         "name": "Daniela Castro",
         "age": 16,

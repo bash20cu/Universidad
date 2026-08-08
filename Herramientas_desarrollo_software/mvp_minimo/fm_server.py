@@ -1,3 +1,10 @@
+# Archivo: fm_server.py
+# Propósito: Administra el ciclo de vida de un servidor local fm serve.
+# Responsabilidades: Consulta salud, inicia bajo demanda, espera disponibilidad y detiene únicamente procesos propios.
+# Dependencias: __future__, json, subprocess, time, dataclasses, urllib
+# Entradas y salidas: Recibe comando, host y puerto; devuelve estados o FMServerError y controla un proceso local.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Cliente y ciclo de vida del servidor local ``fm serve``."""
 
 from __future__ import annotations

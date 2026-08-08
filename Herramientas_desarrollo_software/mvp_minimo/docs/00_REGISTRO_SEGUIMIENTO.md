@@ -43,6 +43,14 @@ No existían el registro de seguimiento, el estado del MVP ni el registro de rie
 
 Un pendiente se marcará como cerrado cuando exista código verificable, prueba automatizada o evidencia manual reproducible y la documentación principal coincida con ese comportamiento.
 
+## 2026-08-08 - Revisión de documentación del código
+
+- Se revisaron los módulos propios de la aplicación, proveedores IA, lanzadores y pruebas.
+- Se confirmó que las clases y funciones de la aplicación cuentan con docstrings en español.
+- Se documentaron explícitamente los proveedores, la seguridad TOTP, la trazabilidad de evaluaciones, la compatibilidad de esquema y el aislamiento de pruebas.
+- Se agregó `docs/05_DOCUMENTACION_CODIGO.md` como guía de mantenimiento y explicación académica del código.
+- Se agregaron comentarios breves en la selección de proveedores, migración compatible y persistencia de respuestas diagnósticas.
+
 ## 2026-08-05 - Decisión de proveedores y centro de ayuda
 
 - Se adopta NVIDIA NIM como proveedor principal y Foundation Models como fallback local en macOS.
@@ -72,3 +80,18 @@ Un pendiente se marcará como cerrado cuando exista código verificable, prueba 
 - Resultado de la ejecución UI: **3 passed**.
 - Se documentaron límites de cobertura: CRUD de contenidos/preguntas, IA real, chat SSE, recomendaciones, reportes, responsive móvil y Windows quedan para una segunda ronda.
 - Regresión combinada con `RUN_SELENIUM=1`: **33 passed** (30 backend + 3 UI).
+
+## 2026-08-08 - Cabeceras de documentación en código
+
+- Se revisaron los 67 archivos propios de código del MVP: Python, JavaScript, CSS, plantillas Jinja y lanzadores.
+- Se añadieron cabeceras breves con archivo, propósito, responsabilidades, dependencias y entradas/salidas.
+- Se conservaron los shebangs, directivas de Windows y herencia de plantillas; no se modificó la lógica.
+- Se excluyeron `.venv`, Bootstrap, evidencias generadas y archivos externos.
+- Verificación: sintaxis Python y shell correctas; **30 pruebas aprobadas y 1 omitida** por requerir Selenium Grid.
+
+## 2026-08-08 - Autoría y copyright en cabeceras
+
+- Se actualizaron las cabeceras de los 67 archivos de código propios para incluir la autoría del equipo.
+- Se agregó la línea de copyright académico 2026 con los nombres disponibles en el informe final.
+- No se inventaron autores ni fechas de creación; se mantuvo únicamente el año académico disponible.
+- No se duplicaron cabeceras ni se alteró la lógica del sistema.

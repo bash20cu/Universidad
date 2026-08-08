@@ -1,3 +1,10 @@
+# Archivo: two_factor.py
+# Propósito: Emite y verifica desafíos TOTP y códigos temporales.
+# Responsabilidades: Genera secretos, crea URI QR, valida ventanas de tiempo y aplica expiración, intentos y uso único.
+# Dependencias: PyOTP, secrets, datetime, SQLAlchemy y modelos de usuario.
+# Entradas y salidas: Recibe usuario/código; devuelve booleanos, URI, desafíos persistidos o TwoFactorError.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Emisión y verificación segura de códigos de segundo factor."""
 
 from __future__ import annotations

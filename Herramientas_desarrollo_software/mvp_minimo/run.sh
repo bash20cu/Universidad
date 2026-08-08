@@ -1,4 +1,11 @@
 #!/bin/zsh
+# Archivo: run.sh
+# Propósito: Prepara el entorno virtual y ejecuta TutorIA.
+# Responsabilidades: Resuelve Python, carga variables de entorno y delega el arranque al servidor Flask.
+# Dependencias: zsh, .venv y run.py.
+# Entradas y salidas: Lee PYTHON_BIN y variables del entorno; inicia el proceso web.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 
 set -euo pipefail
 

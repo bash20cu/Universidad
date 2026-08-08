@@ -1,3 +1,10 @@
+# Archivo: auth.py
+# Propósito: Gestiona login, registro y configuración del segundo factor.
+# Responsabilidades: Valida credenciales, emite desafíos, configura TOTP, crea QR, registra eventos y cierra sesiones.
+# Dependencias: Flask, Flask-Login, PyOTP, formularios, modelos y servicios de correo/auditoría.
+# Entradas y salidas: Recibe formularios HTTP y sesión; devuelve redirecciones, vistas, mensajes y eventos de seguridad.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Autenticación, autorregistro y segundo factor de TutorIA."""
 
 from __future__ import annotations

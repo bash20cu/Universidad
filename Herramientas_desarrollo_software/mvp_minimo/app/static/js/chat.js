@@ -1,3 +1,12 @@
+/*
+ * Archivo: chat.js
+ * Propósito: Controla la interacción del chat TutorIA en el navegador.
+ * Responsabilidades: Envía mensajes, consume streaming SSE, muestra estados del proveedor, actualiza el historial y maneja errores.
+ * Dependencias: DOM del template main/chat.html, Fetch API y EventSource/lectura de respuesta SSE.
+ * Entradas y salidas: Lee formularios y eventos del DOM; actualiza la interfaz y solicita /chat/api/chat y /chat/api/status.
+ * Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+ * Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
+ */
 const form = document.querySelector("#chat-form");
 const promptInput = document.querySelector("#prompt");
 const messagesElement = document.querySelector("#messages");

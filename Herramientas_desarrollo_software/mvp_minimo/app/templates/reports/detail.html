@@ -1,3 +1,10 @@
+{# Archivo: detail.html #}
+{# Propósito: Renderiza el reporte individual de progreso. #}
+{# Responsabilidades: Presenta barra de progreso, historial de evaluaciones, proveedor IA y ruta recomendada. #}
+{# Dependencias: Jinja2, base.html y datos de reportes. #}
+{# Entradas y salidas: Recibe student, evaluations, recommendations y progress; produce HTML. #}
+{# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García #}
+{# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García. #}
 {% extends "base.html" %}
 {% block title %}Reporte de {{ student.name }} | TutorIA{% endblock %}
 {% block content %}

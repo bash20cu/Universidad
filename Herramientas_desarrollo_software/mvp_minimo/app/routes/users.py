@@ -1,3 +1,10 @@
+# Archivo: users.py
+# Propósito: Administra cuentas y bitácora para el rol administrador.
+# Responsabilidades: Lista eventos, crea y edita usuarios, valida duplicados y guarda contraseñas mediante hash.
+# Dependencias: Flask, Flask-Login, SQLAlchemy, formularios, modelos y auditoría.
+# Entradas y salidas: Recibe formularios de administración; devuelve vistas, redirecciones y eventos persistidos.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Administración de cuentas reservada al rol administrador."""
 
 from flask import Blueprint, flash, redirect, render_template, url_for

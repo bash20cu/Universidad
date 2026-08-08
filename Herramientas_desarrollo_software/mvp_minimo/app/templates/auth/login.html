@@ -1,3 +1,10 @@
+{# Archivo: login.html #}
+{# Propósito: Renderiza el formulario de inicio de sesión. #}
+{# Responsabilidades: Muestra credenciales, CSRF y acceso al registro. #}
+{# Dependencias: Jinja2, base.html, LoginForm y rutas auth. #}
+{# Entradas y salidas: Recibe form; produce HTML de login. #}
+{# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García #}
+{# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García. #}
 {% extends "base.html" %}{% block title %}Ingresar | TutorIA{% endblock %}
 {% block content %}<div class="row justify-content-center py-5"><div class="col-md-6 col-lg-4"><h1 class="h3 mb-4">Ingresar</h1>
 <form method="post" class="bg-white border rounded p-4">{{ form.hidden_tag() }}

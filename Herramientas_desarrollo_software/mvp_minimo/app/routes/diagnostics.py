@@ -1,3 +1,10 @@
+# Archivo: diagnostics.py
+# Propósito: Gestiona preguntas y evaluaciones diagnósticas.
+# Responsabilidades: Administra preguntas, registra respuestas, muestra resultados y solicita clasificación al proveedor IA.
+# Dependencias: Flask, Flask-Login, SQLAlchemy, formularios, servicios de diagnóstico, auditoría y proveedor IA.
+# Entradas y salidas: Recibe formularios de docentes; devuelve vistas, redirecciones, clasificaciones y estados persistidos.
+# Autoría: Miguel Alejandro Fernández Arteaga y Roberto José Rojas García
+# Copyright académico: © 2026 Miguel Alejandro Fernández Arteaga y Roberto José Rojas García.
 """Flujo de creación, clasificación y consulta de diagnósticos."""
 
 from flask import Blueprint, current_app, flash, redirect, render_template, request, url_for
@@ -116,6 +123,8 @@ def create():
         answers_by_question = {}
         missing_questions = []
         for question in questions:
+            # El campo usa el id de la pregunta para que un cambio de orden
+            # en la pantalla no altere la relación pregunta-respuesta.
             value = request.form.get(f"answer_{question.id}", "").strip()
             if not value:
                 missing_questions.append(question.id)
